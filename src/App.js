@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Header from './components/Header.js';
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
@@ -31,17 +32,17 @@ export default function App() {
     setNotes(transformedNotes);
   }
 
-  function ShowPages() {
-    if (notes.length > 1 && pages.length < 1) {
-      return <p>Push the Show pages button</p>
-    }
-    if (pages.length < 1 && notes.length < 1) {
-      return <p>Push the Fetch notes button</p>;
-    } 
-    if (pages.length > 0) {
-      return pages.map((page, index) => <p key={index}>{page}</p>)
-    }
-  }
+  // function ShowPages() {
+  //   if (notes.length > 1 && pages.length < 1) {
+  //     return <p>Push the Show pages button</p>
+  //   }
+  //   if (pages.length < 1 && notes.length < 1) {
+  //     return <p>Push the Fetch notes button</p>;
+  //   } 
+  //   if (pages.length > 0) {
+  //     return pages.map((page, index) => <p key={index}>{page}</p>)
+  //   }
+  // }
 
   function getPages(myArr) {
     const pageArr = [];
@@ -70,11 +71,13 @@ export default function App() {
 
   return (
     <div className="App">
+      <Header pageNames={pages} />
       <header className="App-header">
-        <ShowPages />
+        {/* <ShowPages /> */}
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getPages(notes)}>Show pages</button>
         <button disabled={notes.length < 1} onClick={() => executeSearch(notes, 'install')}>Find install</button>
+        <div className="test">test</div>
       </header>
     </div>
   );
