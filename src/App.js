@@ -16,41 +16,18 @@ export default function App() {
       throw new Error(data.message || "Could not fetch quotes.");
     }
 
+    // console.log("data", data); //@DEBUG
+
     const transformedNotes = [];
 
-    // console.log('data', data); //@DEBUG
-
-    const noteObj = {};
-
     for (const key in data) {
-      if (
-        data[key].page === "git" ||
-        data[key].page === "angularfire" ||
-        data[key].page === "misc" ||
-        data[key].page === "ionic" ||
-        data[key].page === "shortcuts" ||
-        data[key].page === "reactnative" ||
-        data[key].page === "reactjs" ||
-        data[key].page === "docker" ||
-        data[key].page === "vscode" ||
-        data[key].page === "simulator" ||
-        data[key].page === "interview"
-      ) {
-        noteObj[[key]] = { book: "developer", ...data[key] };
-      }
-      if (
-        data[key].page === "3dprinting" ||
-        data[key].page === "raspberrypi" ||
-        data[key].page === "arduino"
-      ) {
-        noteObj[[key]] = { book: "hobby", ...data[key] };
-      }
-      if (data[key].page === "appletv" || data[key].page === "updates") {
-        noteObj[[key]] = { book: "misc", ...data[key] };
-      }
+      const noteObj = {
+        id: key,
+        ...data[key],
+      };
+      transformedNotes.push(noteObj);
     }
-    const myArr = [noteObj];
-    console.log(JSON.stringify(myArr)); //@DEBUG
+    console.log(transformedNotes);
 
     setNotes(transformedNotes);
   }
