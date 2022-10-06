@@ -55,12 +55,26 @@ export default function App() {
     setPages(pageArr);
   }
 
+  
+
+  function executeSearch(myArr, keyWord) {
+    const keyWordObjectsArr = [];
+    for (const key in myArr) {
+      let myWord = myArr[key]
+      if (myWord.content.toLowerCase().includes(keyWord)) {
+        keyWordObjectsArr.push(myWord.content);
+      }
+    }
+    setPages(keyWordObjectsArr);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <ShowPages />
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getPages(notes)}>Show pages</button>
+        <button disabled={notes.length < 1} onClick={() => executeSearch(notes, 'install')}>Find install</button>
       </header>
     </div>
   );
