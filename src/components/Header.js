@@ -1,25 +1,31 @@
 import classes from "./Header.module.css";
+import { useState } from "react";
 
 export default function Header({ pageNames }) {
-  function ShowBooks() {
-    if (pageNames.length > 0) {
-      return pageNames.map((page, index) => (
-        <button className={classes.item} key={index}>
-          {page}
-        </button>
-      ));
-    }
-    if (pageNames.length < 0) {
-      return <div style={{ color: "white" }}>No Pages</div>;
-    }
-  }
+  const [isActive, setIsActive] = useState(null);
 
   return (
     <div className={classes.container}>
       <h1 className={classes.logo}>My Notes</h1>
       <div className={classes.itemContainer}>
-        <ShowBooks />
-        <button className={classes.item} >new +</button>
+        {pageNames.map((page, index) => {
+          return (
+            <button
+              onMouseDown={() => setIsActive(index)}
+              className={isActive === index ? classes.active : classes.item}
+              key={index}
+            >
+              {page}
+            </button>
+          );
+        })}
+        <button
+          onMouseDown={() => setIsActive("new")}
+          onMouseUp={() => setIsActive(false)}
+          className={isActive === "new" ? classes.active : classes.item}
+        >
+          new +
+        </button>
         <input placeholder="search" />
       </div>
       <h3 className={classes.logOut}>Log Out</h3>
