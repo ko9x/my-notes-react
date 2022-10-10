@@ -1,28 +1,30 @@
 import classes from "./Header.module.css";
 import { useState } from "react";
 
-export default function Header({ pageNames }) {
-  const [isActive, setIsActive] = useState(null);
+export default function Header({ bookNames, selectedBook }) {
+  const [activeBook, setActiveBook] = useState(null);
+
+  selectedBook(activeBook);
 
   return (
     <div className={classes.container}>
       <h1 className={classes.logo}>My Notes</h1>
       <div className={classes.itemContainer}>
-        {pageNames.map((page, index) => {
+        {bookNames.map((book, index) => {
           return (
             <button
-              onMouseDown={() => setIsActive(index)}
-              className={isActive === index ? classes.active : classes.item}
+              onMouseDown={() => setActiveBook(book)}
+              className={activeBook === book ? classes.active : classes.item}
               key={index}
             >
-              {page}
+              {book}
             </button>
           );
         })}
         <button
-          onMouseDown={() => setIsActive("new")}
-          onMouseUp={() => setIsActive(false)}
-          className={isActive === "new" ? classes.active : classes.item}
+          onMouseDown={() => setActiveBook("new")}
+          onMouseUp={() => setActiveBook(null)}
+          className={activeBook === "new" ? classes.active : classes.item}
         >
           new +
         </button>

@@ -80,11 +80,14 @@ export default function App() {
     setPages(keyWordObjectsArr);
   }
 
+  function selectedBook(book) {
+    console.log('book name', book); //@DEBUG
+  }
+
   return (
     <div className="App">
-      <Header pageNames={books} />
+      <Header bookNames={books} selectedBook={selectedBook} />
       <header className="App-header">
-        {/* <ShowPages /> */}
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getPages(notes)}>
           Show pages
