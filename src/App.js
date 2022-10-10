@@ -1,12 +1,25 @@
 import "./App.css";
 import { useState } from "react";
 import Header from "./components/Header.js";
+import { useEffect } from "react";
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
 
   const [notes, setNotes] = useState([]);
+  const [books, setBooks] = useState([]);
   const [pages, setPages] = useState([]);
+
+  useEffect(() => {
+    getNotes();
+  }, []);
+
+  useEffect(() => {
+    if(notes.length > 0) {
+      getBooks(notes);
+      getPages(notes);
+    }
+  }, [notes]);
 
   async function getNotes() {
     const response = await fetch(`${NotesAPI}/notes.json`);
@@ -32,17 +45,17 @@ export default function App() {
     setNotes(transformedNotes);
   }
 
-  // function ShowPages() {
-  //   if (notes.length > 1 && pages.length < 1) {
-  //     return <p>Push the Show pages button</p>
-  //   }
-  //   if (pages.length < 1 && notes.length < 1) {
-  //     return <p>Push the Fetch notes button</p>;
-  //   }
-  //   if (pages.length > 0) {
-  //     return pages.map((page, index) => <p key={index}>{page}</p>)
-  //   }
-  // }
+  function getBooks(myArr) {
+    const bookArr = [];
+    for (const key in myArr) {
+      const book = myArr[key].book;
+      if (!bookArr.includes(book)) {
+        bookArr.push(book);
+      }
+    }
+
+    setBooks(bookArr);
+  }
 
   function getPages(myArr) {
     const pageArr = [];
@@ -69,7 +82,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Header pageNames={pages} />
+      <Header pageNames={books} />
       <header className="App-header">
         {/* <ShowPages /> */}
         <button onClick={() => getNotes()}>Fetch notes</button>
