@@ -1,4 +1,32 @@
 .container {
+    display: flex !important;
+    flex-direction: row !important;
     height: 100px;
-    background-color: green;
+    background-color: #c1c1c1;
+}
+.itemContainer {
+    width: 60%;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: center;
+}
+.item {
+    flex: 1;
+    align-self: center;
+    font-size: large;
+    font-family:'Courier New', Courier, monospace;
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+.logo {
+    font-family:'Courier New', Courier, monospace;
+    flex: 1;
+    align-self: center;
+}
+.logOut {
+    font-family:'Courier New', Courier, monospace;
+    align-self: center;
+    width: 15%;
 }
