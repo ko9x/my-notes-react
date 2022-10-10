@@ -6,6 +6,7 @@
 ### What to do next
 * Add auth
 * Add the new features
+* Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 
 ### Done
 * Get the notes from the API
