@@ -1,30 +1,27 @@
-export default function Grabber() {
+export default function Grabber({arrowAmount, isOpen}) {
     let grabArray = [];
     let grabStyleTop = { margin: "0px" };
     let grabStyleMiddle = { margin: "-6px" };
     let grabStyleBottom = { margin: "0px" };
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < (arrowAmount + 1); i++) {
       if (i === 1) {
         grabArray.push(
           <p key={i} style={grabStyleTop}>
-            {" "}
-            >{" "}
+            {isOpen ? '<' : '>'}
           </p>
         );
       }
-      if (i === 4) {
+      if (i === arrowAmount) {
         grabArray.push(
           <p key={i} style={grabStyleBottom}>
-            {" "}
-            >{" "}
+            {isOpen ? '<' : '>'}
           </p>
         );
       }
-      if (i !== 4 && i !== 1) {
+      if (i !== arrowAmount && i !== 1) {
         grabArray.push(
           <p key={i} style={grabStyleMiddle}>
-            {" "}
-            >{" "}
+            {isOpen ? '<' : '>'}
           </p>
         );
       }

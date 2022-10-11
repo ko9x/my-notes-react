@@ -16,7 +16,7 @@ export default function SideBar() {
           onClick={() => setIsOpen((prevState) => !prevState)}
           className={classes.grabber}
         >
-          <Grabber />
+          <Grabber isOpen={isOpen} arrowAmount={4} />
         </div>
       </div>
     </div>
