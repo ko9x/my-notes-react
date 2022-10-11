@@ -11,5 +11,16 @@
 .closed {
     transition: ease-in;
     transition-duration: 200ms;
-    width: 0px;
+    width: 20px;
+    background-color: #8c8a8a;
+    
+}
+.grabber {
+    cursor: pointer;
+    background-color: #696969;
+    margin-top: 40vh;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 20px;
+    align-self: flex-end;
 }

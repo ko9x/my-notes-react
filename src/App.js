@@ -40,7 +40,7 @@ export default function App() {
       };
       transformedNotes.push(noteObj);
     }
-    console.log(transformedNotes);
+    // console.log(transformedNotes);
 
     setNotes(transformedNotes);
   }
@@ -81,7 +81,7 @@ export default function App() {
   }
 
   function selectedBook(book) {
-    console.log('book name', book); //@DEBUG
+    // console.log('book name', book); //@DEBUG
   }
 
   return (
