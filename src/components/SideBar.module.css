@@ -1,26 +1,31 @@
 .container {
-    padding-top: 1px;
-    height: 100vh;
-    background-color: aquamarine;
+  display: flex;
+  padding-top: 1px;
+  height: 100vh;
+  background-color: #a9a9a9;
+  justify-content: flex-end;
 }
 .open {
-    transition:ease-out;
-    transition-duration: 200ms;
-    width: 300px;
+  transition: ease-out;
+  transition-duration: 200ms;
+  width: 300px;
 }
 .closed {
-    transition: ease-in;
-    transition-duration: 200ms;
-    width: 20px;
-    background-color: #8c8a8a;
-    
+  transition: ease-in;
+  transition-duration: 200ms;
+  width: 22px;
+}
+.grabberBar {
+  display: flex;
+  align-items: center;
+  height: 90vh;
+  background-color: #8c8a8a;
+  margin-top: -1px;
 }
 .grabber {
-    cursor: pointer;
-    background-color: #696969;
-    margin-top: 40vh;
-    border-radius: 5px;
-    border: 1px solid black;
-    width: 20px;
-    align-self: flex-end;
+  cursor: pointer;
+  background-color: #696969;
+  border-radius: 5px;
+  border: 1px solid black;
+  width: 20px;
 }
