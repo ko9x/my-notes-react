@@ -1,7 +1,7 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
-import { useEffect } from "react";
+import SideBar from "./components/SideBar";
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
@@ -87,6 +87,7 @@ export default function App() {
   return (
     <div className="App">
       <Header bookNames={books} selectedBook={selectedBook} />
+      <SideBar />
       <header className="App-header">
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getPages(notes)}>

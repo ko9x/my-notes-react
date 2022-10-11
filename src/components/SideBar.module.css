@@ -1,0 +1,11 @@
+.container {
+    padding-top: 1px;
+    height: 100vh;
+    background-color: aquamarine;
+}
+.open {
+    width: 300px;
+}
+.closed {
+    width: 0px;
+}
