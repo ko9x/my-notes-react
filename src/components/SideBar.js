@@ -6,6 +6,6 @@ export default function SideBar() {
 
     return <div className={`${classes.container} ${isOpen ? classes.open : classes.closed}`}>
         <button onClick={() => setIsOpen(prevState => !prevState)}>Toggle</button>
-        <p>I am the side bar</p>
+        {isOpen && <p>I am the side bar</p>}
     </div>
 }

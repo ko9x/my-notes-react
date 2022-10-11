@@ -4,8 +4,12 @@
     background-color: aquamarine;
 }
 .open {
+    transition:ease-out;
+    transition-duration: 200ms;
     width: 300px;
 }
 .closed {
+    transition: ease-in;
+    transition-duration: 200ms;
     width: 0px;
 }
