@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import classes from "./SideBar.module.css";
 import Grabber from "./Grabber";
 
 export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
   const [activePage, setActivePage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    handleItemNameChange()
+  }, [itemName])
+
+  function handleItemNameChange() {
+    if(isOpen) {
+      setIsOpen(false);
+    } 
+    if (itemName && itemName.length > 0) {
+      setTimeout(() => {
+        setIsOpen(true);
+      }, '200')
+    }
+  }
+
 
   function handlePageSelection(page) {
     setActivePage(page);
