@@ -7,10 +7,13 @@ export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
 
   const [notes, setNotes] = useState([]);
+  const [selectedNotes, setSelectedNotes] = useState([]);
   const [bookNames, setBookNames] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [pageNames, setPageNames] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null);
+  const [sectionNames, setSectionNames] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -86,8 +89,8 @@ export default function App() {
         }
       }
     }
-    console.log('sectionNameArr', sectionNameArr);
-    console.log('sectionArr', sectionArr);
+    setSectionNames(sectionNameArr);
+    setSelectedNotes(sectionArr);
   }
 
   function executeSearch(myArr, keyWord) {
@@ -106,7 +109,7 @@ export default function App() {
     setSelectedBook(selectedBook);
   }
   function liftedPage(page) {
-    // getSections(notes, book, page)
+    getSections(notes, selectedBook, page);
     setSelectedPage(page);
   }
 
@@ -117,7 +120,7 @@ export default function App() {
       <SideBar itemName={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
-      <SideBar itemName={pageNames} selectedItemName={liftedPage} sideDisplayed={'right'} />
+      <SideBar itemName={sectionNames} selectedItemName={null} sideDisplayed={'right'} />
       </div>
       <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
