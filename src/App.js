@@ -113,10 +113,10 @@ export default function App() {
   return (
     <div className="App">
       <Header bookNames={books} selectedBook={selectedBook} />
-      <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+      <div style={{display: 'flex', justifyContent: 'flex-start', width: "200px", float: 'left'}}>
       <SideBar itemName={pages} selectedItemName={selectedPage} side={'left'} />
       </div>
-      <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '-100vh'}}>
+      <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
       <SideBar itemName={pages} selectedItemName={selectedPage} side={'right'} />
       </div>
       <header>
