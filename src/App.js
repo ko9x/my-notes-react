@@ -8,7 +8,9 @@ export default function App() {
 
   const [notes, setNotes] = useState([]);
   const [books, setBooks] = useState([]);
+  const [book, setBook] = useState(null);
   const [pages, setPages] = useState([]);
+  const [page, setPage] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -69,6 +71,25 @@ export default function App() {
     setPages(pageArr);
   }
 
+  function getSections(myArr, book, page) {
+    const sectionNameArr = [];
+    const sectionArr = [];
+    for (const key in myArr) {
+      const note = myArr[key];
+      if (myArr[key].book === book) {
+        if (myArr[key].page === page) {
+          const sectionName = myArr[key].section;
+          sectionArr.push(note);
+          if(!sectionNameArr.includes(sectionName)) {
+            sectionNameArr.push(sectionName);
+          }
+        }
+      }
+    }
+    console.log('sectionNameArr', sectionNameArr);
+    console.log('sectionArr', sectionArr);
+  }
+
   function executeSearch(myArr, keyWord) {
     const keyWordObjectsArr = [];
     for (const key in myArr) {
@@ -82,18 +103,20 @@ export default function App() {
 
   function selectedBook(book) {
     getPages(notes, book);
+    setBook(book);
   }
-  function selectedPage(book) {
-    // getPages(notes, book);
+  function selectedPage(page) {
+    // getSections(notes, book, page)
+    setPage(page);
   }
 
   return (
     <div className="App">
       <Header bookNames={books} selectedBook={selectedBook} />
-      <SideBar pageNames={pages} selectedPage={selectedPage} />
+      <SideBar itemName={pages} selectedItemName={selectedPage} />
       <header className="App-header">
         <button onClick={() => getNotes()}>Fetch notes</button>
-        <button disabled={notes.length < 1} onClick={() => getPages(notes, 'developer')}>
+        <button disabled={notes.length < 1} onClick={() => getSections(notes, book, page)}>
           Show pages
         </button>
         <button
