@@ -17,7 +17,9 @@ export default function Header({ bookNames, selectedBook }) {
           return (
             <button
               onMouseDown={() => handleBookSelection(book)}
-              className={activeBook === book ? classes.active : classes.item}
+              className={`${classes.item} ${
+                activeBook === book ? classes.active : null
+              }`}
               key={index}
             >
               {book}
@@ -27,7 +29,9 @@ export default function Header({ bookNames, selectedBook }) {
         <button
           onMouseDown={() => handleBookSelection("new")}
           onMouseUp={() => handleBookSelection(null)}
-          className={activeBook === "new" ? classes.active : classes.item}
+          className={`${classes.item} ${
+            activeBook === "new" ? classes.active : null
+          }`}
         >
           new +
         </button>

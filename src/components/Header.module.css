@@ -22,14 +22,6 @@
     cursor: pointer;
 }
 .active {
-    flex: 1;
-    align-self: center;
-    font-size: large;
-    font-family:'Courier New', Courier, monospace;
-    text-decoration: none;
-    border: none;
-    background: none;
-    cursor: pointer;
     color: palegreen;
     text-shadow: 2px 2px 5px black;
 }
