@@ -3,7 +3,6 @@
   padding-top: 1px;
   height: 100%;
   background-color: #a9a9a9;
-  justify-content: flex-end;
 }
 .open {
   position: inherit;
@@ -34,11 +33,14 @@
   width: 20px;
 }
 .itemContainer {
-  flex: 1;
   display: flex;
   padding-top: 10px;
   flex-direction: column;
   align-items: flex-start;
+  float: right;
+}
+.itemContainerRight {
+  flex: 1
 }
 .item {
   font-size: large;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import classes from "./SideBar.module.css";
 import Grabber from "./Grabber";
 
-export default function SideBar({itemName, selectedItemName}) {
+export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
   const [activePage, setActivePage] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,13 +11,27 @@ export default function SideBar({itemName, selectedItemName}) {
     selectedItemName(page);
   }
 
+  function grabberBar() {
+    return (
+      <div className={classes.grabberBar}>
+        <div
+          onClick={() => setIsOpen((prevState) => !prevState)}
+          className={classes.grabber}
+        >
+          <Grabber isOpen={isOpen} iconAmount={5} sideDisplayed={sideDisplayed} />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div
       className={`${classes.container} ${
         isOpen ? classes.open : classes.closed
       }`}
     >
-      <div className={classes.itemContainer}>
+      {sideDisplayed === 'left' && grabberBar()}
+      <div className={`${classes.itemContainer} ${sideDisplayed === 'right' ? classes.itemContainerRight : null}`}>
       {itemName && isOpen ? itemName.map((page, index) => {
           return (
             <button
@@ -28,16 +42,9 @@ export default function SideBar({itemName, selectedItemName}) {
               {page}
             </button>
           )
-        }) : <p></p>}
+        }) : null}
       </div>
-      <div className={classes.grabberBar}>
-        <div
-          onClick={() => setIsOpen((prevState) => !prevState)}
-          className={classes.grabber}
-        >
-          <Grabber isOpen={isOpen} arrowAmount={4} />
-        </div>
-      </div>
+      {sideDisplayed === 'right' && grabberBar()}
     </div>
   );
 }
