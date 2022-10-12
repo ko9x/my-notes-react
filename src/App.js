@@ -7,10 +7,10 @@ export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
 
   const [notes, setNotes] = useState([]);
-  const [books, setBooks] = useState([]);
-  const [book, setBook] = useState(null);
-  const [pages, setPages] = useState([]);
-  const [page, setPage] = useState(null);
+  const [bookNames, setBookNames] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [pageNames, setPageNames] = useState([]);
+  const [selectedPage, setSelectedPage] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -55,29 +55,29 @@ export default function App() {
       }
     }
 
-    setBooks(bookArr);
+    setBookNames(bookArr);
   }
 
-  function getPages(myArr, book) {
+  function getPages(myArr, selectedBook) {
     const pageArr = [];
     for (const key in myArr) {
-      if (myArr[key].book === book) {
+      if (myArr[key].book === selectedBook) {
         const page = myArr[key].page;
         if (!pageArr.includes(page)) {
           pageArr.push(page);
         }
       }
     }
-    setPages(pageArr);
+    setPageNames(pageArr);
   }
 
-  function getSections(myArr, book, page) {
+  function getSections(myArr, selectedBook, selectedPage) {
     const sectionNameArr = [];
     const sectionArr = [];
     for (const key in myArr) {
       const note = myArr[key];
-      if (myArr[key].book === book) {
-        if (myArr[key].page === page) {
+      if (myArr[key].book === selectedBook) {
+        if (myArr[key].page === selectedPage) {
           const sectionName = myArr[key].section;
           sectionArr.push(note);
           if(!sectionNameArr.includes(sectionName)) {
@@ -98,30 +98,30 @@ export default function App() {
         keyWordObjectsArr.push(myWord.content);
       }
     }
-    setPages(keyWordObjectsArr);
+    setPageNames(keyWordObjectsArr);
   }
 
-  function selectedBook(book) {
-    getPages(notes, book);
-    setBook(book);
+  function liftedBook(selectedBook) {
+    getPages(notes, selectedBook);
+    setSelectedBook(selectedBook);
   }
-  function selectedPage(page) {
+  function liftedPage(page) {
     // getSections(notes, book, page)
-    setPage(page);
+    setSelectedPage(page);
   }
 
   return (
     <div className="App">
-      <Header bookNames={books} selectedBook={selectedBook} />
+      <Header bookNames={bookNames} selectedBook={liftedBook} />
       <div style={{display: 'flex', justifyContent: 'flex-start', width: "200px", float: 'left'}}>
-      <SideBar itemName={pages} selectedItemName={selectedPage} sideDisplayed={'left'} />
+      <SideBar itemName={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
-      <SideBar itemName={pages} selectedItemName={selectedPage} sideDisplayed={'right'} />
+      <SideBar itemName={pageNames} selectedItemName={liftedPage} sideDisplayed={'right'} />
       </div>
       <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
-        <button disabled={notes.length < 1} onClick={() => getSections(notes, book, page)}>
+        <button disabled={notes.length < 1} onClick={() => getSections(notes, selectedBook, selectedPage)}>
           Show pages
         </button>
         <button
