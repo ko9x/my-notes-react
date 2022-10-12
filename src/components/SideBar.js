@@ -2,7 +2,7 @@ import { useState } from "react";
 import classes from "./SideBar.module.css";
 import Grabber from "./Grabber";
 
-export default function SideBar() {
+export default function SideBar({pageNames}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -11,6 +11,19 @@ export default function SideBar() {
         isOpen ? classes.open : classes.closed
       }`}
     >
+      <div>
+      {pageNames ? pageNames.map((page, index) => {
+          return (
+            <button
+            //   onMouseDown={() => handleBookSelection(book)}
+            //   className={activeBook === book ? classes.active : classes.item}
+              key={index}
+            >
+              {page}
+            </button>
+          )
+        }) : <p>no names we are nameless</p>}
+      </div>
       <div className={classes.grabberBar}>
         <div
           onClick={() => setIsOpen((prevState) => !prevState)}

@@ -15,9 +15,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if(notes.length > 0) {
+    if (notes.length > 0) {
       getBooks(notes);
-      getPages(notes);
     }
   }, [notes]);
 
@@ -57,15 +56,16 @@ export default function App() {
     setBooks(bookArr);
   }
 
-  function getPages(myArr) {
+  function getPages(myArr, book) {
     const pageArr = [];
     for (const key in myArr) {
-      const page = myArr[key].page;
-      if (!pageArr.includes(page)) {
-        pageArr.push(page);
+      if (myArr[key].book === book) {
+        const page = myArr[key].page;
+        if (!pageArr.includes(page)) {
+          pageArr.push(page);
+        }
       }
     }
-
     setPages(pageArr);
   }
 
@@ -81,16 +81,19 @@ export default function App() {
   }
 
   function selectedBook(book) {
-    // console.log('book name', book); //@DEBUG
+    getPages(notes, book);
+  }
+  function selectedPage(book) {
+    // getPages(notes, book);
   }
 
   return (
     <div className="App">
       <Header bookNames={books} selectedBook={selectedBook} />
-      <SideBar />
+      <SideBar pageNames={pages} selectedPage={selectedPage} />
       <header className="App-header">
         <button onClick={() => getNotes()}>Fetch notes</button>
-        <button disabled={notes.length < 1} onClick={() => getPages(notes)}>
+        <button disabled={notes.length < 1} onClick={() => getPages(notes, 'developer')}>
           Show pages
         </button>
         <button

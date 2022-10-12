@@ -4,7 +4,10 @@ import { useState } from "react";
 export default function Header({ bookNames, selectedBook }) {
   const [activeBook, setActiveBook] = useState(null);
 
-  selectedBook(activeBook);
+  function handleBookSelection(book) {
+    selectedBook(book);
+    setActiveBook(book);
+  }
 
   return (
     <div className={classes.container}>
@@ -13,7 +16,7 @@ export default function Header({ bookNames, selectedBook }) {
         {bookNames.map((book, index) => {
           return (
             <button
-              onMouseDown={() => setActiveBook(book)}
+              onMouseDown={() => handleBookSelection(book)}
               className={activeBook === book ? classes.active : classes.item}
               key={index}
             >
@@ -22,8 +25,8 @@ export default function Header({ bookNames, selectedBook }) {
           );
         })}
         <button
-          onMouseDown={() => setActiveBook("new")}
-          onMouseUp={() => setActiveBook(null)}
+          onMouseDown={() => handleBookSelection("new")}
+          onMouseUp={() => handleBookSelection(null)}
           className={activeBook === "new" ? classes.active : classes.item}
         >
           new +
