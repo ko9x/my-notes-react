@@ -22,7 +22,9 @@
   height: 90vh;
   background-color: #8c8a8a;
   margin-top: -1px;
-  box-shadow: -5px 15px 30px black;
+  box-shadow: 2px 1px 20px black;
+  position: relative;
+  z-index: 10;
 }
 .grabber {
   cursor: pointer;

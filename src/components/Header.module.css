@@ -4,6 +4,9 @@
     height: 100px;
     width: 100vw;
     background-color: #c1c1c1;
+    position: relative;
+    z-index: 100;
+    box-shadow: 2px -5px 20px black;
 }
 .itemContainer {
     width: 60%;
