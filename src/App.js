@@ -113,8 +113,13 @@ export default function App() {
   return (
     <div className="App">
       <Header bookNames={books} selectedBook={selectedBook} />
-      <SideBar itemName={pages} selectedItemName={selectedPage} />
-      <header className="App-header">
+      <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+      <SideBar itemName={pages} selectedItemName={selectedPage} side={'left'} />
+      </div>
+      <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '-100vh'}}>
+      <SideBar itemName={pages} selectedItemName={selectedPage} side={'right'} />
+      </div>
+      <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getSections(notes, book, page)}>
           Show pages

@@ -8,7 +8,7 @@
 .open {
   position: inherit;
   transition: ease-out;
-  transition-duration: 200ms;
+  transition-duration: 80ms;
   width: 200px;
 }
 .closed {
