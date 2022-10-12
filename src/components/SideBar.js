@@ -11,18 +11,18 @@ export default function SideBar({pageNames}) {
         isOpen ? classes.open : classes.closed
       }`}
     >
-      <div>
-      {pageNames ? pageNames.map((page, index) => {
+      <div className={classes.itemContainer}>
+      {pageNames && isOpen ? pageNames.map((page, index) => {
           return (
             <button
             //   onMouseDown={() => handleBookSelection(book)}
-            //   className={activeBook === book ? classes.active : classes.item}
+              className={classes.item}
               key={index}
             >
               {page}
             </button>
           )
-        }) : <p>no names we are nameless</p>}
+        }) : <p></p>}
       </div>
       <div className={classes.grabberBar}>
         <div

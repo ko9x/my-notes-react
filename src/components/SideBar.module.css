@@ -6,9 +6,10 @@
   justify-content: flex-end;
 }
 .open {
+  position: inherit;
   transition: ease-out;
   transition-duration: 200ms;
-  width: 300px;
+  width: 200px;
 }
 .closed {
   transition: ease-in;
@@ -21,6 +22,7 @@
   height: 90vh;
   background-color: #8c8a8a;
   margin-top: -1px;
+  box-shadow: -5px 15px 30px black;
 }
 .grabber {
   cursor: pointer;
@@ -28,4 +30,20 @@
   border-radius: 5px;
   border: 1px solid black;
   width: 20px;
+}
+.itemContainer {
+  flex: 1;
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.item {
+  font-size: large;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
