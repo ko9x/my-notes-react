@@ -1,15 +1,19 @@
 ### Current Focus
-* Create the sidebar to show the pages within the selected book
-    * I want the left SideBar to open and reveal the pages when you select a book from the Header.
-        * If you select a different book, I want the left SideBar to close and then open with the new pages
-    * I want the right SideBar to open and reveal the sections when you select a page from the left SideBar
-        * If you select a different page, I want the right SideBar to close and then open with the new sections
-* Finish styling the SideBars
-    * SEE STYLING SECTIONS
 * Display the notes in the center of the screen for the selected book and page
-    * I would like selecting a section from the right sidebar to scroll the user to that section
-
+    * I would like selecting a section from the right sidebar to result in only that section showing
+        * This will require a new function to be created in the App.js
+* Finish styling the SideBars
+    * SEE STYLING AND BUGS SECTIONS
+* Add a footer
+    * Just something basic to make the bottom of the page look nicer.
+    
 ### Bugs
+* The text in the SideBars needs to be invisible when the opening or closing transition is happening
+    * Currently the text will show outside the SideBar or look smashed while the transition is happening
+* If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
+    * This may be resolved by the refactoring mentioned in the Refactoring section
+        * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
+   
 
 ### What to do next
 * Make a global for colors
@@ -25,9 +29,8 @@
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 
 ### Styling
-* Decide if we should remove the GrabberBar and Grabber
-    * I don't like the way it looks on the left SideBar but I like the way the right side looks/operates
-        * Get them both styled like the right one and see if I still like it.
+* Decide if we should redesign the grabber
+    * It looks a bit cheesy so hopefully I can come up with something better
 
 
 ### What to do later
@@ -36,10 +39,25 @@
 * Add a note about how position: relative allows you to use z-index to decide what is on top
     * there is an example in the Header.module.css
 
+### Refactoring 
+* I believe the getBooks, getPages, and getSections functions in the App.js can be one function
+    * Just check if the arguement is null or not and act accordingly.
+    * This will result in one very large function but overall less code
+        * Is less code worth the lack of readability?
+        * Maybe break the giant function out into it's own helper function component?
+
 ### Done
 * Get the notes from the API
 * Decide on a design for the header
     * How should we display the different sections?
+* Create the sidebar to show the pages within the selected book
+    * I want the left SideBar to open and reveal the pages when you select a book from the Header.
+        * If you select a different book, I want the left SideBar to close and then open with the new pages
+    * I want the right SideBar to open and reveal the sections when you select a page from the left SideBar
+        * If you select a different page, I want the right SideBar to close and then open with the new sections
+* Decide if we should remove the GrabberBar
+    * I don't like the way it looks on the left SideBar but I like the way the right side looks/operates
+        * Get them both styled like the right one and see if I still like it.
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
