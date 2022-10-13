@@ -14,7 +14,6 @@ export default function App() {
   const [pageNames, setPageNames] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null);
   const [sectionNames, setSectionNames] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -94,6 +93,21 @@ export default function App() {
     setSelectedNotes(sectionArr);
   }
 
+  function getSingleSection(myArr, selectedBook, selectedPage, selectedSection) {
+    const singleSectionArr = []
+    for (const key in myArr) {
+      const note = myArr[key];
+      if (myArr[key].book === selectedBook) {
+        if (myArr[key].page === selectedPage) {
+          if(myArr[key].section === selectedSection) {
+            singleSectionArr.push(note);
+          }
+        }
+      }
+    }
+    setSelectedNotes(singleSectionArr);
+  }
+
   function executeSearch(myArr, keyWord) {
     const keyWordObjectsArr = [];
     for (const key in myArr) {
@@ -113,6 +127,9 @@ export default function App() {
     getSections(notes, selectedBook, page);
     setSelectedPage(page);
   }
+  function liftedSection(section) {
+    getSingleSection(notes, selectedBook, selectedPage, section);
+  }
 
   return (
     <div className="App">
@@ -121,9 +138,9 @@ export default function App() {
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
-      <SideBar itemNameArray={sectionNames} selectedItemName={null} sideDisplayed={'right'} />
+      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideDisplayed={'right'} />
       </div>
-      <Note />
+      <Note selectedNotes={selectedNotes} />
       <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getSections(notes, selectedBook, selectedPage)}>
