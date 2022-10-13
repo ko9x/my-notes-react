@@ -118,10 +118,10 @@ export default function App() {
     <div className="App">
       <Header bookNames={bookNames} selectedBook={liftedBook} />
       <div style={{display: 'flex', justifyContent: 'flex-start', width: "200px", float: 'left'}}>
-      <SideBar itemName={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
+      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
       </div>
       <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
-      <SideBar itemName={sectionNames} selectedItemName={null} sideDisplayed={'right'} />
+      <SideBar itemNameArray={sectionNames} selectedItemName={null} sideDisplayed={'right'} />
       </div>
       <Note />
       <header>

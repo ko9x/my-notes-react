@@ -2,19 +2,19 @@ import { useState, useEffect } from "react";
 import classes from "./SideBar.module.css";
 import Grabber from "./Grabber";
 
-export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
+export default function SideBar({itemNameArray, selectedItemName, sideDisplayed}) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    handleItemNameChange()
-  }, [itemName])
+    handleItemNameArrayChange()
+  }, [itemNameArray])
 
-  function handleItemNameChange() {
+  function handleItemNameArrayChange() {
     if(isOpen) {
       setIsOpen(false);
     } 
-    if (itemName && itemName.length > 0) {
+    if (itemNameArray && itemNameArray.length > 0) {
       setTimeout(() => {
         setIsOpen(true);
       }, '200')
@@ -24,6 +24,7 @@ export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
 
   function handleItemSelection(item) {
     setActiveItem(item);
+    // @TODO remove the if check because it should never be null
     if(selectedItemName) {
       selectedItemName(item);
     }
@@ -50,7 +51,7 @@ export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
     >
       {sideDisplayed === 'left' && grabberBar()}
       <div className={`${classes.itemContainer} ${sideDisplayed === 'right' ? classes.itemContainerRight : null}`}>
-      {itemName && isOpen ? itemName.map((item, index) => {
+      {itemNameArray && isOpen ? itemNameArray.map((item, index) => {
           return (
             <button
               onMouseDown={() => handleItemSelection(item)}
