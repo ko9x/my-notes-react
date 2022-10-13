@@ -1,7 +1,7 @@
 ### Current Focus
-* Display the notes in the center of the screen for the selected book and page
-    * I would like selecting a section from the right sidebar to result in only that section showing
-        * This will require a new function to be created in the App.js
+* Add an "All" button to the right SideBar so you can scroll through all the sections if you want to.
+* Make sure the code in the notes is presented in a readable way
+    * Maybe put a border around code?
 * Finish styling the SideBars
     * SEE STYLING AND BUGS SECTIONS
 * Add a footer
@@ -16,6 +16,8 @@
    
 
 ### What to do next
+* Add functionality to add new pages, sections, and notes
+* Add edit and remove functionality
 * Make a global for colors
     * It's better to do this early on 
         * I'd like to be able to do a light mode and a dark mode
@@ -31,6 +33,7 @@
 ### Styling
 * Decide if we should redesign the grabber
     * It looks a bit cheesy so hopefully I can come up with something better
+    * Maybe just remove them completely. I don't think there is a point to allowing the user to manually close the SideBars. It doesn't make the content in the middle of the screen stretch or anything.
 
 
 ### What to do later
@@ -58,6 +61,9 @@
 * Decide if we should remove the GrabberBar
     * I don't like the way it looks on the left SideBar but I like the way the right side looks/operates
         * Get them both styled like the right one and see if I still like it.
+* Display the notes in the center of the screen for the selected book and page
+    * I would like selecting a section from the right sidebar to result in only that section showing
+        * This will require a new function to be created in the App.js
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
