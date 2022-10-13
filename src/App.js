@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
 import SideBar from "./components/SideBar";
+import Note from './components/Note.js';
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
@@ -122,6 +123,7 @@ export default function App() {
       <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
       <SideBar itemName={sectionNames} selectedItemName={null} sideDisplayed={'right'} />
       </div>
+      <Note />
       <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getSections(notes, selectedBook, selectedPage)}>
