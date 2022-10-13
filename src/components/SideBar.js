@@ -3,7 +3,7 @@ import classes from "./SideBar.module.css";
 import Grabber from "./Grabber";
 
 export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
-  const [activePage, setActivePage] = useState(null);
+  const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -22,9 +22,11 @@ export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
   }
 
 
-  function handlePageSelection(page) {
-    setActivePage(page);
-    selectedItemName(page);
+  function handleItemSelection(item) {
+    setActiveItem(item);
+    if(selectedItemName) {
+      selectedItemName(item);
+    }
   }
 
   function grabberBar() {
@@ -48,14 +50,14 @@ export default function SideBar({itemName, selectedItemName, sideDisplayed}) {
     >
       {sideDisplayed === 'left' && grabberBar()}
       <div className={`${classes.itemContainer} ${sideDisplayed === 'right' ? classes.itemContainerRight : null}`}>
-      {itemName && isOpen ? itemName.map((page, index) => {
+      {itemName && isOpen ? itemName.map((item, index) => {
           return (
             <button
-              onMouseDown={() => handlePageSelection(page)}
-              className={`${classes.item} ${activePage === page ? classes.active : null}`}
+              onMouseDown={() => handleItemSelection(item)}
+              className={`${classes.item} ${activeItem === item ? classes.active : null}`}
               key={index}
             >
-              {page}
+              {item}
             </button>
           )
         }) : null}
