@@ -21,8 +21,6 @@
   align-items: flex-start;
   float: right;
   width: 300;
-  transition: ease-in;
-  transition-duration: 200ms;
   height: 90vh;
 }
 .item {

@@ -1,6 +1,10 @@
 ### Current Focus
-* Make sure the code in the notes is presented in a readable way
-    * Maybe put a border around code?
+* Fix the slowdown caused by highlight.js
+    * there are notes in the npm about using web workers to fix the freezing issue I'm having
+        * there is a link to the npm in the react folder
+    * or only apply the highlight to what is currently on the screen somehow?
+        * Make sure the amount of code that gets processed by highlight is always small somehow?
+            * Maybe that is what the web worker does. I'm not really sure yet.
 * Finish styling the SideBars
     * SEE STYLING AND BUGS SECTIONS
 * Add an "All" button to the right SideBar so you can scroll through all the sections if you want to.
@@ -34,6 +38,7 @@
 
 
 ### What to do later
+* highlight.js makes everything slower. There is probably somehting I can do to fix that.
 * Add a note describing how to add multiple styles in react.js
     * there is an example in the Header.js/css and the SideBar.js/css
 * Add a note about how position: relative allows you to use z-index to decide what is on top
@@ -63,6 +68,8 @@
         * This will require a new function to be created in the App.js
 * Add a footer
     * Just something basic to make the bottom of the page look nicer.
+* Make sure the code in the notes is presented in a readable way
+    * Maybe put a border around code?
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
