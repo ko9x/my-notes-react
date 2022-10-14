@@ -1,6 +1,14 @@
 import classes from "./Note.module.css";
+import { useEffect } from "react";
+import hljs from "highlight.js";
+import 'highlight.js/styles/github-dark.css';
 
 export default function Note({ selectedNotes, bookIsSelected }) {
+
+  useEffect(() => {
+    hljs.highlightAll();
+  })
+
   return (
     <div className={classes.container}>
       {selectedNotes.length > 0 ? (
