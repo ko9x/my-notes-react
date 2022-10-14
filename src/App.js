@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
+import Footer from "./components/Footer.js";
 import SideBar from "./components/SideBar";
 import Note from './components/Note.js';
 
@@ -141,7 +142,8 @@ export default function App() {
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideDisplayed={'right'} />
       </div>
       <Note selectedNotes={selectedNotes} />
-      <header>
+      <Footer />
+      {/* <header>
         <button onClick={() => getNotes()}>Fetch notes</button>
         <button disabled={notes.length < 1} onClick={() => getSections(notes, selectedBook, selectedPage)}>
           Show pages
@@ -153,7 +155,7 @@ export default function App() {
           Find install
         </button>
         <div className="test">test</div>
-      </header>
+      </header> */}
     </div>
   );
 }
