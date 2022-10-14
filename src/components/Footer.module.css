@@ -1,18 +1,18 @@
 .container {
-    height: 5vh;
-    width: 100vw;
-    margin-top: -6vh;
-    background-color: #c1c1c1;
-    position: relative;
-    z-index: 100;
-    box-shadow: 1px .5px 10px black;
+  height: 5vh;
+  width: 100vw;
+  margin-top: -6vh;
+  background-color: #c1c1c1;
+  position: relative;
+  z-index: 100;
+  box-shadow: 1px 0.5px 10px black;
 }
 .footerTextContainer {
-    position: relative;
-    z-index: 100;
-    justify-content: center;
+  position: relative;
+  z-index: 100;
+  justify-content: center;
 }
 .footerText {
-    align-self: center;
-    padding-top: 1.5vh;
+  align-self: center;
+  padding-top: 1.5vh;
 }
