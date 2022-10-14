@@ -1,0 +1,18 @@
+.app {
+  text-align: center;
+  background-color: #282c34;
+  height: 100vh;
+  width: 100vw;
+}
+.leftSideBarContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 200px;
+  float: left;
+}
+.rightSideBarContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  float: right;
+}

@@ -1,8 +1,9 @@
-import "./App.css";
+import classes from "./App.module.css";
 import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/SideBar.js";
+import SideBarWall from "./components/SideBarWall.js"
 import Note from './components/Note.js';
 
 export default function App() {
@@ -133,29 +134,18 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className={classes.app}>
       <Header bookNames={bookNames} selectedBook={liftedBook} />
-      <div style={{display: 'flex', justifyContent: 'flex-start', width: "200px", float: 'left'}}>
-      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideDisplayed={'left'} />
+      <div className={classes.leftSideBarContainer}>
+      <SideBarWall />
+      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} />
       </div>
-      <div style={{display: 'flex', justifyContent: 'flex-end', width: '200px', float: 'right'}}>
-      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideDisplayed={'right'} />
+      <div className={classes.rightSideBarContainer}>
+      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} />
+      <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} />
+      <Note selectedNotes={selectedNotes} bookIsSelected={pageNames.length > 0} />
       <Footer />
-      {/* <header>
-        <button onClick={() => getNotes()}>Fetch notes</button>
-        <button disabled={notes.length < 1} onClick={() => getSections(notes, selectedBook, selectedPage)}>
-          Show pages
-        </button>
-        <button
-          disabled={notes.length < 1}
-          onClick={() => executeSearch(notes, "install")}
-        >
-          Find install
-        </button>
-        <div className="test">test</div>
-      </header> */}
     </div>
   );
 }

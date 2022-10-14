@@ -5,7 +5,6 @@
   background-color: #a9a9a9;
 }
 .open {
-  position: inherit;
   transition: ease-out;
   transition-duration: 200ms;
   width: 200px;
@@ -13,24 +12,7 @@
 .closed {
   transition: ease-in;
   transition-duration: 200ms;
-  width: 22px;
-}
-.grabberBar {
-  display: flex;
-  align-items: center;
-  height: 90vh;
-  background-color: #8c8a8a;
-  margin-top: -1px;
-  box-shadow: 2px 1px 20px black;
-  position: relative;
-  z-index: 10;
-}
-.grabber {
-  cursor: pointer;
-  background-color: #696969;
-  border-radius: 5px;
-  border: 1px solid black;
-  width: 20px;
+  width: .01px;
 }
 .itemContainer {
   display: flex;
@@ -38,9 +20,10 @@
   flex-direction: column;
   align-items: flex-start;
   float: right;
-}
-.itemContainerRight {
-  flex: 1
+  width: 300;
+  transition: ease-in;
+  transition-duration: 200ms;
+  height: 90vh;
 }
 .item {
   font-size: large;
