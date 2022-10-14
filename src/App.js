@@ -134,7 +134,7 @@ export default function App() {
   }
 
   return (
-    <div className={classes.app}>
+    <div className={classes.container}>
       <Header bookNames={bookNames} selectedBook={liftedBook} />
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
