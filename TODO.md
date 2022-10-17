@@ -10,8 +10,8 @@
 * Add an "All" button to the right SideBar so you can scroll through all the sections if you want to.
     
 ### Bugs
-* The text in the SideBars needs to be invisible when the opening or closing transition is happening
-    * Currently the text will show outside the SideBar or look smashed while the transition is happening
+* The text on the SideBar should stay until the SideBar has closed and only open again once the new text is saved to the state. 
+    * This will look nicer than havin the text flash when the user presses a new book or page
 * If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
     * This may be resolved by the refactoring mentioned in the Refactoring section
         * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
