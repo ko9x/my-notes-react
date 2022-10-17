@@ -138,10 +138,10 @@ export default function App() {
       <Header bookNames={bookNames} selectedBook={liftedBook} />
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
-      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} />
+      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideBarPosition={'left'} />
       </div>
       <div className={classes.rightSideBarContainer}>
-      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} />
+      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
       <Note selectedNotes={selectedNotes} bookIsSelected={pageNames.length > 0} />

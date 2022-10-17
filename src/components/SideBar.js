@@ -4,6 +4,7 @@ import classes from "./SideBar.module.css";
 export default function SideBar({
   itemNameArray,
   selectedItemName,
+  sideBarPosition,
 }) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -32,11 +33,9 @@ export default function SideBar({
     <div
       className={`${classes.container} ${
         isOpen ? classes.open : classes.closed
-      }`}
+      } ${sideBarPosition === "left" ? classes.leftSideBarContainer : null}`}
     >
-      <div
-        className={classes.itemContainer}
-      >
+      <div className={classes.itemContainer}>
         {itemNameArray && isOpen
           ? itemNameArray.map((item, index) => {
               return (
