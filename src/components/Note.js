@@ -1,13 +1,12 @@
 import classes from "./Note.module.css";
 import { useEffect } from "react";
 import hljs from "highlight.js";
-import 'highlight.js/styles/github-dark.css';
+import "highlight.js/styles/github-dark.css";
 
 export default function Note({ selectedNotes, bookIsSelected }) {
-
   useEffect(() => {
     // hljs.highlightAll();
-  })
+  });
 
   return (
     <div className={classes.container}>
@@ -31,9 +30,17 @@ export default function Note({ selectedNotes, bookIsSelected }) {
           </div>
         ))
       ) : (
-        <div style={{ display: "flex", alignItems: "center", flexDirection: 'column' }}>
-          <h1>Select a book from the Header to begin</h1>
-          {bookIsSelected && <h2>Now select a page from the left SideBar</h2>}
+        <div>
+          {!bookIsSelected && (
+            <h1 className={classes.instructions}>
+              Select a book from the Header to begin
+            </h1>
+          )}
+          {bookIsSelected && (
+            <h2 className={classes.instructions}>
+              Select a page from the left SideBar
+            </h2>
+          )}
         </div>
       )}
     </div>
