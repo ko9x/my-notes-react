@@ -17,6 +17,7 @@ export default function SideBar({
   function handleItemNameArrayChange() {
     if (isOpen) {
       setIsOpen(false);
+      setActiveItem(null);
     }
     if (!isOpen && itemNameArray && itemNameArray.length > 0) {
       setCurrentItems(itemNameArray);

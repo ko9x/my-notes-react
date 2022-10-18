@@ -11,12 +11,12 @@
 }
 .open {
   transition: ease-out;
-  transition-duration: 200ms;
+  transition-duration: 500ms;
   width: 200px;
 }
 .closed {
   transition: ease-in;
-  transition-duration: 200ms;
+  transition-duration: 500ms;
   width: .01px;
 }
 .itemContainer {

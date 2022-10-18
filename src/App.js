@@ -121,9 +121,15 @@ export default function App() {
     setPageNames(keyWordObjectsArr);
   }
 
-  function liftedBook(selectedBook) {
-    getPages(notes, selectedBook);
-    setSelectedBook(selectedBook);
+  function liftedBook(bookBeingLifted) {
+    if(bookBeingLifted === selectedBook) {
+      return 
+    } else {
+      getPages(notes, bookBeingLifted);
+      setSelectedNotes([]);
+      setSelectedBook(bookBeingLifted);
+      setSectionNames(null);
+    }
   }
   function liftedPage(page) {
     getSections(notes, selectedBook, page);
