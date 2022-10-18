@@ -5,7 +5,7 @@ import "highlight.js/styles/github-dark.css";
 
 export default function Note({ selectedNotes, bookIsSelected }) {
   useEffect(() => {
-    // hljs.highlightAll();
+    hljs.highlightAll();
   });
 
   return (
