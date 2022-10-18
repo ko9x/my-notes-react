@@ -2,6 +2,7 @@ import classes from "./Note.module.css";
 import { useEffect } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
+import Highlighter from "react-highlight-words";
 
 export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
   useEffect(() => {
@@ -10,6 +11,12 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
 
   return (
     <div className={classes.container}>
+      <Highlighter
+        highlightStyle={{ color: "black" }}
+        searchWords={["and", "or", "the"]}
+        autoEscape={true}
+        textToHighlight="The dog is chasing the cat. Or perhaps they're just playing?"
+      />
       {selectedNotes.length > 0 ? (
         selectedNotes.map((note) => (
           <div className={classes.note} key={note.id}>
