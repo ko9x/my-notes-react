@@ -131,9 +131,13 @@ export default function App() {
       setSectionNames(null);
     }
   }
-  function liftedPage(page) {
-    getSections(notes, selectedBook, page);
-    setSelectedPage(page);
+  function liftedPage(pageBeingLifted) {
+    if(pageBeingLifted === selectedPage) {
+      return
+    } else {
+      getSections(notes, selectedBook, pageBeingLifted);
+      setSelectedPage(pageBeingLifted);
+    }
   }
   function liftedSection(section) {
     getSingleSection(notes, selectedBook, selectedPage, section);
