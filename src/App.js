@@ -16,6 +16,7 @@ export default function App() {
   const [pageNames, setPageNames] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null);
   const [sectionNames, setSectionNames] = useState(null);
+  const [searchItem, setSearchItem] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -115,10 +116,15 @@ export default function App() {
     for (const key in myArr) {
       let myWord = myArr[key];
       if (myWord.content.toLowerCase().includes(keyWord)) {
-        keyWordObjectsArr.push(myWord.content);
+        keyWordObjectsArr.push(myWord);
       }
     }
-    setPageNames(keyWordObjectsArr);
+    setSearchItem(keyWord)
+    setSelectedNotes(keyWordObjectsArr);
+  }
+
+  function liftedSearchItem(searchItemBeingLifted) {
+    executeSearch(notes, searchItemBeingLifted)
   }
 
   function liftedBook(bookBeingLifted) {
@@ -145,7 +151,7 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <Header bookNames={bookNames} selectedBook={liftedBook} />
+      <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem} />
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideBarPosition={'left'} />
@@ -154,7 +160,7 @@ export default function App() {
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} bookIsSelected={pageNames.length > 0} />
+      <Note selectedNotes={selectedNotes} bookIsSelected={pageNames.length > 0} keyWord={searchItem} />
       <Footer />
     </div>
   );

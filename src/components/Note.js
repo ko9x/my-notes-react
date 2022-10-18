@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 
-export default function Note({ selectedNotes, bookIsSelected }) {
+export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
   useEffect(() => {
     hljs.highlightAll();
   });

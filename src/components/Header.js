@@ -1,12 +1,24 @@
 import classes from "./Header.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-export default function Header({ bookNames, selectedBook }) {
+export default function Header({ bookNames, selectedBook, searchItem }) {
   const [activeBook, setActiveBook] = useState(null);
+  const inputRef = useRef();
 
   function handleBookSelection(book) {
     selectedBook(book);
     setActiveBook(book);
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+
+    const value = inputRef.current.value;
+    if (value === "") {
+      return;
+    }
+    searchItem(value);
+    inputRef.current.value = "";
   }
 
   return (
@@ -35,7 +47,9 @@ export default function Header({ bookNames, selectedBook }) {
         >
           new +
         </button>
-        <input placeholder="search" />
+        <form onSubmit={onSubmit}>
+          <input placeholder="search" type="search" ref={inputRef} />
+        </form>
       </div>
       <h3 className={classes.logOut}>Log Out</h3>
     </div>
