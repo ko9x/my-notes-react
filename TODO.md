@@ -1,24 +1,10 @@
 ### Current Focus
-* Fix the slowdown caused by highlight.js
-    * there are notes in the npm about using web workers to fix the freezing issue I'm having
-        * there is a link to the npm in the react folder
-    * or only apply the highlight to what is currently on the screen somehow?
-        * Make sure the amount of code that gets processed by highlight is always small somehow?
-            * Maybe that is what the web worker does. I'm not really sure yet.
-* Finish styling the SideBars
-    * SEE STYLING AND BUGS SECTIONS
-* Add an "All" button to the right SideBar so you can scroll through all the sections if you want to.
+* Decide what to focus on next
     
-### Bugs
-* The text on the SideBar should stay until the SideBar has closed and only open again once the new text is saved to the state. 
-    * This will look nicer than havin the text flash when the user presses a new book or page
-* If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
-    * This may be resolved by the refactoring mentioned in the Refactoring section
-        * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
-
 ### What to do next
 * Add functionality to add new pages, sections, and notes
 * Add edit and remove functionality
+* Add search functionality
 * Make a global for colors
     * It's better to do this early on 
         * I'd like to be able to do a light mode and a dark mode
@@ -32,10 +18,16 @@
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 
 ### Styling
-* Decide if we should redesign the grabber
-    * It looks a bit cheesy so hopefully I can come up with something better
-    * Maybe just remove them completely. I don't think there is a point to allowing the user to manually close the SideBars. It doesn't make the content in the middle of the screen stretch or anything.
 
+### Bugs
+* The first time you select a section the fade in animation doesn't fire
+    * Every subsequent time you select a section it work just fine.
+* Fix the slowdown caused by highlight.js
+    * there are notes in the npm about using web workers to fix the freezing issue I'm having
+        * there is a link to the npm in the react folder
+    * or only apply the highlight to what is currently on the screen somehow?
+        * Make sure the amount of code that gets processed by highlight is always small somehow?
+            * Maybe that is what the web worker does. I'm not really sure yet.
 
 ### What to do later
 * highlight.js makes everything slower. There is probably somehting I can do to fix that.
@@ -70,6 +62,7 @@
     * Just something basic to make the bottom of the page look nicer.
 * Make sure the code in the notes is presented in a readable way
     * Maybe put a border around code?
+* Finish styling the SideBars
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
@@ -78,3 +71,8 @@
 * Notes that have a pre-code wrap are not being confined to the center of the screen
     * We need to find a good way to present the code wrapped notes.
     * (the fix) There really isn't a fix. I need to make sure the code is written in a way that can be presented on the screen. I will need to edit all the notes that are written in a way that doesn't fit on the screen.
+* The text on the SideBar should stay until the SideBar has closed and only open again once the new text is saved to the state. 
+    * This will look nicer than havin the text flash when the user presses a new book or page
+* If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
+    * This may be resolved by the refactoring mentioned in the Refactoring section
+        * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
