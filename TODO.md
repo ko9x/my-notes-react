@@ -1,10 +1,12 @@
 ### Current Focus
-* Decide what to focus on next
+* Add functionality to add new pages, sections, and notes
+    * Allow pages and section names to be multiple words and use unique characters
+* Add edit and remove functionality
+    * Allow user to move a note from one page to another or one book to another
+    * Allow user to move a note to a section, page, or book they create when editing the note
+    * After editing a note make sure the view returns to the note you just edited
     
 ### What to do next
-* Add functionality to add new pages, sections, and notes
-* Add edit and remove functionality
-* Add search functionality
 * Make a global for colors
     * It's better to do this early on 
         * I'd like to be able to do a light mode and a dark mode
@@ -30,12 +32,14 @@
             * Maybe that is what the web worker does. I'm not really sure yet.
 
 ### What to do later
+* Add an animation when the showNoteDetail function adds the class in the Note.js
 * highlight.js makes everything slower. There is probably somehting I can do to fix that.
 * Add a note describing how to add multiple styles in react.js
     * there is an example in the Header.js/css and the SideBar.js/css
 * Add a note about how position: relative allows you to use z-index to decide what is on top
     * there is an example in the Header.module.css
-
+* Add a note about making a unique array out of an array with duplicate objects
+    * there is an example in the executeSearch function inside the App.js
 ### Refactoring 
 * I believe the getBooks, getPages, and getSections functions in the App.js can be one function
     * Just check if the arguement is null or not and act accordingly.
@@ -63,6 +67,7 @@
 * Make sure the code in the notes is presented in a readable way
     * Maybe put a border around code?
 * Finish styling the SideBars
+* Add search functionality
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
