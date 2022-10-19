@@ -4,6 +4,17 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 
+function highlightKeyWord(myStr, myKeyWord) {
+
+  let regEx = new RegExp(myKeyWord, 'ig')
+
+  const highlightedHtml = myStr.replaceAll(
+    regEx,
+    `<mark>${myKeyWord}</mark>`
+  );
+  return highlightedHtml;
+}
+
 export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
   useEffect(() => {
     hljs.highlightAll();
@@ -11,27 +22,40 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
 
   return (
     <div className={classes.container}>
-      <Highlighter
-        highlightStyle={{ color: "black" }}
-        searchWords={["and", "or", "the"]}
-        autoEscape={true}
-        textToHighlight="The dog is chasing the cat. Or perhaps they're just playing?"
-      />
       {selectedNotes.length > 0 ? (
         selectedNotes.map((note) => (
           <div className={classes.note} key={note.id}>
-            <h1>{note.title}</h1>
-            <p dangerouslySetInnerHTML={{ __html: note.content }}></p>
+            <h1>
+              <Highlighter
+                highlightStyle={{ color: "#282c34" }}
+                searchWords={[keyWord]}
+                autoEscape={true}
+                textToHighlight={note.title}
+              />
+            </h1>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: highlightKeyWord(note.content, keyWord),
+              }}
+            ></p>
             {note.import && note.important.length > 0 && (
               <>
                 <h3 style={{ color: "red" }}>Important Note</h3>
-                <p dangerouslySetInnerHTML={{ __html: note.important }}></p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: highlightKeyWord(note.important, keyWord),
+                  }}
+                ></p>
               </>
             )}
             {note.side && note.side.length > 0 && (
               <>
                 <h3 style={{ color: "orange" }}>Side Note</h3>
-                <p dangerouslySetInnerHTML={{ __html: note.side }}></p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: highlightKeyWord(note.side, keyWord),
+                  }}
+                ></p>
               </>
             )}
           </div>
