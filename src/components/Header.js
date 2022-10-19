@@ -19,6 +19,7 @@ export default function Header({ bookNames, selectedBook, searchItem }) {
     }
     searchItem(value);
     inputRef.current.value = "";
+    setActiveBook(null);
   }
 
   return (

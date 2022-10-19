@@ -133,8 +133,10 @@ export default function App() {
     const ids = arrWithDuplicates.map(object => object.id)
     const uniqueArr = arrWithDuplicates.filter(({id}, index) => !ids.includes(id, index + 1))
 
-    setSearchItem(keyWord)
+    setSearchItem(keyWord);
     setSelectedNotes(uniqueArr);
+    setPageNames(null);
+    setSectionNames(null);
   }
 
   function liftedSearchItem(searchItemBeingLifted) {
@@ -145,8 +147,8 @@ export default function App() {
     if(bookBeingLifted === selectedBook) {
       return 
     } else {
-      getPages(notes, bookBeingLifted);
       setSelectedNotes([]);
+      getPages(notes, bookBeingLifted);
       setSelectedBook(bookBeingLifted);
       setSectionNames(null);
     }
@@ -165,7 +167,7 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem} />
+      <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideBarPosition={'left'} />
@@ -174,7 +176,7 @@ export default function App() {
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} bookIsSelected={pageNames.length > 0} keyWord={searchItem} />
+      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} />
       <Footer />
     </div>
   );
