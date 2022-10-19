@@ -1,11 +1,10 @@
 import classes from "./Note.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 
 function highlightKeyWord(myStr, myKeyWord) {
-
   const highlightedHtml = myStr.replaceAll(
     myKeyWord,
     `<mark>${myKeyWord}</mark>`
@@ -18,12 +17,29 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
     hljs.highlightAll();
   });
 
+  const [showingNoteDetails, setShowingNoteDetails] = useState(false);
+
+  function showNoteDetails(note) {
+    return (
+      <div className={classes.detailContainer}>
+        <p className={classes.detail}>Book: {note.book}</p>
+        <p className={classes.detail}>Page: {note.page}</p>
+        <p className={classes.detail}>Section: {note.section}</p>
+      </div>
+    );
+  }
+
   return (
     <div className={classes.container}>
       {selectedNotes.length > 0 ? (
         selectedNotes.map((note) => (
           <div className={classes.note} key={note.id}>
-            <h1>
+            {showingNoteDetails && showNoteDetails(note)}
+            <h1
+              onClick={() => {
+                setShowingNoteDetails(prevState => !prevState);
+              }}
+            >
               <Highlighter
                 highlightStyle={{ color: "#282c34" }}
                 searchWords={[keyWord]}

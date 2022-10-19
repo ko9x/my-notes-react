@@ -25,6 +25,14 @@ mark {
 a {
   color: red;
 }
+.detailContainer {
+  display: flex;
+  flex-direction: row;
+}
+.detail {
+  padding-right: 10px;
+  margin-bottom: -10px;
+}
 .instructions {
   display: flex;
   align-items: center;
