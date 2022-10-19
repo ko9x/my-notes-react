@@ -144,6 +144,11 @@ export default function App() {
   }
 
   function liftedBook(bookBeingLifted) {
+    if(bookBeingLifted === null) {
+      // User ran a search and we need to make sure no book shows as selected
+      setSelectedBook(null)
+      return
+    }
     if(bookBeingLifted === selectedBook) {
       return 
     } else {
