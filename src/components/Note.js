@@ -6,10 +6,8 @@ import Highlighter from "react-highlight-words";
 
 function highlightKeyWord(myStr, myKeyWord) {
 
-  let regEx = new RegExp(myKeyWord, 'ig')
-
   const highlightedHtml = myStr.replaceAll(
-    regEx,
+    myKeyWord,
     `<mark>${myKeyWord}</mark>`
   );
   return highlightedHtml;
