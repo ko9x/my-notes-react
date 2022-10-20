@@ -27,11 +27,13 @@ export default function SideBar({
 
   // @TODO this is kind of clunky. We should have an ID or something to verify the array has changed
   function handleTransitionEnd() {
-    if(itemNameArray[0] !== currentItems[0]) {
-      handleItemNameArrayChange();
-    }
-    if (itemNameArray.length !== currentItems.length) {
-      handleItemNameArrayChange();
+    if(itemNameArray) {
+      if(itemNameArray[0] !== currentItems[0]) {
+        handleItemNameArrayChange();
+      }
+      if (itemNameArray.length !== currentItems.length) {
+        handleItemNameArrayChange();
+      }
     }
   }
 
