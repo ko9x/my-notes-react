@@ -145,8 +145,9 @@ export default function App() {
 
   function liftedBook(bookBeingLifted) {
     if(bookBeingLifted === null) {
-      // User ran a search and we need to make sure no book shows as selected
-      setSelectedBook(null)
+      //The user ran a search, which closes the SideBars so we need to set the selectedBook and selectedPage to null
+      setSelectedBook(null);
+      setSelectedPage(null);
       return
     }
     if(bookBeingLifted === selectedBook) {
