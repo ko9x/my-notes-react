@@ -5,6 +5,10 @@ import Footer from "./components/Footer.js";
 import SideBar from "./components/SideBar.js";
 import SideBarWall from "./components/SideBarWall.js"
 import Note from './components/Note.js';
+import EditModal from "./modals/EditModal";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
@@ -17,6 +21,7 @@ export default function App() {
   const [selectedPage, setSelectedPage] = useState(null);
   const [sectionNames, setSectionNames] = useState(null);
   const [searchItem, setSearchItem] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getNotes();
@@ -168,11 +173,22 @@ export default function App() {
     }
   }
   function liftedSection(section) {
+    handleModalOpen()
     getSingleSection(notes, selectedBook, selectedPage, section);
+  }
+
+  function handleModalOpen() {
+    setIsModalOpen(true);
+  }
+
+  function handleCloseModal() {
+    setIsModalOpen(false);
   }
 
   return (
     <div className={classes.container}>
+      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} />
+      <button onClick={() => {handleModalOpen()}}>Open Modal</button>
       <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />

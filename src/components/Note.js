@@ -4,6 +4,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 
+
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
     myKeyWord,
@@ -32,7 +33,6 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
       inline: 'nearest'
     });
   }
-
 
   function showNoteDetails(note) {
     return (
