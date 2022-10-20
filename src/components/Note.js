@@ -1,5 +1,5 @@
 import classes from "./Note.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
@@ -18,6 +18,21 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
   });
 
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
+  const [noteId, setNoteId] = useState(null);
+  const noteRef = useRef(null);
+
+  function storeNoteId(id) {
+    setNoteId(id);
+  }
+
+  function scrollToNote() {
+    noteRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
+  }
+
 
   function showNoteDetails(note) {
     return (
@@ -31,9 +46,12 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
 
   return (
     <div className={classes.container}>
+      {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
       {selectedNotes.length > 0 ? (
         selectedNotes.map((note) => (
-          <div className={classes.note} key={note.id}>
+          // the ref is only added if the note.id matches the stored noteId
+          <div className={classes.note} key={note.id} ref={note.id === noteId ? noteRef : null}>
+            {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
             {showingNoteDetails && showNoteDetails(note)}
             <h1
               onClick={() => {
