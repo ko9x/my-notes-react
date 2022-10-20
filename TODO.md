@@ -1,4 +1,5 @@
 ### Current Focus
+* Figure out if we want to use the modal for the edit form
 * Add functionality to add new pages, sections, and notes
     * Allow pages and section names to be multiple words and use unique characters
 * Add edit and remove functionality
@@ -40,6 +41,9 @@
     * there is an example in the Header.module.css
 * Add a note about making a unique array out of an array with duplicate objects
     * there is an example in the executeSearch function inside the App.js
+* Add a note about using scrollIntoView inside a mapped list
+    * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
+
 ### Refactoring 
 * I believe the getBooks, getPages, and getSections functions in the App.js can be one function
     * Just check if the arguement is null or not and act accordingly.
@@ -81,3 +85,8 @@
 * If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
     * This may be resolved by the refactoring mentioned in the Refactoring section
         * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
+* If a page is selected and then the user does a search and goes back to that same page it doesn't load the sections because the selectedPage state never got cleared
+
+
+
+
