@@ -190,7 +190,6 @@ export default function App() {
   return (
     <div className={classes.container}>
       <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} pageList={pageNames} sectionList={sectionNames}  />
-      <button onClick={() => {handleModalOpen()}}>Open Modal</button>
       <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
