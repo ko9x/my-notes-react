@@ -6,9 +6,6 @@ import SideBar from "./components/SideBar.js";
 import SideBarWall from "./components/SideBarWall.js"
 import Note from './components/Note.js';
 import EditModal from "./modals/EditModal";
-import Modal from 'react-modal';
-
-Modal.setAppElement('#root');
 
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";

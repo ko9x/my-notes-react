@@ -14,6 +14,7 @@ const customStyles = {
       transform: 'translate(-50%, -50%)',
       backgroundColor: 'grey',
     },
+    
   };
 
 export default function EditModal({isModalOpen, closeModal}) {
@@ -24,6 +25,7 @@ export default function EditModal({isModalOpen, closeModal}) {
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
+        closeTimeoutMS={500}
       >
         <h2>Hello</h2>
         <button onClick={closeModal}>close</button>
