@@ -4,7 +4,6 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 
-
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
     myKeyWord,
@@ -13,7 +12,7 @@ function highlightKeyWord(myStr, myKeyWord) {
   return highlightedHtml;
 }
 
-export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
+export default function Note({ selectedNotes, bookIsSelected, keyWord, editPressed }) {
   useEffect(() => {
     hljs.highlightAll();
   });
@@ -28,18 +27,27 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
 
   function scrollToNote() {
     noteRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest'
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
     });
+  }
+
+  function handleNoteEditPress(note) {
+    editPressed(note);
   }
 
   function showNoteDetails(note) {
     return (
-      <div className={classes.detailContainer}>
-        <p className={classes.detail}>Book: {note.book}</p>
-        <p className={classes.detail}>Page: {note.page}</p>
-        <p className={classes.detail}>Section: {note.section}</p>
+      <div style={{justifyContent: 'space-between', flexDirection: 'row', display: 'flex'}} >
+        <div className={classes.detailContainer}>
+          <p className={classes.detail}>Book: {note.book}</p>
+          <p className={classes.detail}>Page: {note.page}</p>
+          <p className={classes.detail}>Section: {note.section}</p>
+        </div>
+        <div style={{ alignSelf: "center" }}>
+          <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
+        </div>
       </div>
     );
   }
@@ -50,12 +58,16 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord }) {
       {selectedNotes.length > 0 ? (
         selectedNotes.map((note) => (
           // the ref is only added if the note.id matches the stored noteId
-          <div className={classes.note} key={note.id} ref={note.id === noteId ? noteRef : null}>
+          <div
+            className={classes.note}
+            key={note.id}
+            ref={note.id === noteId ? noteRef : null}
+          >
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
             {showingNoteDetails && showNoteDetails(note)}
             <h1
               onClick={() => {
-                setShowingNoteDetails(prevState => !prevState);
+                setShowingNoteDetails((prevState) => !prevState);
               }}
             >
               <Highlighter

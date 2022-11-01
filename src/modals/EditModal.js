@@ -17,7 +17,7 @@ const customStyles = {
     
   };
 
-export default function EditModal({isModalOpen, closeModal}) {
+export default function EditModal({isModalOpen, closeModal, noteToEdit}) {
 
     return (
       <Modal
@@ -31,7 +31,8 @@ export default function EditModal({isModalOpen, closeModal}) {
         <button onClick={closeModal}>close</button>
         <div>I am a modal</div>
         <form>
-          <input />
+          <h2>Title</h2>
+          <input placeholder={noteToEdit?.title} />
           <button>tab navigation</button>
           <button>stays</button>
           <button>inside</button>

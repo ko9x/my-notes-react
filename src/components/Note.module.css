@@ -28,6 +28,7 @@ a {
 .detailContainer {
   display: flex;
   flex-direction: row;
+  height: 50px;
 }
 .detail {
   padding-right: 10px;

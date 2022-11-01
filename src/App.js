@@ -19,6 +19,7 @@ export default function App() {
   const [sectionNames, setSectionNames] = useState(null);
   const [searchItem, setSearchItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [noteToEdit, setNoteToEdit] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -170,7 +171,6 @@ export default function App() {
     }
   }
   function liftedSection(section) {
-    handleModalOpen()
     getSingleSection(notes, selectedBook, selectedPage, section);
   }
 
@@ -182,9 +182,14 @@ export default function App() {
     setIsModalOpen(false);
   }
 
+  function editPressed(note) {
+    setNoteToEdit(note);
+    handleModalOpen();
+  }
+
   return (
     <div className={classes.container}>
-      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} />
+      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} pageList={pageNames} sectionList={sectionNames}  />
       <button onClick={() => {handleModalOpen()}}>Open Modal</button>
       <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
@@ -195,7 +200,7 @@ export default function App() {
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} />
+      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} editPressed={editPressed} />
       <Footer />
     </div>
   );
