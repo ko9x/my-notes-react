@@ -2,16 +2,15 @@ import Modal from "react-modal";
 
 const customStyles = {
   content: {
-    height: "50vh",
-    width: "50vw",
+    height: "80vh",
+    width: "70vw",
     position: "relative",
     zIndex: "200",
-    top: "50%",
-    left: "50%",
+    marginLeft: '11vw',
+    marginTop: '8vh',
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
     backgroundColor: "grey",
   },
 };
@@ -32,20 +31,53 @@ export default function EditModal({
       contentLabel="Example Modal"
       closeTimeoutMS={500}
     >
-      <h2>Select a Book</h2>
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
-        {bookList.length > 0 && bookList.map((book) => <div><input type='radio' /> <label>{book}</label></div>)}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div>
+          <h2>Select a Book</h2>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {bookList.length > 0 &&
+              bookList.map((book) => (
+                <div>
+                  <input type="radio" /> <label>{book}</label>
+                </div>
+              ))}
+            <div>
+              <input type="radio" /> <label>new +</label>
+            </div>
+          </div>
+          <form>
+            <h2>Title</h2>
+            <input
+              type="text"
+              value={noteToEdit?.title}
+              style={{ width: "95%", borderRadius: "5px" }}
+            />
+            <h2>Content</h2>
+            <textarea style={{width: '95%', height: '20vh', borderRadius: '5px'}}>{noteToEdit?.content}</textarea>
+            <h3>Side Note</h3>
+            <input
+              type="text"
+              value={noteToEdit?.side ? noteToEdit.side : null}
+              style={{ width: "95%", borderRadius: "5px" }}
+            />
+            <h3>Important Note</h3>
+            <input
+              type="text"
+              value={noteToEdit?.important ? noteToEdit.important : null}
+              style={{ width: "95%", borderRadius: "5px" }}
+            />
+          </form>
+        </div>
+        <div style={{ alignSelf: "center" }}>
+          <button onClick={closeModal}>close</button>
+        </div>
       </div>
-      <button onClick={closeModal}>close</button>
-      <div>I am a modal</div>
-      <form>
-        <h2>Title</h2>
-        <input placeholder={noteToEdit?.title} />
-        <button>tab navigation</button>
-        <button>stays</button>
-        <button>inside</button>
-        <button>the modal</button>
-      </form>
     </Modal>
   );
 }

@@ -40,7 +40,6 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
   function showNoteDetails(note) {
     return (
       <div className={classes.noteDetailContainer} >
-      {/* // <div style={{display: 'flex', justifyContent: 'space-between'}} > */}
         <div className={classes.descriptionContainer}>
           <p className={classes.description}>Book: {note.book}</p>
           <p className={classes.description}>Page: {note.page}</p>
