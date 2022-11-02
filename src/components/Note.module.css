@@ -25,14 +25,21 @@ mark {
 a {
   color: red;
 }
-.detailContainer {
+.noteDetailContainer {
+  justify-content: space-between;
+  display: flex;
+}
+.descriptionContainer {
   display: flex;
   flex-direction: row;
   height: 50px;
 }
-.detail {
+.description {
   padding-right: 10px;
   margin-bottom: -10px;
+}
+.editButton {
+  align-self: center;
 }
 .instructions {
   display: flex;

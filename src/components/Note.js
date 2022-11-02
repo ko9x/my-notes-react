@@ -39,13 +39,14 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
 
   function showNoteDetails(note) {
     return (
-      <div style={{justifyContent: 'space-between', flexDirection: 'row', display: 'flex'}} >
-        <div className={classes.detailContainer}>
-          <p className={classes.detail}>Book: {note.book}</p>
-          <p className={classes.detail}>Page: {note.page}</p>
-          <p className={classes.detail}>Section: {note.section}</p>
+      <div className={classes.noteDetailContainer} >
+      {/* // <div style={{display: 'flex', justifyContent: 'space-between'}} > */}
+        <div className={classes.descriptionContainer}>
+          <p className={classes.description}>Book: {note.book}</p>
+          <p className={classes.description}>Page: {note.page}</p>
+          <p className={classes.description}>Section: {note.section}</p>
         </div>
-        <div style={{ alignSelf: "center" }}>
+        <div className={classes.editButton}>
           <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
         </div>
       </div>
