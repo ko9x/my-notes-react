@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import classes from './EditModal.module.css'
 
 const customStyles = {
   content: {
@@ -31,7 +32,7 @@ export default function EditModal({
       contentLabel="Example Modal"
       closeTimeoutMS={500}
     >
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div className={classes.container}>
         <div>
           <h2>Select a Book</h2>
           <div
@@ -56,26 +57,26 @@ export default function EditModal({
             <input
               type="text"
               value={noteToEdit?.title}
-              style={{ width: "95%", borderRadius: "5px" }}
+              className={classes.modalInput}
             />
             <h2>Content</h2>
-            <textarea style={{width: '95%', height: '20vh', borderRadius: '5px'}}>{noteToEdit?.content}</textarea>
+            <textarea className={classes.modalTextArea}>{noteToEdit?.content}</textarea>
             <h3>Side Note</h3>
             <input
               type="text"
               value={noteToEdit?.side ? noteToEdit.side : null}
-              style={{ width: "95%", borderRadius: "5px" }}
+              className={classes.modalInput}
             />
             <h3>Important Note</h3>
             <input
               type="text"
               value={noteToEdit?.important ? noteToEdit.important : null}
-              style={{ width: "95%", borderRadius: "5px" }}
+              className={classes.modalInput}
             />
           </form>
         </div>
-        <div style={{ alignSelf: "center" }}>
-          <button onClick={closeModal}>close</button>
+        <div className={classes.closeButtonContainer}>
+          <button className={classes.closeButton} onClick={closeModal}>close</button>
         </div>
       </div>
     </Modal>
