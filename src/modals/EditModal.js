@@ -51,6 +51,9 @@ export default function EditModal({
       setImportantSize(null);
     }
   }
+  function handleRadioButtonChange(e) {
+    console.log('radio button changed to:', e.target.id);
+  }
   function handleSubmit(e) {
     e.preventDefault();
     console.log('The title:', e.target.title.value)
@@ -78,7 +81,7 @@ export default function EditModal({
           >
             {bookList.length > 0 &&
               bookList.map((book) => (
-                <div key={book} onChange={(e) => console.log(e.target.id)}>
+                <div key={book} onChange={(e) => handleRadioButtonChange(e)}>
                   <input type="radio" id={book} /> <label>{book}</label>
                 </div>
               ))}
