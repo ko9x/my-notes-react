@@ -1,9 +1,10 @@
 ### Current Focus
-* Add transition when a user clicks the header to reveal the edit button and details
 * Finish the form
-* Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
-    * Make sure if a book or page or section exists, the radio button defaults to that spot
-    * Make sure only one radio button is selected at a time
+* (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
+    * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
+    * (done) Make sure only one radio button is selected at a time
+    
+    * Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
 
 * Figure out if we want to use the modal for the edit form
 * Add functionality to add new pages, sections, and notes
@@ -78,6 +79,7 @@
     * Maybe put a border around code?
 * Finish styling the SideBars
 * Add search functionality
+* Add transition when a user clicks the header to reveal the edit button and details
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
