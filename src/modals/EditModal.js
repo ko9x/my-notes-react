@@ -1,6 +1,8 @@
 import Modal from "react-modal";
 import classes from "./EditModal.module.css";
 import { useState } from "react";
+import Radio from "../components/Radio";
+import { useEffect } from "react";
 
 const customStyles = {
   content: {
@@ -22,12 +24,22 @@ export default function EditModal({
   closeModal,
   noteToEdit,
   bookList,
+  defaultBook,
   pageList,
+  defaultPage,
   sectionList,
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
   const [importantSize, setImportantSize] = useState(null);
+  const [selectedBook, setSelectedBook] = useState(defaultBook);
+  const [selectedPage, setSelectedPage] = useState(defaultPage);
+  const [selectedSection, setSelectedSection] = useState(null);
+
+  useEffect(() => {
+    setSelectedBook(defaultBook);
+    setSelectedPage(defaultPage);
+  }, [defaultBook, defaultPage])
 
   // @TODO I'm sure there is a better way to refactor this
   function toggleContentSize() {
@@ -51,8 +63,14 @@ export default function EditModal({
       setImportantSize(null);
     }
   }
-  function handleRadioButtonChange(e) {
-    console.log("radio button changed to:", e.target.id);
+  function handleBookChange(e) {
+    setSelectedBook(e.target.id);
+  }
+  function handlePageChange(e) {
+    setSelectedPage(e.target.id);
+  }
+  function handleSectionChange(e) {
+    setSelectedSection(e.target.id);
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -71,24 +89,12 @@ export default function EditModal({
     >
       <div className={classes.container}>
         <div>
-          <h2>Select a Book</h2>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {bookList.length > 0 &&
-              bookList.map((book) => (
-                <div key={book} onChange={(e) => handleRadioButtonChange(e)}>
-                  <input type="radio" id={book} /> <label>{book}</label>
-                </div>
-              ))}
-            <div>
-              <input type="radio" /> <label>new +</label>
-            </div>
-          </div>
+          <div className={classes.radioTitle}><h2>Select a Book</h2><button className={classes.newItemButton}>new +</button></div>
+          <Radio nameArray={bookList} selectedItem={selectedBook ? selectedBook : null} selectionFunction={handleBookChange} />
+          <div className={classes.radioTitle}><h2>Select a Page</h2><button className={classes.newItemButton}>new +</button></div>
+          <Radio nameArray={pageList} selectedItem={selectedPage} selectionFunction={handlePageChange} />
+          <div className={classes.radioTitle}><h2>Select a Section</h2><button className={classes.newItemButton}>new +</button></div>
+          <Radio nameArray={sectionList} selectedItem={selectedSection} selectionFunction={handleSectionChange} />
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input

@@ -189,7 +189,7 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} pageList={pageNames} sectionList={sectionNames}  />
+      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames}  />
       <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />

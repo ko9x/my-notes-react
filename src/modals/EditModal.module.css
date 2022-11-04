@@ -20,9 +20,22 @@
     transition-duration: 500ms;
     height: 50vh; 
 }
+.radioTitle {
+    display: flex;
+    font-family:'Courier New', Courier, monospace;
+}
+.newItemButton {
+    padding-left: 5vw;
+    font-size: large;
+    font-weight: 600;
+    font-family:'Courier New', Courier, monospace;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
 .closeButtonContainer { 
     width: 50%;
-    /* align-self: center; */
     float: right;
     padding-top: 2vh;
 }
