@@ -52,6 +52,14 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     );
   }
 
+  function handleSetNoteDetails(newNoteId) {
+    if (showingNoteDetails === newNoteId) {
+      setShowingNoteDetails(null);
+    } else {
+      setShowingNoteDetails(newNoteId);
+    }
+  }
+
   return (
     <div className={classes.container}>
       {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
@@ -64,10 +72,10 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
             ref={note.id === noteId ? noteRef : null}
           >
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
-            {showingNoteDetails && showNoteDetails(note)}
+            <div style={{height: showingNoteDetails === note.id ? '50px' : '0.1px', transitionDuration: '500ms'}}>{showingNoteDetails === note.id && showNoteDetails(note)}</div>
             <h1
               onClick={() => {
-                setShowingNoteDetails((prevState) => !prevState);
+                handleSetNoteDetails(note.id);
               }}
             >
               <Highlighter
