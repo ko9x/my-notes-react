@@ -21,9 +21,12 @@
     height: 50vh; 
 }
 .closeButtonContainer { 
-    align-self: center;
+    width: 50%;
+    /* align-self: center; */
+    float: right;
     padding-top: 2vh;
 }
 .closeButton {
     border-radius: 5px;
+    float: right
 }

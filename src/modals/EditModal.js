@@ -52,14 +52,14 @@ export default function EditModal({
     }
   }
   function handleRadioButtonChange(e) {
-    console.log('radio button changed to:', e.target.id);
+    console.log("radio button changed to:", e.target.id);
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('The title:', e.target.title.value)
-    console.log('The content:', e.target.content.value)
-    console.log('The side note:', e.target.side.value)
-    console.log('The important note:', e.target.important.value)
+    console.log("The title:", e.target.title.value);
+    console.log("The content:", e.target.content.value);
+    console.log("The side note:", e.target.side.value);
+    console.log("The important note:", e.target.important.value);
   }
   return (
     <Modal
@@ -92,49 +92,58 @@ export default function EditModal({
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
-              onChange={(e) => {console.log('input change', e)}}
+              onChange={(e) => {
+                console.log("input change", e);
+              }}
               type="text"
-              id='title'
+              id="title"
               defaultValue={noteToEdit?.title}
               className={classes.modalInput}
             />
             <h2 onClick={() => toggleContentSize()}>Content</h2>
             <textarea
               defaultValue={noteToEdit?.content}
-              id='content'
-              onChange={(e) => {console.log('content change', e)}}
+              id="content"
+              onChange={(e) => {
+                console.log("content change", e);
+              }}
               className={`${classes.modalTextArea} ${
                 contentSize === "large"
                   ? classes.modalTextAreaLargeHeight
                   : classes.modalTextAreaMediumHeight
               }`}
-            >
-            </textarea>
+            ></textarea>
             <h3 onClick={() => toggleSideSize()}>Side Note</h3>
             <textarea
               defaultValue={noteToEdit?.side}
-              id='side'
-              onChange={(e) => {console.log('side change', e)}}
-              placeholder={noteToEdit?.side ? null : 'Add a side note'}
+              id="side"
+              onChange={(e) => {
+                console.log("side change", e);
+              }}
+              placeholder={noteToEdit?.side ? null : "Add a side note"}
               className={`${classes.modalTextArea} ${
                 sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
               }`}
-            >
-            </textarea>
+            ></textarea>
             <h3 onClick={() => toggleImportantSize()}>Important Note</h3>
             <textarea
               defaultValue={noteToEdit?.important}
-              id='important'
-              onChange={(e) => {console.log('important change', e)}}
-              placeholder={noteToEdit?.side ? null : 'Add an important note'}
+              id="important"
+              onChange={(e) => {
+                console.log("important change", e);
+              }}
+              placeholder={noteToEdit?.side ? null : "Add an important note"}
               className={`${classes.modalTextArea} ${
                 importantSize === "medium"
                   ? classes.modalTextAreaMediumHeight
                   : null
               }`}
-            >
-            </textarea>
-            <button>Submit</button>
+            ></textarea>
+            <div style={{width: '69.1%', paddingTop: '20px'}}>
+              <button style={{ width: "30vw", borderRadius: "5px", float: 'right' }}>
+                Submit
+              </button>
+            </div>
           </form>
         </div>
         <div className={classes.closeButtonContainer}>
