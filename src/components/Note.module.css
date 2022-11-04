@@ -32,7 +32,18 @@ a {
 .descriptionContainer {
   display: flex;
   flex-direction: row;
-  height: 50px;
+  height: 45px;
+  
+}
+.detailOpen {
+  height: 30px;
+  opacity: 1;
+  transition-duration: 500ms;
+  animation: fadeIn 1s;
+}
+.detailClosed {
+  height: 0.1px;
+  transition-duration: 500ms;
 }
 .description {
   padding-right: 10px;

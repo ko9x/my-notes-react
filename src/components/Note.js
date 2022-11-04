@@ -72,7 +72,7 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
             ref={note.id === noteId ? noteRef : null}
           >
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
-            <div style={{height: showingNoteDetails === note.id ? '50px' : '0.1px', transitionDuration: '500ms'}}>{showingNoteDetails === note.id && showNoteDetails(note)}</div>
+            <div className={`${showingNoteDetails === note.id ? classes.detailOpen : classes.detailClosed}`}>{showingNoteDetails === note.id && showNoteDetails(note)}</div>
             <h1
               onClick={() => {
                 handleSetNoteDetails(note.id);
