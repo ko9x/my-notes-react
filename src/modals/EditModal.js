@@ -117,9 +117,9 @@ export default function EditModal({
           <div className={classes.radioTitle}><h2>Select a Book</h2><button className={classes.newItemButton}>new +</button></div>
           <Radio nameArray={bookList} selectedItem={selectedBook ? selectedBook : noteToEdit ? noteToEdit?.book : null} selectionFunction={handleBookChange} />
           <div className={classes.radioTitle}><h2>Select a Page</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={pageList} selectedItem={selectedPage} selectionFunction={handlePageChange} />
+          <Radio nameArray={pageList} selectedItem={selectedPage ? selectedPage : noteToEdit ? noteToEdit.page : null} selectionFunction={handlePageChange} />
           <div className={classes.radioTitle}><h2>Select a Section</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={sectionList} selectedItem={selectedSection} selectionFunction={handleSectionChange} />
+          <Radio nameArray={sectionList} selectedItem={selectedSection ? selectedSection : noteToEdit ? noteToEdit.section : null} selectionFunction={handleSectionChange} />
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
