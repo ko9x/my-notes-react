@@ -30,6 +30,8 @@
 ### Styling
 
 ### Bugs
+* The search feature only works if you refresh
+    * the searchExecuted function runs too early in the life cycle.
 * The first time you select a section the fade in animation doesn't fire
     * Every subsequent time you select a section it work just fine.
 * Fix the slowdown caused by highlight.js
