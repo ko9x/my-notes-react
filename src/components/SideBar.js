@@ -5,6 +5,7 @@ export default function SideBar({
   itemNameArray,
   selectedItemName,
   sideBarPosition,
+  defaultItem
 }) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,10 @@ export default function SideBar({
   useEffect(() => {
     handleItemNameArrayChange();
   }, [itemNameArray]);
+  
+  useEffect(() => {
+    setActiveItem(defaultItem);
+  }, [defaultItem]);
 
   function handleItemNameArrayChange() {
     if (isOpen) {

@@ -1,9 +1,14 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
+import { useEffect } from "react";
 
-export default function Header({ bookNames, selectedBook, searchItem }) {
+export default function Header({ bookNames, selectedBook, searchItem, defaultBook }) {
   const [activeBook, setActiveBook] = useState(null);
   const inputRef = useRef();
+
+  useEffect(() => {
+    setActiveBook(defaultBook);
+  }, [defaultBook])
 
   function handleBookSelection(book) {
     selectedBook(book);

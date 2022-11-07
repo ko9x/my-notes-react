@@ -28,6 +28,9 @@ export default function EditModal({
   pageList,
   defaultPage,
   sectionList,
+  changeBook,
+  changePage,
+  changeSection
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -65,12 +68,15 @@ export default function EditModal({
   }
   function handleBookChange(e) {
     setSelectedBook(e.target.id);
+    changeBook(e.target.id)
   }
   function handlePageChange(e) {
     setSelectedPage(e.target.id);
+    changePage(e.target.id);
   }
   function handleSectionChange(e) {
     setSelectedSection(e.target.id);
+    changeSection(e.target.id);
   }
   function handleSubmit(e) {
     e.preventDefault();

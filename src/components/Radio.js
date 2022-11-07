@@ -7,7 +7,7 @@ export default function Radio({ nameArray, selectionFunction, selectedItem }) {
         justifyContent: "space-evenly",
       }}
     >
-      {nameArray.length > 0 &&
+      {nameArray?.length > 0 &&
         nameArray.map((itemName) => (
           <div key={itemName}>
             <input onChange={(e) => selectionFunction(e)} type="radio" id={itemName} checked={itemName === selectedItem ? true : false} /> <label>{itemName}</label>

@@ -189,11 +189,11 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <EditModal isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames}  />
-      <Header bookNames={bookNames} selectedBook={liftedBook} searchItem={liftedSearchItem}/>
+      <EditModal changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames}  />
+      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
-      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} sideBarPosition={'left'} />
+      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} defaultItem={selectedPage}  sideBarPosition={'left'} />
       </div>
       <div className={classes.rightSideBarContainer}>
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
