@@ -31,7 +31,7 @@ export default function EditModal({
   changeBook,
   changePage,
   changeSection,
-  isSearching
+  isSearching,
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -44,11 +44,11 @@ export default function EditModal({
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
-  }, [defaultBook, defaultPage])
+  }, [defaultBook, defaultPage]);
 
   useEffect(() => {
     setIsSearch(isSearching);
-  }, [isSearching])
+  }, [isSearching]);
 
   // @TODO I'm sure there is a better way to refactor this
   function toggleContentSize() {
@@ -74,7 +74,7 @@ export default function EditModal({
   }
   function handleBookChange(e) {
     setSelectedBook(e.target.id);
-    changeBook(e.target.id)
+    changeBook(e.target.id);
   }
   function handlePageChange(e) {
     setSelectedPage(e.target.id);
@@ -92,17 +92,17 @@ export default function EditModal({
     console.log("The important note:", e.target.important.value);
   }
 
-  if(isSearch && noteToEdit) {
+  if (isSearch && noteToEdit) {
     changeBook(noteToEdit.book);
     setSelectedPage(noteToEdit.page);
     setIsSearch(false);
   }
 
   useEffect(() => {
-    if(selectedPage && !sectionList) {
+    if (selectedPage && !sectionList) {
       changePage(selectedPage);
     }
-  }, [selectedPage, changePage, sectionList])
+  }, [selectedPage, changePage, sectionList]);
 
   return (
     <Modal
@@ -114,12 +114,43 @@ export default function EditModal({
     >
       <div className={classes.container}>
         <div>
-          <div className={classes.radioTitle}><h2>Select a Book</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={bookList} selectedItem={selectedBook ? selectedBook : noteToEdit ? noteToEdit?.book : null} selectionFunction={handleBookChange} />
-          <div className={classes.radioTitle}><h2>Select a Page</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={pageList} selectedItem={selectedPage ? selectedPage : noteToEdit ? noteToEdit.page : null} selectionFunction={handlePageChange} />
-          <div className={classes.radioTitle}><h2>Select a Section</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={sectionList} selectedItem={selectedSection ? selectedSection : noteToEdit ? noteToEdit.section : null} selectionFunction={handleSectionChange} />
+          <div className={classes.radioTitle}>
+            <h2>Select a Book</h2>
+            <button className={classes.newItemButton}>new +</button>
+          </div>
+          <Radio
+            nameArray={bookList}
+            selectedItem={
+              selectedBook ? selectedBook : noteToEdit ? noteToEdit?.book : null
+            }
+            selectionFunction={handleBookChange}
+          />
+          <div className={classes.radioTitle}>
+            <h2>Select a Page</h2>
+            <button className={classes.newItemButton}>new +</button>
+          </div>
+          <Radio
+            nameArray={pageList}
+            selectedItem={
+              selectedPage ? selectedPage : noteToEdit ? noteToEdit.page : null
+            }
+            selectionFunction={handlePageChange}
+          />
+          <div className={classes.radioTitle}>
+            <h2>Select a Section</h2>
+            <button className={classes.newItemButton}>new +</button>
+          </div>
+          <Radio
+            nameArray={sectionList}
+            selectedItem={
+              selectedSection
+                ? selectedSection
+                : noteToEdit
+                ? noteToEdit.section
+                : null
+            }
+            selectionFunction={handleSectionChange}
+          />
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
@@ -170,8 +201,10 @@ export default function EditModal({
                   : null
               }`}
             ></textarea>
-            <div style={{width: '69.1%', paddingTop: '20px'}}>
-              <button style={{ width: "30vw", borderRadius: "5px", float: 'right' }}>
+            <div style={{ width: "69.1%", paddingTop: "20px" }}>
+              <button
+                style={{ width: "30vw", borderRadius: "5px", float: "right" }}
+              >
                 Submit
               </button>
             </div>
