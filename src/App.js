@@ -162,6 +162,7 @@ export default function App() {
       setSectionNames(null);
     }
   }
+
   function liftedPage(pageBeingLifted) {
     if(pageBeingLifted === selectedPage) {
       return
@@ -189,7 +190,7 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <EditModal changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames}  />
+      <EditModal changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
       <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />

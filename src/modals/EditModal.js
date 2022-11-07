@@ -30,7 +30,8 @@ export default function EditModal({
   sectionList,
   changeBook,
   changePage,
-  changeSection
+  changeSection,
+  isSearching
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -38,11 +39,16 @@ export default function EditModal({
   const [selectedBook, setSelectedBook] = useState(defaultBook);
   const [selectedPage, setSelectedPage] = useState(defaultPage);
   const [selectedSection, setSelectedSection] = useState(null);
+  const [isSearch, setIsSearch] = useState(null);
 
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
   }, [defaultBook, defaultPage])
+
+  useEffect(() => {
+    setIsSearch(isSearching);
+  }, [isSearching])
 
   // @TODO I'm sure there is a better way to refactor this
   function toggleContentSize() {
@@ -85,6 +91,19 @@ export default function EditModal({
     console.log("The side note:", e.target.side.value);
     console.log("The important note:", e.target.important.value);
   }
+
+  if(isSearch && noteToEdit) {
+    changeBook(noteToEdit.book);
+    setSelectedPage(noteToEdit.page);
+    setIsSearch(false);
+  }
+
+  useEffect(() => {
+    if(selectedPage && !sectionList) {
+      changePage(selectedPage);
+    }
+  }, [selectedPage, changePage, sectionList])
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -96,7 +115,7 @@ export default function EditModal({
       <div className={classes.container}>
         <div>
           <div className={classes.radioTitle}><h2>Select a Book</h2><button className={classes.newItemButton}>new +</button></div>
-          <Radio nameArray={bookList} selectedItem={selectedBook ? selectedBook : null} selectionFunction={handleBookChange} />
+          <Radio nameArray={bookList} selectedItem={selectedBook ? selectedBook : noteToEdit ? noteToEdit?.book : null} selectionFunction={handleBookChange} />
           <div className={classes.radioTitle}><h2>Select a Page</h2><button className={classes.newItemButton}>new +</button></div>
           <Radio nameArray={pageList} selectedItem={selectedPage} selectionFunction={handlePageChange} />
           <div className={classes.radioTitle}><h2>Select a Section</h2><button className={classes.newItemButton}>new +</button></div>
