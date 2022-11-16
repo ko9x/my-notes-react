@@ -114,7 +114,7 @@ export default function EditModal({
         if (response.status === 200) {
           console.log('response', response); //@DEBUG
           if(noteToEdit) {
-            updateNotesArray(updatedNote, noteToEdit.id)
+            updateNotesArray(updatedNote, noteToEdit.id, noteToEdit.section !== updatedNote.section ? true : null)
           } else {
             console.log('we need to get the id of the new note', ); //@DEBUG
           }

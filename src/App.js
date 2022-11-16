@@ -31,6 +31,7 @@ export default function App() {
   const [searchItem, setSearchItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState(null);
+  const [selectedSection, setSelectedSection] = useState(null);
 
   useEffect(() => {
     getNotes();
@@ -186,6 +187,7 @@ export default function App() {
       setSelectedPage(pageBeingLifted);
     }
   }
+
   function liftedSection(section) {
     getSingleSection(notes, selectedBook, selectedPage, section);
   }
@@ -203,9 +205,20 @@ export default function App() {
     handleModalOpen();
   }
 
-  function updateNotesArray(newNote, noteId) {
-    replaceNote(selectedNotes, setSelectedNotes, newNote, noteId);
+  function updateNotesArray(newNote, noteId, locationChanged) {
+    // Update the notes array so the state has the changes
     replaceNote(notes, setNotes, newNote, noteId);
+    // If the location was changed push the new note into the selectedNotes
+    if(locationChanged) {
+      setSelectedNotes((prevState) => {
+        return prevState.concat(newNote)
+      })
+      // Show which section is currently being shown
+      setSelectedSection(newNote.section);
+    // If the location did not change update note in the selectedNotes
+    } else {
+      replaceNote(selectedNotes, setSelectedNotes, newNote, noteId);
+    }
   }
 
   return (
@@ -217,7 +230,7 @@ export default function App() {
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} defaultItem={selectedPage}  sideBarPosition={'left'} />
       </div>
       <div className={classes.rightSideBarContainer}>
-      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} sideBarPosition={'right'} />
+      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} defaultItem={selectedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
       <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} editPressed={editPressed} />
