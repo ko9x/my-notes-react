@@ -1,17 +1,14 @@
 ### Current Focus
-* Finish the form
+* (done?) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
     * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
     * (done) Make sure only one radio button is selected at a time
-    
-    * Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
-
-* Figure out if we want to use the modal for the edit form
-* Add functionality to add new pages, sections, and notes
-    * Allow pages and section names to be multiple words and use unique characters
+    * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
+* Add functionality to add new books, pages, sections, and notes
+    * Allow books, pages, and section names to be multiple words and use unique characters
 * Add edit and remove functionality
-    * Allow user to move a note from one page to another or one book to another
-    * Allow user to move a note to a section, page, or book they create when editing the note
+    * (done) Allow user to move a note from one book, page, or section to another
+    * Allow user to move a note to a book, page, or section they create when editing the note
     * After editing a note make sure the view returns to the note you just edited
     
 ### What to do next
@@ -28,10 +25,11 @@
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 
 ### Styling
+* Make the edit/add form look nicer
 
 ### Bugs
-* The search feature only works if you refresh
-    * the searchExecuted function runs too early in the life cycle.
+* If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
+* If you have launched the edit modal you need to refresh before search will work
 * The first time you select a section the fade in animation doesn't fire
     * Every subsequent time you select a section it work just fine.
 * Fix the slowdown caused by highlight.js
@@ -96,7 +94,8 @@
     * This may be resolved by the refactoring mentioned in the Refactoring section
         * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
 * If a page is selected and then the user does a search and goes back to that same page it doesn't load the sections because the selectedPage state never got cleared
-
+* The search feature only works if you refresh
+    * the executeSearch function runs too early in the life cycle.
 
 
 
