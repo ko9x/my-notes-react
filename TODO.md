@@ -24,6 +24,16 @@
         * only allow one sidebar open at a time on smaller screens
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 
+### Notes to add once that functionality is working
+* Add a note describing how to add multiple styles in react.js
+    * there is an example in the Header.js/css and the SideBar.js/css
+* Add a note about how position: relative allows you to use z-index to decide what is on top
+    * there is an example in the Header.module.css
+* Add a note about making a unique array out of an array with duplicate objects
+    * there is an example in the executeSearch function inside the App.js
+* Add a note about using scrollIntoView inside a mapped list
+    * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
+
 ### Styling
 * Make the edit/add form look nicer
 
@@ -41,15 +51,7 @@
 
 ### What to do later
 * Add an animation when the showNoteDetail function adds the class in the Note.js
-* highlight.js makes everything slower. There is probably somehting I can do to fix that.
-* Add a note describing how to add multiple styles in react.js
-    * there is an example in the Header.js/css and the SideBar.js/css
-* Add a note about how position: relative allows you to use z-index to decide what is on top
-    * there is an example in the Header.module.css
-* Add a note about making a unique array out of an array with duplicate objects
-    * there is an example in the executeSearch function inside the App.js
-* Add a note about using scrollIntoView inside a mapped list
-    * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
+* highlight.js makes everything slower. There is probably something I can do to fix that.
 
 ### Refactoring 
 * I believe the getBooks, getPages, and getSections functions in the App.js can be one function
