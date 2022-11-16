@@ -1,5 +1,5 @@
 ### Current Focus
-* (done?) Finish the form
+* (done) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
     * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
     * (done) Make sure only one radio button is selected at a time
@@ -10,6 +10,14 @@
     * (done) Allow user to move a note from one book, page, or section to another
     * Allow user to move a note to a book, page, or section they create when editing the note
     * After editing a note make sure the view returns to the note you just edited
+    * Add a button to easily code such as:
+        * pre-wrap/code-wrap 
+        * p tags and 
+        * HTML Entities 
+            * such as &#60 for < 
+            * <br> to add a line break
+            * &nbsp to add a non breaking space (so a horizontal gap between stuff)
+            * <li>
     
 ### What to do next
 * Make a global for colors
@@ -23,6 +31,7 @@
     * make the sidebars less wide
         * only allow one sidebar open at a time on smaller screens
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
+* Host the app on blakes server instead of github pages
 
 ### Notes to add once that functionality is working
 * Add a note describing how to add multiple styles in react.js
@@ -33,6 +42,16 @@
     * there is an example in the executeSearch function inside the App.js
 * Add a note about using scrollIntoView inside a mapped list
     * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
+* Make a note about HTML Entities
+    * use &#60 instead of < in the code and it will show the code and not the HTML result
+* Make a note about using the index feature of a map to resolve the "unique key" warning when conditionally rendering an element of a mapped item.
+    * there is an example in the Note.js map.
+        * if you remove the index from the key you will get the error
+
+### Sections to add once that functionality is working
+* Make a javascript section
+* Make an HTML section
+* Made a css section?
 
 ### Styling
 * Make the edit/add form look nicer
