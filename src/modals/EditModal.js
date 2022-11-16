@@ -190,9 +190,6 @@ export default function EditModal({
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
-              onChange={(e) => {
-                console.log("input change", e);
-              }}
               type="text"
               id="title"
               defaultValue={noteToEdit?.title}
@@ -202,9 +199,6 @@ export default function EditModal({
             <textarea
               defaultValue={noteToEdit?.content}
               id="content"
-              onChange={(e) => {
-                console.log("content change", e);
-              }}
               className={`${classes.modalTextArea} ${
                 contentSize === "large"
                   ? classes.modalTextAreaLargeHeight
@@ -215,9 +209,6 @@ export default function EditModal({
             <textarea
               defaultValue={noteToEdit?.important}
               id="important"
-              onChange={(e) => {
-                console.log("important change", e);
-              }}
               placeholder={
                 noteToEdit?.important ? null : "Add an important note"
               }
@@ -231,9 +222,6 @@ export default function EditModal({
             <textarea
               defaultValue={noteToEdit?.side}
               id="side"
-              onChange={(e) => {
-                console.log("side change", e);
-              }}
               placeholder={noteToEdit?.side ? null : "Add a side note"}
               className={`${classes.modalTextArea} ${
                 sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
