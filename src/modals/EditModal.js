@@ -86,10 +86,37 @@ export default function EditModal({
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("The title:", e.target.title.value);
-    console.log("The content:", e.target.content.value);
-    console.log("The side note:", e.target.side.value);
-    console.log("The important note:", e.target.important.value);
+    const url = noteToEdit
+      ? `https://my-notes-64d6a.firebaseio.com/notes/${noteToEdit.id}.json`
+      : "https://my-notes-64d6a.firebaseio.com/notes.json";
+
+    const method = noteToEdit ? "PUT" : "POST";
+
+    fetch(url, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        book: selectedBook,
+        page: selectedPage,
+        section: selectedSection ? selectedSection : noteToEdit.section,
+        title: e.target.title.value,
+        content: e.target.content.value,
+        side: e.target.side.value,
+        important: e.target.important.value,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          closeModal();
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   }
 
   if (isSearch && noteToEdit) {
@@ -194,7 +221,9 @@ export default function EditModal({
               onChange={(e) => {
                 console.log("important change", e);
               }}
-              placeholder={noteToEdit?.side ? null : "Add an important note"}
+              placeholder={
+                noteToEdit?.important ? null : "Add an important note"
+              }
               className={`${classes.modalTextArea} ${
                 importantSize === "medium"
                   ? classes.modalTextAreaMediumHeight

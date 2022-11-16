@@ -90,7 +90,7 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
                 __html: highlightKeyWord(note.content, keyWord),
               }}
             ></p>
-            {note.import && note.important.length > 0 && (
+            {note.important && note.important.length > 0 && (
               <>
                 <h3 style={{ color: "red" }}>Important Note</h3>
                 <p
