@@ -14,6 +14,7 @@ function highlightKeyWord(myStr, myKeyWord) {
 
 export default function Note({ selectedNotes, bookIsSelected, keyWord, editPressed }) {
   useEffect(() => {
+    hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
   });
 
