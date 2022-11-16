@@ -7,6 +7,17 @@ import SideBarWall from "./components/SideBarWall.js"
 import Note from './components/Note.js';
 import EditModal from "./modals/EditModal";
 
+function replaceNote(arr, func, newNote, newNoteId) {
+  const newArray = arr.map(note => {
+    if(note.id === newNoteId) {
+      return newNote;
+    } else {
+      return note;
+    }
+  });
+  func(newArray);
+}
+
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
 
@@ -192,9 +203,14 @@ export default function App() {
     handleModalOpen();
   }
 
+  function updateNotesArray(newNote, noteId) {
+    replaceNote(selectedNotes, setSelectedNotes, newNote, noteId);
+    replaceNote(notes, setNotes, newNote, noteId);
+  }
+
   return (
     <div className={classes.container}>
-      <EditModal changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
+      <EditModal updateNotesArray={updateNotesArray} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
       <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />

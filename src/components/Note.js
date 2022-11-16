@@ -17,6 +17,11 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     hljs.highlightAll();
   });
 
+  useEffect(() => {
+    setDisplayedNotes(selectedNotes);
+  }, [selectedNotes])
+
+  const [displayedNotes, setDisplayedNotes] = useState(null);
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
   const [noteId, setNoteId] = useState(null);
   const noteRef = useRef(null);
@@ -60,11 +65,17 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     }
   }
 
+  if(!displayedNotes) {
+    return (
+      <p>loading...</p>
+    )
+  }
+
   return (
     <div className={classes.container}>
       {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
-      {selectedNotes.length > 0 ? (
-        selectedNotes.map((note) => (
+      {displayedNotes?.length > 0 ? (
+        displayedNotes?.map((note) => (
           // the ref is only added if the note.id matches the stored noteId
           <div
             className={classes.note}

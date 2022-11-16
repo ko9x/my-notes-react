@@ -32,6 +32,7 @@ export default function EditModal({
   changePage,
   changeSection,
   isSearching,
+  updateNotesArray
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -92,23 +93,31 @@ export default function EditModal({
 
     const method = noteToEdit ? "PUT" : "POST";
 
+    const updatedNote =  {
+      book: selectedBook,
+      page: selectedPage,
+      section: selectedSection ? selectedSection : noteToEdit.section,
+      title: e.target.title.value,
+      content: e.target.content.value,
+      side: e.target.side.value,
+      important: e.target.important.value,
+    }
+
     fetch(url, {
       method: method,
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        book: selectedBook,
-        page: selectedPage,
-        section: selectedSection ? selectedSection : noteToEdit.section,
-        title: e.target.title.value,
-        content: e.target.content.value,
-        side: e.target.side.value,
-        important: e.target.important.value,
-      }),
+      body: JSON.stringify(updatedNote),
     })
       .then((response) => {
         if (response.status === 200) {
+          console.log('response', response); //@DEBUG
+          if(noteToEdit) {
+            updateNotesArray(updatedNote, noteToEdit.id)
+          } else {
+            console.log('we need to get the id of the new note', ); //@DEBUG
+          }
           closeModal();
         } else {
           throw new Error("Something went wrong");
