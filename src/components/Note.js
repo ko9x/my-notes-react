@@ -76,11 +76,11 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     <div className={classes.container}>
       {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
       {displayedNotes?.length > 0 ? (
-        displayedNotes?.map((note) => (
+        displayedNotes?.map((note, index) => (
           // the ref is only added if the note.id matches the stored noteId
           <div
             className={classes.note}
-            key={note.id}
+            key={`${note.id}${index}`}
             ref={note.id === noteId ? noteRef : null}
           >
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
