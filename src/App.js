@@ -156,6 +156,7 @@ export default function App() {
     if(bookBeingLifted === selectedBook) {
       return 
     } else {
+      setSearchItem(null);
       setSelectedNotes([]);
       getPages(notes, bookBeingLifted);
       setSelectedBook(bookBeingLifted);
@@ -164,6 +165,9 @@ export default function App() {
   }
 
   function liftedPage(pageBeingLifted) {
+    if(searchItem) {
+      return
+    }
     if(pageBeingLifted === selectedPage) {
       return
     } else {
