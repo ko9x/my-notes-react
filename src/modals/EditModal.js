@@ -211,18 +211,6 @@ export default function EditModal({
                   : classes.modalTextAreaMediumHeight
               }`}
             ></textarea>
-            <h3 onClick={() => toggleSideSize()}>Side Note</h3>
-            <textarea
-              defaultValue={noteToEdit?.side}
-              id="side"
-              onChange={(e) => {
-                console.log("side change", e);
-              }}
-              placeholder={noteToEdit?.side ? null : "Add a side note"}
-              className={`${classes.modalTextArea} ${
-                sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
-              }`}
-            ></textarea>
             <h3 onClick={() => toggleImportantSize()}>Important Note</h3>
             <textarea
               defaultValue={noteToEdit?.important}
@@ -237,6 +225,18 @@ export default function EditModal({
                 importantSize === "medium"
                   ? classes.modalTextAreaMediumHeight
                   : null
+              }`}
+            ></textarea>
+            <h3 onClick={() => toggleSideSize()}>Side Note</h3>
+            <textarea
+              defaultValue={noteToEdit?.side}
+              id="side"
+              onChange={(e) => {
+                console.log("side change", e);
+              }}
+              placeholder={noteToEdit?.side ? null : "Add a side note"}
+              className={`${classes.modalTextArea} ${
+                sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
             <div style={{ width: "69.1%", paddingTop: "20px" }}>
