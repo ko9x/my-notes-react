@@ -41,6 +41,7 @@ export default function EditModal({
   const [selectedPage, setSelectedPage] = useState(defaultPage);
   const [selectedSection, setSelectedSection] = useState(null);
   const [isSearch, setIsSearch] = useState(null);
+  const [newBook, setNewBook] = useState({changing: false, name: null});
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -94,7 +95,7 @@ export default function EditModal({
     const method = noteToEdit ? "PUT" : "POST";
 
     const updatedNote =  {
-      book: selectedBook,
+      book: newBook.name ? newBook.name : selectedBook,
       page: selectedPage,
       section: selectedSection ? selectedSection : noteToEdit.section,
       title: e.target.title.value,
@@ -113,7 +114,9 @@ export default function EditModal({
       .then((response) => {
         if (response.status === 200) {
           if(noteToEdit) {
-            updateNotesArray(updatedNote, noteToEdit.id, noteToEdit.section !== updatedNote.section ? true : null)
+            console.log('do we need to update the note with the id or does it already have it?', ); //@DEBUG
+            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
+            updateNotesArray(updatedNoteWithId, noteToEdit.id, noteToEdit.section !== updatedNote.section ? true : null)
           } else {
             response.json().then(data => {
               // Adding the firebase id to the note
@@ -143,6 +146,14 @@ export default function EditModal({
     }
   }, [selectedPage, changePage, sectionList]);
 
+  function handleSetNewBookName(e) {
+    if(e.target.value === '') {
+      setNewBook({...newBook, name: selectedBook})
+    } else {
+      setNewBook({...newBook, name: e.target.value})
+    }
+  }
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -155,15 +166,15 @@ export default function EditModal({
         <div>
           <div className={classes.radioTitle}>
             <h2>Select a Book</h2>
-            <button className={classes.newItemButton}>new +</button>
+            <button onClick={() => setNewBook({...newBook, changing: true})} className={classes.newItemButton}>{newBook.name ? newBook.name : 'new +'}</button>
           </div>
-          <Radio
+          {newBook.changing ? <> <input type="text" placeholder={selectedBook} onChange={(e) => handleSetNewBookName(e)} /><button style={{marginLeft: '1.5vw'}} onClick={() => setNewBook({changing: false, name: null})}>Cancel</button></> : <Radio
             nameArray={bookList}
             selectedItem={
               selectedBook ? selectedBook : noteToEdit ? noteToEdit?.book : null
             }
             selectionFunction={handleBookChange}
-          />
+          />}
           <div className={classes.radioTitle}>
             <h2>Select a Page</h2>
             <button className={classes.newItemButton}>new +</button>
