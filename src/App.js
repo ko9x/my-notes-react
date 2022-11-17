@@ -7,15 +7,23 @@ import SideBarWall from "./components/SideBarWall.js"
 import Note from './components/Note.js';
 import EditModal from "./modals/EditModal";
 
-function replaceNote(arr, func, newNote, newNoteId) {
+function addNote(arr, func, newNote, newNoteId) {
+  let count = 0;
   const newArray = arr.map(note => {
     if(note.id === newNoteId) {
+      count++;
       return newNote;
     } else {
       return note;
     }
   });
-  func(newArray);
+  if(count < 1) {
+    func((prevState) => {
+      return prevState.concat(newNote);
+    })
+  } else {
+    func(newArray);
+  }
 }
 
 function removeNote(arr, func, newNoteId) {
@@ -232,7 +240,7 @@ export default function App() {
       return;
     }
     // Update the notes array so the state has the changes
-    replaceNote(notes, setNotes, newNote, noteId);
+    addNote(notes, setNotes, newNote, noteId);
     // If the location was changed push the new note into the selectedNotes
     if(locationChanged) {
       setSelectedNotes((prevState) => {
@@ -242,7 +250,7 @@ export default function App() {
       setSelectedSection(newNote.section);
     // If the location did not change update note in the selectedNotes
     } else {
-      replaceNote(selectedNotes, setSelectedNotes, newNote, noteId);
+      addNote(selectedNotes, setSelectedNotes, newNote, noteId);
     }
   }
 
