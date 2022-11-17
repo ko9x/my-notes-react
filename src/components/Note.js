@@ -4,7 +4,7 @@ import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 import { confirmAlert } from "react-confirm-alert";
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -14,7 +14,13 @@ function highlightKeyWord(myStr, myKeyWord) {
   return highlightedHtml;
 }
 
-export default function Note({ selectedNotes, bookIsSelected, keyWord, editPressed, removeNoteFromArrays }) {
+export default function Note({
+  selectedNotes,
+  bookIsSelected,
+  keyWord,
+  editPressed,
+  removeNoteFromArrays,
+}) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
@@ -22,7 +28,7 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
 
   useEffect(() => {
     setDisplayedNotes(selectedNotes);
-  }, [selectedNotes])
+  }, [selectedNotes]);
 
   const [displayedNotes, setDisplayedNotes] = useState(null);
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
@@ -46,18 +52,15 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
   }
 
   function deleteNote(note) {
-    fetch(
-      `https://my-notes-64d6a.firebaseio.com/notes/${note.id}.json`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch(`https://my-notes-64d6a.firebaseio.com/notes/${note.id}.json`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => {
         if (response.status === 200) {
-          removeNoteFromArrays(note)
+          removeNoteFromArrays(note);
         } else {
           throw new Error("Something went wrong");
         }
@@ -69,24 +72,24 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
 
   function handleAlert(note) {
     confirmAlert({
-      title: 'Delete note?',
-      message: 'This action cannot be undone',
+      title: "Delete note?",
+      message: "This action cannot be undone",
       buttons: [
         {
-          label: 'Yes',
-          onClick: () => deleteNote(note)
+          label: "Yes",
+          onClick: () => deleteNote(note),
         },
         {
-          label: 'Cancel',
-          onClick: () => {}
+          label: "Cancel",
+          onClick: () => {},
         },
-      ]
-    })
+      ],
+    });
   }
 
   function showNoteDetails(note) {
     return (
-      <div className={classes.noteDetailContainer} >
+      <div className={classes.noteDetailContainer}>
         <div className={classes.descriptionContainer}>
           <p className={classes.description}>Book: {note.book}</p>
           <p className={classes.description}>Page: {note.page}</p>
@@ -110,10 +113,8 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     }
   }
 
-  if(!displayedNotes) {
-    return (
-      <p>loading...</p>
-    )
+  if (!displayedNotes) {
+    return <p>loading...</p>;
   }
 
   return (
@@ -123,17 +124,24 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
         displayedNotes?.map((note, index) => (
           // the ref is only added if the note.id matches the stored noteId
           <div
+            onClick={() => {
+              handleSetNoteDetails(note.id);
+            }}
             className={classes.note}
             key={`${note.id}${index}`}
             ref={note.id === noteId ? noteRef : null}
           >
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
-            <div className={`${showingNoteDetails === note.id ? classes.detailOpen : classes.detailClosed}`}>{showingNoteDetails === note.id && showNoteDetails(note)}</div>
-            <h1
-              onClick={() => {
-                handleSetNoteDetails(note.id);
-              }}
+            <div
+              className={`${
+                showingNoteDetails === note.id
+                  ? classes.detailOpen
+                  : classes.detailClosed
+              }`}
             >
+              {showingNoteDetails === note.id && showNoteDetails(note)}
+            </div>
+            <h1>
               <Highlighter
                 highlightStyle={{ color: "#282c34" }}
                 searchWords={[keyWord]}
