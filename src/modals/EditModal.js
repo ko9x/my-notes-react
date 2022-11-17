@@ -110,6 +110,7 @@ export default function EditModal({
     const method = noteToEdit ? "PUT" : "POST";
 
     const updatedNote =  {
+      id: noteToEdit ? noteToEdit.id : null,
       book: newBook.name ? newBook.name : selectedBook,
       page: selectedPage,
       section: selectedSection ? selectedSection : noteToEdit.section,
@@ -136,12 +137,10 @@ export default function EditModal({
             })
           }
           if(noteToEdit && (noteToEdit.section === updatedNote.section)) {
-            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
-            changedNoteContent(updatedNoteWithId);
+            changedNoteContent(updatedNote);
           }
           if(noteToEdit && (noteToEdit.section !== updatedNote.section)) {
-            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
-            changedNoteLocation(updatedNoteWithId);
+            changedNoteLocation(updatedNote);
           }
           closeModal();
         } else {
