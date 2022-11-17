@@ -1,4 +1,7 @@
 ### Current Focus
+* Added functionality to create a new book but there are still some bugs with it
+    * The page doesn't refresh showing the note in its new location
+
 * (done) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
     * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
@@ -13,11 +16,11 @@
     * Add a button to easily code such as:
         * pre-wrap/code-wrap 
         * p tags and 
+        * <br> to add a line break
+        * &nbsp to add a non breaking space (so a horizontal gap between stuff)
+        * <li>
         * HTML Entities 
             * such as &#60 for < 
-            * <br> to add a line break
-            * &nbsp to add a non breaking space (so a horizontal gap between stuff)
-            * <li>
     
 ### What to do next
 * Make a global for colors
