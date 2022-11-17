@@ -222,6 +222,7 @@ export default function App() {
     handleModalOpen();
     setSelectedPage(null);
     setSelectedSection(null);
+    setNoteToEdit(null);
   }
 
   function createdNote(newNote) {
@@ -287,7 +288,7 @@ export default function App() {
   return (
     <div className={classes.container}>
       <EditModal changedNoteContent={changedNoteContent} changedNoteLocation={changedNoteLocation} createdNote={createdNote} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
-      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem} newPressed={newPressed}/>
+      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem} newPressed={newPressed} isModalOpen={isModalOpen}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} defaultItem={selectedPage}  sideBarPosition={'left'} />

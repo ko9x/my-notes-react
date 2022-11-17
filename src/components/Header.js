@@ -2,7 +2,7 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 
-export default function Header({ bookNames, selectedBook, searchItem, defaultBook, newPressed }) {
+export default function Header({ bookNames, selectedBook, searchItem, defaultBook, newPressed, isModalOpen }) {
   const [activeBook, setActiveBook] = useState(null);
   const inputRef = useRef();
 
@@ -37,6 +37,7 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
         {bookNames.map((book, index) => {
           return (
             <button
+              disabled={isModalOpen ? true : false}
               onMouseDown={() => handleBookSelection(book)}
               className={`${classes.item} ${
                 activeBook === book ? classes.active : null
@@ -48,16 +49,14 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
           );
         })}
         <button
+          disabled={isModalOpen ? true : false}
           onMouseDown={() => handleBookSelection("new")}
-          onMouseUp={() => handleBookSelection(null)}
-          className={`${classes.item} ${
-            activeBook === "new" ? classes.active : null
-          }`}
+          className={classes.item}
         >
           new +
         </button>
         <form onSubmit={onSubmit}>
-          <input placeholder="search" type="search" ref={inputRef} />
+          <input disabled={isModalOpen ? true : false} placeholder="search" type="search" ref={inputRef} />
         </form>
       </div>
       <h3 className={classes.logOut}>Log Out</h3>

@@ -32,6 +32,7 @@ export default function EditModal({
   changePage,
   changeSection,
   isSearching,
+  newPressed,
   createdNote,
   changedNoteLocation,
   changedNoteContent,
@@ -53,6 +54,18 @@ export default function EditModal({
   useEffect(() => {
     setIsSearch(isSearching);
   }, [isSearching]);
+
+  useEffect(() => {
+    if(!noteToEdit) {
+      resetModal();
+    }
+  }, [noteToEdit])
+
+  function resetModal() {
+    setSelectedBook(null);
+    setSelectedPage(null);
+    setSelectedSection(null);
+  }
 
   // @TODO I'm sure there is a better way to refactor this
   function toggleContentSize() {
