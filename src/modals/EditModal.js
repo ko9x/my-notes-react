@@ -32,7 +32,9 @@ export default function EditModal({
   changePage,
   changeSection,
   isSearching,
-  updateNotesArray
+  createdNote,
+  changedNoteLocation,
+  changedNoteContent,
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -113,16 +115,20 @@ export default function EditModal({
     })
       .then((response) => {
         if (response.status === 200) {
-          if(noteToEdit) {
-            console.log('do we need to update the note with the id or does it already have it?', ); //@DEBUG
-            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
-            updateNotesArray(updatedNoteWithId, noteToEdit.id, noteToEdit.section !== updatedNote.section ? true : null)
-          } else {
+          if(!noteToEdit) {
             response.json().then(data => {
               // Adding the firebase id to the note
               const newlyCreatedNote = {id: data.name, ...updatedNote}
-              updateNotesArray(newlyCreatedNote, null, false, true)
+              createdNote(newlyCreatedNote);
             })
+          }
+          if(noteToEdit && (noteToEdit.section === updatedNote.section)) {
+            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
+            changedNoteContent(updatedNoteWithId);
+          }
+          if(noteToEdit && (noteToEdit.section !== updatedNote.section)) {
+            const updatedNoteWithId = {...updatedNote, id: noteToEdit.id}
+            changedNoteLocation(updatedNoteWithId);
           }
           closeModal();
         } else {

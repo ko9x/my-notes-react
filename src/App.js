@@ -224,35 +224,60 @@ export default function App() {
     setSelectedSection(null);
   }
 
-  function updateNotesArray(newNote, noteId, locationChanged, newlyAdded) {
-    // Check if the note is newly added to the database
-    if(newlyAdded) {
-      // Add the note to the notes array
-      setNotes((prevState) => {
-        return prevState.concat(newNote);
-      })
-      // Add the note to the selectedNotes array
-      setSelectedNotes((prevState) => {
-        return prevState.concat(newNote);
-      })
-      // Show which section is currently being shown
-      setSelectedSection(newNote.section);
-      return;
-    }
-    // Update the notes array so the state has the changes
-    addNote(notes, setNotes, newNote, noteId);
-    // If the location was changed push the new note into the selectedNotes
-    if(locationChanged) {
-      setSelectedNotes((prevState) => {
-        return prevState.concat(newNote)
-      })
-      // Show which section is currently being shown
-      setSelectedSection(newNote.section);
-    // If the location did not change update note in the selectedNotes
-    } else {
-      addNote(selectedNotes, setSelectedNotes, newNote, noteId);
-    }
+  function createdNote(newNote) {
+    setNotes((prevState) => {
+      return prevState.concat(newNote);
+    })
+    setSelectedNotes((prevState) => {
+      return prevState.concat(newNote);
+    })
+    setSelectedSection(newNote.section);
+    return;
   }
+  function createdNoteLocation() {
+
+  }
+  function changedNoteContent(newNote) {
+    addNote(notes, setNotes, newNote, newNote.id);
+    addNote(selectedNotes, setSelectedNotes, newNote, newNote.id);
+  }
+  function changedNoteLocation(newNote) {
+    addNote(notes, setNotes, newNote, newNote.id);
+    setSelectedNotes((prevState) => {
+      return prevState.concat(newNote)
+    });
+    setSelectedSection(newNote.section);
+  }
+
+  // function updateNotesArray(newNote, noteId, locationChanged, newlyAdded) {
+  //   // Check if the note is newly added to the database
+  //   if(newlyAdded) {
+  //     // Add the note to the notes array
+  //     setNotes((prevState) => {
+  //       return prevState.concat(newNote);
+  //     })
+  //     // Add the note to the selectedNotes array
+  //     setSelectedNotes((prevState) => {
+  //       return prevState.concat(newNote);
+  //     })
+  //     // Show which section is currently being shown
+  //     setSelectedSection(newNote.section);
+  //     return;
+  //   }
+  //   // Update the notes array so the state has the changes
+  //   addNote(notes, setNotes, newNote, noteId);
+  //   // If the location was changed push the new note into the selectedNotes
+  //   if(locationChanged) {
+  //     setSelectedNotes((prevState) => {
+  //       return prevState.concat(newNote)
+  //     })
+  //     // Show which section is currently being shown
+  //     setSelectedSection(newNote.section);
+  //   // If the location did not change update note in the selectedNotes
+  //   } else {
+  //     addNote(selectedNotes, setSelectedNotes, newNote, noteId);
+  //   }
+  // }
 
   function removeNoteFromArrays(note) {
     removeNote(notes, setNotes, note.id);
@@ -261,7 +286,7 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <EditModal updateNotesArray={updateNotesArray} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
+      <EditModal changedNoteContent={changedNoteContent} changedNoteLocation={changedNoteLocation} createdNote={createdNote} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
       <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem} newPressed={newPressed}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
