@@ -2,7 +2,7 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 
-export default function Header({ bookNames, selectedBook, searchItem, defaultBook }) {
+export default function Header({ bookNames, selectedBook, searchItem, defaultBook, newPressed }) {
   const [activeBook, setActiveBook] = useState(null);
   const inputRef = useRef();
 
@@ -13,6 +13,9 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
   function handleBookSelection(book) {
     selectedBook(book);
     setActiveBook(book);
+    if(book === 'new') {
+      newPressed();
+    }
   }
 
   function onSubmit(e) {

@@ -205,7 +205,27 @@ export default function App() {
     handleModalOpen();
   }
 
-  function updateNotesArray(newNote, noteId, locationChanged) {
+  function newPressed() {
+    handleModalOpen();
+    setSelectedPage(null);
+    setSelectedSection(null);
+  }
+
+  function updateNotesArray(newNote, noteId, locationChanged, newlyAdded) {
+    // Check if the note is newly added to the database
+    if(newlyAdded) {
+      // Add the note to the notes array
+      setNotes((prevState) => {
+        return prevState.concat(newNote);
+      })
+      // Add the note to the selectedNotes array
+      setSelectedNotes((prevState) => {
+        return prevState.concat(newNote);
+      })
+      // Show which section is currently being shown
+      setSelectedSection(newNote.section);
+      return;
+    }
     // Update the notes array so the state has the changes
     replaceNote(notes, setNotes, newNote, noteId);
     // If the location was changed push the new note into the selectedNotes
@@ -224,7 +244,7 @@ export default function App() {
   return (
     <div className={classes.container}>
       <EditModal updateNotesArray={updateNotesArray} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
-      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem}/>
+      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem} newPressed={newPressed}/>
       <div className={classes.leftSideBarContainer}>
       <SideBarWall />
       <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} defaultItem={selectedPage}  sideBarPosition={'left'} />

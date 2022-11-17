@@ -112,11 +112,14 @@ export default function EditModal({
     })
       .then((response) => {
         if (response.status === 200) {
-          console.log('response', response); //@DEBUG
           if(noteToEdit) {
             updateNotesArray(updatedNote, noteToEdit.id, noteToEdit.section !== updatedNote.section ? true : null)
           } else {
-            console.log('we need to get the id of the new note', ); //@DEBUG
+            response.json().then(data => {
+              // Adding the firebase id to the note
+              const newlyCreatedNote = {id: data.name, ...updatedNote}
+              updateNotesArray(newlyCreatedNote, null, false, true)
+            })
           }
           closeModal();
         } else {
