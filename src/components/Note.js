@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from "react";
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
+import { confirmAlert } from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -12,7 +14,7 @@ function highlightKeyWord(myStr, myKeyWord) {
   return highlightedHtml;
 }
 
-export default function Note({ selectedNotes, bookIsSelected, keyWord, editPressed }) {
+export default function Note({ selectedNotes, bookIsSelected, keyWord, editPressed, removeNoteFromArrays }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
@@ -43,6 +45,45 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
     editPressed(note);
   }
 
+  function deleteNote(note) {
+    fetch(
+      `https://my-notes-64d6a.firebaseio.com/notes/${note.id}.json`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          removeNoteFromArrays(note)
+        } else {
+          throw new Error("Something went wrong");
+        }
+      })
+      .catch((error) => {
+        console.log("error", error); //@DEBUG
+      });
+  }
+
+  function handleAlert(note) {
+    confirmAlert({
+      title: 'Delete note?',
+      message: 'This action cannot be undone',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => deleteNote(note)
+        },
+        {
+          label: 'Cancel',
+          onClick: () => {}
+        },
+      ]
+    })
+  }
+
   function showNoteDetails(note) {
     return (
       <div className={classes.noteDetailContainer} >
@@ -51,8 +92,11 @@ export default function Note({ selectedNotes, bookIsSelected, keyWord, editPress
           <p className={classes.description}>Page: {note.page}</p>
           <p className={classes.description}>Section: {note.section}</p>
         </div>
-        <div className={classes.editButton}>
-          <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
+        <div className={classes.buttonContainer}>
+          <div className={classes.editButton}>
+            <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
+          </div>
+          <button onClick={() => handleAlert(note)}>Delete Note</button>
         </div>
       </div>
     );

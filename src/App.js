@@ -18,6 +18,11 @@ function replaceNote(arr, func, newNote, newNoteId) {
   func(newArray);
 }
 
+function removeNote(arr, func, newNoteId) {
+  const newArray = arr.filter(note => note.id !== newNoteId);
+  func(newArray);
+}
+
 export default function App() {
   const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
 
@@ -241,6 +246,11 @@ export default function App() {
     }
   }
 
+  function removeNoteFromArrays(note) {
+    removeNote(notes, setNotes, note.id);
+    removeNote(selectedNotes, setSelectedNotes, note.id);
+  }
+
   return (
     <div className={classes.container}>
       <EditModal updateNotesArray={updateNotesArray} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
@@ -253,7 +263,7 @@ export default function App() {
       <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} defaultItem={selectedSection} sideBarPosition={'right'} />
       <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} editPressed={editPressed} />
+      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} editPressed={editPressed} removeNoteFromArrays={removeNoteFromArrays} />
       <Footer />
     </div>
   );
