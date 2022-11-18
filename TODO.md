@@ -1,18 +1,19 @@
 ### Current Focus
-* Added functionality to create a new book but there are still some bugs with it
-    * The page doesn't refresh showing the note in its new location
+* (done) Add functionality to create a new book
+* Add functionality to create a new page
+* Add functionality to create a new section
+
 
 * (done) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
     * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
     * (done) Make sure only one radio button is selected at a time
     * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
-* Add functionality to add new books, pages, sections, and notes
+* (working on it) Add functionality to add new notes with a new book name, page name, and/or section name
     * Allow books, pages, and section names to be multiple words and use unique characters
-* Add edit and remove functionality
+* (working on edit, remove is done) Add edit and remove functionality
     * (done) Allow user to move a note from one book, page, or section to another
-    * Allow user to move a note to a book, page, or section they create when editing the note
-    * After editing a note make sure the view returns to the note you just edited
+    * (working on it) After editing a note make sure the view returns to the note you just edited
     * Add a button to easily code such as:
         * pre-wrap/code-wrap 
         * p tags and 

@@ -200,6 +200,8 @@ export default function App() {
     if (searchItem) {
       return;
     }
+    // @TODO Need to figure out a better way to handle this
+    
     // if (pageBeingLifted === selectedPage) {
     //   return;
     // } else {
