@@ -200,12 +200,12 @@ export default function App() {
     if (searchItem) {
       return;
     }
-    if (pageBeingLifted === selectedPage) {
-      return;
-    } else {
+    // if (pageBeingLifted === selectedPage) {
+    //   return;
+    // } else {
       getSections(notes, selectedBook, pageBeingLifted);
       setSelectedPage(pageBeingLifted);
-    }
+    // }
   }
 
   function liftedSection(section) {

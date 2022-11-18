@@ -19,11 +19,6 @@ const customStyles = {
   },
 };
 
-function checkForCreatedLocation(myArr, item) {
-  const newArr = myArr.find(arrItem => arrItem === item);
-  return !Boolean(newArr);
-}
-
 export default function EditModal({
   isModalOpen,
   closeModal,
@@ -96,6 +91,7 @@ export default function EditModal({
     }
   }
   function handleBookChange(e) {
+    setNewBook({changing: false, name: null});
     setSelectedBook(e.target.id);
     changeBook(e.target.id);
   }
@@ -126,6 +122,12 @@ export default function EditModal({
       important: e.target.important.value,
     };
 
+    function hasNewLocation() {
+      if(newBook.name) {
+        return true
+      }
+    }
+
     fetch(url, {
       method: method,
       headers: {
@@ -141,17 +143,17 @@ export default function EditModal({
               const newlyCreatedNote = { id: data.name, ...updatedNote };
               createdNote(newlyCreatedNote);
             });
+          } else {
+            if (hasNewLocation()) {
+              createdNoteLocation(updatedNote)
+            }
+            if (!hasNewLocation() && noteToEdit.section === updatedNote.section) {
+              changedNoteContent(updatedNote);
+            }
+            if (!hasNewLocation() && noteToEdit.section !== updatedNote.section) {
+              changedNoteLocation(updatedNote);
+            }
           }
-          if (noteToEdit && checkForCreatedLocation(bookList, updatedNote.book)) {
-            createdNoteLocation(updatedNote)
-            console.log('Check for created location', ); //@DEBUG
-          }
-          // if (noteToEdit && noteToEdit.section === updatedNote.section) {
-          //   changedNoteContent(updatedNote);
-          // }
-          // if (noteToEdit && noteToEdit.section !== updatedNote.section) {
-          //   changedNoteLocation(updatedNote);
-          // }
           closeModal();
         } else {
           throw new Error("Something went wrong");
@@ -182,6 +184,21 @@ export default function EditModal({
     }
   }
 
+  function determineSelectedItem() {
+    if(newBook.name) {
+      return newBook.name;
+    }
+    if(selectedBook) {
+      return selectedBook
+    }
+    if(noteToEdit) {
+      return noteToEdit.book
+    }
+    if(!noteToEdit) {
+      return null
+    }
+  }
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -198,7 +215,7 @@ export default function EditModal({
               onClick={() => setNewBook({ ...newBook, changing: true })}
               className={classes.newItemButton}
             >
-              {newBook.name ? newBook.name : "new +"}
+              new +
             </button>
           </div>
           {newBook.changing ? (
@@ -208,6 +225,9 @@ export default function EditModal({
                 placeholder={selectedBook}
                 onChange={(e) => handleSetNewBookName(e)}
               />
+              <button style={{ marginLeft: "1.5vw" }} disabled={newBook.name === null} onClick={() => setNewBook({...newBook, changing: false})}>
+                Confirm
+              </button>
               <button
                 style={{ marginLeft: "1.5vw" }}
                 onClick={() => setNewBook({ changing: false, name: null })}
@@ -217,13 +237,9 @@ export default function EditModal({
             </>
           ) : (
             <Radio
-              nameArray={bookList}
+              nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
               selectedItem={
-                selectedBook
-                  ? selectedBook
-                  : noteToEdit
-                  ? noteToEdit?.book
-                  : null
+                determineSelectedItem()
               }
               selectionFunction={handleBookChange}
             />
@@ -296,6 +312,7 @@ export default function EditModal({
             ></textarea>
             <div style={{ width: "69.1%", paddingTop: "20px" }}>
               <button
+                disabled={newBook.changing === true}
                 style={{ width: "30vw", borderRadius: "5px", float: "right" }}
               >
                 Submit
