@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import classes from "./EditModal.module.css";
 import { useState } from "react";
 import Radio from "../components/Radio";
+import NoteInput from "../components/NoteInput";
 import { useEffect } from "react";
 
 const customStyles = {
@@ -181,11 +182,18 @@ export default function EditModal({
     }
   }, [selectedPage, changePage, sectionList]);
 
-  function handleSetNewBookName(e) {
-    if (e.target.value === "" || hasDuplicate(bookList, e.target.value) ) {
-      setNewBook({ ...newBook, name: null });
-    } else {
-      setNewBook({ ...newBook, name: e.target.value });
+  function handleSetNewBook(instruction) {
+    if (instruction.text === 'setNameNull') {
+      setNewBook({...newBook, name: null});
+    }
+    if (instruction.text === 'hasValue') {
+      setNewBook({name: instruction.payload, changing: true});
+    }
+    if (instruction.text === 'cancel') {
+      setNewBook({ changing: false, name: null });
+    }
+    if (instruction.text === 'confirm') {
+      setNewBook({ changing: false, name: newBook.name });
     }
   }
 
@@ -224,22 +232,7 @@ export default function EditModal({
             </button>
           </div>
           {newBook.changing ? (
-            <>
-              <input
-                type="text"
-                placeholder={selectedBook}
-                onChange={(e) => handleSetNewBookName(e)}
-              />
-              <button style={{ marginLeft: "1.5vw" }} disabled={newBook.name === null} onClick={() => setNewBook({...newBook, changing: false})}>
-                Confirm
-              </button>
-              <button
-                style={{ marginLeft: "1.5vw" }}
-                onClick={() => setNewBook({ changing: false, name: null })}
-              >
-                Cancel
-              </button>
-            </>
+            <NoteInput selectedItem={newBook.name ? newBook.name : selectedBook} newItem={newBook} handleSetNewItem={handleSetNewBook} hasDuplicate={hasDuplicate} list={bookList} />
           ) : (
             <Radio
               nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
