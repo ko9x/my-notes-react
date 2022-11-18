@@ -3,31 +3,31 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import SideBar from "./components/SideBar.js";
-import SideBarWall from "./components/SideBarWall.js"
-import Note from './components/Note.js';
+import SideBarWall from "./components/SideBarWall.js";
+import Note from "./components/Note.js";
 import EditModal from "./modals/EditModal";
 
 function addNote(arr, func, newNote, newNoteId) {
   let count = 0;
-  const newArray = arr.map(note => {
-    if(note.id === newNoteId) {
+  const newArray = arr.map((note) => {
+    if (note.id === newNoteId) {
       count++;
       return newNote;
     } else {
       return note;
     }
   });
-  if(count < 1) {
+  if (count < 1) {
     func((prevState) => {
       return prevState.concat(newNote);
-    })
+    });
   } else {
     func(newArray);
   }
 }
 
 function removeNote(arr, func, newNoteId) {
-  const newArray = arr.filter(note => note.id !== newNoteId);
+  const newArray = arr.filter((note) => note.id !== newNoteId);
   func(newArray);
 }
 
@@ -114,7 +114,7 @@ export default function App() {
         if (myArr[key].page === selectedPage) {
           const sectionName = myArr[key].section;
           sectionArr.push(note);
-          if(!sectionNameArr.includes(sectionName)) {
+          if (!sectionNameArr.includes(sectionName)) {
             sectionNameArr.push(sectionName);
           }
         }
@@ -124,13 +124,18 @@ export default function App() {
     setSelectedNotes(sectionArr);
   }
 
-  function getSingleSection(myArr, selectedBook, selectedPage, selectedSection) {
-    const singleSectionArr = []
+  function getSingleSection(
+    myArr,
+    selectedBook,
+    selectedPage,
+    selectedSection
+  ) {
+    const singleSectionArr = [];
     for (const key in myArr) {
       const note = myArr[key];
       if (myArr[key].book === selectedBook) {
         if (myArr[key].page === selectedPage) {
-          if(myArr[key].section === selectedSection) {
+          if (myArr[key].section === selectedSection) {
             singleSectionArr.push(note);
           }
         }
@@ -158,8 +163,10 @@ export default function App() {
     }
     // Take an array with duplicate objects and make a unique array using the id for each object
     const arrWithDuplicates = keyWordObjectsArr;
-    const ids = arrWithDuplicates.map(object => object.id)
-    const uniqueArr = arrWithDuplicates.filter(({id}, index) => !ids.includes(id, index + 1))
+    const ids = arrWithDuplicates.map((object) => object.id);
+    const uniqueArr = arrWithDuplicates.filter(
+      ({ id }, index) => !ids.includes(id, index + 1)
+    );
 
     setSearchItem(keyWord);
     setSelectedNotes(uniqueArr);
@@ -168,18 +175,18 @@ export default function App() {
   }
 
   function liftedSearchItem(searchItemBeingLifted) {
-    executeSearch(notes, searchItemBeingLifted)
+    executeSearch(notes, searchItemBeingLifted);
   }
 
   function liftedBook(bookBeingLifted) {
-    if(bookBeingLifted === null) {
+    if (bookBeingLifted === null) {
       //The user ran a search, which closes the SideBars so we need to set the selectedBook and selectedPage to null
       setSelectedBook(null);
       setSelectedPage(null);
-      return
+      return;
     }
-    if(bookBeingLifted === selectedBook) {
-      return 
+    if (bookBeingLifted === selectedBook) {
+      return;
     } else {
       setSearchItem(null);
       setSelectedNotes([]);
@@ -190,11 +197,11 @@ export default function App() {
   }
 
   function liftedPage(pageBeingLifted) {
-    if(searchItem) {
-      return
+    if (searchItem) {
+      return;
     }
-    if(pageBeingLifted === selectedPage) {
-      return
+    if (pageBeingLifted === selectedPage) {
+      return;
     } else {
       getSections(notes, selectedBook, pageBeingLifted);
       setSelectedPage(pageBeingLifted);
@@ -228,15 +235,21 @@ export default function App() {
   function createdNote(newNote) {
     setNotes((prevState) => {
       return prevState.concat(newNote);
-    })
+    });
     setSelectedNotes((prevState) => {
       return prevState.concat(newNote);
-    })
+    });
     setSelectedSection(newNote.section);
     return;
   }
-  function createdNoteLocation() {
-
+  function createdNoteLocation(newNote) {
+    setSelectedBook(newNote.book);
+    setSelectedPage(newNote.page);
+    setSelectedSection(newNote.section);
+    addNote(notes, setNotes, newNote, newNote.id);
+    setSelectedNotes([newNote]);
+    setPageNames([newNote.page]);
+    setSectionNames([newNote.section]);
   }
   function changedNoteContent(newNote) {
     addNote(notes, setNotes, newNote, newNote.id);
@@ -245,40 +258,10 @@ export default function App() {
   function changedNoteLocation(newNote) {
     addNote(notes, setNotes, newNote, newNote.id);
     setSelectedNotes((prevState) => {
-      return prevState.concat(newNote)
+      return prevState.concat(newNote);
     });
     setSelectedSection(newNote.section);
   }
-
-  // function updateNotesArray(newNote, noteId, locationChanged, newlyAdded) {
-  //   // Check if the note is newly added to the database
-  //   if(newlyAdded) {
-  //     // Add the note to the notes array
-  //     setNotes((prevState) => {
-  //       return prevState.concat(newNote);
-  //     })
-  //     // Add the note to the selectedNotes array
-  //     setSelectedNotes((prevState) => {
-  //       return prevState.concat(newNote);
-  //     })
-  //     // Show which section is currently being shown
-  //     setSelectedSection(newNote.section);
-  //     return;
-  //   }
-  //   // Update the notes array so the state has the changes
-  //   addNote(notes, setNotes, newNote, noteId);
-  //   // If the location was changed push the new note into the selectedNotes
-  //   if(locationChanged) {
-  //     setSelectedNotes((prevState) => {
-  //       return prevState.concat(newNote)
-  //     })
-  //     // Show which section is currently being shown
-  //     setSelectedSection(newNote.section);
-  //   // If the location did not change update note in the selectedNotes
-  //   } else {
-  //     addNote(selectedNotes, setSelectedNotes, newNote, noteId);
-  //   }
-  // }
 
   function removeNoteFromArrays(note) {
     removeNote(notes, setNotes, note.id);
@@ -287,17 +270,57 @@ export default function App() {
 
   return (
     <div className={classes.container}>
-      <EditModal changedNoteContent={changedNoteContent} changedNoteLocation={changedNoteLocation} createdNote={createdNote} changeBook={liftedBook} changePage={liftedPage} changeSection={liftedSection} isModalOpen={isModalOpen} closeModal={handleCloseModal} noteToEdit={noteToEdit} bookList={bookNames} defaultBook={selectedBook} pageList={pageNames} defaultPage={selectedPage} sectionList={sectionNames} isSearching={searchItem}  />
-      <Header bookNames={bookNames} selectedBook={liftedBook} defaultBook={selectedBook} searchItem={liftedSearchItem} newPressed={newPressed} isModalOpen={isModalOpen}/>
+      <EditModal
+        createdNoteLocation={createdNoteLocation}
+        changedNoteContent={changedNoteContent}
+        changedNoteLocation={changedNoteLocation}
+        createdNote={createdNote}
+        changeBook={liftedBook}
+        changePage={liftedPage}
+        changeSection={liftedSection}
+        isModalOpen={isModalOpen}
+        closeModal={handleCloseModal}
+        noteToEdit={noteToEdit}
+        bookList={bookNames}
+        defaultBook={selectedBook}
+        pageList={pageNames}
+        defaultPage={selectedPage}
+        sectionList={sectionNames}
+        isSearching={searchItem}
+      />
+      <Header
+        bookNames={bookNames}
+        selectedBook={liftedBook}
+        defaultBook={selectedBook}
+        searchItem={liftedSearchItem}
+        newPressed={newPressed}
+        isModalOpen={isModalOpen}
+      />
       <div className={classes.leftSideBarContainer}>
-      <SideBarWall />
-      <SideBar itemNameArray={pageNames} selectedItemName={liftedPage} defaultItem={selectedPage}  sideBarPosition={'left'} />
+        <SideBarWall />
+        <SideBar
+          itemNameArray={pageNames}
+          selectedItemName={liftedPage}
+          defaultItem={selectedPage}
+          sideBarPosition={"left"}
+        />
       </div>
       <div className={classes.rightSideBarContainer}>
-      <SideBar itemNameArray={sectionNames} selectedItemName={liftedSection} defaultItem={selectedSection} sideBarPosition={'right'} />
-      <SideBarWall />
+        <SideBar
+          itemNameArray={sectionNames}
+          selectedItemName={liftedSection}
+          defaultItem={selectedSection}
+          sideBarPosition={"right"}
+        />
+        <SideBarWall />
       </div>
-      <Note selectedNotes={selectedNotes} bookIsSelected={ pageNames && pageNames.length > 0} keyWord={searchItem} editPressed={editPressed} removeNoteFromArrays={removeNoteFromArrays} />
+      <Note
+        selectedNotes={selectedNotes}
+        bookIsSelected={pageNames && pageNames.length > 0}
+        keyWord={searchItem}
+        editPressed={editPressed}
+        removeNoteFromArrays={removeNoteFromArrays}
+      />
       <Footer />
     </div>
   );

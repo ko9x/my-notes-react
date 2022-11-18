@@ -19,6 +19,11 @@ const customStyles = {
   },
 };
 
+function checkForCreatedLocation(myArr, item) {
+  const newArr = myArr.find(arrItem => arrItem === item);
+  return !Boolean(newArr);
+}
+
 export default function EditModal({
   isModalOpen,
   closeModal,
@@ -36,6 +41,7 @@ export default function EditModal({
   createdNote,
   changedNoteLocation,
   changedNoteContent,
+  createdNoteLocation
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -136,12 +142,16 @@ export default function EditModal({
               createdNote(newlyCreatedNote);
             });
           }
-          if (noteToEdit && noteToEdit.section === updatedNote.section) {
-            changedNoteContent(updatedNote);
+          if (noteToEdit && checkForCreatedLocation(bookList, updatedNote.book)) {
+            createdNoteLocation(updatedNote)
+            console.log('Check for created location', ); //@DEBUG
           }
-          if (noteToEdit && noteToEdit.section !== updatedNote.section) {
-            changedNoteLocation(updatedNote);
-          }
+          // if (noteToEdit && noteToEdit.section === updatedNote.section) {
+          //   changedNoteContent(updatedNote);
+          // }
+          // if (noteToEdit && noteToEdit.section !== updatedNote.section) {
+          //   changedNoteLocation(updatedNote);
+          // }
           closeModal();
         } else {
           throw new Error("Something went wrong");
@@ -193,7 +203,6 @@ export default function EditModal({
           </div>
           {newBook.changing ? (
             <>
-              {" "}
               <input
                 type="text"
                 placeholder={selectedBook}
