@@ -1,5 +1,4 @@
 export default function Radio({ nameArray, selectionFunction, selectedItem }) {
-  console.log('make sure all the names in name Array are unique')
   return (
     <div
       style={{

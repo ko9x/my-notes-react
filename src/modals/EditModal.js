@@ -19,6 +19,11 @@ const customStyles = {
   },
 };
 
+function hasDuplicate(myArr, item) {
+  const newArr = myArr.find(arrItem => arrItem === item);
+  return Boolean(newArr);
+}
+
 export default function EditModal({
   isModalOpen,
   closeModal,
@@ -177,8 +182,8 @@ export default function EditModal({
   }, [selectedPage, changePage, sectionList]);
 
   function handleSetNewBookName(e) {
-    if (e.target.value === "") {
-      setNewBook({ ...newBook, name: selectedBook });
+    if (e.target.value === "" || hasDuplicate(bookList, e.target.value) ) {
+      setNewBook({ ...newBook, name: null });
     } else {
       setNewBook({ ...newBook, name: e.target.value });
     }
