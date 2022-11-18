@@ -52,6 +52,7 @@ export default function EditModal({
   const [selectedSection, setSelectedSection] = useState(null);
   const [isSearch, setIsSearch] = useState(null);
   const [newBook, setNewBook] = useState({ changing: false, name: null });
+  const [newPage, setNewPage] = useState({ changing: false, name: null });
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -184,7 +185,7 @@ export default function EditModal({
 
   function handleSetNewBook(instruction) {
     if (instruction.text === 'setNameNull') {
-      setNewBook({...newBook, name: null});
+      setNewBook({changing: newBook.changing, name: null});
     }
     if (instruction.text === 'hasValue') {
       setNewBook({name: instruction.payload, changing: true});
@@ -197,15 +198,30 @@ export default function EditModal({
     }
   }
 
-  function determineSelectedItem() {
-    if(newBook.name) {
-      return newBook.name;
+  function handleSetNewPage(instruction) {
+    if (instruction.text === 'setNameNull') {
+      setNewPage({changing: newBook.changing , name: null});
     }
-    if(selectedBook) {
-      return selectedBook
+    if (instruction.text === 'hasValue') {
+      setNewPage({name: instruction.payload, changing: true});
+    }
+    if (instruction.text === 'cancel') {
+      setNewPage({ changing: false, name: null });
+    }
+    if (instruction.text === 'confirm') {
+      setNewPage({ changing: false, name: newPage.name });
+    }
+  }
+
+  function determineSelectedItem(newItem, selectedItem, noteToEditItem) {
+    if(newItem.name) {
+      return newItem.name;
+    }
+    if(selectedItem) {
+      return selectedItem
     }
     if(noteToEdit) {
-      return noteToEdit.book
+      return noteToEditItem
     }
     if(!noteToEdit) {
       return null
@@ -237,22 +253,29 @@ export default function EditModal({
             <Radio
               nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
               selectedItem={
-                determineSelectedItem()
+                determineSelectedItem(newBook, selectedBook, noteToEdit?.book)
               }
               selectionFunction={handleBookChange}
             />
           )}
           <div className={classes.radioTitle}>
             <h2>Select a Page</h2>
-            <button className={classes.newItemButton}>new +</button>
+            <button
+              onClick={() => setNewPage({ ...newBook, changing: true })}
+              className={classes.newItemButton}
+            >
+              new +
+            </button>
           </div>
-          <Radio
-            nameArray={pageList}
+          {newPage.changing ? (
+            <NoteInput selectedItem={newPage.name ? newPage.name : selectedPage} newItem={newPage} handleSetNewItem={handleSetNewPage} hasDuplicate={hasDuplicate} list={pageList} />
+          ) : (<Radio
+            nameArray={newPage.name ? [newPage.name, ...pageList] : pageList}
             selectedItem={
-              selectedPage ? selectedPage : noteToEdit ? noteToEdit.page : null
+              determineSelectedItem(newPage, selectedPage, noteToEdit?.page)
             }
             selectionFunction={handlePageChange}
-          />
+          />)}
           <div className={classes.radioTitle}>
             <h2>Select a Section</h2>
             <button className={classes.newItemButton}>new +</button>
