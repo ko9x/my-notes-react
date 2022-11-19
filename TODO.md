@@ -1,6 +1,6 @@
 ### Current Focus
 * (done) Add functionality to create a new book
-* Add functionality to create a new page
+* (working on it. Still needs more testing and refining) Add functionality to create a new page
 * Add functionality to create a new section
 
 
