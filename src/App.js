@@ -244,14 +244,23 @@ export default function App() {
     setSelectedSection(newNote.section);
     return;
   }
-  function createdNoteLocation(newNote) {
+
+  function createdNoteLocation(newNote, tracker) {
     setSelectedBook(newNote.book);
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
     addNote(notes, setNotes, newNote, newNote.id);
+    if (tracker.book) {
+      setSectionNames([newNote.section]);
+      setPageNames([newNote.page]);
+    }
+    if (!tracker.book && tracker.page) {
+      setPageNames((prevState) => {
+        return prevState.concat(newNote.page);
+      })
+      setSectionNames([newNote.section]);
+    }
     setSelectedNotes([newNote]);
-    setPageNames([newNote.page]);
-    setSectionNames([newNote.section]);
   }
   function changedNoteContent(newNote) {
     addNote(notes, setNotes, newNote, newNote.id);

@@ -53,6 +53,7 @@ export default function EditModal({
   const [isSearch, setIsSearch] = useState(null);
   const [newBook, setNewBook] = useState({ changing: false, name: null });
   const [newPage, setNewPage] = useState({ changing: false, name: null });
+  const [locationTracker, setLocationTracker] = useState({book: false, page: false, section: false});
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -110,6 +111,14 @@ export default function EditModal({
     setSelectedSection(e.target.id);
     changeSection(e.target.id);
   }
+
+  function hasNewLocation() {
+    const hasChange = Object.values(locationTracker).every(
+      value => value === false
+    )
+    return !Boolean(hasChange);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     const url = noteToEdit
@@ -121,19 +130,13 @@ export default function EditModal({
     const updatedNote = {
       id: noteToEdit ? noteToEdit.id : null,
       book: newBook.name ? newBook.name : selectedBook,
-      page: selectedPage,
+      page: newPage.name ? newPage.name : selectedPage,
       section: selectedSection ? selectedSection : noteToEdit.section,
       title: e.target.title.value,
       content: e.target.content.value,
       side: e.target.side.value,
       important: e.target.important.value,
     };
-
-    function hasNewLocation() {
-      if(newBook.name) {
-        return true
-      }
-    }
 
     fetch(url, {
       method: method,
@@ -152,7 +155,7 @@ export default function EditModal({
             });
           } else {
             if (hasNewLocation()) {
-              createdNoteLocation(updatedNote)
+              createdNoteLocation(updatedNote, locationTracker)
             }
             if (!hasNewLocation() && noteToEdit.section === updatedNote.section) {
               changedNoteContent(updatedNote);
@@ -188,6 +191,7 @@ export default function EditModal({
       setNewBook({changing: newBook.changing, name: null});
     }
     if (instruction.text === 'hasValue') {
+      setLocationTracker({book: true, page: false, section: false})
       setNewBook({name: instruction.payload, changing: true});
     }
     if (instruction.text === 'cancel') {
@@ -203,6 +207,7 @@ export default function EditModal({
       setNewPage({changing: newBook.changing , name: null});
     }
     if (instruction.text === 'hasValue') {
+      setLocationTracker({book: false, page: true, section: false})
       setNewPage({name: instruction.payload, changing: true});
     }
     if (instruction.text === 'cancel') {
