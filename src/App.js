@@ -40,7 +40,7 @@ export default function App() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [pageNames, setPageNames] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null);
-  const [sectionNames, setSectionNames] = useState(null);
+  const [sectionNames, setSectionNames] = useState([]);
   const [searchItem, setSearchItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState(null);
@@ -170,8 +170,8 @@ export default function App() {
 
     setSearchItem(keyWord);
     setSelectedNotes(uniqueArr);
-    setPageNames(null);
-    setSectionNames(null);
+    setPageNames([]);
+    setSectionNames([]);
   }
 
   function liftedSearchItem(searchItemBeingLifted) {
@@ -192,7 +192,7 @@ export default function App() {
       setSelectedNotes([]);
       getPages(notes, bookBeingLifted);
       setSelectedBook(bookBeingLifted);
-      setSectionNames(null);
+      setSectionNames([]);
     }
   }
 

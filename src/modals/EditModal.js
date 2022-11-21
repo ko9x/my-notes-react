@@ -21,8 +21,13 @@ const customStyles = {
 };
 
 function hasDuplicate(myArr, item) {
-  const newArr = myArr.find(arrItem => arrItem === item);
+  if(!myArr) {
+    return false;
+  } else {
+    const newArr = myArr.find(arrItem => arrItem === item);
   return Boolean(newArr);
+  }
+  
 }
 
 export default function EditModal({
@@ -53,6 +58,7 @@ export default function EditModal({
   const [isSearch, setIsSearch] = useState(null);
   const [newBook, setNewBook] = useState({ changing: false, name: null });
   const [newPage, setNewPage] = useState({ changing: false, name: null });
+  const [newSection, setNewSection] = useState({ changing: false, name: null });
   const [locationTracker, setLocationTracker] = useState({book: false, page: false, section: false});
 
   useEffect(() => {
@@ -104,10 +110,12 @@ export default function EditModal({
     changeBook(e.target.id);
   }
   function handlePageChange(e) {
+    setNewPage({changing: false, name: null});
     setSelectedPage(e.target.id);
     changePage(e.target.id);
   }
   function handleSectionChange(e) {
+    setNewSection({changing: false, name: null});
     setSelectedSection(e.target.id);
     changeSection(e.target.id);
   }
@@ -131,7 +139,7 @@ export default function EditModal({
       id: noteToEdit ? noteToEdit.id : null,
       book: newBook.name ? newBook.name : selectedBook,
       page: newPage.name ? newPage.name : selectedPage,
-      section: selectedSection ? selectedSection : noteToEdit.section,
+      section: newSection.name ? newSection.name : selectedSection,
       title: e.target.title.value,
       content: e.target.content.value,
       side: e.target.side.value,
@@ -152,6 +160,7 @@ export default function EditModal({
               // Adding the firebase id to the note
               const newlyCreatedNote = { id: data.name, ...updatedNote };
               createdNote(newlyCreatedNote);
+              createdNoteLocation(updatedNote, locationTracker)
             });
           } else {
             if (hasNewLocation()) {
@@ -203,10 +212,6 @@ export default function EditModal({
       itemFunction({ changing: false, name: itemProperty.name });
     }
   }
-
-  console.log('locationTracker', locationTracker); //@DEBUG
-  console.log('newBook', newBook); //@DEBUG
-  console.log('newPage', newPage); //@DEBUG
 
   function determineSelectedItem(newItem, selectedItem, noteToEditItem) {
     if(newItem.name) {
@@ -265,7 +270,7 @@ export default function EditModal({
           <div className={classes.radioTitle}>
             <h2>Select a Page</h2>
             <button
-              onClick={() => setNewPage({ ...newBook, changing: true })}
+              onClick={() => setNewPage({ ...newPage, changing: true })}
               className={classes.newItemButton}
             >
               new +
@@ -291,19 +296,31 @@ export default function EditModal({
           />)}
           <div className={classes.radioTitle}>
             <h2>Select a Section</h2>
-            <button className={classes.newItemButton}>new +</button>
+            <button
+              onClick={() => setNewSection({ ...newSection, changing: true })}
+              className={classes.newItemButton}
+            >
+              new +
+            </button>
           </div>
-          <Radio
-            nameArray={sectionList}
+          {newSection.changing ? (
+            <NoteInput 
+              selectedItem={newSection.name ? newSection.name : selectedSection}  
+              newItem={newSection} 
+              handleSetNewItem={handleSetNewItem} 
+              hasDuplicate={hasDuplicate} 
+              list={sectionList}
+              itemProperty={newSection}
+              itemFunction={setNewSection}
+              itemPropertyName='section'
+            />
+          ) : (<Radio
+            nameArray={newSection.name ? [newSection.name, ...sectionList] : sectionList}
             selectedItem={
-              selectedSection
-                ? selectedSection
-                : noteToEdit
-                ? noteToEdit.section
-                : null
+              determineSelectedItem(newSection, selectedSection, noteToEdit?.section)
             }
             selectionFunction={handleSectionChange}
-          />
+          />)}
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
