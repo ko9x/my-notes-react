@@ -186,37 +186,27 @@ export default function EditModal({
     }
   }, [selectedPage, changePage, sectionList]);
 
-  function handleSetNewBook(instruction) {
+  function handleSetNewItem(instruction, itemProperty, itemFunction, itemPropertyName) {
     if (instruction.text === 'setNameNull') {
-      setNewBook({changing: newBook.changing, name: null});
+      setLocationTracker({...locationTracker, [itemPropertyName]: false})
+      itemFunction({...itemProperty, name: null});
     }
     if (instruction.text === 'hasValue') {
-      setLocationTracker({book: true, page: false, section: false})
-      setNewBook({name: instruction.payload, changing: true});
+      itemFunction({name: instruction.payload, changing: true});
     }
     if (instruction.text === 'cancel') {
-      setNewBook({ changing: false, name: null });
+      setLocationTracker({...locationTracker, [itemPropertyName]: false})
+      itemFunction({ changing: false, name: null });
     }
     if (instruction.text === 'confirm') {
-      setNewBook({ changing: false, name: newBook.name });
+      setLocationTracker({...locationTracker, [itemPropertyName]: true})
+      itemFunction({ changing: false, name: itemProperty.name });
     }
   }
 
-  function handleSetNewPage(instruction) {
-    if (instruction.text === 'setNameNull') {
-      setNewPage({changing: newBook.changing , name: null});
-    }
-    if (instruction.text === 'hasValue') {
-      setLocationTracker({book: false, page: true, section: false})
-      setNewPage({name: instruction.payload, changing: true});
-    }
-    if (instruction.text === 'cancel') {
-      setNewPage({ changing: false, name: null });
-    }
-    if (instruction.text === 'confirm') {
-      setNewPage({ changing: false, name: newPage.name });
-    }
-  }
+  console.log('locationTracker', locationTracker); //@DEBUG
+  console.log('newBook', newBook); //@DEBUG
+  console.log('newPage', newPage); //@DEBUG
 
   function determineSelectedItem(newItem, selectedItem, noteToEditItem) {
     if(newItem.name) {
@@ -253,7 +243,16 @@ export default function EditModal({
             </button>
           </div>
           {newBook.changing ? (
-            <NoteInput selectedItem={newBook.name ? newBook.name : selectedBook} newItem={newBook} handleSetNewItem={handleSetNewBook} hasDuplicate={hasDuplicate} list={bookList} />
+            <NoteInput 
+              selectedItem={newBook.name ? newBook.name : selectedBook} 
+              newItem={newBook} 
+              handleSetNewItem={handleSetNewItem} 
+              hasDuplicate={hasDuplicate} 
+              list={bookList}
+              itemProperty={newBook}
+              itemFunction={setNewBook}
+              itemPropertyName='book'
+            />
           ) : (
             <Radio
               nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
@@ -273,7 +272,16 @@ export default function EditModal({
             </button>
           </div>
           {newPage.changing ? (
-            <NoteInput selectedItem={newPage.name ? newPage.name : selectedPage} newItem={newPage} handleSetNewItem={handleSetNewPage} hasDuplicate={hasDuplicate} list={pageList} />
+            <NoteInput 
+              selectedItem={newPage.name ? newPage.name : selectedPage}  
+              newItem={newPage} 
+              handleSetNewItem={handleSetNewItem} 
+              hasDuplicate={hasDuplicate} 
+              list={pageList}
+              itemProperty={newPage}
+              itemFunction={setNewPage}
+              itemPropertyName='page'
+            />
           ) : (<Radio
             nameArray={newPage.name ? [newPage.name, ...pageList] : pageList}
             selectedItem={
@@ -338,7 +346,7 @@ export default function EditModal({
             ></textarea>
             <div style={{ width: "69.1%", paddingTop: "20px" }}>
               <button
-                disabled={newBook.changing === true}
+                disabled={newBook.changing === true || newPage.changing}
                 style={{ width: "30vw", borderRadius: "5px", float: "right" }}
               >
                 Submit

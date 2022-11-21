@@ -4,12 +4,15 @@ export default function NoteInput({
   handleSetNewItem,
   hasDuplicate,
   list,
+  itemProperty,
+  itemFunction,
+  itemPropertyName
 }) {
   function handleSetNewItemName(e) {
     if (e.target.value === "" || hasDuplicate(list, e.target.value)) {
-      handleSetNewItem({ text: "setNameNull" });
+      handleSetNewItem({ text: "setNameNull" }, itemProperty, itemFunction, itemPropertyName);
     } else {
-      handleSetNewItem({ text: "hasValue", payload: e.target.value });
+      handleSetNewItem({ text: "hasValue", payload: e.target.value }, itemProperty, itemFunction, itemPropertyName);
     }
   }
 
@@ -23,13 +26,13 @@ export default function NoteInput({
       <button
         style={{ marginLeft: "1.5vw" }}
         disabled={newItem.name === null}
-        onClick={() => handleSetNewItem({ text: "confirm" })}
+        onClick={() => handleSetNewItem({ text: "confirm" }, itemProperty, itemFunction, itemPropertyName)}
       >
         Confirm
       </button>
       <button
         style={{ marginLeft: "1.5vw" }}
-        onClick={() => handleSetNewItem({ text: "cancel" })}
+        onClick={() => handleSetNewItem({ text: "cancel" }, itemProperty, itemFunction, itemPropertyName)}
       >
         Cancel
       </button>

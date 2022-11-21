@@ -260,6 +260,11 @@ export default function App() {
       })
       setSectionNames([newNote.section]);
     }
+    if (!tracker.book && !tracker.page && tracker.section) {
+      setSectionNames((prevState) => {
+        return prevState.concat(newNote.section);
+      });
+    }
     setSelectedNotes([newNote]);
   }
   function changedNoteContent(newNote) {
