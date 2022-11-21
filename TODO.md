@@ -1,8 +1,15 @@
 ### Current Focus
 * (done) Add functionality to create a new book
-* (working on it. Still needs more testing and refining) Add functionality to create a new page
-* Add functionality to create a new section
-
+* (done?) Add functionality to create a new page
+    * needs more testing
+* (done?) Add functionality to create a new section
+    * needs more testing
+* Add validation ensuring each note has:
+    * book
+    * page
+    * section
+    * title
+    * content
 
 * (done) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
