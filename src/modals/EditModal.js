@@ -122,7 +122,6 @@ export default function EditModal({
   }
 
   function hasNewLocation() {
-    console.log('locationTracker in edit', locationTracker); //@DEBUG
     const hasChange = Object.values(locationTracker).every(
       value => value === false
     )
