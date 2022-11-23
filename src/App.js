@@ -143,6 +143,7 @@ export default function App() {
         }
       }
     }
+    setSelectedSection(selectedSection);
     setSelectedNotes(singleSectionArr);
   }
 
@@ -231,8 +232,6 @@ export default function App() {
 
   function newPressed() {
     handleModalOpen();
-    setSelectedPage(null);
-    setSelectedSection(null);
     setNoteToEdit(null);
   }
 
@@ -280,6 +279,7 @@ export default function App() {
         pageList={pageNames}
         defaultPage={selectedPage}
         sectionList={sectionNames}
+        defaultSection={selectedSection}
         isSearching={searchItem}
         locationChanged={locationChanged}
       />

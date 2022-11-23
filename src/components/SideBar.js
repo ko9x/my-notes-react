@@ -19,6 +19,12 @@ export default function SideBar({
     setActiveItem(defaultItem);
   }, [defaultItem]);
 
+  useEffect(() => {
+    if(isOpen) {
+      setActiveItem(defaultItem)
+    }
+  }, [isOpen, defaultItem])
+
   function handleItemNameArrayChange() {
     if (isOpen) {
       setIsOpen(false);

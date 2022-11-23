@@ -39,11 +39,11 @@ export default function EditModal({
   pageList,
   defaultPage,
   sectionList,
+  defaultSection,
   changeBook,
   changePage,
   changeSection,
   isSearching,
-  newPressed,
   createdNote,
   changedNoteLocation,
   changedNoteContent,
@@ -64,7 +64,8 @@ export default function EditModal({
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
-  }, [defaultBook, defaultPage]);
+    setSelectedSection(defaultSection);
+  }, [defaultBook, defaultPage, defaultSection]);
 
   useEffect(() => {
     setIsSearch(isSearching);
@@ -77,9 +78,6 @@ export default function EditModal({
   }, [noteToEdit]);
 
   function resetModal() {
-    setSelectedBook(null);
-    setSelectedPage(null);
-    setSelectedSection(null);
     setNewBook({ changing: false, name: null })
     setNewPage({ changing: false, name: null })
     setNewSection({ changing: false, name: null })
@@ -123,6 +121,11 @@ export default function EditModal({
     changeSection(e.target.id);
   }
 
+  function handleCloseModal() {
+    resetModal();
+    closeModal();
+  }
+
   function locationMoved(updatedNote) {
     if(noteToEdit.book !== updatedNote.book) {
       return true;
@@ -135,7 +138,7 @@ export default function EditModal({
     }
     return false;
   }
-
+// **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
     e.preventDefault();
     const url = noteToEdit
@@ -188,6 +191,8 @@ export default function EditModal({
       });
   }
 
+  // **************** Submit Handler Section End ****************************
+
   if (isSearch && noteToEdit) {
     changeBook(noteToEdit.book);
     setSelectedPage(noteToEdit.page);
@@ -233,7 +238,7 @@ export default function EditModal({
   return (
     <Modal
       isOpen={isModalOpen}
-      onRequestClose={closeModal}
+      onRequestClose={handleCloseModal}
       style={customStyles}
       contentLabel="Example Modal"
       closeTimeoutMS={500}
@@ -374,7 +379,7 @@ export default function EditModal({
           </form>
         </div>
         <div className={classes.closeButtonContainer}>
-          <button className={classes.closeButton} onClick={closeModal}>
+          <button className={classes.closeButton} onClick={handleCloseModal}>
             close
           </button>
         </div>
