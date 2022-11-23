@@ -72,7 +72,6 @@ export default function EditModal({
   }, [isSearching]);
 
   useEffect(() => {
-    console.log('noteToEdit changed', ); //@DEBUG
     setLocationTracker({book: false, page: false, section: false})
     if (!noteToEdit) {
       resetModal();
@@ -124,7 +123,6 @@ export default function EditModal({
   }
 
   function hasNewLocation() {
-    console.log('locationTracker', locationTracker); //@DEBUG
     const hasChange = Object.values(locationTracker).every(
       value => value === false
     )

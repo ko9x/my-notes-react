@@ -46,7 +46,6 @@ export default function App() {
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
-  const [updateReady, setUpdateReady] = useState(false);
 
   useEffect(() => {
     getNotes();
@@ -60,27 +59,17 @@ export default function App() {
 
   useEffect(() => {
     if(newNote) {
-      fetchNewNotes()
+      newFetchedNotes()
     }
   }, [bookNames]);
 
-  // useEffect(() => {
-  //   if (newNote) {
-  //     console.log('second one', ); //@DEBUG
-  //     fetchNewNotes(newNote);
-  //   }
-  // }, [newNote])
-
   async function getNotes() {
-    console.log('getNotes ran', ); //@DEBUG
     const response = await fetch(`${NotesAPI}/notes.json`);
     const data = await response.json();
 
     if (!response.ok) {
       throw new Error(data.message || "Could not fetch quotes.");
     }
-
-    // console.log("data", data); //@DEBUG
 
     const transformedNotes = [];
 
@@ -91,14 +80,10 @@ export default function App() {
       };
       transformedNotes.push(noteObj);
     }
-    // console.log(transformedNotes);
-
-    console.log('transformedNotes.length', transformedNotes.length); //@DEBUG
     setNotes(transformedNotes);
   }
 
   function getBooks(myArr) {
-    console.log('getBooks ran', ); //@DEBUG
     const bookArr = [];
     for (const key in myArr) {
       const book = myArr[key].book;
@@ -110,7 +95,6 @@ export default function App() {
   }
 
   function getPages(myArr, selectedBook) {
-    console.log('getPages ran', ); //@DEBUG
     const pageArr = [];
     for (const key in myArr) {
       if (myArr[key].book === selectedBook) {
@@ -120,12 +104,10 @@ export default function App() {
         }
       }
     }
-    console.log('pageArr', pageArr); //@DEBUG
     setPageNames(pageArr);
   }
 
   function getSections(myArr, selectedBook, selectedPage) {
-    console.log('getSections ran', ); //@DEBUG
     const sectionNameArr = [];
     const sectionArr = [];
     for (const key in myArr) {
@@ -140,9 +122,6 @@ export default function App() {
         }
       }
     }
-    console.log('notes.length', notes.length); //@DEBUG
-    console.log('sectionNameArr', sectionNameArr); //@DEBUG
-    console.log('sectionArr',sectionArr ); //@DEBUG
     setSectionNames(sectionNameArr);
     setSelectedNotes(sectionArr);
   }
@@ -257,11 +236,14 @@ export default function App() {
     setNoteToEdit(null);
   }
 
-  function fetchNewNotes() {
+  function newFetchedNotes() {
     getPages(notes, newNote.book);
     getSections(notes, newNote.book, newNote.page);
+    setSelectedPage(newNote.page);
+    setSelectedSection(newNote.section);
+    getSingleSection(notes, newNote.book, newNote.page, newNote.section)
+    setSelectedBook(newNote.book);
     setNewNote(null);
-    console.log('notes.length fetch', notes.length); //@DEBUG
   }
 
   function locationChanged(newNote) {
@@ -271,65 +253,53 @@ export default function App() {
     setSectionNames([]);
     setSelectedPage(null);
     setSelectedSection(null);
-    // console.log('newNote', newNote); //@DEBUG
-    // setTimeout(() => {
-    //   console.log('first Timeout', ); //@DEBUG
-    // setTimeout(() => {
-    //   console.log('secondTimeout', notes.length ); //@DEBUG
-    //   getPages(notes, newNote.book);
-    //   setTimeout(() => {
-    //     console.log('3rd Timeout', notes.length ); //@DEBUG
-    //     getSections(notes, newNote.book, newNote.page);
-    //     setNewNote(null);
-    //   }, 1000)
-    // }, 1000)
-    // }, 1000)
   }
 
   function createdNote(newNote) {
-    setNotes((prevState) => {
-      return prevState.concat(newNote);
-    });
-    setSelectedNotes((prevState) => {
-      return prevState.concat(newNote);
-    });
-    setSelectedSection(newNote.section);
-    return;
+    // setNotes((prevState) => {
+    //   return prevState.concat(newNote);
+    // });
+    // setSelectedNotes((prevState) => {
+    //   return prevState.concat(newNote);
+    // });
+    // setSelectedSection(newNote.section);
+    // return;
   }
 
   function createdNoteLocation(newNote, tracker) {
-    console.log('createdNoteLocationRan', ); //@DEBUG
-    setSelectedBook(newNote.book);
-    setSelectedPage(newNote.page);
-    setSelectedSection(newNote.section);
-    addNote(notes, setNotes, newNote, newNote.id);
-    if (tracker.book) {
-      setSectionNames([newNote.section]);
-      setPageNames([newNote.page]);
-    }
-    if (!tracker.book && tracker.page) {
-      setPageNames((prevState) => {
-        return prevState.concat(newNote.page);
-      })
-      setSectionNames([newNote.section]);
-    }
-    if (!tracker.book && !tracker.page && tracker.section) {
-      setSectionNames((prevState) => {
-        return prevState.concat(newNote.section);
-      });
-    }
-    setSelectedNotes([newNote]);
+    // setSelectedBook(newNote.book);
+    // setSelectedPage(newNote.page);
+    // setSelectedSection(newNote.section);
+    // addNote(notes, setNotes, newNote, newNote.id);
+    // if (tracker.book) {
+    //   setSectionNames([newNote.section]);
+    //   setPageNames([newNote.page]);
+    // }
+    // if (!tracker.book && tracker.page) {
+    //   setPageNames((prevState) => {
+    //     return prevState.concat(newNote.page);
+    //   })
+    //   setSectionNames([newNote.section]);
+    // }
+    // if (!tracker.book && !tracker.page && tracker.section) {
+    //   setSectionNames((prevState) => {
+    //     return prevState.concat(newNote.section);
+    //   });
+    // }
+    // setSelectedNotes([newNote]);
   }
+
   function changedNoteContent(newNote) {
     addNote(notes, setNotes, newNote, newNote.id);
     addNote(selectedNotes, setSelectedNotes, newNote, newNote.id);
   }
+  
   function changedNoteLocation(newNote) {
-    addNote(notes, setNotes, newNote, newNote.id);
-    setSelectedNotes((prevState) => {
-      return prevState.concat(newNote);
-    });
-    setSelectedSection(newNote.section);
+    // addNote(notes, setNotes, newNote, newNote.id);
+    // setSelectedNotes((prevState) => {
+    //   return prevState.concat(newNote);
+    // });
+    // setSelectedSection(newNote.section);
   }
 
   function removeNoteFromArrays(note) {
@@ -371,7 +341,7 @@ export default function App() {
         <SideBar
           itemNameArray={isModalOpen ? null : pageNames}
           selectedItemName={liftedPage}
-          defaultItem={isModalOpen ? null : selectedPage}
+          defaultItem={selectedPage}
           sideBarPosition={"left"}
         />
       </div>
