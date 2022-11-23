@@ -21,13 +21,12 @@ const customStyles = {
 };
 
 function hasDuplicate(myArr, item) {
-  if(!myArr) {
+  if (!myArr) {
     return false;
   } else {
-    const newArr = myArr.find(arrItem => arrItem === item);
-  return Boolean(newArr);
+    const newArr = myArr.find((arrItem) => arrItem === item);
+    return Boolean(newArr);
   }
-  
 }
 
 export default function EditModal({
@@ -48,7 +47,7 @@ export default function EditModal({
   changedNoteLocation,
   changedNoteContent,
   createdNoteLocation,
-  locationChanged
+  locationChanged,
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -57,15 +56,32 @@ export default function EditModal({
   const [selectedPage, setSelectedPage] = useState(defaultPage);
   const [selectedSection, setSelectedSection] = useState(null);
   const [isSearch, setIsSearch] = useState(null);
+  const [controlledBookList, setControlledBookList] = useState([]);
   const [newBook, setNewBook] = useState({ changing: false, name: null });
+  const [controlledPageList, setControlledPageList] = useState([]);
   const [newPage, setNewPage] = useState({ changing: false, name: null });
+  const [controlledSectionList, setControlledSectionList] = useState([]);
   const [newSection, setNewSection] = useState({ changing: false, name: null });
 
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
     setSelectedSection(defaultSection);
-  }, [defaultBook, defaultPage, defaultSection]);
+    setControlledBookList(bookList);
+    setControlledPageList(pageList);
+    setControlledSectionList(sectionList);
+  }, [
+    defaultBook,
+    defaultPage,
+    defaultSection,
+    // @TODO do we need these here?
+    // controlledBookList,
+    // controlledPageList,
+    // controlledSectionList,
+    bookList,
+    pageList,
+    sectionList,
+  ]);
 
   useEffect(() => {
     setIsSearch(isSearching);
@@ -78,9 +94,9 @@ export default function EditModal({
   }, [noteToEdit]);
 
   function resetModal() {
-    setNewBook({ changing: false, name: null })
-    setNewPage({ changing: false, name: null })
-    setNewSection({ changing: false, name: null })
+    setNewBook({ changing: false, name: null });
+    setNewPage({ changing: false, name: null });
+    setNewSection({ changing: false, name: null });
   }
 
   // @TODO I'm sure there is a better way to refactor this
@@ -106,17 +122,23 @@ export default function EditModal({
     }
   }
   function handleBookChange(e) {
-    setNewBook({changing: false, name: null});
+    setNewBook({ changing: false, name: null });
     setSelectedBook(e.target.id);
     changeBook(e.target.id);
+    setSelectedPage(null);
+    setSelectedSection(null);
+    setControlledPageList([]);
+    setControlledSectionList([]);
   }
   function handlePageChange(e) {
-    setNewPage({changing: false, name: null});
+    setNewPage({ changing: false, name: null });
     setSelectedPage(e.target.id);
     changePage(e.target.id);
+    setSelectedSection(null);
+    setControlledSectionList([]);
   }
   function handleSectionChange(e) {
-    setNewSection({changing: false, name: null});
+    setNewSection({ changing: false, name: null });
     setSelectedSection(e.target.id);
     changeSection(e.target.id);
   }
@@ -127,18 +149,18 @@ export default function EditModal({
   }
 
   function locationMoved(updatedNote) {
-    if(noteToEdit.book !== updatedNote.book) {
+    if (noteToEdit.book !== updatedNote.book) {
       return true;
     }
-    if(noteToEdit.page !== updatedNote.page) {
+    if (noteToEdit.page !== updatedNote.page) {
       return true;
     }
-    if(noteToEdit.section !== updatedNote.section) {
-      return true
+    if (noteToEdit.section !== updatedNote.section) {
+      return true;
     }
     return false;
   }
-// **************** Submit Handler Section Start ****************************
+  // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
     e.preventDefault();
     const url = noteToEdit
@@ -151,7 +173,11 @@ export default function EditModal({
       id: noteToEdit ? noteToEdit.id : null,
       book: newBook.name ? newBook.name : selectedBook,
       page: newPage.name ? newPage.name : selectedPage,
-      section: newSection.name ? newSection.name : selectedSection ? selectedSection : noteToEdit.section,
+      section: newSection.name
+        ? newSection.name
+        : selectedSection
+        ? selectedSection
+        : noteToEdit.section,
       title: e.target.title.value,
       content: e.target.content.value,
       side: e.target.side.value,
@@ -175,11 +201,11 @@ export default function EditModal({
               locationChanged(newlyCreatedNote);
             });
           } else {
-              if(locationMoved(updatedNote)) {
-                locationChanged(updatedNote)
-              } else {
-                changedNoteContent(updatedNote);
-              }
+            if (locationMoved(updatedNote)) {
+              locationChanged(updatedNote);
+            } else {
+              changedNoteContent(updatedNote);
+            }
           }
           closeModal();
         } else {
@@ -205,33 +231,38 @@ export default function EditModal({
     }
   }, [selectedPage, changePage, sectionList]);
 
-  function handleSetNewItem(instruction, itemProperty, itemFunction, itemPropertyName) {
-    if (instruction.text === 'setNameNull') {
-      itemFunction({...itemProperty, name: null});
+  function handleSetNewItem(
+    instruction,
+    itemProperty,
+    itemFunction,
+    itemPropertyName
+  ) {
+    if (instruction.text === "setNameNull") {
+      itemFunction({ ...itemProperty, name: null });
     }
-    if (instruction.text === 'hasValue') {
-      itemFunction({name: instruction.payload, changing: true});
+    if (instruction.text === "hasValue") {
+      itemFunction({ name: instruction.payload, changing: true });
     }
-    if (instruction.text === 'cancel') {
+    if (instruction.text === "cancel") {
       itemFunction({ changing: false, name: null });
     }
-    if (instruction.text === 'confirm') {
+    if (instruction.text === "confirm") {
       itemFunction({ changing: false, name: itemProperty.name });
     }
   }
 
   function determineSelectedItem(newItem, selectedItem, noteToEditItem) {
-    if(newItem.name) {
+    if (newItem.name) {
       return newItem.name;
     }
-    if(selectedItem) {
-      return selectedItem
+    if (selectedItem) {
+      return selectedItem;
     }
-    if(noteToEdit) {
-      return noteToEditItem
+    if (noteToEdit) {
+      return noteToEditItem;
     }
-    if(!noteToEdit) {
-      return null
+    if (!noteToEdit) {
+      return null;
     }
   }
 
@@ -255,22 +286,24 @@ export default function EditModal({
             </button>
           </div>
           {newBook.changing ? (
-            <NoteInput 
-              selectedItem={newBook.name ? newBook.name : selectedBook} 
-              newItem={newBook} 
-              handleSetNewItem={handleSetNewItem} 
-              hasDuplicate={hasDuplicate} 
-              list={bookList}
+            <NoteInput
+              selectedItem={newBook.name ? newBook.name : selectedBook}
+              newItem={newBook}
+              handleSetNewItem={handleSetNewItem}
+              hasDuplicate={hasDuplicate}
+              list={controlledBookList}
               itemProperty={newBook}
               itemFunction={setNewBook}
-              itemPropertyName='book'
+              itemPropertyName="book"
             />
           ) : (
             <Radio
-              nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
-              selectedItem={
-                determineSelectedItem(newBook, selectedBook, noteToEdit?.book)
-              }
+              nameArray={newBook.name ? [newBook.name, ...controlledBookList] : controlledBookList}
+              selectedItem={determineSelectedItem(
+                newBook,
+                selectedBook,
+                noteToEdit?.book
+              )}
               selectionFunction={handleBookChange}
             />
           )}
@@ -284,23 +317,27 @@ export default function EditModal({
             </button>
           </div>
           {newPage.changing ? (
-            <NoteInput 
-              selectedItem={newPage.name ? newPage.name : selectedPage}  
-              newItem={newPage} 
-              handleSetNewItem={handleSetNewItem} 
-              hasDuplicate={hasDuplicate} 
-              list={pageList}
+            <NoteInput
+              selectedItem={newPage.name ? newPage.name : selectedPage}
+              newItem={newPage}
+              handleSetNewItem={handleSetNewItem}
+              hasDuplicate={hasDuplicate}
+              list={controlledPageList}
               itemProperty={newPage}
               itemFunction={setNewPage}
-              itemPropertyName='page'
+              itemPropertyName="page"
             />
-          ) : (<Radio
-            nameArray={newPage.name ? [newPage.name, ...pageList] : pageList}
-            selectedItem={
-              determineSelectedItem(newPage, selectedPage, noteToEdit?.page)
-            }
-            selectionFunction={handlePageChange}
-          />)}
+          ) : (
+            <Radio
+              nameArray={newPage.name ? [newPage.name, ...controlledPageList] : controlledPageList}
+              selectedItem={determineSelectedItem(
+                newPage,
+                selectedPage,
+                noteToEdit?.page
+              )}
+              selectionFunction={handlePageChange}
+            />
+          )}
           <div className={classes.radioTitle}>
             <h2>Select a Section</h2>
             <button
@@ -311,23 +348,31 @@ export default function EditModal({
             </button>
           </div>
           {newSection.changing ? (
-            <NoteInput 
-              selectedItem={newSection.name ? newSection.name : selectedSection}  
-              newItem={newSection} 
-              handleSetNewItem={handleSetNewItem} 
-              hasDuplicate={hasDuplicate} 
-              list={sectionList}
+            <NoteInput
+              selectedItem={newSection.name ? newSection.name : selectedSection}
+              newItem={newSection}
+              handleSetNewItem={handleSetNewItem}
+              hasDuplicate={hasDuplicate}
+              list={controlledSectionList}
               itemProperty={newSection}
               itemFunction={setNewSection}
-              itemPropertyName='section'
+              itemPropertyName="section"
             />
-          ) : (<Radio
-            nameArray={newSection.name ? [newSection.name, ...sectionList] : sectionList}
-            selectedItem={
-              determineSelectedItem(newSection, selectedSection, noteToEdit?.section)
-            }
-            selectionFunction={handleSectionChange}
-          />)}
+          ) : (
+            <Radio
+              nameArray={
+                newSection.name
+                  ? [newSection.name, ...controlledSectionList]
+                  : controlledSectionList
+              }
+              selectedItem={determineSelectedItem(
+                newSection,
+                selectedSection,
+                noteToEdit?.section
+              )}
+              selectionFunction={handleSectionChange}
+            />
+          )}
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
