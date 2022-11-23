@@ -1,13 +1,10 @@
 ### Current Focus
-* Finish implementation of controlledLists so we can clear them if a new book or page is added
-    * in the EditModal
-    
 * Add validation ensuring each note has:
     * book
     * page
     * section
-    * title
-    * content
+    * (done) title
+    * (done) content
 
 * (done) Add functionality to create a new book
 * (done) Add functionality to create a new page
