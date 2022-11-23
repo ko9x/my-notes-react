@@ -25,6 +25,8 @@ export default function SideBar({
       setActiveItem(null);
     }
     if (!isOpen && itemNameArray && itemNameArray.length > 0) {
+      console.log('itemsNameArray', itemNameArray); //@DEBUG
+      console.log('isOpen', isOpen); //@DEBUG
       setCurrentItems(itemNameArray);
       setIsOpen(true);
     }

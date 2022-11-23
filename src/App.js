@@ -45,6 +45,8 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+  const [newNote, setNewNote] = useState(null);
+  const [updateReady, setUpdateReady] = useState(false);
 
   useEffect(() => {
     getNotes();
@@ -56,7 +58,21 @@ export default function App() {
     }
   }, [notes]);
 
+  useEffect(() => {
+    if(newNote) {
+      fetchNewNotes()
+    }
+  }, [bookNames]);
+
+  // useEffect(() => {
+  //   if (newNote) {
+  //     console.log('second one', ); //@DEBUG
+  //     fetchNewNotes(newNote);
+  //   }
+  // }, [newNote])
+
   async function getNotes() {
+    console.log('getNotes ran', ); //@DEBUG
     const response = await fetch(`${NotesAPI}/notes.json`);
     const data = await response.json();
 
@@ -77,10 +93,12 @@ export default function App() {
     }
     // console.log(transformedNotes);
 
+    console.log('transformedNotes.length', transformedNotes.length); //@DEBUG
     setNotes(transformedNotes);
   }
 
   function getBooks(myArr) {
+    console.log('getBooks ran', ); //@DEBUG
     const bookArr = [];
     for (const key in myArr) {
       const book = myArr[key].book;
@@ -88,11 +106,11 @@ export default function App() {
         bookArr.push(book);
       }
     }
-
     setBookNames(bookArr);
   }
 
   function getPages(myArr, selectedBook) {
+    console.log('getPages ran', ); //@DEBUG
     const pageArr = [];
     for (const key in myArr) {
       if (myArr[key].book === selectedBook) {
@@ -102,10 +120,12 @@ export default function App() {
         }
       }
     }
+    console.log('pageArr', pageArr); //@DEBUG
     setPageNames(pageArr);
   }
 
   function getSections(myArr, selectedBook, selectedPage) {
+    console.log('getSections ran', ); //@DEBUG
     const sectionNameArr = [];
     const sectionArr = [];
     for (const key in myArr) {
@@ -120,6 +140,9 @@ export default function App() {
         }
       }
     }
+    console.log('notes.length', notes.length); //@DEBUG
+    console.log('sectionNameArr', sectionNameArr); //@DEBUG
+    console.log('sectionArr',sectionArr ); //@DEBUG
     setSectionNames(sectionNameArr);
     setSelectedNotes(sectionArr);
   }
@@ -234,6 +257,35 @@ export default function App() {
     setNoteToEdit(null);
   }
 
+  function fetchNewNotes() {
+    getPages(notes, newNote.book);
+    getSections(notes, newNote.book, newNote.page);
+    setNewNote(null);
+    console.log('notes.length fetch', notes.length); //@DEBUG
+  }
+
+  function locationChanged(newNote) {
+    getNotes();
+    setNewNote(newNote);
+    setPageNames([]);
+    setSectionNames([]);
+    setSelectedPage(null);
+    setSelectedSection(null);
+    // console.log('newNote', newNote); //@DEBUG
+    // setTimeout(() => {
+    //   console.log('first Timeout', ); //@DEBUG
+    // setTimeout(() => {
+    //   console.log('secondTimeout', notes.length ); //@DEBUG
+    //   getPages(notes, newNote.book);
+    //   setTimeout(() => {
+    //     console.log('3rd Timeout', notes.length ); //@DEBUG
+    //     getSections(notes, newNote.book, newNote.page);
+    //     setNewNote(null);
+    //   }, 1000)
+    // }, 1000)
+    // }, 1000)
+  }
+
   function createdNote(newNote) {
     setNotes((prevState) => {
       return prevState.concat(newNote);
@@ -246,6 +298,7 @@ export default function App() {
   }
 
   function createdNoteLocation(newNote, tracker) {
+    console.log('createdNoteLocationRan', ); //@DEBUG
     setSelectedBook(newNote.book);
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
@@ -303,6 +356,7 @@ export default function App() {
         defaultPage={selectedPage}
         sectionList={sectionNames}
         isSearching={searchItem}
+        locationChanged={locationChanged}
       />
       <Header
         bookNames={bookNames}
@@ -315,15 +369,15 @@ export default function App() {
       <div className={classes.leftSideBarContainer}>
         <SideBarWall />
         <SideBar
-          itemNameArray={pageNames}
+          itemNameArray={isModalOpen ? null : pageNames}
           selectedItemName={liftedPage}
-          defaultItem={selectedPage}
+          defaultItem={isModalOpen ? null : selectedPage}
           sideBarPosition={"left"}
         />
       </div>
       <div className={classes.rightSideBarContainer}>
         <SideBar
-          itemNameArray={sectionNames}
+          itemNameArray={isModalOpen ? null : sectionNames}
           selectedItemName={liftedSection}
           defaultItem={selectedSection}
           sideBarPosition={"right"}

@@ -11,8 +11,10 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
   }, [defaultBook])
 
   function handleBookSelection(book) {
-    selectedBook(book);
-    setActiveBook(book);
+    if(book !== 'new') {
+      selectedBook(book);
+      setActiveBook(book);
+    }
     if(book === 'new') {
       newPressed();
     }

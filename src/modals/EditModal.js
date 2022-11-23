@@ -47,7 +47,8 @@ export default function EditModal({
   createdNote,
   changedNoteLocation,
   changedNoteContent,
-  createdNoteLocation
+  createdNoteLocation,
+  locationChanged
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -71,6 +72,7 @@ export default function EditModal({
   }, [isSearching]);
 
   useEffect(() => {
+    console.log('noteToEdit changed', ); //@DEBUG
     setLocationTracker({book: false, page: false, section: false})
     if (!noteToEdit) {
       resetModal();
@@ -122,6 +124,7 @@ export default function EditModal({
   }
 
   function hasNewLocation() {
+    console.log('locationTracker', locationTracker); //@DEBUG
     const hasChange = Object.values(locationTracker).every(
       value => value === false
     )
@@ -160,19 +163,21 @@ export default function EditModal({
             response.json().then((data) => {
               // Adding the firebase id to the note
               const newlyCreatedNote = { id: data.name, ...updatedNote };
-              createdNote(newlyCreatedNote);
-              createdNoteLocation(updatedNote, locationTracker)
+              locationChanged(newlyCreatedNote);
+              // hasNewLocation();
+              // createdNote(newlyCreatedNote);
+              // createdNoteLocation(updatedNote, locationTracker)
             });
           } else {
-            if (hasNewLocation()) {
-              createdNoteLocation(updatedNote, locationTracker)
-            }
-            if (!hasNewLocation() && noteToEdit.section === updatedNote.section) {
-              changedNoteContent(updatedNote);
-            }
-            if (!hasNewLocation() && noteToEdit.section !== updatedNote.section) {
-              changedNoteLocation(updatedNote);
-            }
+            // if (hasNewLocation()) {
+            //   createdNoteLocation(updatedNote, locationTracker)
+            // }
+            // if (!hasNewLocation() && noteToEdit.section === updatedNote.section) {
+            //   changedNoteContent(updatedNote);
+            // }
+            // if (!hasNewLocation() && noteToEdit.section !== updatedNote.section) {
+            //   changedNoteLocation(updatedNote);
+            // }
           }
           closeModal();
         } else {
