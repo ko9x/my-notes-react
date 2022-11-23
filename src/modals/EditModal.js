@@ -3,7 +3,7 @@ import classes from "./EditModal.module.css";
 import { useState } from "react";
 import Radio from "../components/Radio";
 import NoteInput from "../components/NoteInput";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const customStyles = {
   content: {
@@ -59,6 +59,11 @@ export default function EditModal({
   const [newBook, setNewBook] = useState({ changing: false, name: null });
   const [newPage, setNewPage] = useState({ changing: false, name: null });
   const [newSection, setNewSection] = useState({ changing: false, name: null });
+  const [missingTitle, setMissingTitle] = useState(false);
+  const [missingContent, setMissingContent] = useState(false);
+
+  const titleRef = useRef();
+  const contentRef = useRef();
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -144,9 +149,23 @@ export default function EditModal({
     }
     return false;
   }
+
+  function missingValues() {
+    if(titleRef.current?.value === '') {
+      setMissingTitle(true);
+      return true
+    }
+    if(contentRef.current?.value === '') {
+      setMissingContent(true);
+      return true
+    }
+  }
   // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
     e.preventDefault();
+    if(missingValues()) {
+      return
+    }
     const url = noteToEdit
       ? `https://my-notes-64d6a.firebaseio.com/notes/${noteToEdit.id}.json`
       : "https://my-notes-64d6a.firebaseio.com/notes.json";
@@ -266,6 +285,18 @@ export default function EditModal({
     }
   }
 
+  function handleEnableSubmitButton() {
+    if (newBook.changing || newPage.changing || newSection.changing) {
+      return true;
+    }
+  }
+
+  function handleOnChangeInput(e, setFunc) {
+    if(e.target.value !== '') {
+      setFunc(false);
+    }
+  }
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -372,14 +403,21 @@ export default function EditModal({
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
+              ref={titleRef}
               type="text"
               id="title"
               defaultValue={noteToEdit?.title}
               className={classes.modalInput}
+              placeholder='Enter a title'
+              onChange={e => handleOnChangeInput(e, setMissingTitle)}
             />
+            {missingTitle && <p style={{color: 'red'}}>Title is required</p>}
             <h2 onClick={() => toggleContentSize()}>Content</h2>
             <textarea
+              ref={contentRef}
+              onChange={e => handleOnChangeInput(e, setMissingContent)}
               defaultValue={noteToEdit?.content}
+              placeholder='Enter content'
               id="content"
               className={`${classes.modalTextArea} ${
                 contentSize === "large"
@@ -387,6 +425,7 @@ export default function EditModal({
                   : classes.modalTextAreaMediumHeight
               }`}
             ></textarea>
+            {missingContent && <p style={{color: 'red'}}>Content is required</p>}
             <h3 onClick={() => toggleImportantSize()}>Important Note</h3>
             <textarea
               defaultValue={noteToEdit?.important}
@@ -411,7 +450,7 @@ export default function EditModal({
             ></textarea>
             <div style={{ width: "69.1%", paddingTop: "20px" }}>
               <button
-                disabled={newBook.changing === true || newPage.changing}
+                disabled={handleEnableSubmitButton()}
                 style={{ width: "30vw", borderRadius: "5px", float: "right" }}
               >
                 Submit
