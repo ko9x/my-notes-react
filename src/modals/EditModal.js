@@ -92,6 +92,10 @@ export default function EditModal({
     setNewBook({ changing: false, name: null });
     setNewPage({ changing: false, name: null });
     setNewSection({ changing: false, name: null });
+    setSelectedSection(null);
+    setMissingBook(false);
+    setMissingPage(false);
+    setMissingSection(false);
   }
 
   // @TODO I'm sure there is a better way to refactor this
@@ -237,7 +241,7 @@ export default function EditModal({
               changedNoteContent(updatedNote);
             }
           }
-          closeModal();
+          handleCloseModal();
         } else {
           throw new Error("Something went wrong");
         }
