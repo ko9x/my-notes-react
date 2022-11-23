@@ -1,24 +1,8 @@
 ### Current Focus
-* Add validation ensuring each note has:
-    * book
-    * page
-    * section
-    * (done) title
-    * (done) content
-
-* (done) Add functionality to create a new book
-* (done) Add functionality to create a new page
-* (done) Add functionality to create a new section
-* (done) Finish the form
-* (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
-    * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
-    * (done) Make sure only one radio button is selected at a time
-    * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
-* (Done) Add functionality to add new notes with a new book name, page name, and/or section name
-    * Allow books, pages, and section names to be multiple words and use unique characters
-* (Done) Add edit and remove functionality
-    * (done) Allow user to move a note from one book, page, or section to another
-    * (Done) After editing a note make sure the view returns to the note you just edited
+* Validation is done so I guess decide what to work on next
+    * Maybe do the stuff in the "Notes to add once that functionality is working" section
+        * That will be a good test of the validation we just did.
+            * But maybe we should do the helper buttons first so those notes are easier to add
     
 ### What to do next
 * Add buttons to easily code such as:
@@ -64,6 +48,10 @@
 * Make the edit/add form look nicer
 
 ### Bugs
+* if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
+* when you delete the last note in a page or section it doesn't clear it from the sidebar
+    * maybe we should do an API call when deleting an item
+        * like we do when creating a new note
 * If you do a search and then try to edit one of the notes there is an error
 * If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
 * If you have launched the edit modal you need to refresh before search will work
@@ -111,6 +99,25 @@
 * Add transition when a user clicks the header to reveal the edit button and details
 * (Done) Add the new features
     * (done) Most important is implementing the search feature
+* (done) Add validation ensuring each note has:
+    * (done) book
+    * (done) page
+    * (done) section
+    * (done) title
+    * (done) content
+* (done) Add functionality to create a new book
+* (done) Add functionality to create a new page
+* (done) Add functionality to create a new section
+* (done) Finish the form
+* (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
+    * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
+    * (done) Make sure only one radio button is selected at a time
+    * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
+* (Done) Add functionality to add new notes with a new book name, page name, and/or section name
+    * Allow books, pages, and section names to be multiple words and use unique characters
+* (Done) Add edit and remove functionality
+    * (done) Allow user to move a note from one book, page, or section to another
+    * (Done) After editing a note make sure the view returns to the note you just edited
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
