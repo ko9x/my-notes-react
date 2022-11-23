@@ -60,7 +60,6 @@ export default function EditModal({
   const [newBook, setNewBook] = useState({ changing: false, name: null });
   const [newPage, setNewPage] = useState({ changing: false, name: null });
   const [newSection, setNewSection] = useState({ changing: false, name: null });
-  const [locationTracker, setLocationTracker] = useState({book: false, page: false, section: false});
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -72,7 +71,6 @@ export default function EditModal({
   }, [isSearching]);
 
   useEffect(() => {
-    setLocationTracker({book: false, page: false, section: false})
     if (!noteToEdit) {
       resetModal();
     }
@@ -82,6 +80,9 @@ export default function EditModal({
     setSelectedBook(null);
     setSelectedPage(null);
     setSelectedSection(null);
+    setNewBook({ changing: false, name: null })
+    setNewPage({ changing: false, name: null })
+    setNewSection({ changing: false, name: null })
   }
 
   // @TODO I'm sure there is a better way to refactor this
@@ -122,11 +123,17 @@ export default function EditModal({
     changeSection(e.target.id);
   }
 
-  function hasNewLocation() {
-    const hasChange = Object.values(locationTracker).every(
-      value => value === false
-    )
-    return !Boolean(hasChange);
+  function locationMoved(updatedNote) {
+    if(noteToEdit.book !== updatedNote.book) {
+      return true;
+    }
+    if(noteToEdit.page !== updatedNote.page) {
+      return true;
+    }
+    if(noteToEdit.section !== updatedNote.section) {
+      return true
+    }
+    return false;
   }
 
   function handleSubmit(e) {
@@ -141,7 +148,7 @@ export default function EditModal({
       id: noteToEdit ? noteToEdit.id : null,
       book: newBook.name ? newBook.name : selectedBook,
       page: newPage.name ? newPage.name : selectedPage,
-      section: newSection.name ? newSection.name : selectedSection,
+      section: newSection.name ? newSection.name : selectedSection ? selectedSection : noteToEdit.section,
       title: e.target.title.value,
       content: e.target.content.value,
       side: e.target.side.value,
@@ -156,26 +163,20 @@ export default function EditModal({
       body: JSON.stringify(updatedNote),
     })
       .then((response) => {
+        resetModal();
         if (response.status === 200) {
           if (!noteToEdit) {
             response.json().then((data) => {
               // Adding the firebase id to the note
               const newlyCreatedNote = { id: data.name, ...updatedNote };
               locationChanged(newlyCreatedNote);
-              // hasNewLocation();
-              // createdNote(newlyCreatedNote);
-              // createdNoteLocation(updatedNote, locationTracker)
             });
           } else {
-            // if (hasNewLocation()) {
-            //   createdNoteLocation(updatedNote, locationTracker)
-            // }
-            // if (!hasNewLocation() && noteToEdit.section === updatedNote.section) {
-            //   changedNoteContent(updatedNote);
-            // }
-            // if (!hasNewLocation() && noteToEdit.section !== updatedNote.section) {
-            //   changedNoteLocation(updatedNote);
-            // }
+              if(locationMoved(updatedNote)) {
+                locationChanged(updatedNote)
+              } else {
+                changedNoteContent(updatedNote);
+              }
           }
           closeModal();
         } else {
@@ -201,18 +202,15 @@ export default function EditModal({
 
   function handleSetNewItem(instruction, itemProperty, itemFunction, itemPropertyName) {
     if (instruction.text === 'setNameNull') {
-      setLocationTracker({...locationTracker, [itemPropertyName]: false})
       itemFunction({...itemProperty, name: null});
     }
     if (instruction.text === 'hasValue') {
       itemFunction({name: instruction.payload, changing: true});
     }
     if (instruction.text === 'cancel') {
-      setLocationTracker({...locationTracker, [itemPropertyName]: false})
       itemFunction({ changing: false, name: null });
     }
     if (instruction.text === 'confirm') {
-      setLocationTracker({...locationTracker, [itemPropertyName]: true})
       itemFunction({ changing: false, name: itemProperty.name });
     }
   }

@@ -255,51 +255,9 @@ export default function App() {
     setSelectedSection(null);
   }
 
-  function createdNote(newNote) {
-    // setNotes((prevState) => {
-    //   return prevState.concat(newNote);
-    // });
-    // setSelectedNotes((prevState) => {
-    //   return prevState.concat(newNote);
-    // });
-    // setSelectedSection(newNote.section);
-    // return;
-  }
-
-  function createdNoteLocation(newNote, tracker) {
-    // setSelectedBook(newNote.book);
-    // setSelectedPage(newNote.page);
-    // setSelectedSection(newNote.section);
-    // addNote(notes, setNotes, newNote, newNote.id);
-    // if (tracker.book) {
-    //   setSectionNames([newNote.section]);
-    //   setPageNames([newNote.page]);
-    // }
-    // if (!tracker.book && tracker.page) {
-    //   setPageNames((prevState) => {
-    //     return prevState.concat(newNote.page);
-    //   })
-    //   setSectionNames([newNote.section]);
-    // }
-    // if (!tracker.book && !tracker.page && tracker.section) {
-    //   setSectionNames((prevState) => {
-    //     return prevState.concat(newNote.section);
-    //   });
-    // }
-    // setSelectedNotes([newNote]);
-  }
-
   function changedNoteContent(newNote) {
     addNote(notes, setNotes, newNote, newNote.id);
     addNote(selectedNotes, setSelectedNotes, newNote, newNote.id);
-  }
-  
-  function changedNoteLocation(newNote) {
-    // addNote(notes, setNotes, newNote, newNote.id);
-    // setSelectedNotes((prevState) => {
-    //   return prevState.concat(newNote);
-    // });
-    // setSelectedSection(newNote.section);
   }
 
   function removeNoteFromArrays(note) {
@@ -310,10 +268,7 @@ export default function App() {
   return (
     <div className={classes.container}>
       <EditModal
-        createdNoteLocation={createdNoteLocation}
         changedNoteContent={changedNoteContent}
-        changedNoteLocation={changedNoteLocation}
-        createdNote={createdNote}
         changeBook={liftedBook}
         changePage={liftedPage}
         changeSection={liftedSection}
