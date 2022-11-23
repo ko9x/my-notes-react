@@ -56,31 +56,18 @@ export default function EditModal({
   const [selectedPage, setSelectedPage] = useState(defaultPage);
   const [selectedSection, setSelectedSection] = useState(null);
   const [isSearch, setIsSearch] = useState(null);
-  const [controlledBookList, setControlledBookList] = useState([]);
   const [newBook, setNewBook] = useState({ changing: false, name: null });
-  const [controlledPageList, setControlledPageList] = useState([]);
   const [newPage, setNewPage] = useState({ changing: false, name: null });
-  const [controlledSectionList, setControlledSectionList] = useState([]);
   const [newSection, setNewSection] = useState({ changing: false, name: null });
 
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
     setSelectedSection(defaultSection);
-    setControlledBookList(bookList);
-    setControlledPageList(pageList);
-    setControlledSectionList(sectionList);
   }, [
     defaultBook,
     defaultPage,
     defaultSection,
-    // @TODO do we need these here?
-    // controlledBookList,
-    // controlledPageList,
-    // controlledSectionList,
-    bookList,
-    pageList,
-    sectionList,
   ]);
 
   useEffect(() => {
@@ -127,15 +114,12 @@ export default function EditModal({
     changeBook(e.target.id);
     setSelectedPage(null);
     setSelectedSection(null);
-    setControlledPageList([]);
-    setControlledSectionList([]);
   }
   function handlePageChange(e) {
     setNewPage({ changing: false, name: null });
     setSelectedPage(e.target.id);
     changePage(e.target.id);
     setSelectedSection(null);
-    setControlledSectionList([]);
   }
   function handleSectionChange(e) {
     setNewSection({ changing: false, name: null });
@@ -266,6 +250,22 @@ export default function EditModal({
     }
   }
 
+  function determineRadioPageNameArray() {
+    if (newBook.name) {
+      return newPage.name ? [newPage.name] : [];
+    } else {
+      return newPage.name ? [newPage.name, ...pageList] : pageList
+    }
+  }
+
+  function determineRadioSectionNameArray() {
+    if (newBook.name || newPage.name) {
+      return newSection.name ? [newSection.name] : [];
+    } else {
+      return newSection.name ? [newSection.name, ...sectionList] : sectionList
+    }
+  }
+
   return (
     <Modal
       isOpen={isModalOpen}
@@ -291,14 +291,14 @@ export default function EditModal({
               newItem={newBook}
               handleSetNewItem={handleSetNewItem}
               hasDuplicate={hasDuplicate}
-              list={controlledBookList}
+              list={bookList}
               itemProperty={newBook}
               itemFunction={setNewBook}
               itemPropertyName="book"
             />
           ) : (
             <Radio
-              nameArray={newBook.name ? [newBook.name, ...controlledBookList] : controlledBookList}
+              nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
               selectedItem={determineSelectedItem(
                 newBook,
                 selectedBook,
@@ -322,14 +322,14 @@ export default function EditModal({
               newItem={newPage}
               handleSetNewItem={handleSetNewItem}
               hasDuplicate={hasDuplicate}
-              list={controlledPageList}
+              list={pageList}
               itemProperty={newPage}
               itemFunction={setNewPage}
               itemPropertyName="page"
             />
           ) : (
             <Radio
-              nameArray={newPage.name ? [newPage.name, ...controlledPageList] : controlledPageList}
+              nameArray={determineRadioPageNameArray()}
               selectedItem={determineSelectedItem(
                 newPage,
                 selectedPage,
@@ -353,18 +353,14 @@ export default function EditModal({
               newItem={newSection}
               handleSetNewItem={handleSetNewItem}
               hasDuplicate={hasDuplicate}
-              list={controlledSectionList}
+              list={sectionList}
               itemProperty={newSection}
               itemFunction={setNewSection}
               itemPropertyName="section"
             />
           ) : (
             <Radio
-              nameArray={
-                newSection.name
-                  ? [newSection.name, ...controlledSectionList]
-                  : controlledSectionList
-              }
+              nameArray={determineRadioSectionNameArray()}
               selectedItem={determineSelectedItem(
                 newSection,
                 selectedSection,
