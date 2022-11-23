@@ -1,9 +1,7 @@
 ### Current Focus
-* (done) Add functionality to create a new book
-* (done?) Add functionality to create a new page
-    * needs more testing
-* (done?) Add functionality to create a new section
-    * needs more testing
+* Finish implementation of controlledLists so we can clear them if a new book or page is added
+    * in the EditModal
+    
 * Add validation ensuring each note has:
     * book
     * page
@@ -11,17 +9,22 @@
     * title
     * content
 
+* (done) Add functionality to create a new book
+* (done) Add functionality to create a new page
+* (done) Add functionality to create a new section
 * (done) Finish the form
 * (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
     * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
     * (done) Make sure only one radio button is selected at a time
     * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
-* (working on it) Add functionality to add new notes with a new book name, page name, and/or section name
+* (Done) Add functionality to add new notes with a new book name, page name, and/or section name
     * Allow books, pages, and section names to be multiple words and use unique characters
-* (working on edit, remove is done) Add edit and remove functionality
+* (Done) Add edit and remove functionality
     * (done) Allow user to move a note from one book, page, or section to another
-    * (working on it) After editing a note make sure the view returns to the note you just edited
-    * Add a button to easily code such as:
+    * (Done) After editing a note make sure the view returns to the note you just edited
+    
+### What to do next
+* Add buttons to easily code such as:
         * pre-wrap/code-wrap 
         * p tags and 
         * <br> to add a line break
@@ -29,14 +32,10 @@
         * <li>
         * HTML Entities 
             * such as &#60 for < 
-    
-### What to do next
 * Make a global for colors
     * It's better to do this early on 
         * I'd like to be able to do a light mode and a dark mode
 * Add auth
-* Add the new features
-    * Most important is implementing the search feature
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
     * make the sidebars less wide
@@ -68,6 +67,7 @@
 * Make the edit/add form look nicer
 
 ### Bugs
+* If you do a search and then try to edit one of the notes there is an error
 * If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
 * If you have launched the edit modal you need to refresh before search will work
 * The first time you select a section the fade in animation doesn't fire
@@ -112,6 +112,8 @@
 * Finish styling the SideBars
 * Add search functionality
 * Add transition when a user clicks the header to reveal the edit button and details
+* (Done) Add the new features
+    * (done) Most important is implementing the search feature
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
