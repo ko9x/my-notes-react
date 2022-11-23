@@ -61,6 +61,9 @@ export default function EditModal({
   const [newSection, setNewSection] = useState({ changing: false, name: null });
   const [missingTitle, setMissingTitle] = useState(false);
   const [missingContent, setMissingContent] = useState(false);
+  const [missingBook, setMissingBook] = useState(false);
+  const [missingPage, setMissingPage] = useState(false);
+  const [missingSection, setMissingSection] = useState(false);
 
   const titleRef = useRef();
   const contentRef = useRef();
@@ -150,7 +153,31 @@ export default function EditModal({
     return false;
   }
 
-  function missingValues() {
+  function missingRadioValue() {
+    if (newBook.name === null && selectedBook === null) {
+      setMissingBook(true);
+      return true;
+    }
+    if (newPage.name === null && selectedPage === null) {
+      setMissingPage(true);
+      return true;
+    }
+    if (newSection.name === null && selectedSection === null) {
+      if (!noteToEdit) {
+        setMissingSection(true);
+        return true
+      } else {
+        if (noteToEdit.section) {
+          setNewSection({...newSection, name: noteToEdit.section})
+        } else {
+          setMissingSection(true);
+          return true;
+        }
+      }
+    }
+  }
+
+  function missingTextValue() {
     if(titleRef.current?.value === '') {
       setMissingTitle(true);
       return true
@@ -163,7 +190,7 @@ export default function EditModal({
   // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
     e.preventDefault();
-    if(missingValues()) {
+    if(missingTextValue() || missingRadioValue()) {
       return
     }
     const url = noteToEdit
@@ -238,7 +265,8 @@ export default function EditModal({
     instruction,
     itemProperty,
     itemFunction,
-    itemPropertyName
+    itemPropertyName,
+    validationFunction
   ) {
     if (instruction.text === "setNameNull") {
       itemFunction({ ...itemProperty, name: null });
@@ -250,6 +278,7 @@ export default function EditModal({
       itemFunction({ changing: false, name: null });
     }
     if (instruction.text === "confirm") {
+      validationFunction(false);
       itemFunction({ changing: false, name: itemProperty.name });
     }
   }
@@ -308,7 +337,7 @@ export default function EditModal({
       <div className={classes.container}>
         <div>
           <div className={classes.radioTitle}>
-            <h2>Select a Book</h2>
+            <h2 className={missingBook ? classes.validationWarning : null}>Select a Book</h2>
             <button
               onClick={() => setNewBook({ ...newBook, changing: true })}
               className={classes.newItemButton}
@@ -326,6 +355,7 @@ export default function EditModal({
               itemProperty={newBook}
               itemFunction={setNewBook}
               itemPropertyName="book"
+              validationFunction={setMissingBook}
             />
           ) : (
             <Radio
@@ -339,7 +369,7 @@ export default function EditModal({
             />
           )}
           <div className={classes.radioTitle}>
-            <h2>Select a Page</h2>
+            <h2 className={missingPage ? classes.validationWarning : null}>Select a Page</h2>
             <button
               onClick={() => setNewPage({ ...newPage, changing: true })}
               className={classes.newItemButton}
@@ -357,6 +387,7 @@ export default function EditModal({
               itemProperty={newPage}
               itemFunction={setNewPage}
               itemPropertyName="page"
+              validationFunction={setMissingPage}
             />
           ) : (
             <Radio
@@ -370,7 +401,7 @@ export default function EditModal({
             />
           )}
           <div className={classes.radioTitle}>
-            <h2>Select a Section</h2>
+            <h2 className={missingSection ? classes.validationWarning : null}>Select a Section</h2>
             <button
               onClick={() => setNewSection({ ...newSection, changing: true })}
               className={classes.newItemButton}
@@ -388,6 +419,7 @@ export default function EditModal({
               itemProperty={newSection}
               itemFunction={setNewSection}
               itemPropertyName="section"
+              validationFunction={setMissingSection}
             />
           ) : (
             <Radio
@@ -411,7 +443,7 @@ export default function EditModal({
               placeholder='Enter a title'
               onChange={e => handleOnChangeInput(e, setMissingTitle)}
             />
-            {missingTitle && <p style={{color: 'red'}}>Title is required</p>}
+            {missingTitle && <p className={classes.validationWarning}>Title is required</p>}
             <h2 onClick={() => toggleContentSize()}>Content</h2>
             <textarea
               ref={contentRef}
@@ -425,7 +457,7 @@ export default function EditModal({
                   : classes.modalTextAreaMediumHeight
               }`}
             ></textarea>
-            {missingContent && <p style={{color: 'red'}}>Content is required</p>}
+            {missingContent && <p className={classes.validationWarning}>Content is required</p>}
             <h3 onClick={() => toggleImportantSize()}>Important Note</h3>
             <textarea
               defaultValue={noteToEdit?.important}

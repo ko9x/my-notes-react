@@ -6,7 +6,8 @@ export default function NoteInput({
   list,
   itemProperty,
   itemFunction,
-  itemPropertyName
+  itemPropertyName,
+  validationFunction
 }) {
   function handleSetNewItemName(e) {
     if (e.target.value === "" || hasDuplicate(list, e.target.value)) {
@@ -26,7 +27,7 @@ export default function NoteInput({
       <button
         style={{ marginLeft: "1.5vw" }}
         disabled={newItem.name === null}
-        onClick={() => handleSetNewItem({ text: "confirm" }, itemProperty, itemFunction, itemPropertyName)}
+        onClick={() => handleSetNewItem({ text: "confirm" }, itemProperty, itemFunction, itemPropertyName, validationFunction)}
       >
         Confirm
       </button>

@@ -43,3 +43,6 @@
     border-radius: 5px;
     float: right
 }
+.validationWarning {
+    color: red;
+}
