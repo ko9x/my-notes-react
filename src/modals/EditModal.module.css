@@ -24,8 +24,9 @@
     display: flex;
     font-family:'Courier New', Courier, monospace;
 }
-.newItemButton {
-    padding-left: 5vw;
+.courierButton {
+    padding-left: 2vw;
+    padding-top: 1vh;
     font-size: large;
     font-weight: 600;
     font-family:'Courier New', Courier, monospace;
