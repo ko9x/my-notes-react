@@ -1,13 +1,11 @@
 ### Current Focus
-* Validation is done so I guess decide what to work on next
-    * Maybe do the stuff in the "Notes to add once that functionality is working" section
-        * That will be a good test of the validation we just did.
-            * But maybe we should do the helper buttons first so those notes are easier to add
+* Break the helper buttons into a separate component and add them to the side and important notes
+* Do the stuff in the "Notes to add once that functionality is working" section
     
 ### What to do next
 * Add buttons to easily code such as:
         * pre-wrap/code-wrap 
-        * p tags and 
+        * p tag
         * <br> to add a line break
         * &nbsp to add a non breaking space (so a horizontal gap between stuff)
         * <li>
