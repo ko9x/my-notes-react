@@ -35,6 +35,10 @@
     background: none;
     cursor: pointer;
 }
+.textAreaHeaderContainer {
+    display: flex;
+    flex-direction: row;
+}
 .closeButtonContainer { 
     width: 50%;
     float: right;

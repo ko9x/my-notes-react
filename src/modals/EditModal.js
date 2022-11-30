@@ -4,6 +4,7 @@ import { useState } from "react";
 import Radio from "../components/Radio";
 import NoteInput from "../components/NoteInput";
 import { useEffect, useRef } from "react";
+import HelperButtons from "../components/HelperButtons";
 
 const customStyles = {
   content: {
@@ -29,14 +30,39 @@ function hasDuplicate(myArr, item) {
   }
 }
 
-// ******************* Helpers Section Start *************************************
-const codeWrap = '<pre><code></code></pre>';
-const pTag = '<p></p>';
-const lineBreak = '<br>';
-const nonBreakingSpace = ' &nbsp ';
-const listItem = '<li></li>';
-const openCaret = '&#60';
-// ******************* Helpers Seciton End ****************************************
+const helpers = {
+  codeWrap: '<pre><code></code></pre>',
+  pTag: '<p></p>',
+  lineBreak: '<br>',
+  nonBreakingSpace: ' &nbsp ',
+  listItem: '<li></li>',
+  openCaret: '&#60'
+}
+
+function setCursorPosition(cursorPosition, selectedRef, helperName) {
+  if(helperName === helpers.pTag) {
+    return selectedRef.current.selectionEnd = cursorPosition + 3;
+  }
+  if(helperName === helpers.codeWrap) {
+    return selectedRef.current.selectionEnd = cursorPosition + 11;
+  }
+  if(helperName === helpers.nonBreakingSpace) {
+    return selectedRef.current.selectionEnd = cursorPosition + 7;
+  }
+  if(helperName === helpers.listItem || helpers.lineBreak || helpers.openCaret) {
+    return selectedRef.current.selectionEnd = cursorPosition + 4;
+  }
+}
+
+function insertHelperText(selectedRef, helperName) {
+  let currentValue = selectedRef.current.value;
+  let cursorPosition = selectedRef.current.selectionStart;
+  let valueBeforeCursor = selectedRef.current.value.substring(0, cursorPosition);
+  let valueAfterCursor = selectedRef.current.value.substring(cursorPosition, currentValue.length);
+  selectedRef.current.value = valueBeforeCursor + helperName + valueAfterCursor;
+  selectedRef.current.focus();
+  setCursorPosition(cursorPosition, selectedRef, helperName);
+}
 
 export default function EditModal({
   isModalOpen,
@@ -76,6 +102,8 @@ export default function EditModal({
 
   const titleRef = useRef();
   const contentRef = useRef();
+  const importantRef = useRef();
+  const sideRef = useRef();
 
   useEffect(() => {
     setSelectedBook(defaultBook);
@@ -339,31 +367,6 @@ export default function EditModal({
     }
   }
 
-  function setCursorPosition(cursorPosition, selectedRef, helperName) {
-    if(helperName === pTag) {
-      return selectedRef.current.selectionEnd = cursorPosition + 3;
-    }
-    if(helperName === codeWrap) {
-      return selectedRef.current.selectionEnd = cursorPosition + 11;
-    }
-    if(helperName === nonBreakingSpace) {
-      return selectedRef.current.selectionEnd = cursorPosition + 7;
-    }
-    if(helperName === listItem || lineBreak || openCaret) {
-      return selectedRef.current.selectionEnd = cursorPosition + 4;
-    }
-  }
-
-  function insertHelperText(selectedRef, helperName) {
-    let currentValue = selectedRef.current.value;
-    let cursorPosition = selectedRef.current.selectionStart;
-    let valueBeforeCursor = selectedRef.current.value.substring(0, cursorPosition);
-    let valueAfterCursor = selectedRef.current.value.substring(cursorPosition, currentValue.length);
-    selectedRef.current.value = valueBeforeCursor + helperName + valueAfterCursor;
-    selectedRef.current.focus();
-    setCursorPosition(cursorPosition, selectedRef, helperName);
-  }
-
   return (
     <Modal
       isOpen={isModalOpen}
@@ -482,16 +485,9 @@ export default function EditModal({
               onChange={e => handleOnChangeInput(e, setMissingTitle)}
             />
             {missingTitle && <p className={classes.validationWarning}>Title is required</p>}
-            <div style={{display: 'flex', flexDirection: 'row'}}>
+            <div className={classes.textAreaHeaderContainer}>
               <h2 onClick={() => toggleContentSize()}>Content</h2>
-              <div style={{display: 'flex', flexDirection: 'row', paddingTop: '5px'}}>
-                <h2 onClick={() => insertHelperText(contentRef, codeWrap)} className={classes.courierButton}>code-wrap</h2>
-                <h2 onClick={() => insertHelperText(contentRef, pTag)} className={classes.courierButton}>p-tag</h2>
-                <h2 onClick={() => insertHelperText(contentRef, lineBreak)} className={classes.courierButton}>line-break</h2>
-                <h2 onClick={() => insertHelperText(contentRef, nonBreakingSpace)} className={classes.courierButton}>non-breaking-space</h2>
-                <h2 onClick={() => insertHelperText(contentRef, listItem)} className={classes.courierButton}>list-item</h2>
-                <h2 onClick={() => insertHelperText(contentRef, openCaret)} className={classes.courierButton}> {"<"} </h2>
-              </div>
+              <HelperButtons insertHelperText={insertHelperText} selectedRef={contentRef} helpers={helpers} />
             </div>
             <textarea
               ref={contentRef}
@@ -506,8 +502,12 @@ export default function EditModal({
               }`}
             ></textarea>
             {missingContent && <p className={classes.validationWarning}>Content is required</p>}
-            <h3 onClick={() => toggleImportantSize()}>Important Note</h3>
+            <div className={classes.textAreaHeaderContainer}>
+              <h2 onClick={() => toggleImportantSize()}>Important Note</h2>
+              <HelperButtons insertHelperText={insertHelperText} selectedRef={importantRef} helpers={helpers} />
+            </div>
             <textarea
+              ref={importantRef}
               defaultValue={noteToEdit?.important}
               id="important"
               placeholder={
@@ -519,8 +519,12 @@ export default function EditModal({
                   : null
               }`}
             ></textarea>
-            <h3 onClick={() => toggleSideSize()}>Side Note</h3>
+            <div className={classes.textAreaHeaderContainer}>
+              <h2 onClick={() => toggleSideSize()}>Side Note</h2>
+              <HelperButtons insertHelperText={insertHelperText} selectedRef={sideRef} helpers={helpers} />
+            </div>
             <textarea
+              ref={sideRef}
               defaultValue={noteToEdit?.side}
               id="side"
               placeholder={noteToEdit?.side ? null : "Add a side note"}
