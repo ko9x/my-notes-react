@@ -4,7 +4,7 @@
   justify-content: flex-end;
   padding-top: 1px;
   height: 100%;
-  background-color: #a9a9a9;
+  background-color: var(--secondary-color);
 }
 .leftSideBarContainer {
   flex-direction: row;
@@ -38,6 +38,6 @@
   cursor: pointer;
 }
 .active {
-    color: palegreen;
+    color: var(--activeButton-color);
     text-shadow: 2px 2px 5px black;
 }
