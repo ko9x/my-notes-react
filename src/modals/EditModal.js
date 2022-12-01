@@ -1,10 +1,9 @@
 import Modal from "react-modal";
 import classes from "./EditModal.module.css";
 import { useState } from "react";
-import Radio from "../components/Radio";
-import NoteInput from "../components/NoteInput";
 import { useEffect, useRef } from "react";
 import HelperButtons from "../components/HelperButtons";
+import RadioManager from "../components/RadioManager";
 
 const customStyles = {
   content: {
@@ -20,15 +19,6 @@ const customStyles = {
     backgroundColor: "grey",
   },
 };
-
-function hasDuplicate(myArr, item) {
-  if (!myArr) {
-    return false;
-  } else {
-    const newArr = myArr.find((arrItem) => arrItem === item);
-    return Boolean(newArr);
-  }
-}
 
 const helpers = {
   codeWrap: {id: 1, name: 'code-wrap', code: '<pre><code></code></pre>'},
@@ -167,17 +157,20 @@ export default function EditModal({
     changeBook(e.target.id);
     setSelectedPage(null);
     setSelectedSection(null);
+    setMissingBook(false);
   }
   function handlePageChange(e) {
     setNewPage({ changing: false, name: null });
     setSelectedPage(e.target.id);
     changePage(e.target.id);
     setSelectedSection(null);
+    setMissingPage(false);
   }
   function handleSectionChange(e) {
     setNewSection({ changing: false, name: null });
     setSelectedSection(e.target.id);
     changeSection(e.target.id);
+    setMissingSection(false);
   }
 
   function handleCloseModal() {
@@ -343,6 +336,14 @@ export default function EditModal({
     }
   }
 
+  function determineRadioBookNameArray() {
+    if(newBook.name) {
+      return [newBook.name, ...bookList];
+    } else {
+      return bookList;
+    }
+  }
+
   function determineRadioPageNameArray() {
     if (newBook.name) {
       return newPage.name ? [newPage.name] : [];
@@ -381,102 +382,48 @@ export default function EditModal({
     >
       <div className={classes.container}>
         <div>
-          <div className={classes.radioTitle}>
-            <h2 className={missingBook ? classes.validationWarning : null}>Select a Book</h2>
-            <button
-              onClick={() => setNewBook({ ...newBook, changing: true })}
-              className={classes.courierButton}
-            >
-              new +
-            </button>
-          </div>
-          {newBook.changing ? (
-            <NoteInput
-              selectedItem={newBook.name ? newBook.name : selectedBook}
-              newItem={newBook}
-              handleSetNewItem={handleSetNewItem}
-              hasDuplicate={hasDuplicate}
-              list={bookList}
-              itemProperty={newBook}
-              itemFunction={setNewBook}
-              itemPropertyName="book"
-              validationFunction={setMissingBook}
-            />
-          ) : (
-            <Radio
-              nameArray={newBook.name ? [newBook.name, ...bookList] : bookList}
-              selectedItem={determineSelectedItem(
-                newBook,
-                selectedBook,
-                noteToEdit?.book
-              )}
-              selectionFunction={handleBookChange}
-            />
-          )}
-          <div className={classes.radioTitle}>
-            <h2 className={missingPage ? classes.validationWarning : null}>Select a Page</h2>
-            <button
-              onClick={() => setNewPage({ ...newPage, changing: true })}
-              className={classes.courierButton}
-            >
-              new +
-            </button>
-          </div>
-          {newPage.changing ? (
-            <NoteInput
-              selectedItem={newPage.name ? newPage.name : selectedPage}
-              newItem={newPage}
-              handleSetNewItem={handleSetNewItem}
-              hasDuplicate={hasDuplicate}
-              list={pageList}
-              itemProperty={newPage}
-              itemFunction={setNewPage}
-              itemPropertyName="page"
-              validationFunction={setMissingPage}
-            />
-          ) : (
-            <Radio
-              nameArray={determineRadioPageNameArray()}
-              selectedItem={determineSelectedItem(
-                newPage,
-                selectedPage,
-                noteToEdit?.page
-              )}
-              selectionFunction={handlePageChange}
-            />
-          )}
-          <div className={classes.radioTitle}>
-            <h2 className={missingSection ? classes.validationWarning : null}>Select a Section</h2>
-            <button
-              onClick={() => setNewSection({ ...newSection, changing: true })}
-              className={classes.courierButton}
-            >
-              new +
-            </button>
-          </div>
-          {newSection.changing ? (
-            <NoteInput
-              selectedItem={newSection.name ? newSection.name : selectedSection}
-              newItem={newSection}
-              handleSetNewItem={handleSetNewItem}
-              hasDuplicate={hasDuplicate}
-              list={sectionList}
-              itemProperty={newSection}
-              itemFunction={setNewSection}
-              itemPropertyName="section"
-              validationFunction={setMissingSection}
-            />
-          ) : (
-            <Radio
-              nameArray={determineRadioSectionNameArray()}
-              selectedItem={determineSelectedItem(
-                newSection,
-                selectedSection,
-                noteToEdit?.section
-              )}
-              selectionFunction={handleSectionChange}
-            />
-          )}
+          <RadioManager
+            missingItem={missingBook}
+            newItem={newBook}
+            selectedProperty={selectedBook}
+            handleSetNewItem={handleSetNewItem}
+            itemList={bookList}
+            setNewItem={setNewBook}
+            itemPropertyName={'book'}
+            setMissingItem={setMissingBook}
+            determineSelectedItem={determineSelectedItem}
+            noteToEdit={noteToEdit}
+            handleItemChange={handleBookChange}
+            determinePropertyNameArray={determineRadioBookNameArray}
+          />
+          <RadioManager
+            missingItem={missingPage}
+            newItem={newPage}
+            selectedProperty={selectedPage}
+            handleSetNewItem={handleSetNewItem}
+            itemList={pageList}
+            setNewItem={setNewPage}
+            itemPropertyName={'page'}
+            setMissingItem={setMissingPage}
+            determineSelectedItem={determineSelectedItem}
+            noteToEdit={noteToEdit}
+            handleItemChange={handlePageChange}
+            determinePropertyNameArray={determineRadioPageNameArray}
+          />
+          <RadioManager
+            missingItem={missingSection}
+            newItem={newSection}
+            selectedProperty={selectedSection}
+            handleSetNewItem={handleSetNewItem}
+            itemList={sectionList}
+            setNewItem={setNewSection}
+            itemPropertyName={'section'}
+            setMissingItem={setMissingSection}
+            determineSelectedItem={determineSelectedItem}
+            noteToEdit={noteToEdit}
+            handleItemChange={handleSectionChange}
+            determinePropertyNameArray={determineRadioSectionNameArray}
+          />
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
