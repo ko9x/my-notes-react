@@ -31,37 +31,41 @@ function hasDuplicate(myArr, item) {
 }
 
 const helpers = {
-  codeWrap: '<pre><code></code></pre>',
-  pTag: '<p></p>',
-  lineBreak: '<br>',
-  nonBreakingSpace: ' &nbsp ',
-  listItem: '<li></li>',
-  openCaret: '&#60'
+  codeWrap: {id: 1, name: 'code-wrap', code: '<pre><code></code></pre>'},
+  pTag: {id: 2, name: 'p-tag', code: '<p></p>'},
+  aTag: {id: 3, name: 'a-tag', code: '<a href="" target="_blank"><a/>'},
+  lineBreak: {id: 4, name: 'line-break', code: '<br>'},
+  nonBreakingSpace: {id: 5, name: 'non-breaking-space', code: ' &nbsp '},
+  listItem: {id: 6, name: 'list-item', code: '<li></li>'},
+  openCaret: {id: 7, name: '<', code: '&#60'}
 }
 
-function setCursorPosition(cursorPosition, selectedRef, helperName) {
-  if(helperName === helpers.pTag) {
+function setCursorPosition(cursorPosition, selectedRef, helper) {
+  if(helper === helpers.aTag) {
+    return selectedRef.current.selectionEnd = cursorPosition + 9;
+  }
+  if(helper === helpers.pTag) {
     return selectedRef.current.selectionEnd = cursorPosition + 3;
   }
-  if(helperName === helpers.codeWrap) {
+  if(helper === helpers.codeWrap) {
     return selectedRef.current.selectionEnd = cursorPosition + 11;
   }
-  if(helperName === helpers.nonBreakingSpace) {
+  if(helper === helpers.nonBreakingSpace) {
     return selectedRef.current.selectionEnd = cursorPosition + 7;
   }
-  if(helperName === helpers.listItem || helpers.lineBreak || helpers.openCaret) {
+  if(helper === helpers.listItem || helpers.lineBreak || helpers.openCaret) {
     return selectedRef.current.selectionEnd = cursorPosition + 4;
   }
 }
 
-function insertHelperText(selectedRef, helperName) {
+function insertHelperText(selectedRef, helper) {
   let currentValue = selectedRef.current.value;
   let cursorPosition = selectedRef.current.selectionStart;
   let valueBeforeCursor = selectedRef.current.value.substring(0, cursorPosition);
   let valueAfterCursor = selectedRef.current.value.substring(cursorPosition, currentValue.length);
-  selectedRef.current.value = valueBeforeCursor + helperName + valueAfterCursor;
+  selectedRef.current.value = valueBeforeCursor + helper.code + valueAfterCursor;
   selectedRef.current.focus();
-  setCursorPosition(cursorPosition, selectedRef, helperName);
+  setCursorPosition(cursorPosition, selectedRef, helper);
 }
 
 export default function EditModal({

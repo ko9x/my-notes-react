@@ -5,44 +5,18 @@ export default function HelperButtons({
   selectedRef,
   helpers,
 }) {
-  return (
-    <div className={classes.buttonContainer}>
+  const helpersArray = Object.values(helpers);
+  function renderedItems() {
+    return helpersArray.map((helper, index) => (
       <h2
-        onClick={() => insertHelperText(selectedRef, helpers.codeWrap)}
+        key={helper.id}
         className={classes.courierButton}
+        onClick={() => insertHelperText(selectedRef, helper)}
       >
-        code-wrap
+        {helper.name}
       </h2>
-      <h2
-        onClick={() => insertHelperText(selectedRef, helpers.pTag)}
-        className={classes.courierButton}
-      >
-        p-tag
-      </h2>
-      <h2
-        onClick={() => insertHelperText(selectedRef, helpers.lineBreak)}
-        className={classes.courierButton}
-      >
-        line-break
-      </h2>
-      <h2
-        onClick={() => insertHelperText(selectedRef, helpers.nonBreakingSpace)}
-        className={classes.courierButton}
-      >
-        non-breaking-space
-      </h2>
-      <h2
-        onClick={() => insertHelperText(selectedRef, helpers.listItem)}
-        className={classes.courierButton}
-      >
-        list-item
-      </h2>
-      <h2
-        onClick={() => insertHelperText(selectedRef, helpers.openCaret)}
-        className={classes.courierButton}
-      >
-        {"<"}
-      </h2>
-    </div>
-  );
+    ));
+  }
+
+  return <div className={classes.buttonContainer}>{renderedItems()}</div>;
 }
