@@ -1,19 +1,13 @@
 ### Current Focus
-* Break the helper buttons into a separate component and add them to the side and important notes
-* Do the stuff in the "Notes to add once that functionality is working" section
+* Make a global styles file (It's better to do this early on)
+    * add all the colors used to the global
+        * this would also make it easier to do themes like light and dark mode
+    * add the courierButton class to the global
+        * it is used in the RadioManager component and the HelperButtons component
+            * something similar is used for the header buttons also
     
 ### What to do next
-* Add buttons to easily code such as:
-        * pre-wrap/code-wrap 
-        * p tag
-        * <br> to add a line break
-        * &nbsp to add a non breaking space (so a horizontal gap between stuff)
-        * <li>
-        * HTML Entities 
-            * such as &#60 for < 
-* Make a global for colors
-    * It's better to do this early on 
-        * I'd like to be able to do a light mode and a dark mode
+* Maybe solve some of the issues in the bugs section
 * Add auth
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
@@ -22,25 +16,7 @@
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 * Host the app on blakes server instead of github pages
 
-### Notes to add once that functionality is working
-* Add a note describing how to add multiple styles in react.js
-    * there is an example in the Header.js/css and the SideBar.js/css
-* Add a note about how position: relative allows you to use z-index to decide what is on top
-    * there is an example in the Header.module.css
-* Add a note about making a unique array out of an array with duplicate objects
-    * there is an example in the executeSearch function inside the App.js
-* Add a note about using scrollIntoView inside a mapped list
-    * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
-* Make a note about HTML Entities
-    * use &#60 instead of < in the code and it will show the code and not the HTML result
-* Make a note about using the index feature of a map to resolve the "unique key" warning when conditionally rendering an element of a mapped item.
-    * there is an example in the Note.js map.
-        * if you remove the index from the key you will get the error
-
-### Sections to add once that functionality is working
-* Make a javascript section
-* Make an HTML section
-* Made a css section?
+### Notes to add
 
 ### Styling
 * Make the edit/add form look nicer
@@ -51,11 +27,20 @@
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
 * If you do a search and then try to edit one of the notes there is an error
+    * this could possibly be resolved by implementing flatlist-react
+        * it would mean a lot of revamping the way the notes are displayed though
+            * here is a link with more info about flatlist-react
+            * https://itnext.io/how-to-handle-data-lists-in-react-like-a-pro-flatlist-react-c5a82183d5b4
 * If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
 * If you have launched the edit modal you need to refresh before search will work
 * The first time you select a section the fade in animation doesn't fire
     * Every subsequent time you select a section it work just fine.
-* Fix the slowdown caused by highlight.js
+* Fix the slowdown caused by highlight.js\
+    * I think flatlist-react has some features that will help deal with this issue
+        * Render on scroll might be exactly what we need
+            * there is also a pagination propery that might help
+            * https://itnext.io/how-to-handle-data-lists-in-react-like-a-pro-flatlist-react-c5a82183d5b4
+            * https://www.npmjs.com/package/flatlist-react
     * there are notes in the npm about using web workers to fix the freezing issue I'm having
         * there is a link to the npm in the react folder
     * or only apply the highlight to what is currently on the screen somehow?
@@ -116,6 +101,28 @@
 * (Done) Add edit and remove functionality
     * (done) Allow user to move a note from one book, page, or section to another
     * (Done) After editing a note make sure the view returns to the note you just edited
+* Break the helper buttons into a separate component and add them to the side and important notes
+* Add buttons to easily code such as:
+        * pre-wrap/code-wrap 
+        * p tag
+        * <br> to add a line break
+        * &nbsp to add a non breaking space (so a horizontal gap between stuff)
+        * <li>
+        * HTML Entities 
+            * such as &#60 for < 
+* Add a note describing how to add multiple styles in react.js
+    * there is an example in the Header.js/css and the SideBar.js/css
+* Add a note about how position: relative allows you to use z-index to decide what is on top
+    * there is an example in the Header.module.css
+* Add a note about making a unique array out of an array with duplicate objects
+    * there is an example in the executeSearch function inside the App.js
+* Add a note about using scrollIntoView inside a mapped list
+    * here is a link https://stackoverflow.com/questions/71261123/how-to-useref-and-scrollintoview-to-scroll-to-specific-element-in-a-mapped-list
+* Make a note about HTML Entities
+    * use &#60 instead of < in the code and it will show the code and not the HTML result
+* Make a note about using the index feature of a map to resolve the "unique key" warning when conditionally rendering an element of a mapped item.
+    * there is an example in the Note.js map.
+        * if you remove the index from the key you will get the error
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
