@@ -1,10 +1,5 @@
 ### Current Focus
-* Make a global styles file (It's better to do this early on)
-    * add all the colors used to the global
-        * this would also make it easier to do themes like light and dark mode
-    * add the courierButton class to the global
-        * it is used in the RadioManager component and the HelperButtons component
-            * something similar is used for the header buttons also
+* Decide what to do next
     
 ### What to do next
 * Maybe solve some of the issues in the bugs section
@@ -17,6 +12,9 @@
 * Host the app on blakes server instead of github pages
 
 ### Notes to add
+* make a note about global styles in reactjs as opposed to local styles
+    * there is an example in RadioManager and HelperButtons
+        * The style is called courierButton
 
 ### Styling
 * Make the edit/add form look nicer
@@ -123,7 +121,12 @@
 * Make a note about using the index feature of a map to resolve the "unique key" warning when conditionally rendering an element of a mapped item.
     * there is an example in the Note.js map.
         * if you remove the index from the key you will get the error
-
+* Make a global styles file (It's better to do this early on)
+    * add all the colors used to the global
+        * this would also make it easier to do themes like light and dark mode
+    * add the courierButton class to the global
+        * it is used in the RadioManager component and the HelperButtons component
+            
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
     * (the fix) I made the containing div in the App.js width 200px and float right
