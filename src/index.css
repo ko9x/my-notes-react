@@ -18,10 +18,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.courierButton {
+  padding-left: 2vw;
+  padding-top: .5vh;
+  font-size: large;
+  font-weight: 600;
+  font-family:'Courier New', Courier, monospace;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .ReactModal__Overlay {
   opacity: 0;

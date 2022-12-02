@@ -31,7 +31,7 @@ export default function RadioManager({
             <h2 className={missingItem ? classes.validationWarning : null}>Select a {itemPropertyName}</h2>
             <button
               onClick={() => setNewItem({ ...newItem, changing: true })}
-              className={classes.courierButton}
+              className='courierButton'
             >
               new +
             </button>

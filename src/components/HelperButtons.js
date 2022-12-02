@@ -10,7 +10,7 @@ export default function HelperButtons({
     return helpersArray.map((helper, index) => (
       <h2
         key={helper.id}
-        className={classes.courierButton}
+        className='courierButton'
         onClick={() => insertHelperText(selectedRef, helper)}
       >
         {helper.name}

@@ -2,17 +2,6 @@
     display: flex;
     font-family:'Courier New', Courier, monospace;
 }
-.courierButton {
-    padding-left: 2vw;
-    padding-top: 1vh;
-    font-size: large;
-    font-weight: 600;
-    font-family:'Courier New', Courier, monospace;
-    text-decoration: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-}
 .validationWarning {
     color: red;
 }
