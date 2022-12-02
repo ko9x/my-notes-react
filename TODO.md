@@ -12,9 +12,6 @@
 * Host the app on blakes server instead of github pages
 
 ### Notes to add
-* make a note about global styles in reactjs as opposed to local styles
-    * there is an example in RadioManager and HelperButtons
-        * The style is called courierButton
 
 ### Styling
 * Make the edit/add form look nicer
