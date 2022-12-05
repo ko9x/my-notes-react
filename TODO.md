@@ -123,6 +123,7 @@
         * this would also make it easier to do themes like light and dark mode
     * add the courierButton class to the global
         * it is used in the RadioManager component and the HelperButtons component
+* Make it so anytime < is saved it automatically gets changed to the entity number
             
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
