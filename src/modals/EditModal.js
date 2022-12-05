@@ -58,6 +58,19 @@ function insertHelperText(selectedRef, helper) {
   setCursorPosition(cursorPosition, selectedRef, helper);
 }
 
+function fixCaret(noteText) {
+  let arr = noteText.split('<pre><code>').map(el => el.split('</code></pre>')).reduce((acc, curr) => acc.concat(curr))
+  let newArr = arr.map((section, index) => {
+    if(index % 2 !== 0) {
+      let newPart = section.split('<').join('&#60');
+      return `<pre><code>${newPart}</code></pre>`;
+    } else {
+      return section;
+    }
+  });
+  return newArr.join('');
+}
+
 export default function EditModal({
   isModalOpen,
   closeModal,
@@ -225,6 +238,7 @@ export default function EditModal({
       return true
     }
   }
+
   // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
     e.preventDefault();
@@ -247,9 +261,9 @@ export default function EditModal({
         ? selectedSection
         : noteToEdit.section,
       title: e.target.title.value,
-      content: e.target.content.value,
-      side: e.target.side.value,
-      important: e.target.important.value,
+      content: fixCaret(e.target.content.value),
+      side: fixCaret(e.target.side.value),
+      important: fixCaret(e.target.important.value),
     };
 
     fetch(url, {
