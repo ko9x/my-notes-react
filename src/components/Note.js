@@ -5,6 +5,7 @@ import "highlight.js/styles/github-dark.css";
 import Highlighter from "react-highlight-words";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import FlatList from "flatlist-react";
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -27,13 +28,30 @@ export default function Note({
   });
 
   useEffect(() => {
-    setDisplayedNotes(selectedNotes);
+    // window.scrollTo({
+    //   top: 0,
+    //   behavior: 'smooth'
+    // });
+    getFirstTen();
   }, [selectedNotes]);
 
   const [displayedNotes, setDisplayedNotes] = useState(null);
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
   const [noteId, setNoteId] = useState(null);
+  const [hasMoreNotes, setHasMoreNotes] = useState(true);
   const noteRef = useRef(null);
+
+  function getFirstTen() {
+    console.log('getFirst10', ); //@DEBUG
+    setDisplayedNotes(selectedNotes.slice(0, 10))
+    setHasMoreNotes(true);
+  }
+
+  function getAllNotes() {
+    console.log('getAllNotes', ); //@DEBUG
+    setDisplayedNotes(selectedNotes);
+    // setHasMoreNotes(false);
+  }
 
   function storeNoteId(id) {
     setNoteId(id);
@@ -117,20 +135,17 @@ export default function Note({
     return <p>loading...</p>;
   }
 
-  return (
-    <div className={classes.container}>
-      {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
-      {displayedNotes?.length > 0 ? (
-        displayedNotes?.map((note, index) => (
-          // the ref is only added if the note.id matches the stored noteId
-          <div
+  function renderItem(note, index) {
+    return (
+      <div
             onClick={() => {
               handleSetNoteDetails(note.id);
             }}
             className={classes.note}
             key={`${note.id}${index}`}
-            ref={note.id === noteId ? noteRef : null}
+            ref={note.id === noteId ? noteRef : null} 
           >
+            {/* <button onClick={() => window.scrollTo({top: 500, left: 0, behavior: 'auto'})}>Click Me</button> */}
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
             <div
               className={`${
@@ -175,21 +190,92 @@ export default function Note({
               </>
             )}
           </div>
-        ))
-      ) : (
-        <div>
-          {!bookIsSelected && (
-            <h1 className={classes.instructions}>
-              Select a book from the Header to begin
-            </h1>
-          )}
-          {bookIsSelected && (
-            <h2 className={classes.instructions}>
-              Select a page from the left SideBar
-            </h2>
-          )}
+    )
+  }
+
+  return (
+      <div className={classes.container}>
+        <div style={{height: 900, overflow: 'auto'}}>
+          <FlatList
+            list={displayedNotes}
+            renderItem={renderItem}
+            hasMoreItems={hasMoreNotes}
+            loadMoreItems={getAllNotes}
+          />
         </div>
-      )}
-    </div>
+      </div>
+    // <div className={classes.container}>
+    //   {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
+    //   {displayedNotes?.length > 0 ? (
+    //     displayedNotes?.map((note, index) => (
+    //       // the ref is only added if the note.id matches the stored noteId
+    //       <div
+    //         onClick={() => {
+    //           handleSetNoteDetails(note.id);
+    //         }}
+    //         className={classes.note}
+    //         key={`${note.id}${index}`}
+    //         ref={note.id === noteId ? noteRef : null}
+    //       >
+    //         {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
+    //         <div
+    //           className={`${
+    //             showingNoteDetails === note.id
+    //               ? classes.detailOpen
+    //               : classes.detailClosed
+    //           }`}
+    //         >
+    //           {showingNoteDetails === note.id && showNoteDetails(note)}
+    //         </div>
+    //         <h1>
+    //           <Highlighter
+    //             highlightStyle={{ color: "#282c34" }}
+    //             searchWords={[keyWord]}
+    //             autoEscape={true}
+    //             textToHighlight={note.title}
+    //           />
+    //         </h1>
+    //         <p
+    //           dangerouslySetInnerHTML={{
+    //             __html: highlightKeyWord(note.content, keyWord),
+    //           }}
+    //         ></p>
+    //         {note.important && note.important.length > 0 && (
+    //           <>
+    //             <h3 style={{ color: "red" }}>Important Note</h3>
+    //             <p
+    //               dangerouslySetInnerHTML={{
+    //                 __html: highlightKeyWord(note.important, keyWord),
+    //               }}
+    //             ></p>
+    //           </>
+    //         )}
+    //         {note.side && note.side.length > 0 && (
+    //           <>
+    //             <h3 style={{ color: "orange" }}>Side Note</h3>
+    //             <p
+    //               dangerouslySetInnerHTML={{
+    //                 __html: highlightKeyWord(note.side, keyWord),
+    //               }}
+    //             ></p>
+    //           </>
+    //         )}
+    //       </div>
+    //     ))
+    //   ) : (
+    //     <div>
+    //       {!bookIsSelected && (
+    //         <h1 className={classes.instructions}>
+    //           Select a book from the Header to begin
+    //         </h1>
+    //       )}
+    //       {bookIsSelected && (
+    //         <h2 className={classes.instructions}>
+    //           Select a page from the left SideBar
+    //         </h2>
+    //       )}
+    //     </div>
+    //   )}
+    // </div>
   );
 }

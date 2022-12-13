@@ -3,6 +3,7 @@
     
 ### What to do next
 * Maybe solve some of the issues in the bugs section
+    * a big one is the issues with the search feature
 * Add auth
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
