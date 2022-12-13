@@ -1,5 +1,8 @@
 ### Current Focus
-* Decide what to do next
+* Continue testing out FlatList React
+    * Figure out a way to scroll to the top of the page every time a new Page is selected
+
+    * Test out the search feature
     
 ### What to do next
 * Maybe solve some of the issues in the bugs section
