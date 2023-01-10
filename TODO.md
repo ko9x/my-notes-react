@@ -1,8 +1,9 @@
 ### Current Focus
 * Continue testing out FlatList React
-    * Figure out a way to scroll to the top of the page every time a new Page is selected
-
     * Test out the search feature
+    * Figure out a way to scroll to the top of the page every time a new Page is selected
+        * It's not too big of a deal though so maybe put it on the back burner
+            * Not scrolling to the top causes getAllNotes to run right after getFirstTen which makes the right drawer jump and look bad.
     
 ### What to do next
 * Maybe solve some of the issues in the bugs section
@@ -14,11 +15,16 @@
         * only allow one sidebar open at a time on smaller screens
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 * Host the app on blakes server instead of github pages
+* Maybe do some of the styling TODOs
 
 ### Notes to add
 
 ### Styling
 * Make the edit/add form look nicer
+* Make some themes the user can choose from
+    * like an iOS theme
+    * a dark mode theme would be cool also
+* the "fade in" on the notes screen looks kinda bad.
 
 ### Bugs
 * if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes

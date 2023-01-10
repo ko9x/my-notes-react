@@ -28,10 +28,6 @@ export default function Note({
   });
 
   useEffect(() => {
-    // window.scrollTo({
-    //   top: 0,
-    //   behavior: 'smooth'
-    // });
     getFirstTen();
   }, [selectedNotes]);
 
@@ -42,15 +38,12 @@ export default function Note({
   const noteRef = useRef(null);
 
   function getFirstTen() {
-    console.log('getFirst10', ); //@DEBUG
     setDisplayedNotes(selectedNotes.slice(0, 10))
     setHasMoreNotes(true);
   }
 
   function getAllNotes() {
-    console.log('getAllNotes', ); //@DEBUG
     setDisplayedNotes(selectedNotes);
-    // setHasMoreNotes(false);
   }
 
   function storeNoteId(id) {
