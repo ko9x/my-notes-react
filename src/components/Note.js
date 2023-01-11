@@ -170,14 +170,14 @@ export default function Note({
 
   return (
       <div className={classes.container}>
-        <div style={{height: 900, overflow: 'auto'}}>
-          <FlatList
+        {bookIsSelected ? <div style={{height: 900, overflow: 'auto'}}>
+          {selectedNotes.length > 0 ? <FlatList
             searchTerm={keyWord ? keyWord : null}
             searchBy={['content', 'title', 'important', 'side']}
             list={keyWord ? notes : selectedNotes}
             renderItem={renderItem}
-          />
-        </div>
+          /> : <h1 className={classes.instructions}>Please select a page from the sidebar</h1>}
+        </div> : <h1 className={classes.instructions}>Please select a book from the header to get started</h1>}
       </div>
   );
 }
