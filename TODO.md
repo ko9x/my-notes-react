@@ -1,9 +1,8 @@
 ### Current Focus
 * Continue testing out FlatList React
-    * Test out the search feature
-    * Figure out a way to scroll to the top of the page every time a new Page is selected
-        * It's not too big of a deal though so maybe put it on the back burner
-            * Not scrolling to the top causes getAllNotes to run right after getFirstTen which makes the right drawer jump and look bad.
+    * I think we are all good to merge back with the sean and master branches
+        * But maybe I'll think of some other stuff to test first
+    
     
 ### What to do next
 * Maybe solve some of the issues in the bugs section
@@ -27,6 +26,8 @@
 * the "fade in" on the notes screen looks kinda bad.
 
 ### Bugs
+* Figure out a way to scroll to the top of the page every time a new Page is selected
+* I turned off the fade in on the notes.js because it flickers
 * if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
