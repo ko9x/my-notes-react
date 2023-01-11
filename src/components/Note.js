@@ -28,25 +28,9 @@ export default function Note({
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
   });
-
-  useEffect(() => {
-    getFirstTen();
-  }, [selectedNotes]);
-
-  const [displayedNotes, setDisplayedNotes] = useState(null);
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
   const [noteId, setNoteId] = useState(null);
-  const [hasMoreNotes, setHasMoreNotes] = useState(true);
   const noteRef = useRef(null);
-
-  function getFirstTen() {
-    setDisplayedNotes(selectedNotes.slice(0, 10))
-    setHasMoreNotes(true);
-  }
-
-  function getAllNotes() {
-    setDisplayedNotes(selectedNotes);
-  }
 
   function storeNoteId(id) {
     setNoteId(id);
@@ -127,10 +111,6 @@ export default function Note({
     }
   }
 
-  if (!displayedNotes) {
-    return <p>loading...</p>;
-  }
-
   function renderItem(note, index) {
     return (
       <div
@@ -196,83 +176,8 @@ export default function Note({
             searchBy={['content', 'title', 'important', 'side']}
             list={keyWord ? notes : selectedNotes}
             renderItem={renderItem}
-            hasMoreItems={hasMoreNotes}
-            loadMoreItems={getAllNotes}
           />
         </div>
       </div>
-    // <div className={classes.container}>
-    //   {/* <button onClick={() => scrollToNote()}>Scroll to note</button> */}
-    //   {displayedNotes?.length > 0 ? (
-    //     displayedNotes?.map((note, index) => (
-    //       // the ref is only added if the note.id matches the stored noteId
-    //       <div
-    //         onClick={() => {
-    //           handleSetNoteDetails(note.id);
-    //         }}
-    //         className={classes.note}
-    //         key={`${note.id}${index}`}
-    //         ref={note.id === noteId ? noteRef : null}
-    //       >
-    //         {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
-    //         <div
-    //           className={`${
-    //             showingNoteDetails === note.id
-    //               ? classes.detailOpen
-    //               : classes.detailClosed
-    //           }`}
-    //         >
-    //           {showingNoteDetails === note.id && showNoteDetails(note)}
-    //         </div>
-    //         <h1>
-    //           <Highlighter
-    //             highlightStyle={{ color: "#282c34" }}
-    //             searchWords={[keyWord]}
-    //             autoEscape={true}
-    //             textToHighlight={note.title}
-    //           />
-    //         </h1>
-    //         <p
-    //           dangerouslySetInnerHTML={{
-    //             __html: highlightKeyWord(note.content, keyWord),
-    //           }}
-    //         ></p>
-    //         {note.important && note.important.length > 0 && (
-    //           <>
-    //             <h3 style={{ color: "red" }}>Important Note</h3>
-    //             <p
-    //               dangerouslySetInnerHTML={{
-    //                 __html: highlightKeyWord(note.important, keyWord),
-    //               }}
-    //             ></p>
-    //           </>
-    //         )}
-    //         {note.side && note.side.length > 0 && (
-    //           <>
-    //             <h3 style={{ color: "orange" }}>Side Note</h3>
-    //             <p
-    //               dangerouslySetInnerHTML={{
-    //                 __html: highlightKeyWord(note.side, keyWord),
-    //               }}
-    //             ></p>
-    //           </>
-    //         )}
-    //       </div>
-    //     ))
-    //   ) : (
-    //     <div>
-    //       {!bookIsSelected && (
-    //         <h1 className={classes.instructions}>
-    //           Select a book from the Header to begin
-    //         </h1>
-    //       )}
-    //       {bookIsSelected && (
-    //         <h2 className={classes.instructions}>
-    //           Select a page from the left SideBar
-    //         </h2>
-    //       )}
-    //     </div>
-    //   )}
-    // </div>
   );
 }
