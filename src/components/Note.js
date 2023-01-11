@@ -23,7 +23,6 @@ export default function Note({
   editPressed,
   removeNoteFromArrays,
 }) {
-
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
@@ -35,7 +34,6 @@ export default function Note({
   function storeNoteId(id) {
     setNoteId(id);
   }
-
 
   function scrollToNote() {
     noteRef.current.scrollIntoView({
@@ -114,70 +112,82 @@ export default function Note({
   function renderItem(note, index) {
     return (
       <div
-            onClick={() => {
-              handleSetNoteDetails(note.id);
-            }}
-            className={classes.note}
-            key={`${note.id}${index}`}
-            ref={note.id === noteId ? noteRef : null} 
-          >
-            {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
-            <div
-              className={`${
-                showingNoteDetails === note.id
-                  ? classes.detailOpen
-                  : classes.detailClosed
-              }`}
-            >
-              {showingNoteDetails === note.id && showNoteDetails(note)}
-            </div>
-            <h1>
-              <Highlighter
-                highlightStyle={{ color: "#282c34" }}
-                searchWords={[keyWord]}
-                autoEscape={true}
-                textToHighlight={note.title}
-              />
-            </h1>
+        onClick={() => {
+          handleSetNoteDetails(note.id);
+        }}
+        className={classes.note}
+        key={`${note.id}${index}`}
+        ref={note.id === noteId ? noteRef : null}
+      >
+        {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
+        <div
+          className={`${
+            showingNoteDetails === note.id
+              ? classes.detailOpen
+              : classes.detailClosed
+          }`}
+        >
+          {showingNoteDetails === note.id && showNoteDetails(note)}
+        </div>
+        <h1>
+          <Highlighter
+            highlightStyle={{ color: "#282c34" }}
+            searchWords={[keyWord]}
+            autoEscape={true}
+            textToHighlight={note.title}
+          />
+        </h1>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: highlightKeyWord(note.content, keyWord),
+          }}
+        ></p>
+        {note.important && note.important.length > 0 && (
+          <>
+            <h3 style={{ color: "red" }}>Important Note</h3>
             <p
               dangerouslySetInnerHTML={{
-                __html: highlightKeyWord(note.content, keyWord),
+                __html: highlightKeyWord(note.important, keyWord),
               }}
             ></p>
-            {note.important && note.important.length > 0 && (
-              <>
-                <h3 style={{ color: "red" }}>Important Note</h3>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: highlightKeyWord(note.important, keyWord),
-                  }}
-                ></p>
-              </>
-            )}
-            {note.side && note.side.length > 0 && (
-              <>
-                <h3 style={{ color: "orange" }}>Side Note</h3>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: highlightKeyWord(note.side, keyWord),
-                  }}
-                ></p>
-              </>
-            )}
-          </div>
-    )
+          </>
+        )}
+        {note.side && note.side.length > 0 && (
+          <>
+            <h3 style={{ color: "orange" }}>Side Note</h3>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: highlightKeyWord(note.side, keyWord),
+              }}
+            ></p>
+          </>
+        )}
+      </div>
+    );
   }
 
   return (
-      <div className={classes.container}>
-        {bookIsSelected ? <div style={{height: 900, overflow: 'auto'}}>
-          {selectedNotes.length > 0 ? <FlatList
-            searchTerm={keyWord ? keyWord : null}
-            searchBy={['content', 'title', 'important', 'side']}
-            list={keyWord ? notes : selectedNotes}
-            renderItem={renderItem}
-          /> : <h1 className={classes.instructions}>Please select a page from the sidebar</h1>}
-        </div> : <h1 className={classes.instructions}>Please select a book from the header to get started</h1>}
-      </div>
+    <div className={classes.container}>
+      {bookIsSelected ? (
+        <div style={{ height: 900, overflow: "auto" }}>
+          {selectedNotes.length > 0 ? (
+            <FlatList
+              searchTerm={keyWord ? keyWord : null}
+              searchBy={["content", "title", "important", "side"]}
+              list={keyWord ? notes : selectedNotes}
+              renderItem={renderItem}
+            />
+          ) : (
+            <h1 className={classes.instructions}>
+              Please select a page from the sidebar
+            </h1>
+          )}
+        </div>
+      ) : (
+        <h1 className={classes.instructions}>
+          Please select a book from the header to get started
+        </h1>
+      )}
+    </div>
   );
 }
