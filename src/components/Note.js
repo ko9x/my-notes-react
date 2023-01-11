@@ -16,12 +16,14 @@ function highlightKeyWord(myStr, myKeyWord) {
 }
 
 export default function Note({
+  notes,
   selectedNotes,
   bookIsSelected,
   keyWord,
   editPressed,
   removeNoteFromArrays,
 }) {
+
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
@@ -49,6 +51,7 @@ export default function Note({
   function storeNoteId(id) {
     setNoteId(id);
   }
+
 
   function scrollToNote() {
     noteRef.current.scrollIntoView({
@@ -138,7 +141,6 @@ export default function Note({
             key={`${note.id}${index}`}
             ref={note.id === noteId ? noteRef : null} 
           >
-            {/* <button onClick={() => window.scrollTo({top: 500, left: 0, behavior: 'auto'})}>Click Me</button> */}
             {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
             <div
               className={`${
@@ -190,7 +192,9 @@ export default function Note({
       <div className={classes.container}>
         <div style={{height: 900, overflow: 'auto'}}>
           <FlatList
-            list={displayedNotes}
+            searchTerm={keyWord ? keyWord : null}
+            searchBy={['content', 'title', 'important', 'side']}
+            list={keyWord ? notes : selectedNotes}
             renderItem={renderItem}
             hasMoreItems={hasMoreNotes}
             loadMoreItems={getAllNotes}

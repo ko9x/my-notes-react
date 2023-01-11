@@ -310,6 +310,7 @@ export default function App() {
         <SideBarWall />
       </div>
       <Note
+        notes={notes}
         selectedNotes={selectedNotes}
         bookIsSelected={pageNames && pageNames.length > 0}
         keyWord={searchItem}
