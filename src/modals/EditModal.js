@@ -27,7 +27,6 @@ const helpers = {
   lineBreak: {id: 4, name: 'line-break', code: '<br>'},
   nonBreakingSpace: {id: 5, name: 'non-breaking-space', code: ' &nbsp '},
   listItem: {id: 6, name: 'list-item', code: '<li></li>'},
-  openCaret: {id: 7, name: '<', code: '&#60'}
 }
 
 function setCursorPosition(cursorPosition, selectedRef, helper) {
@@ -43,7 +42,7 @@ function setCursorPosition(cursorPosition, selectedRef, helper) {
   if(helper === helpers.nonBreakingSpace) {
     return selectedRef.current.selectionEnd = cursorPosition + 7;
   }
-  if(helper === helpers.listItem || helpers.lineBreak || helpers.openCaret) {
+  if(helper === helpers.listItem || helpers.lineBreak) {
     return selectedRef.current.selectionEnd = cursorPosition + 4;
   }
 }
