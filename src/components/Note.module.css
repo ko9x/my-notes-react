@@ -11,7 +11,7 @@
   padding: 5px;
   border-bottom: solid white 2px;
   padding-bottom: 30px;
-  animation: fadeIn 1.5s;
+  animation: fadeIn 2s;
 }
 pre {
   background-color: #0d1117;
@@ -43,7 +43,7 @@ a {
   height: 30px;
   opacity: 1;
   transition-duration: 500ms;
-  animation: fadeIn 1s;
+  /* animation: fadeIn 1s; */
 }
 .detailClosed {
   height: 0.1px;
@@ -67,11 +67,11 @@ a {
   flex-direction: column;
   animation: fadeIn 1.5s;
 }
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-}
+} */
