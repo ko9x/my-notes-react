@@ -168,9 +168,9 @@ export default function Note({
 
   return (
     <div className={classes.container}>
-      {bookIsSelected ? (
+      {bookIsSelected || keyWord ? (
         <div style={{ height: 900, overflow: "auto" }}>
-          {selectedNotes.length > 0 ? (
+          {selectedNotes.length > 0 || keyWord ? (
             <FlatList
               searchTerm={keyWord ? keyWord : null}
               searchBy={["content", "title", "important", "side"]}
