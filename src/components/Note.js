@@ -91,12 +91,16 @@ export default function Note({
           <p className={classes.description}>Page: {note.page}</p>
           <p className={classes.description}>Section: {note.section}</p>
         </div>
-        <div className={classes.buttonContainer}>
-          <div className={classes.editButton}>
-            <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
+        {!keyWord && (
+          <div className={classes.buttonContainer}>
+            <div className={classes.editButton}>
+              <button onClick={() => handleNoteEditPress(note)}>
+                Edit Note
+              </button>
+            </div>
+            <button onClick={() => handleAlert(note)}>Delete Note</button>
           </div>
-          <button onClick={() => handleAlert(note)}>Delete Note</button>
-        </div>
+        )}
       </div>
     );
   }
