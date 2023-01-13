@@ -188,6 +188,9 @@ export default function App() {
       setSelectedPage(null);
       return;
     }
+    // if(searchItem) {
+    //   return;
+    // }
     if (bookBeingLifted === selectedBook) {
       return;
     } else {
@@ -199,8 +202,9 @@ export default function App() {
     }
   }
 
-  function liftedPage(pageBeingLifted) {
+  function liftedPage(pageBeingLifted, theBook) {
     if (searchItem) {
+      getSections(notes, theBook, pageBeingLifted);
       return;
     }
     // @TODO Need to figure out a better way to handle this
@@ -223,6 +227,7 @@ export default function App() {
 
   function handleCloseModal() {
     setIsModalOpen(false);
+    setNoteToEdit(null);
   }
 
   function editPressed(note) {

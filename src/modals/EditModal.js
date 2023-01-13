@@ -300,11 +300,15 @@ export default function EditModal({
 
   // **************** Submit Handler Section End ****************************
 
-  if (isSearch && noteToEdit) {
-    changeBook(noteToEdit.book);
-    setSelectedPage(noteToEdit.page);
-    setIsSearch(false);
-  }
+  useEffect(() => {
+    if (isSearch && noteToEdit) {
+      changeBook(noteToEdit.book);
+      changePage(noteToEdit.page, noteToEdit.book);
+      setSelectedPage(noteToEdit.page);
+      setSelectedSection(noteToEdit.section);
+      setIsSearch(false);
+    }
+  }, [isSearch, noteToEdit])
 
   useEffect(() => {
     if (selectedPage && !sectionList) {
