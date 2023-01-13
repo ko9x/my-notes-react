@@ -3,10 +3,8 @@
     * I think we are all good to merge back with the sean and master branches
         * But maybe I'll think of some other stuff to test first
     
-    
 ### What to do next
 * Maybe solve some of the issues in the bugs section
-    * a big one is the issues with the search feature
 * Add auth
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
@@ -15,8 +13,6 @@
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 * Host the app on blakes server instead of github pages
 * Maybe do some of the styling TODOs
-
-### Notes to add
 
 ### Styling
 * Make the edit/add form look nicer
@@ -32,21 +28,9 @@
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
-* If you do a search and then try to edit one of the notes there is an error
-    * this could possibly be resolved by implementing flatlist-react
-        * it would mean a lot of revamping the way the notes are displayed though
-            * here is a link with more info about flatlist-react
-            * https://itnext.io/how-to-handle-data-lists-in-react-like-a-pro-flatlist-react-c5a82183d5b4
 * If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
-* If you have launched the edit modal you need to refresh before search will work
 * The first time you select a section the fade in animation doesn't fire
     * Every subsequent time you select a section it work just fine.
-* Fix the slowdown caused by highlight.js\
-    * I think flatlist-react has some features that will help deal with this issue
-        * Render on scroll might be exactly what we need
-            * there is also a pagination propery that might help
-            * https://itnext.io/how-to-handle-data-lists-in-react-like-a-pro-flatlist-react-c5a82183d5b4
-            * https://www.npmjs.com/package/flatlist-react
     * there are notes in the npm about using web workers to fix the freezing issue I'm having
         * there is a link to the npm in the react folder
     * or only apply the highlight to what is currently on the screen somehow?
@@ -54,8 +38,6 @@
             * Maybe that is what the web worker does. I'm not really sure yet.
 
 ### What to do later
-* Add an animation when the showNoteDetail function adds the class in the Note.js
-* highlight.js makes everything slower. There is probably something I can do to fix that.
 
 ### Refactoring 
 * I believe the getBooks, getPages, and getSections functions in the App.js can be one function
@@ -135,6 +117,9 @@
     * add the courierButton class to the global
         * it is used in the RadioManager component and the HelperButtons component
 * Make it so anytime < is saved it automatically gets changed to the entity number
+* Add an animation when the showNoteDetail function adds the class in the Note.js
+* highlight.js makes everything slower. There is probably something I can do to fix that.
+    * Using FlatListReact fixed the issue so I don't think highligh.js was the culprit
             
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
@@ -151,6 +136,11 @@
 * If a page is selected and then the user does a search and goes back to that same page it doesn't load the sections because the selectedPage state never got cleared
 * The search feature only works if you refresh
     * the executeSearch function runs too early in the life cycle.
-
+* Fix these bugs because they break the app and you have to refresh
+    * If you have launched the edit modal you need to refresh before search will work
+    * If you do a search and then try to edit one of the notes there is an error
+        * I removed the delete and edit buttons from the view when a user does a search
+            * Not a perfect solution but it will work for now
+    * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
 
 
