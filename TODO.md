@@ -1,11 +1,11 @@
 ### Current Focus
-* Continue testing out FlatList React
-    * I think we are all good to merge back with the sean and master branches
-        * But maybe I'll think of some other stuff to test first
-    
+* Figure out how to get Auth working
+    * The firebase rules are the problem I think.
+
 ### What to do next
-* Maybe solve some of the issues in the bugs section
 * Add auth
+    * At least for me so I stop getting those emails every day
+* Maybe solve some of the issues in the bugs section
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
     * make the sidebars less wide
@@ -15,6 +15,10 @@
 * Maybe do some of the styling TODOs
 
 ### Styling
+* Add some loading spinners
+    * When you do a search there should be a spinner
+    * When you submit the form it hangs sometimes so a loading spinner would be nice
+    * When you select reactjs or react native it hangs so a spinner would be nice there
 * Make the edit/add form look nicer
 * Make some themes the user can choose from
     * like an iOS theme
@@ -23,19 +27,12 @@
 
 ### Bugs
 * Figure out a way to scroll to the top of the page every time a new Page is selected
-* I turned off the fade in on the notes.js because it flickers
+* I turned off the fade in on the notes.js because it flickers and other bugs like:
+    * The first time you select a section the fade in animation doesn't fire
 * if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
-* If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
-* The first time you select a section the fade in animation doesn't fire
-    * Every subsequent time you select a section it work just fine.
-    * there are notes in the npm about using web workers to fix the freezing issue I'm having
-        * there is a link to the npm in the react folder
-    * or only apply the highlight to what is currently on the screen somehow?
-        * Make sure the amount of code that gets processed by highlight is always small somehow?
-            * Maybe that is what the web worker does. I'm not really sure yet.
 
 ### What to do later
 
@@ -45,6 +42,28 @@
     * This will result in one very large function but overall less code
         * Is less code worth the lack of readability?
         * Maybe break the giant function out into it's own helper function component?
+
+### Fixed Bugs
+* The width of the right SideBar is preventing content from showing in the middle
+    * (the fix) I made the containing div in the App.js width 200px and float right
+        * I gave the same styling to the left SideBar except float left
+* Notes that have a pre-code wrap are not being confined to the center of the screen
+    * We need to find a good way to present the code wrapped notes.
+    * (the fix) There really isn't a fix. I need to make sure the code is written in a way that can be presented on the screen. I will need to edit all the notes that are written in a way that doesn't fit on the screen.
+* The text on the SideBar should stay until the SideBar has closed and only open again once the new text is saved to the state. 
+    * This will look nicer than havin the text flash when the user presses a new book or page
+* If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
+    * This may be resolved by the refactoring mentioned in the Refactoring section
+        * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
+* If a page is selected and then the user does a search and goes back to that same page it doesn't load the sections because the selectedPage state never got cleared
+* The search feature only works if you refresh
+    * the executeSearch function runs too early in the life cycle.
+* Fix these bugs because they break the app and you have to refresh
+    * If you have launched the edit modal you need to refresh before search will work
+    * If you do a search and then try to edit one of the notes there is an error
+        * I removed the delete and edit buttons from the view when a user does a search
+            * Not a perfect solution but it will work for now
+    * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
 
 ### Done
 * Get the notes from the API
@@ -120,27 +139,7 @@
 * Add an animation when the showNoteDetail function adds the class in the Note.js
 * highlight.js makes everything slower. There is probably something I can do to fix that.
     * Using FlatListReact fixed the issue so I don't think highligh.js was the culprit
-            
-### Fixed Bugs
-* The width of the right SideBar is preventing content from showing in the middle
-    * (the fix) I made the containing div in the App.js width 200px and float right
-        * I gave the same styling to the left SideBar except float left
-* Notes that have a pre-code wrap are not being confined to the center of the screen
-    * We need to find a good way to present the code wrapped notes.
-    * (the fix) There really isn't a fix. I need to make sure the code is written in a way that can be presented on the screen. I will need to edit all the notes that are written in a way that doesn't fit on the screen.
-* The text on the SideBar should stay until the SideBar has closed and only open again once the new text is saved to the state. 
-    * This will look nicer than havin the text flash when the user presses a new book or page
-* If you select a new book while the sections for the previously selected page are still showing the SideBar doesn't close so it displays sctions for a page that is not selected.
-    * This may be resolved by the refactoring mentioned in the Refactoring section
-        * Or at least the refactored function could provide a solution to pass a null value to the section SideBar and then we could say if the value is null, close the SideBar
-* If a page is selected and then the user does a search and goes back to that same page it doesn't load the sections because the selectedPage state never got cleared
-* The search feature only works if you refresh
-    * the executeSearch function runs too early in the life cycle.
-* Fix these bugs because they break the app and you have to refresh
-    * If you have launched the edit modal you need to refresh before search will work
-    * If you do a search and then try to edit one of the notes there is an error
-        * I removed the delete and edit buttons from the view when a user does a search
-            * Not a perfect solution but it will work for now
-    * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
-
-
+* Continue testing out FlatList React
+    * I think we are all good to merge back with the sean and master branches
+        * But maybe I'll think of some other stuff to test first
+* If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
