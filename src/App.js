@@ -6,6 +6,8 @@ import SideBar from "./components/SideBar.js";
 import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import EditModal from "./modals/EditModal";
+import { logInWithEmailAndPassword, auth } from './auth/firebase.js';
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function addNote(arr, func, newNote, newNoteId) {
   let count = 0;
@@ -32,8 +34,6 @@ function removeNote(arr, func, newNoteId) {
 }
 
 export default function App() {
-  const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
-
   const [notes, setNotes] = useState([]);
   const [selectedNotes, setSelectedNotes] = useState([]);
   const [bookNames, setBookNames] = useState([]);
@@ -46,10 +46,18 @@ export default function App() {
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    getNotes();
-  }, []);
+    logInWithEmailAndPassword('slcidevice@yahoo.com', 'asdfg123');
+  });
+
+  useEffect(() => {
+    if(user) {
+      getNotes();
+    }
+  }, [user]);
+
 
   useEffect(() => {
     if (notes.length > 0) {
@@ -64,6 +72,8 @@ export default function App() {
   }, [bookNames]);
 
   async function getNotes() {
+    console.log('user', user); //@DEBUG
+    const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
     const response = await fetch(`${NotesAPI}/notes.json`);
     const data = await response.json();
 
