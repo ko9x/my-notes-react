@@ -105,6 +105,7 @@ export default function EditModal({
   const [missingBook, setMissingBook] = useState(false);
   const [missingPage, setMissingPage] = useState(false);
   const [missingSection, setMissingSection] = useState(false);
+  const [missingRequiredInformation, setMissingRequiredInformation] = useState(false);
 
   const titleRef = useRef();
   const contentRef = useRef();
@@ -115,6 +116,9 @@ export default function EditModal({
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
     setSelectedSection(defaultSection);
+    return () => {
+      resetModal()
+    }
   }, [
     defaultBook,
     defaultPage,
@@ -125,12 +129,6 @@ export default function EditModal({
     setIsSearch(isSearching);
   }, [isSearching]);
 
-  useEffect(() => {
-    if (!noteToEdit) {
-      resetModal();
-    }
-  }, [noteToEdit]);
-
   function resetModal() {
     setNewBook({ changing: false, name: null });
     setNewPage({ changing: false, name: null });
@@ -139,6 +137,7 @@ export default function EditModal({
     setMissingBook(false);
     setMissingPage(false);
     setMissingSection(false);
+    setMissingRequiredInformation(false);
   }
 
   // @TODO I'm sure there is a better way to refactor this
@@ -242,6 +241,7 @@ export default function EditModal({
   function handleSubmit(e) {
     e.preventDefault();
     if(missingTextValue() || missingRadioValue()) {
+      setMissingRequiredInformation(true);
       return
     }
     const url = noteToEdit
@@ -505,7 +505,8 @@ export default function EditModal({
                 disabled={handleEnableSubmitButton()}
                 style={{ width: "30vw", borderRadius: "5px", float: "right" }}
               >
-                Submit
+                <p>Submit</p>
+                <p style={{color: 'red'}}>{missingRequiredInformation && 'Please complete the form'}</p>
               </button>
             </div>
           </form>

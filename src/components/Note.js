@@ -176,6 +176,7 @@ export default function Note({
               searchBy={["content", "title", "important", "side"]}
               list={keyWord ? notes : selectedNotes}
               renderItem={renderItem}
+              searchCaseInsensitive
             />
           ) : (
             <h1 className={classes.instructions}>
