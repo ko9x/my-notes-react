@@ -6,8 +6,9 @@ import SideBar from "./components/SideBar.js";
 import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import EditModal from "./modals/EditModal";
-import { logInWithEmailAndPassword, auth } from './auth/firebase.js';
+import { logInWithEmailAndPassword, auth, database } from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { ref, onValue } from "firebase/database";
 
 function addNote(arr, func, newNote, newNoteId) {
   let count = 0;
@@ -46,18 +47,18 @@ export default function App() {
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
+  // Autologin as me 
   useEffect(() => {
-    logInWithEmailAndPassword('slcidevice@yahoo.com', 'asdfg123');
+    logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123");
   });
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       getNotes();
     }
   }, [user]);
-
 
   useEffect(() => {
     if (notes.length > 0) {
@@ -66,31 +67,27 @@ export default function App() {
   }, [notes]);
 
   useEffect(() => {
-    if(newNote) {
-      newFetchedNotes()
+    if (newNote) {
+      newFetchedNotes();
     }
   }, [bookNames]);
 
   async function getNotes() {
-    console.log('user', user); //@DEBUG
-    const NotesAPI = "https://my-notes-64d6a.firebaseio.com";
-    const response = await fetch(`${NotesAPI}/notes.json`);
-    const data = await response.json();
+    const fetchedNotes = await ref(database, "/notes");
+    onValue(fetchedNotes, (snapshot) => {
+      const data = snapshot.val();
 
-    if (!response.ok) {
-      throw new Error(data.message || "Could not fetch quotes.");
-    }
+      const transformedNotes = [];
 
-    const transformedNotes = [];
-
-    for (const key in data) {
-      const noteObj = {
-        id: key,
-        ...data[key],
-      };
-      transformedNotes.push(noteObj);
-    }
-    setNotes(transformedNotes);
+      for (const key in data) {
+        const noteObj = {
+          id: key,
+          ...data[key],
+        };
+        transformedNotes.push(noteObj);
+      }
+      setNotes(transformedNotes);
+    });
   }
 
   function getBooks(myArr) {
@@ -218,12 +215,12 @@ export default function App() {
       return;
     }
     // @TODO Need to figure out a better way to handle this
-    
+
     // if (pageBeingLifted === selectedPage) {
     //   return;
     // } else {
-      getSections(notes, selectedBook, pageBeingLifted);
-      setSelectedPage(pageBeingLifted);
+    getSections(notes, selectedBook, pageBeingLifted);
+    setSelectedPage(pageBeingLifted);
     // }
   }
 
@@ -255,7 +252,7 @@ export default function App() {
     getSections(notes, newNote.book, newNote.page);
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
-    getSingleSection(notes, newNote.book, newNote.page, newNote.section)
+    getSingleSection(notes, newNote.book, newNote.page, newNote.section);
     setSelectedBook(newNote.book);
     setNewNote(null);
   }
