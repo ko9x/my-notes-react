@@ -51,8 +51,8 @@ export default function App() {
 
   // Autologin as me 
   useEffect(() => {
-    logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123");
-  });
+    logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123")
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -85,6 +85,7 @@ export default function App() {
         };
         transformedNotes.push(noteObj);
       }
+      
       setNotes(transformedNotes);
     });
   }
@@ -303,6 +304,7 @@ export default function App() {
         searchItem={liftedSearchItem}
         newPressed={newPressed}
         isModalOpen={isModalOpen}
+        user={user}
       />
       <div className={classes.leftSideBarContainer}>
         <SideBarWall />

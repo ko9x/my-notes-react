@@ -33,9 +33,19 @@
     font-family:'Courier New', Courier, monospace;
     flex: 1;
     align-self: center;
+    animation: fadeIn 3s;
 }
 .logOut {
     font-family:'Courier New', Courier, monospace;
     align-self: center;
     width: 15%;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

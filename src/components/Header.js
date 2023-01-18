@@ -2,20 +2,28 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 
-export default function Header({ bookNames, selectedBook, searchItem, defaultBook, newPressed, isModalOpen }) {
+export default function Header({
+  bookNames,
+  selectedBook,
+  searchItem,
+  defaultBook,
+  newPressed,
+  isModalOpen,
+  user
+}) {
   const [activeBook, setActiveBook] = useState(null);
   const inputRef = useRef();
 
   useEffect(() => {
     setActiveBook(defaultBook);
-  }, [defaultBook])
+  }, [defaultBook]);
 
   function handleBookSelection(book) {
-    if(book !== 'new') {
+    if (book !== "new") {
       selectedBook(book);
       setActiveBook(book);
     }
-    if(book === 'new') {
+    if (book === "new") {
       newPressed();
     }
   }
@@ -34,7 +42,7 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.logo}>My Notes</h1>
+      <h1 className={classes.logo}>{user ? `${user?.displayName}'s Notes`: 'My Notes'}</h1>
       <div className={classes.itemContainer}>
         {bookNames.map((book, index) => {
           return (
@@ -58,7 +66,12 @@ export default function Header({ bookNames, selectedBook, searchItem, defaultBoo
           new +
         </button>
         <form onSubmit={onSubmit}>
-          <input disabled={isModalOpen ? true : false} placeholder="search" type="search" ref={inputRef} />
+          <input
+            disabled={isModalOpen ? true : false}
+            placeholder="search"
+            type="search"
+            ref={inputRef}
+          />
         </form>
       </div>
       <h3 className={classes.logOut}>Log Out</h3>
