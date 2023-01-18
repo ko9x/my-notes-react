@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect, useRef } from "react";
 import HelperButtons from "../components/HelperButtons";
 import RadioManager from "../components/RadioManager";
+import { ref, child, push, update } from "firebase/database";
 
 const customStyles = {
   content: {
@@ -89,6 +90,8 @@ export default function EditModal({
   changedNoteContent,
   createdNoteLocation,
   locationChanged,
+  user,
+  database
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -237,8 +240,29 @@ export default function EditModal({
     }
   }
 
+  function addNewNote() {
+    const newNoteKey = push(child(ref(database), 'notes')).key;
+    update(ref(database, `notes/${user.uid}/${newNoteKey}`), {
+      id: newNoteKey,
+      book: 'Testing',
+      page: 'Test Page',
+      section: 'Test Section',
+      title: 'Clever Title',
+      content: 'This is the test note content',
+      side: '',
+      important: '',
+    })
+    .then((data) => {
+      console.log('data saved', data ); //@DEBUG
+    })
+    .catch((error) => {
+      console.log('save failed', error ); //@DEBUG
+    })
+  }
+
   // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
+    addNewNote();
     e.preventDefault();
     if(missingTextValue() || missingRadioValue()) {
       setMissingRequiredInformation(true);

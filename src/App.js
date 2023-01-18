@@ -73,10 +73,9 @@ export default function App() {
   }, [bookNames]);
 
   async function getNotes() {
-    const fetchedNotes = await ref(database, "/notes");
+    const fetchedNotes = await ref(database, `/notes/${user.uid}`);
     onValue(fetchedNotes, (snapshot) => {
       const data = snapshot.val();
-
       const transformedNotes = [];
 
       for (const key in data) {
@@ -294,6 +293,8 @@ export default function App() {
         defaultSection={selectedSection}
         isSearching={searchItem}
         locationChanged={locationChanged}
+        user={user}
+        database={database}
       />
       <Header
         bookNames={bookNames}
