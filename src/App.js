@@ -329,6 +329,8 @@ export default function App() {
         keyWord={searchItem}
         editPressed={editPressed}
         removeNoteFromArrays={removeNoteFromArrays}
+        user={user}
+        database={database}
       />
       <Footer />
     </div>

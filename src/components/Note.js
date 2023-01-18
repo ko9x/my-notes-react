@@ -6,6 +6,7 @@ import Highlighter from "react-highlight-words";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import FlatList from "flatlist-react";
+import { remove, ref } from "firebase/database";
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -22,6 +23,8 @@ export default function Note({
   keyWord,
   editPressed,
   removeNoteFromArrays,
+  database,
+  user
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -48,22 +51,10 @@ export default function Note({
   }
 
   function deleteNote(note) {
-    fetch(`https://my-notes-64d6a.firebaseio.com/notes/${note.id}.json`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    remove(ref(database, `notes/${user.uid}/${note.id}`))
+    .then(() => {
+      removeNoteFromArrays(note);
     })
-      .then((response) => {
-        if (response.status === 200) {
-          removeNoteFromArrays(note);
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        console.log("error", error); //@DEBUG
-      });
   }
 
   function handleAlert(note) {
