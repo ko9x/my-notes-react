@@ -1,16 +1,14 @@
 ### Current Focus
-* Figure out how to get Auth working
-    * The firebase rules are the problem I think.
+* Decide what to do next
 
 ### What to do next
-* Add auth
-    * At least for me so I stop getting those emails every day
+* Add a form for new users
+    * Make sure all the auth stuff works for the new users
 * Maybe solve some of the issues in the bugs section
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
     * make the sidebars less wide
         * only allow one sidebar open at a time on smaller screens
-* Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
 * Host the app on blakes server instead of github pages
 * Maybe do some of the styling TODOs
 
@@ -26,6 +24,8 @@
 * the "fade in" on the notes screen looks kinda bad.
 
 ### Bugs
+* If there are only one or two books the buttons are way too wide
+    * Maybe make the "new +" button float right and the other other button in a container that floats left
 * Figure out a way to scroll to the top of the page every time a new Page is selected
 * I turned off the fade in on the notes.js because it flickers and other bugs like:
     * The first time you select a section the fade in animation doesn't fire
@@ -42,6 +42,9 @@
     * This will result in one very large function but overall less code
         * Is less code worth the lack of readability?
         * Maybe break the giant function out into it's own helper function component?
+* We could useReducer in hte EditModal to clean up the numerous useState calls
+    * There is a link in the react folder called useReducer use case that explains why it might make things cleaner
+* Create a useContext to pass the user and database where needed
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
@@ -143,3 +146,10 @@
     * I think we are all good to merge back with the sean and master branches
         * But maybe I'll think of some other stuff to test first
 * If you select a book and a page and then selected a different book, when you return to the original book it won't let you select that page again.
+* Figure out how to get Auth working
+    * The firebase rules are the problem I think.
+* Figure out how to add users to firebase database
+    * Only allow the user who created the data to read/write it
+* Add auth
+    * At least for me so I stop getting those emails every day
+* Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
