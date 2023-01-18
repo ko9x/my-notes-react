@@ -240,42 +240,20 @@ export default function EditModal({
     }
   }
 
-  function addNewNote() {
-    const newNoteKey = push(child(ref(database), 'notes')).key;
-    update(ref(database, `notes/${user.uid}/${newNoteKey}`), {
-      id: newNoteKey,
-      book: 'Testing',
-      page: 'Test Page',
-      section: 'Test Section',
-      title: 'Clever Title',
-      content: 'This is the test note content',
-      side: '',
-      important: '',
-    })
-    .then((data) => {
-      console.log('data saved', data ); //@DEBUG
-    })
-    .catch((error) => {
-      console.log('save failed', error ); //@DEBUG
-    })
-  }
-
   // **************** Submit Handler Section Start ****************************
   function handleSubmit(e) {
-    addNewNote();
     e.preventDefault();
     if(missingTextValue() || missingRadioValue()) {
       setMissingRequiredInformation(true);
       return
     }
+    const newNoteKey = push(child(ref(database), 'notes')).key;
     const url = noteToEdit
-      ? `https://my-notes-64d6a.firebaseio.com/notes/${noteToEdit.id}.json`
-      : "https://my-notes-64d6a.firebaseio.com/notes.json";
-
-    const method = noteToEdit ? "PUT" : "POST";
+      ? `notes/${user.uid}/${noteToEdit.id}`
+      : `notes/${user.uid}/${newNoteKey}`;
 
     const updatedNote = {
-      id: noteToEdit ? noteToEdit.id : null,
+      id: noteToEdit ? noteToEdit.id : newNoteKey,
       book: newBook.name ? newBook.name : selectedBook,
       page: newPage.name ? newPage.name : selectedPage,
       section: newSection.name
@@ -289,22 +267,11 @@ export default function EditModal({
       important: fixCaret(e.target.important.value),
     };
 
-    fetch(url, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedNote),
-    })
-      .then((response) => {
-        resetModal();
-        if (response.status === 200) {
+    update(ref(database, url), updatedNote)
+    .then(() => {
+      resetModal();
           if (!noteToEdit) {
-            response.json().then((data) => {
-              // Adding the firebase id to the note
-              const newlyCreatedNote = { id: data.name, ...updatedNote };
-              locationChanged(newlyCreatedNote);
-            });
+            locationChanged(updatedNote);
           } else {
             if (locationMoved(updatedNote)) {
               locationChanged(updatedNote);
@@ -313,13 +280,10 @@ export default function EditModal({
             }
           }
           handleCloseModal();
-        } else {
-          throw new Error("Something went wrong");
-        }
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+    })
+    .catch((error) => {
+      console.log('save failed', error ); //@DEBUG
+    })
   }
 
   // **************** Submit Handler Section End ****************************
