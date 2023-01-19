@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut, deleteUser } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -40,10 +40,15 @@ const signUserOut = () => {
   signOut(auth);
 }
 
+const handleDeleteUser = (user) => {
+  deleteUser(user);
+}
+
   export {
     auth,
     database,
     logInWithEmailAndPassword,
     registerUserWithEmailAndPassword,
-    signUserOut
+    signUserOut,
+    handleDeleteUser
   }

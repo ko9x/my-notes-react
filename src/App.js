@@ -7,7 +7,7 @@ import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import SignUpLoginModal from "./modals/SignUpLoginModal";
 import EditModal from "./modals/EditModal";
-import { logInWithEmailAndPassword, auth, database, signUserOut } from "./auth/firebase.js";
+import { auth, database, signUserOut } from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 
@@ -50,11 +50,6 @@ export default function App() {
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
   const [user] = useAuthState(auth);
-
-  // Autologin as me 
-  useEffect(() => {
-    // logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123")
-  }, []);
 
   useEffect(() => {
     if (user) {

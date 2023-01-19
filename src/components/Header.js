@@ -86,7 +86,7 @@ export default function Header({
           />
         </form>
       </div>
-      {user ? <button className={classes.item} disabled={disabledButtonCheck()} onClick={isModalOpen ? null : () => signOut()}>Log Out</button> : <button className={classes.item} disabled={disabledButtonCheck()} onClick={isModalOpen ? null : () => signIn()}>Sign in</button>}
+      {user ? <button className={classes.item} disabled={disabledButtonCheck()} onClick={isModalOpen ? null : () => signOut()}>Log Out</button> : <button className={classes.item} disabled={isModalOpen && !user} onClick={isModalOpen ? null : () => signIn()}>Sign in</button>}
     </div>
   );
 }
