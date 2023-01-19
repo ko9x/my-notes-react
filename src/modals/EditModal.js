@@ -442,7 +442,10 @@ export default function EditModal({
             />
             {missingTitle && <p className={classes.validationWarning}>Title is required</p>}
             <div className={classes.textAreaHeaderContainer}>
-              <h2 onClick={() => toggleContentSize()}>Content</h2>
+              <div onClick={() => toggleContentSize()}>
+                <h2 style={{marginBottom: '0px'}}>Content</h2>
+                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+              </div>
               <HelperButtons insertHelperText={insertHelperText} selectedRef={contentRef} helpers={helpers} />
             </div>
             <textarea
@@ -459,7 +462,10 @@ export default function EditModal({
             ></textarea>
             {missingContent && <p className={classes.validationWarning}>Content is required</p>}
             <div className={classes.textAreaHeaderContainer}>
-              <h2 onClick={() => toggleImportantSize()}>Important Note</h2>
+              <div onClick={() => toggleImportantSize()}>
+                <h2 style={{marginBottom: '0px'}}>Important Note</h2>
+                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+              </div>
               <HelperButtons insertHelperText={insertHelperText} selectedRef={importantRef} helpers={helpers} />
             </div>
             <textarea
@@ -476,7 +482,10 @@ export default function EditModal({
               }`}
             ></textarea>
             <div className={classes.textAreaHeaderContainer}>
-              <h2 onClick={() => toggleSideSize()}>Side Note</h2>
+              <div onClick={() => toggleSideSize()}>
+                <h2 style={{marginBottom: '0px'}}>Side Note</h2>
+                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+              </div>
               <HelperButtons insertHelperText={insertHelperText} selectedRef={sideRef} helpers={helpers} />
             </div>
             <textarea
