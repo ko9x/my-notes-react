@@ -5,6 +5,7 @@ import Footer from "./components/Footer.js";
 import SideBar from "./components/SideBar.js";
 import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
+import SignUpLoginModal from "./modals/SignUpLoginModal";
 import EditModal from "./modals/EditModal";
 import { logInWithEmailAndPassword, auth, database } from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -43,7 +44,8 @@ export default function App() {
   const [selectedPage, setSelectedPage] = useState(null);
   const [sectionNames, setSectionNames] = useState([]);
   const [searchItem, setSearchItem] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isSignUpLoginModalOpen, setIsSignUpLoginModalOpen] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
@@ -51,12 +53,15 @@ export default function App() {
 
   // Autologin as me 
   useEffect(() => {
-    logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123")
+    // logInWithEmailAndPassword("slcidevice@yahoo.com", "asdfg123")
   }, []);
 
   useEffect(() => {
     if (user) {
+      setIsSignUpLoginModalOpen(false);
       getNotes();
+    } else {
+      setIsSignUpLoginModalOpen(true);
     }
   }, [user]);
 
@@ -229,12 +234,16 @@ export default function App() {
   }
 
   function handleModalOpen() {
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   }
 
-  function handleCloseModal() {
-    setIsModalOpen(false);
+  function handleCloseEditModal() {
+    setIsEditModalOpen(false);
     setNoteToEdit(null);
+  }
+
+  function handleCloseSignUpLoginModal() {
+    setIsSignUpLoginModalOpen(false);
   }
 
   function editPressed(note) {
@@ -278,13 +287,17 @@ export default function App() {
 
   return (
     <div className={classes.container}>
+      <SignUpLoginModal 
+        isSignUpLoginModalOpen={isSignUpLoginModalOpen}
+        closeModal={handleCloseSignUpLoginModal}
+      />
       <EditModal
         changedNoteContent={changedNoteContent}
         changeBook={liftedBook}
         changePage={liftedPage}
         changeSection={liftedSection}
-        isModalOpen={isModalOpen}
-        closeModal={handleCloseModal}
+        isEditModalOpen={isEditModalOpen}
+        closeModal={handleCloseEditModal}
         noteToEdit={noteToEdit}
         bookList={bookNames}
         defaultBook={selectedBook}
@@ -303,13 +316,13 @@ export default function App() {
         defaultBook={selectedBook}
         searchItem={liftedSearchItem}
         newPressed={newPressed}
-        isModalOpen={isModalOpen}
+        isEditModalOpen={isEditModalOpen}
         user={user}
       />
       <div className={classes.leftSideBarContainer}>
         <SideBarWall />
         <SideBar
-          itemNameArray={isModalOpen ? null : pageNames}
+          itemNameArray={isEditModalOpen ? null : pageNames}
           selectedItemName={liftedPage}
           defaultItem={selectedPage}
           sideBarPosition={"left"}
@@ -317,7 +330,7 @@ export default function App() {
       </div>
       <div className={classes.rightSideBarContainer}>
         <SideBar
-          itemNameArray={isModalOpen ? null : sectionNames}
+          itemNameArray={isEditModalOpen ? null : sectionNames}
           selectedItemName={liftedSection}
           defaultItem={selectedSection}
           sideBarPosition={"right"}

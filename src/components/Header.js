@@ -8,7 +8,7 @@ export default function Header({
   searchItem,
   defaultBook,
   newPressed,
-  isModalOpen,
+  isEditModalOpen,
   user
 }) {
   const [activeBook, setActiveBook] = useState(null);
@@ -47,7 +47,7 @@ export default function Header({
         {bookNames.map((book, index) => {
           return (
             <button
-              disabled={isModalOpen ? true : false}
+              disabled={isEditModalOpen ? true : false}
               onMouseDown={() => handleBookSelection(book)}
               className={`${classes.item} ${
                 activeBook === book ? classes.active : null
@@ -59,7 +59,7 @@ export default function Header({
           );
         })}
         <button
-          disabled={isModalOpen ? true : false}
+          disabled={isEditModalOpen ? true : false}
           onMouseDown={() => handleBookSelection("new")}
           className={classes.item}
         >
@@ -67,7 +67,7 @@ export default function Header({
         </button>
         <form onSubmit={onSubmit}>
           <input
-            disabled={isModalOpen ? true : false}
+            disabled={isEditModalOpen ? true : false}
             placeholder="search"
             type="search"
             ref={inputRef}

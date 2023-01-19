@@ -72,7 +72,7 @@ function fixCaret(noteText) {
 }
 
 export default function EditModal({
-  isModalOpen,
+  isEditModalOpen,
   closeModal,
   noteToEdit,
   bookList,
@@ -379,7 +379,7 @@ export default function EditModal({
 
   return (
     <Modal
-      isOpen={isModalOpen}
+      isOpen={isEditModalOpen}
       onRequestClose={handleCloseModal}
       style={customStyles}
       contentLabel="Example Modal"

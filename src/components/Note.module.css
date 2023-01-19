@@ -43,7 +43,7 @@ a {
   height: 30px;
   opacity: 1;
   transition-duration: 500ms;
-  /* animation: fadeIn 1s; */
+  animation: fadeIn 1s;
 }
 .detailClosed {
   height: 0.1px;
