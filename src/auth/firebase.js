@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -22,8 +22,23 @@ const logInWithEmailAndPassword = async (email, password) => {
     }
   };
 
+const registerUserWithEmailAndPassword = async (email, password, username) => {
+    try {
+      createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        updateProfile(auth.currentUser, {
+          displayName: username
+        })
+      })
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  };
+
   export {
     auth,
     database,
     logInWithEmailAndPassword,
+    registerUserWithEmailAndPassword,
   }
