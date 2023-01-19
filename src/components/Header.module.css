@@ -39,6 +39,7 @@
     font-family:'Courier New', Courier, monospace;
     align-self: center;
     width: 15%;
+    cursor: pointer;
 }
 
 @keyframes fadeIn {

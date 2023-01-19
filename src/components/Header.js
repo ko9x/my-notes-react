@@ -1,6 +1,7 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
+import { signUserOut } from "../auth/firebase";
 
 export default function Header({
   bookNames,
@@ -74,7 +75,7 @@ export default function Header({
           />
         </form>
       </div>
-      <h3 className={classes.logOut}>Log Out</h3>
+      <h3 className={classes.logOut} onClick={() => signUserOut()}>Log Out</h3>
     </div>
   );
 }
