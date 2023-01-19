@@ -67,6 +67,7 @@ a {
   flex-direction: column;
   animation: fadeIn 1.5s;
 }
+/* I commented this out because the fade animation gave me a headache */
 /* @keyframes fadeIn {
   0% {
     opacity: 0;
