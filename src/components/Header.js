@@ -1,7 +1,7 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
-import { signUserOut } from "../auth/firebase";
+
 
 export default function Header({
   bookNames,
@@ -9,8 +9,10 @@ export default function Header({
   searchItem,
   defaultBook,
   newPressed,
-  isEditModalOpen,
-  user
+  isModalOpen,
+  user,
+  signIn,
+  signOut
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const inputRef = useRef();
@@ -41,6 +43,15 @@ export default function Header({
     handleBookSelection(null);
   }
 
+  function disabledButtonCheck() {
+    if(isModalOpen) {
+      return true
+    }
+    if(!user) {
+      return true
+    }
+  }
+
   return (
     <div className={classes.container}>
       <h1 className={classes.logo}>{user ? `${user?.displayName}'s Notes`: 'My Notes'}</h1>
@@ -48,7 +59,7 @@ export default function Header({
         {bookNames.map((book, index) => {
           return (
             <button
-              disabled={isEditModalOpen ? true : false}
+              disabled={disabledButtonCheck()}
               onMouseDown={() => handleBookSelection(book)}
               className={`${classes.item} ${
                 activeBook === book ? classes.active : null
@@ -60,7 +71,7 @@ export default function Header({
           );
         })}
         <button
-          disabled={isEditModalOpen ? true : false}
+          disabled={disabledButtonCheck()}
           onMouseDown={() => handleBookSelection("new")}
           className={classes.item}
         >
@@ -68,14 +79,14 @@ export default function Header({
         </button>
         <form onSubmit={onSubmit}>
           <input
-            disabled={isEditModalOpen ? true : false}
+            disabled={disabledButtonCheck()}
             placeholder="search"
             type="search"
             ref={inputRef}
           />
         </form>
       </div>
-      <h3 className={classes.logOut} onClick={() => signUserOut()}>Log Out</h3>
+      {user ? <button className={classes.item} disabled={disabledButtonCheck()} onClick={isModalOpen ? null : () => signOut()}>Log Out</button> : <button className={classes.item} disabled={disabledButtonCheck()} onClick={isModalOpen ? null : () => signIn()}>Sign in</button>}
     </div>
   );
 }

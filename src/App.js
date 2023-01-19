@@ -7,7 +7,7 @@ import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import SignUpLoginModal from "./modals/SignUpLoginModal";
 import EditModal from "./modals/EditModal";
-import { logInWithEmailAndPassword, auth, database } from "./auth/firebase.js";
+import { logInWithEmailAndPassword, auth, database, signUserOut } from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 
@@ -285,6 +285,15 @@ export default function App() {
     removeNote(selectedNotes, setSelectedNotes, note.id);
   }
 
+  function handleLogInUser() {
+    setIsSignUpLoginModalOpen(true);
+  }
+
+  function handleLogOutUser() {
+    signUserOut();
+    getBooks([]);
+  }
+
   return (
     <div className={classes.container}>
       <SignUpLoginModal 
@@ -316,8 +325,10 @@ export default function App() {
         defaultBook={selectedBook}
         searchItem={liftedSearchItem}
         newPressed={newPressed}
-        isEditModalOpen={isEditModalOpen}
+        isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
         user={user}
+        signIn={handleLogInUser}
+        signOut={handleLogOutUser}
       />
       <div className={classes.leftSideBarContainer}>
         <SideBarWall />
