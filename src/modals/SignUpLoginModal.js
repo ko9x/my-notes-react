@@ -31,7 +31,14 @@ export default function SignUpLoginModal({
   const [isNewUser, setIsNewUser] = useState(false);
 
   function handleCloseModal() {
+    resetModal();
     closeModal();
+  }
+
+  function resetModal() {
+    setEmail('');
+    setPassword('');
+    setUsername('');
   }
 
   async function handleSubmit(e) {
@@ -41,6 +48,7 @@ export default function SignUpLoginModal({
     } else {
       registerUserWithEmailAndPassword(email, password, username);
     }
+    resetModal();
   }
 
   function toggleIsNewUser() {
