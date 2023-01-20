@@ -8,7 +8,17 @@
     z-index: 100;
     box-shadow: 2px -5px 20px black;
 }
-.itemContainer {
+.logoContainer {
+  display: flex;
+  flex: 1;
+}
+.logo {
+  font-family:'Courier New', Courier, monospace;
+  flex: 1;
+  align-self: center;
+  animation: fadeIn 3s;
+}
+.bookContainer {
     display: flex !important;
     flex: 3;
     flex-direction: row !important;
@@ -30,11 +40,13 @@
     color: var(--activeButton-color);
     text-shadow: 2px 2px 5px black;
 }
-.logo {
-    font-family:'Courier New', Courier, monospace;
-    flex: 1;
-    align-self: center;
-    animation: fadeIn 3s;
+.rightSideContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rightSideContainerItems {
+  padding-right: 1vw;
 }
 .logOut {
     font-family:'Courier New', Courier, monospace;

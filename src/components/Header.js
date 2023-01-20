@@ -53,12 +53,12 @@ export default function Header({
 
   return (
     <div className={classes.container}>
-      <div style={{ display: "flex", flex: 1 }}>
+      <div className={classes.logoContainer}>
         <h1 className={classes.logo}>
           {user ? `${user?.displayName}'s Notes` : "My Notes"}
         </h1>
       </div>
-      <div className={classes.itemContainer}>
+      <div className={classes.bookContainer}>
         {bookNames.map((book, index) => {
           return (
             <button
@@ -74,8 +74,8 @@ export default function Header({
           );
         })}
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+      <div className={classes.rightSideContainer}>
+        <div className={classes.rightSideContainerItems}>
           <button
             disabled={disabledButtonCheck()}
             onMouseDown={() => handleBookSelection("new")}
@@ -84,7 +84,7 @@ export default function Header({
             new +
           </button>
         </div>
-        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+        <div className={classes.rightSideContainerItems}>
           <form onSubmit={onSubmit}>
             <input
               disabled={disabledButtonCheck()}
@@ -94,7 +94,7 @@ export default function Header({
             />
           </form>
         </div>
-        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+        <div className={classes.rightSideContainerItems}>
           {user ? (
             <button
               className={classes.item}
