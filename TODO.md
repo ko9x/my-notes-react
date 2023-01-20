@@ -1,35 +1,29 @@
 ### Current Focus
-* Decide what to do next
-
-### What to do next
-* Add a form for new users
-    * Make sure all the auth stuff works for the new users
-* Maybe solve some of the issues in the bugs section
-* Make sure the app looks okay on smaller screens
-    * move things in the header into a hamburger
-    * make the sidebars less wide
-        * only allow one sidebar open at a time on smaller screens
-* Host the app on blakes server instead of github pages
-* Maybe do some of the styling TODOs
-
-### Styling
 * Add some loading spinners
     * When you do a search there should be a spinner
     * When you submit the form it hangs sometimes so a loading spinner would be nice
     * When you select reactjs or react native it hangs so a spinner would be nice there
-* Make the edit/add form look nicer
+
+### What to do next
+* Host the app on blakes server instead of github pages
+    * Or create my own server if it's not too expensive. 
+* Maybe solve some of the issues in the bugs section
+* Maybe do some of the styling TODOs
+* Make sure the app looks okay on smaller screens
+    * move things in the header into a hamburger
+    * make the sidebars less wide
+        * only allow one sidebar open at a time on smaller screens
+
+### Styling
+* Style the SignUpLoginModal
+* Style the EditModal 
 * Make some themes the user can choose from
     * like an iOS theme
     * a dark mode theme would be cool also
-* the "fade in" on the notes screen looks kinda bad.
 
 ### Bugs
-* If there are only one or two books the buttons are way too wide
-    * Maybe make the "new +" button float right and the other other button in a container that floats left
+* When you create a new account it doesn't show the new users displayName until you refresh
 * Figure out a way to scroll to the top of the page every time a new Page is selected
-* I turned off the fade in on the notes.js because it flickers and other bugs like:
-    * The first time you select a section the fade in animation doesn't fire
-* if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
@@ -42,7 +36,7 @@
     * This will result in one very large function but overall less code
         * Is less code worth the lack of readability?
         * Maybe break the giant function out into it's own helper function component?
-* We could useReducer in hte EditModal to clean up the numerous useState calls
+* We could useReducer in the EditModal to clean up the numerous useState calls
     * There is a link in the react folder called useReducer use case that explains why it might make things cleaner
 * Create a useContext to pass the user and database where needed
 
@@ -67,6 +61,7 @@
         * I removed the delete and edit buttons from the view when a user does a search
             * Not a perfect solution but it will work for now
     * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
+* if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
 
 ### Done
 * Get the notes from the API
@@ -153,3 +148,11 @@
 * Add auth
     * At least for me so I stop getting those emails every day
 * Instead of saying "My Notes" it should maybe say the users name like "Sean's Notes"
+* Add a form for new users
+    * Make sure all the auth stuff works for the new users
+        * capture the users displayName 
+* Style the Header
+    * If there are only one or two books the buttons clickable area is way too wide
+    * Maybe make the "new +" button float right and the other other button in a container that floats left
+    * The logout button is also too wide.
+        * The text is fine but the clickable area is much wider than the text
