@@ -4,13 +4,17 @@
 }
 .modalInput { 
     width: 95%;
-    border-radius: 5px;
+    border-radius: .5vh;
+    border-color: transparent;
+    outline-color: var(--actionButton-color)
 }
 .modalTextArea {
     transition-duration: 500ms;
     height: 3.5vh;
     width: 95%; 
-    border-radius: 5px;
+    border-radius: .5vh;
+    border-color: transparent;
+    outline-color: var(--actionButton-color)
 }
 .modalTextAreaMediumHeight {
     transition-duration: 500ms;
@@ -24,14 +28,24 @@
     display: flex;
     flex-direction: row;
 }
+.submitButton {
+    width: 30vw;
+    border-radius: .5vh;
+    float: right;
+    border-color: transparent;
+    background-color: var(--actionButton-color);
+    box-shadow: 1px 1px 2.5px black;
+}
 .closeButtonContainer { 
     width: 50%;
     float: right;
     padding-top: 2vh;
 }
 .closeButton {
-    border-radius: 5px;
-    float: right
+    border-radius: .5vh;
+    float: right;
+    border-color: transparent;
+    box-shadow: 1px 1px 2.5px black;
 }
 .validationWarning {
     color: red;

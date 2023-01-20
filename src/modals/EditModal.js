@@ -500,7 +500,7 @@ export default function EditModal({
             <div style={{ width: "69.1%", paddingTop: "20px" }}>
               <button
                 disabled={handleEnableSubmitButton()}
-                style={{ width: "30vw", borderRadius: "5px", float: "right" }}
+                className={classes.submitButton}
               >
                 <p>Submit</p>
                 <p style={{color: 'red'}}>{missingRequiredInformation && 'Please complete the form'}</p>
