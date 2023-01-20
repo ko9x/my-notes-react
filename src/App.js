@@ -286,7 +286,16 @@ export default function App() {
 
   function handleLogOutUser() {
     signUserOut();
-    getBooks([]);
+    resetNotes();
+  }
+
+  function resetNotes() {
+    setBookNames([]);
+    setSelectedBook(null);
+    setPageNames([]);
+    setSelectedPage(null);
+    setSectionNames([]);
+    setSelectedSection(null);
   }
 
   return (
