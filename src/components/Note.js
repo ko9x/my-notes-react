@@ -157,6 +157,18 @@ export default function Note({
     );
   }
 
+  function DetermineHelperText() {
+    if (user) {
+      if (notes.length < 1) {
+        return "Please click 'new +' to create your first note "
+      } else {
+        return "Please select a book, enter a search term, or create a new note"
+      }
+    } else {
+      return "Please sign in or create an account"
+    }
+  }
+
   return (
     <div className={classes.container}>
       {bookIsSelected || keyWord ? (
@@ -177,7 +189,7 @@ export default function Note({
         </div>
       ) : (
         <h1 className={classes.instructions}>
-          {user ? 'Please select a book from the header to get started' : 'Please sign in or create an account'}
+          <DetermineHelperText />
         </h1>
       )}
     </div>
