@@ -3,6 +3,8 @@
     * When you do a search there should be a spinner
     * When you submit the form it hangs sometimes so a loading spinner would be nice
     * When you select reactjs or react native it hangs so a spinner would be nice there
+    * When the page is autologgin in it displays the login form for a split second
+        * Maybe we could add a timeout and a loading spinner to mask that
 
 ### What to do next
 * Host the app on blakes server instead of github pages
