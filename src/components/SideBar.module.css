@@ -31,6 +31,7 @@
 .item {
   font-size: large;
   font-family: "Courier New", Courier, monospace;
+  font-weight: 600;
   text-decoration: none;
   padding: 10px;
   border: none;
@@ -40,5 +41,5 @@
 }
 .active {
     color: var(--activeButton-color);
-    text-shadow: 2px 2px 5px black;
+    text-shadow: var(--text-shadow);
 }

@@ -11,6 +11,8 @@
   --activeButton-color: palegreen;
   /* action button */
   --actionButton-color: lightseagreen;
+  /* text shadow */
+  --text-shadow: 1px .5px .5px black;
 }
 body {
   margin: 0;
