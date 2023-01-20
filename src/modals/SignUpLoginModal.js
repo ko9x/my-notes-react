@@ -36,9 +36,9 @@ export default function SignUpLoginModal({
   }
 
   function resetModal() {
-    setEmail('');
-    setPassword('');
-    setUsername('');
+    setEmail("");
+    setPassword("");
+    setUsername("");
   }
 
   async function handleSubmit(e) {
@@ -64,39 +64,45 @@ export default function SignUpLoginModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-        <button onClick={() => toggleIsNewUser()}>
-          {isNewUser
-            ? "Back to Login"
-            : "Don't have an account? Click here to sign up"}
-        </button>
+        <h1 className={classes.modalTitle}>{isNewUser ? "Sign up" : "Login"}</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email: </label>
-          <input
-            type="text"
-            value={email}
-            placeholder="enter a username"
-            onChange={({ target }) => setEmail(target.value)}
-          />
-          <label htmlFor="password">password: </label>
-          <input
-            type="password"
-            value={password}
-            placeholder="enter a password"
-            onChange={({ target }) => setPassword(target.value)}
-          />
-          {isNewUser ? (
-            <>
-              <label htmlFor="username">username: </label>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <input
+              type="text"
+              value={email}
+              placeholder="Email"
+              className={classes.modalInput}
+              onChange={({ target }) => setEmail(target.value)}
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="Password"
+              className={classes.modalInput}
+              onChange={({ target }) => setPassword(target.value)}
+            />
+            {isNewUser ? (
               <input
                 type="username"
                 value={username}
-                placeholder="enter a username"
+                placeholder="User name"
+                className={classes.modalInput}
                 onChange={({ target }) => setUsername(target.value)}
               />
-            </>
-          ) : null}
-          <button type="submit">{isNewUser ? "Sign up" : "Login"}</button>
+            ) : null}
+            <button className={classes.submitButton} type="submit">
+              Submit
+            </button>
+          </div>
         </form>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <button
+            className={classes.toggleButton}
+            onClick={() => toggleIsNewUser()}
+          >
+            {isNewUser ? "Back to Login" : "Click here to create an account"}
+          </button>
+        </div>
       </div>
     </Modal>
   );
