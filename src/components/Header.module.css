@@ -30,7 +30,7 @@
     display: flex;
     align-self: center;
     font-size: large;
-    font-weight: 600;
+    font-weight: 500;
     font-family:'Courier New', Courier, monospace;
     text-decoration: none;
     border: none;
@@ -40,6 +40,7 @@
 .active {
     color: var(--activeButton-color);
     text-shadow: var(--text-shadow);
+    font-weight: 600;
 }
 .rightSideContainer {
   display: flex;
