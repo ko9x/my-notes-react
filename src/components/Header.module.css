@@ -9,14 +9,15 @@
     box-shadow: 2px -5px 20px black;
 }
 .itemContainer {
-    width: 60%;
     display: flex !important;
+    flex: 3;
     flex-direction: row !important;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    padding-right: -5vw;
 }
 .item {
-    flex: 1;
+    display: flex;
     align-self: center;
     font-size: large;
     font-family:'Courier New', Courier, monospace;

@@ -53,9 +53,11 @@ export default function Header({
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.logo}>
-        {user ? `${user?.displayName}'s Notes` : "My Notes"}
-      </h1>
+      <div style={{ display: "flex", flex: 1 }}>
+        <h1 className={classes.logo}>
+          {user ? `${user?.displayName}'s Notes` : "My Notes"}
+        </h1>
+      </div>
       <div className={classes.itemContainer}>
         {bookNames.map((book, index) => {
           return (
@@ -71,39 +73,47 @@ export default function Header({
             </button>
           );
         })}
-        <button
-          disabled={disabledButtonCheck()}
-          onMouseDown={() => handleBookSelection("new")}
-          className={classes.item}
-        >
-          new +
-        </button>
-        <form onSubmit={onSubmit}>
-          <input
-            disabled={disabledButtonCheck()}
-            placeholder="search"
-            type="search"
-            ref={inputRef}
-          />
-        </form>
       </div>
-      {user ? (
-        <button
-          className={classes.item}
-          disabled={disabledButtonCheck()}
-          onClick={isModalOpen ? null : () => signOut()}
-        >
-          Log Out
-        </button>
-      ) : (
-        <button
-          className={classes.item}
-          disabled={isModalOpen && !user}
-          onClick={isModalOpen ? null : () => signIn()}
-        >
-          Sign in
-        </button>
-      )}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+          <button
+            disabled={disabledButtonCheck()}
+            onMouseDown={() => handleBookSelection("new")}
+            className={classes.item}
+          >
+            new +
+          </button>
+        </div>
+        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+          <form onSubmit={onSubmit}>
+            <input
+              disabled={disabledButtonCheck()}
+              placeholder="search"
+              type="search"
+              ref={inputRef}
+            />
+          </form>
+        </div>
+        <div style={{ alignSelf: "center", paddingRight: "1vw" }}>
+          {user ? (
+            <button
+              className={classes.item}
+              disabled={disabledButtonCheck()}
+              onClick={isModalOpen ? null : () => signOut()}
+            >
+              Log Out
+            </button>
+          ) : (
+            <button
+              className={classes.item}
+              disabled={isModalOpen && !user}
+              onClick={isModalOpen ? null : () => signIn()}
+            >
+              Sign in
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
