@@ -14,6 +14,13 @@
     background: none;
 }
 
+.actionWord {
+    color: lightseagreen;
+    text-shadow: 1px 1px 2.5px black;
+    padding-right: .05vw;
+    cursor: pointer;
+}
+
 .modalInput {
     height: 3.5vh;
     width: 30vw;

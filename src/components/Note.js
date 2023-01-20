@@ -177,7 +177,7 @@ export default function Note({
         </div>
       ) : (
         <h1 className={classes.instructions}>
-          Please select a book from the header to get started
+          {user ? 'Please select a book from the header to get started' : 'Please sign in or create an account'}
         </h1>
       )}
     </div>

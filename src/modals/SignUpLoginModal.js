@@ -55,6 +55,10 @@ export default function SignUpLoginModal({
     setIsNewUser((prevState) => !prevState);
   }
 
+  function actionWord() {
+    return <p className={classes.actionWord}>here</p>
+  }
+
   return (
     <Modal
       isOpen={isSignUpLoginModalOpen}
@@ -100,7 +104,7 @@ export default function SignUpLoginModal({
             className={classes.toggleButton}
             onClick={() => toggleIsNewUser()}
           >
-            {isNewUser ? "Back to Login" : "Click here to create an account"}
+            {isNewUser ? "Back to Login" : <div style={{display: 'flex', flexDirection: 'row'}}><span>Click <span className={classes.actionWord}>here</span> to sign up</span></div>}
           </button>
         </div>
       </div>
