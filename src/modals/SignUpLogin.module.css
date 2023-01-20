@@ -15,7 +15,7 @@
 }
 
 .actionWord {
-    color: lightseagreen;
+    color: var(--actionButton-color);
     text-shadow: 1px 1px 2.5px black;
     padding-right: .05vw;
     cursor: pointer;
@@ -27,13 +27,16 @@
     margin-bottom: 2vh;
     border-radius: 1vh;
     border-color: transparent;
+    outline-color: var(--actionButton-color)
 }
 
 .submitButton {
-    height: 2.5vh;
+    height: 3vh;
     width: 20vw;
     align-self: center;
     border-radius: .5vh;
     border-color: transparent;
+    box-shadow: 1px 1px 2.5px black;
+    background-color: var(--actionButton-color);
     margin-bottom: 1vh;
 }

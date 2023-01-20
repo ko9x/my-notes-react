@@ -9,6 +9,8 @@
   --background-color: #282c34;
   /* activated button */
   --activeButton-color: palegreen;
+  /* action button */
+  --actionButton-color: lightseagreen;
 }
 body {
   margin: 0;
