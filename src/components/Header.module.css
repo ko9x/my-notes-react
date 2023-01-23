@@ -21,14 +21,12 @@
 .bookContainer {
     display: flex !important;
     flex: 3;
-    flex-direction: row !important;
-    align-items: center;
     justify-content: space-around;
-    padding-right: -5vw;
 }
 .item {
     display: flex;
     align-self: center;
+    margin-left: .5vw;
     font-size: large;
     font-weight: 500;
     font-family:'Courier New', Courier, monospace;
