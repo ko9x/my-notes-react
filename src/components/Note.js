@@ -64,6 +64,7 @@ export default function Note({
       buttons: [
         {
           label: "Yes",
+          style: {background: 'red'},
           onClick: () => deleteNote(note),
         },
         {
