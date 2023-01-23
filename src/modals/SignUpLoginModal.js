@@ -24,6 +24,7 @@ const customStyles = {
 export default function SignUpLoginModal({
   isSignUpLoginModalOpen,
   closeModal,
+  handleNewDisplayName
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,12 +42,17 @@ export default function SignUpLoginModal({
     setUsername("");
   }
 
+  async function handleRegisterUser() {
+    await registerUserWithEmailAndPassword(email, password, username);
+    handleNewDisplayName(username);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     if (!isNewUser) {
       logInWithEmailAndPassword(email, password);
     } else {
-      registerUserWithEmailAndPassword(email, password, username);
+      handleRegisterUser();
     }
     resetModal();
   }

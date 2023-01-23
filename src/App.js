@@ -7,7 +7,7 @@ import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import SignUpLoginModal from "./modals/SignUpLoginModal";
 import EditModal from "./modals/EditModal";
-import { auth, database, signUserOut } from "./auth/firebase.js";
+import { auth, database, signUserOut, handleDeleteUser } from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 
@@ -50,12 +50,17 @@ export default function App() {
   const [selectedSection, setSelectedSection] = useState(null);
   const [newNote, setNewNote] = useState(null);
   const [user] = useAuthState(auth);
+  const [newDisplayName, setNewDisplayName] = useState(null);
 
   useEffect(() => {
     if (user) {
       setIsSignUpLoginModalOpen(false);
       getNotes();
+      if(user.displayName) {
+        setNewDisplayName(user.displayName)
+      }
     } else {
+      setNewDisplayName(null);
       setIsSignUpLoginModalOpen(true);
     }
   }, [user]);
@@ -285,6 +290,7 @@ export default function App() {
   }
 
   function handleLogOutUser() {
+    setNewDisplayName(null);
     signUserOut();
     resetNotes();
   }
@@ -298,11 +304,17 @@ export default function App() {
     setSelectedSection(null);
   }
 
+  function handleNewDisplayName(newName) {
+    setNewDisplayName(newName)
+  }
+
   return (
     <div className={classes.container}>
+      {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
       <SignUpLoginModal 
         isSignUpLoginModalOpen={isSignUpLoginModalOpen}
         closeModal={handleCloseSignUpLoginModal}
+        handleNewDisplayName={handleNewDisplayName}
       />
       <EditModal
         changedNoteContent={changedNoteContent}
@@ -333,6 +345,7 @@ export default function App() {
         user={user}
         signIn={handleLogInUser}
         signOut={handleLogOutUser}
+        newDisplayName={newDisplayName}
       />
       <div className={classes.leftSideBarContainer}>
         <SideBarWall />

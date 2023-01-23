@@ -1,6 +1,7 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
+import { auth } from '../auth/firebase.js'
 
 export default function Header({
   bookNames,
@@ -12,13 +13,19 @@ export default function Header({
   user,
   signIn,
   signOut,
+  newDisplayName,
 }) {
   const [activeBook, setActiveBook] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
   const inputRef = useRef();
 
   useEffect(() => {
     setActiveBook(defaultBook);
   }, [defaultBook]);
+
+  useEffect(() => {
+    setDisplayName(newDisplayName);
+  }, [newDisplayName])
 
   function handleBookSelection(book) {
     if (book !== "new") {
@@ -55,7 +62,7 @@ export default function Header({
     <div className={classes.container}>
       <div className={classes.logoContainer}>
         <h1 className={classes.logo}>
-          {user ? `${user?.displayName}'s Notes` : "My Notes"}
+          {displayName ? `${displayName}'s Notes` : 'My Notes'}
         </h1>
       </div>
       <div className={classes.bookContainer}>

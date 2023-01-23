@@ -28,6 +28,8 @@ const registerUserWithEmailAndPassword = async (email, password, username) => {
       .then(() => {
         updateProfile(auth.currentUser, {
           displayName: username
+        }).then(() => {
+          return username;
         })
       })
     } catch (err) {
