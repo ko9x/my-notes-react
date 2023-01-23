@@ -159,38 +159,10 @@ export default function App() {
     setSelectedNotes(singleSectionArr);
   }
 
-  function executeSearch(myArr, keyWord) {
-    const keyWordObjectsArr = [];
-    for (const key in myArr) {
-      let myWord = myArr[key];
-      if (myWord.title.includes(keyWord)) {
-        keyWordObjectsArr.push(myWord);
-      }
-      if (myWord.content.includes(keyWord)) {
-        keyWordObjectsArr.push(myWord);
-      }
-      if (myWord.important && myWord.important.includes(keyWord)) {
-        keyWordObjectsArr.push(myWord);
-      }
-      if (myWord.side && myWord.side.includes(keyWord)) {
-        keyWordObjectsArr.push(myWord);
-      }
-    }
-    // Take an array with duplicate objects and make a unique array using the id for each object
-    const arrWithDuplicates = keyWordObjectsArr;
-    const ids = arrWithDuplicates.map((object) => object.id);
-    const uniqueArr = arrWithDuplicates.filter(
-      ({ id }, index) => !ids.includes(id, index + 1)
-    );
-
+  function executeSearch(keyWord) {
     setSearchItem(keyWord);
-    setSelectedNotes(uniqueArr);
     setPageNames([]);
     setSectionNames([]);
-  }
-
-  function liftedSearchItem(searchItemBeingLifted) {
-    executeSearch(notes, searchItemBeingLifted);
   }
 
   function liftedBook(bookBeingLifted) {
@@ -339,7 +311,7 @@ export default function App() {
         bookNames={bookNames}
         selectedBook={liftedBook}
         defaultBook={selectedBook}
-        searchItem={liftedSearchItem}
+        searchItem={executeSearch}
         newPressed={newPressed}
         isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
         user={user}

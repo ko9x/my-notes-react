@@ -1,7 +1,6 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
-import { auth } from '../auth/firebase.js'
 
 export default function Header({
   bookNames,
