@@ -1,20 +1,21 @@
 ### Current Focus
-* Add some loading spinners
-    * When you do a search there should be a spinner
-    * When you submit the form it hangs sometimes so a loading spinner would be nice
-    * When you select reactjs or react native it hangs so a spinner would be nice there
-    * When the page is autologgin in it displays the login form for a split second
-        * Maybe we could add a timeout and a loading spinner to mask that
-
-### What to do next
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
+
+
+### What to do next
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
 * Make sure the app looks okay on smaller screens
     * move things in the header into a hamburger
     * make the sidebars less wide
         * only allow one sidebar open at a time on smaller screens
+* Add some loading spinners
+    * When you do a search there should be a spinner
+    * When you submit the form it hangs sometimes so a loading spinner would be nice
+    * When you select reactjs or react native it hangs so a spinner would be nice there
+    * When the page is autologgin in it displays the login form for a split second
+        * Maybe we could add a timeout and a loading spinner to mask that
 
 ### Styling
 * Style the SignUpLoginModal
@@ -24,7 +25,6 @@
     * a dark mode theme would be cool also
 
 ### Bugs
-* When you create a new account it doesn't show the new users displayName until you refresh
 * Figure out a way to scroll to the top of the page every time a new Page is selected
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
@@ -64,6 +64,7 @@
             * Not a perfect solution but it will work for now
     * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
 * if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
+* If you use the search feature and try to edit, the page is not getting set even thought the radio button shows a selection
 
 ### Done
 * Get the notes from the API
@@ -158,3 +159,5 @@
     * Maybe make the "new +" button float right and the other other button in a container that floats left
     * The logout button is also too wide.
         * The text is fine but the clickable area is much wider than the text
+* When you create a new account it doesn't show the new users displayName until you refresh
+* change color or radio buttons to the seagreen color
