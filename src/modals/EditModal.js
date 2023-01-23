@@ -211,16 +211,25 @@ export default function EditModal({
       return true;
     }
     if (newPage.name === null && selectedPage === null) {
-      setMissingPage(true);
-      return true;
+      if (!noteToEdit) {
+        setMissingPage(true);
+        return true;
+      } else {
+        if (noteToEdit.page && noteToEdit.page !== '') {
+          setNewPage({...newPage, name: noteToEdit.page});
+        } else {
+          setMissingSection(true);
+          return true;
+        }
+      }
     }
     if (newSection.name === null && selectedSection === null) {
       if (!noteToEdit) {
         setMissingSection(true);
-        return true
+        return true;
       } else {
-        if (noteToEdit.section) {
-          setNewSection({...newSection, name: noteToEdit.section})
+        if (noteToEdit.section && noteToEdit.section !== '') {
+          setNewSection({...newSection, name: noteToEdit.section});
         } else {
           setMissingSection(true);
           return true;
@@ -255,7 +264,11 @@ export default function EditModal({
     const updatedNote = {
       id: noteToEdit ? noteToEdit.id : newNoteKey,
       book: newBook.name ? newBook.name : selectedBook,
-      page: newPage.name ? newPage.name : selectedPage,
+      page: newPage.name 
+        ? newPage.name 
+        : selectedPage
+        ? selectedPage
+        : noteToEdit.page,
       section: newSection.name
         ? newSection.name
         : selectedSection
