@@ -7,6 +7,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import FlatList from "flatlist-react";
 import { remove, ref } from "firebase/database";
+import { InView, useInView } from "react-intersection-observer";
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -33,6 +34,7 @@ export default function Note({
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
   const [noteId, setNoteId] = useState(null);
   const noteRef = useRef(null);
+  const { ref, inView, entry } = useInView({})
 
   function storeNoteId(id) {
     setNoteId(id);
@@ -101,6 +103,12 @@ export default function Note({
     }
   }
 
+  function inViewHandler(inView, entry) {
+    if(inView) {
+      console.log('Section currently in view of the user:', entry.target.id); //@DEBUG
+    }
+  }
+
   function renderItem(note, index) {
     return (
       <div
@@ -121,6 +129,8 @@ export default function Note({
         >
           {showingNoteDetails === note.id && showNoteDetails(note)}
         </div>
+        <InView as='div' id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
+        </InView>
         <h1>
           <Highlighter
             highlightStyle={{ color: "#282c34" }}
@@ -181,6 +191,7 @@ export default function Note({
               list={keyWord ? notes : selectedNotes}
               renderItem={renderItem}
               searchCaseInsensitive
+              groupBy="section"
             />
           ) : (
             <h1 className={classes.instructions}>
