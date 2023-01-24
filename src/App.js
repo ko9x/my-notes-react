@@ -67,7 +67,7 @@ export default function App() {
 
   useEffect(() => {
     if (notes.length > 0) {
-      getBooks(notes);
+      createArrays(notes);
     }
   }, [notes]);
 
@@ -95,68 +95,129 @@ export default function App() {
     });
   }
 
-  function getBooks(myArr) {
-    const bookArr = [];
-    for (const key in myArr) {
-      const book = myArr[key].book;
-      if (!bookArr.includes(book)) {
-        bookArr.push(book);
-      }
-    }
-    setBookNames(bookArr);
-  }
+  // function getBooks(myArr) {
+  //   const bookArr = [];
+  //   for (const key in myArr) {
+  //     const book = myArr[key].book;
+  //     if (!bookArr.includes(book)) {
+  //       bookArr.push(book);
+  //     }
+  //   }
+  //   setBookNames(bookArr);
+  // }
 
-  function getPages(myArr, selectedBook) {
-    const pageArr = [];
-    for (const key in myArr) {
-      if (myArr[key].book === selectedBook) {
-        const page = myArr[key].page;
-        if (!pageArr.includes(page)) {
-          pageArr.push(page);
-        }
-      }
-    }
-    setPageNames(pageArr);
-  }
+  // function getPages(myArr, selectedBook) {
+  //   const pageArr = [];
+  //   for (const key in myArr) {
+  //     if (myArr[key].book === selectedBook) {
+  //       const page = myArr[key].page;
+  //       if (!pageArr.includes(page)) {
+  //         pageArr.push(page);
+  //       }
+  //     }
+  //   }
+  //   setPageNames(pageArr);
+  // }
 
-  function getSections(myArr, selectedBook, selectedPage) {
-    const sectionNameArr = [];
-    const sectionArr = [];
-    for (const key in myArr) {
-      const note = myArr[key];
-      if (myArr[key].book === selectedBook) {
-        if (myArr[key].page === selectedPage) {
-          const sectionName = myArr[key].section;
-          sectionArr.push(note);
-          if (!sectionNameArr.includes(sectionName)) {
-            sectionNameArr.push(sectionName);
-          }
-        }
-      }
-    }
-    setSectionNames(sectionNameArr);
-    setSelectedNotes(sectionArr);
-  }
+  // function getSections(myArr, selectedBook, selectedPage) {
+  //   const sectionNameArr = [];
+  //   const sectionArr = [];
+  //   for (const key in myArr) {
+  //     const note = myArr[key];
+  //     if (myArr[key].book === selectedBook) {
+  //       if (myArr[key].page === selectedPage) {
+  //         const sectionName = myArr[key].section;
+  //         sectionArr.push(note);
+  //         if (!sectionNameArr.includes(sectionName)) {
+  //           sectionNameArr.push(sectionName);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   setSectionNames(sectionNameArr);
+  //   setSelectedNotes(sectionArr);
+  // }
 
-  function getSingleSection(
+  // function createArrays(
+  //   myArr,
+  //   selectedBook,
+  //   selectedPage,
+  //   selectedSection
+  // ) {
+  //   const singleSectionArr = [];
+  //   for (const key in myArr) {
+  //     const note = myArr[key];
+  //     if (myArr[key].book === selectedBook) {
+  //       if (myArr[key].page === selectedPage) {
+  //         if (myArr[key].section === selectedSection) {
+  //           singleSectionArr.push(note);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   setSelectedSection(selectedSection);
+  //   setSelectedNotes(singleSectionArr);
+  // }
+
+  // function getBooks(myArr) {
+  //   const bookArr = [];
+  //   for (const key in myArr) {
+  //     const book = myArr[key].book;
+  //     if (!bookArr.includes(book)) {
+  //       bookArr.push(book);
+  //     }
+  //   }
+  //   setBookNames(bookArr);
+  // }
+
+  function createArrays(
     myArr,
-    selectedBook,
-    selectedPage,
-    selectedSection
+    selectedBook?,
+    selectedPage?,
+    selectedSection?
   ) {
+    const bookArr = [];
+    const pageArr = [];
+    const sectionArr = [];
+    const allSectionsArray = [];
     const singleSectionArr = [];
     for (const key in myArr) {
       const note = myArr[key];
+      const book = note.book
+      if(!bookArr.includes(book)) {
+        bookArr.push(book);
+      }
       if (myArr[key].book === selectedBook) {
+        const page = note.page;
+        if(!pageArr.includes(page)) {
+          pageArr.push(page);
+        }
         if (myArr[key].page === selectedPage) {
+          const section = note.section;
+          if(!sectionArr.includes(section)) {
+            sectionArr.push(section);
+            allSectionsArray.push(note);
+          }
           if (myArr[key].section === selectedSection) {
             singleSectionArr.push(note);
           }
         }
       }
     }
-    setSelectedSection(selectedSection);
-    setSelectedNotes(singleSectionArr);
+    if ((myArr) && (!selectedBook && !selectedPage && !selectedSection)) {
+      setBookNames(bookArr);
+    }
+    if ((myArr && selectedBook) && (!selectedPage && !selectedSection)) {
+      setPageNames(pageArr);
+    }
+    if ((myArr && selectedBook && selectedPage) && (!selectedSection)) {
+      setSectionNames(sectionArr);
+      setSelectedNotes(allSectionsArray);
+    }
+    if (myArr && selectedBook && selectedPage && selectedSection) {
+      setSelectedSection(selectedSection);
+      setSelectedNotes(singleSectionArr);
+    }
   }
 
   function executeSearch(keyWord) {
@@ -172,15 +233,12 @@ export default function App() {
       setSelectedPage(null);
       return;
     }
-    // if(searchItem) {
-    //   return;
-    // }
     if (bookBeingLifted === selectedBook) {
       return;
     } else {
       setSearchItem(null);
       setSelectedNotes([]);
-      getPages(notes, bookBeingLifted);
+      createArrays(notes, bookBeingLifted);
       setSelectedBook(bookBeingLifted);
       setSectionNames([]);
     }
@@ -188,21 +246,15 @@ export default function App() {
 
   function liftedPage(pageBeingLifted, theBook) {
     if (searchItem) {
-      getSections(notes, theBook, pageBeingLifted);
+      createArrays(notes, theBook, pageBeingLifted);
       return;
     }
-    // @TODO Need to figure out a better way to handle this
-
-    // if (pageBeingLifted === selectedPage) {
-    //   return;
-    // } else {
-    getSections(notes, selectedBook, pageBeingLifted);
+    createArrays(notes, selectedBook, pageBeingLifted);
     setSelectedPage(pageBeingLifted);
-    // }
   }
 
   function liftedSection(section) {
-    getSingleSection(notes, selectedBook, selectedPage, section);
+    createArrays(notes, selectedBook, selectedPage, section);
   }
 
   function handleModalOpen() {
@@ -229,11 +281,11 @@ export default function App() {
   }
 
   function newFetchedNotes() {
-    getPages(notes, newNote.book);
-    getSections(notes, newNote.book, newNote.page);
+    createArrays(notes, newNote.book);
+    createArrays(notes, newNote.book, newNote.page);
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
-    getSingleSection(notes, newNote.book, newNote.page, newNote.section);
+    createArrays(notes, newNote.book, newNote.page, newNote.section);
     setSelectedBook(newNote.book);
     setNewNote(null);
   }
