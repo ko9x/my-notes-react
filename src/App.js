@@ -208,6 +208,11 @@ export default function App() {
     setNewDisplayName(newName)
   }
 
+  function handleShowAllPageNotes() {
+    setSelectedSection(null);
+    createArrays(notes, null, selectedBook, null, selectedPage, () => {}, setSelectedNotes);
+  }
+
   return (
     <div className={classes.container}>
       {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
@@ -262,6 +267,7 @@ export default function App() {
           selectedItemName={liftedSection}
           defaultItem={selectedSection}
           sideBarPosition={"right"}
+          showAll={handleShowAllPageNotes}
         />
         <SideBarWall />
       </div>

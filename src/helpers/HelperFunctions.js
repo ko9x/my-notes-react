@@ -53,5 +53,5 @@ function createArrays(
     }
   }
   export {
-    createArrays
+    createArrays,
   }
