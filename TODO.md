@@ -4,6 +4,7 @@
 
 
 ### What to do next
+* Add an all sections button to the sections sidebar to show all the sections again if the user selected a single section
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
 * Make sure the app looks okay on smaller screens
@@ -18,8 +19,9 @@
         * Maybe we could add a timeout and a loading spinner to mask that
 
 ### Styling
+* See if Blake has any recommendations styling
+* Style the EditModal
 * Style the SignUpLoginModal
-* Style the EditModal 
 * Make some themes the user can choose from
     * like an iOS theme
     * a dark mode theme would be cool also
@@ -33,14 +35,11 @@
 ### What to do later
 
 ### Refactoring 
-* I believe the getBooks, getPages, and getSections functions in the App.js can be one function
-    * Just check if the arguement is null or not and act accordingly.
-    * This will result in one very large function but overall less code
-        * Is less code worth the lack of readability?
-        * Maybe break the giant function out into it's own helper function component?
+* We could maybe useReducer in the App.js to clean up the numberous useState calls
+    * There is a link in the react folder called useReducer use case that explains why it might make things cleaner
 * We could useReducer in the EditModal to clean up the numerous useState calls
     * There is a link in the react folder called useReducer use case that explains why it might make things cleaner
-* Create a useContext to pass the user and database where needed
+* Create a useContext to pass the user and database where needed?
 
 ### Fixed Bugs
 * The width of the right SideBar is preventing content from showing in the middle
@@ -161,3 +160,8 @@
         * The text is fine but the clickable area is much wider than the text
 * When you create a new account it doesn't show the new users displayName until you refresh
 * change color or radio buttons to the seagreen color
+* I believe the getBooks, getPages, and getSections functions in the App.js can be one function
+    * Just check if the arguement is null or not and act accordingly.
+    * This will result in one very large function but overall less code
+        * Is less code worth the lack of readability?
+        * Maybe break the giant function out into it's own helper function component?
