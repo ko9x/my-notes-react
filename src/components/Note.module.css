@@ -13,6 +13,11 @@
   padding-bottom: 30px;
   animation: fadeIn 2s;
 }
+.groupSeparator {
+  color: var(--activeButton-color);
+  text-shadow: var(--text-shadow);
+  font-family:'Courier New', Courier, monospace;
+}
 pre {
   background-color: #0d1117;
   padding: 5px;

@@ -25,7 +25,8 @@ export default function Note({
   editPressed,
   removeNoteFromArrays,
   database,
-  user
+  user,
+  handleSectionScroll
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -105,6 +106,7 @@ export default function Note({
 
   function inViewHandler(inView, entry) {
     if(inView) {
+      handleSectionScroll(entry.target.id);
       console.log('Section currently in view of the user:', entry.target.id); //@DEBUG
     }
   }
@@ -180,6 +182,10 @@ export default function Note({
     }
   }
 
+  const groupSeparator = (group, idx, groupLabel) => (
+    <><h1 className={classes.groupSeparator}>{groupLabel}</h1><hr></hr></>
+  )
+
   return (
     <div className={classes.container}>
       {bookIsSelected || keyWord ? (
@@ -192,6 +198,7 @@ export default function Note({
               renderItem={renderItem}
               searchCaseInsensitive
               groupBy="section"
+              groupSeparator={groupSeparator}
             />
           ) : (
             <h1 className={classes.instructions}>

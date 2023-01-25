@@ -208,9 +208,14 @@ export default function App() {
     setNewDisplayName(newName)
   }
 
+  // Delete this if we end up doing the scroll thing
   function handleShowAllPageNotes() {
     setSelectedSection(null);
     createArrays(notes, null, selectedBook, null, selectedPage, () => {}, setSelectedNotes);
+  }
+
+  function handleSectionScroll(sectionName) {
+    setSelectedSection(sectionName);
   }
 
   return (
@@ -280,6 +285,7 @@ export default function App() {
         removeNoteFromArrays={removeNoteFromArrays}
         user={user}
         database={database}
+        handleSectionScroll={handleSectionScroll}
       />
       <Footer />
     </div>
