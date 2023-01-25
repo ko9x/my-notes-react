@@ -7,7 +7,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import FlatList from "flatlist-react";
 import { remove, ref } from "firebase/database";
-import { InView, useInView } from "react-intersection-observer";
+import { InView } from "react-intersection-observer";
 
 function highlightKeyWord(myStr, myKeyWord) {
   const highlightedHtml = myStr.replaceAll(
@@ -26,27 +26,34 @@ export default function Note({
   removeNoteFromArrays,
   database,
   user,
-  handleSectionScroll
+  handleSectionScroll,
+  selectedSection
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
   });
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
-  const [noteId, setNoteId] = useState(null);
   const noteRef = useRef(null);
-  const { ref, inView, entry } = useInView({})
 
-  function storeNoteId(id) {
-    setNoteId(id);
-  }
+  useEffect(() => {
+      // scrollToNote();
+  }, [selectedSection])
 
   function scrollToNote() {
-    noteRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    const element = document.getElementById(`${selectedSection}Separator`)
+
+    if(element) {
+      element.scrollIntoView({
+        // behavior: 'smooth'
+      });
+    }
+  }
+
+  function inViewHandler(inView, entry) {
+    if(inView) {
+      handleSectionScroll(entry.target.id);
+    }
   }
 
   function handleNoteEditPress(note) {
@@ -104,24 +111,18 @@ export default function Note({
     }
   }
 
-  function inViewHandler(inView, entry) {
-    if(inView) {
-      handleSectionScroll(entry.target.id);
-      console.log('Section currently in view of the user:', entry.target.id); //@DEBUG
-    }
-  }
-
   function renderItem(note, index) {
     return (
-      <div
+      <InView as='div' rootMargin="100px" threshold={1} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
+        <div
         onClick={() => {
           handleSetNoteDetails(note.id);
         }}
         className={classes.note}
         key={`${note.id}${index}`}
-        ref={note.id === noteId ? noteRef : null}
+        ref={note.section === selectedSection ? noteRef : null}
+        id='outerDiv'
       >
-        {/* <button onClick={() => storeNoteId(note.id)}>Click Me</button> */}
         <div
           className={`${
             showingNoteDetails === note.id
@@ -131,8 +132,6 @@ export default function Note({
         >
           {showingNoteDetails === note.id && showNoteDetails(note)}
         </div>
-        <InView as='div' id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
-        </InView>
         <h1>
           <Highlighter
             highlightStyle={{ color: "#282c34" }}
@@ -167,6 +166,7 @@ export default function Note({
           </>
         )}
       </div>
+      </InView>
     );
   }
 
@@ -183,7 +183,7 @@ export default function Note({
   }
 
   const groupSeparator = (group, idx, groupLabel) => (
-    <><h1 className={classes.groupSeparator}>{groupLabel}</h1><hr></hr></>
+    <><h1 id={`${groupLabel}Separator`} className={classes.groupSeparator}>{groupLabel}</h1><hr></hr></>
   )
 
   return (

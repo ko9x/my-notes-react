@@ -129,6 +129,7 @@ export default function App() {
     setSelectedPage(pageBeingLifted);
   }
 
+  // Delete this if we end up using this scrolling sections feature
   function liftedSection(section) {
     createArrays(notes, null, selectedBook, null, selectedPage, null, setSelectedNotes, section, setSelectedSection);
   }
@@ -218,6 +219,10 @@ export default function App() {
     setSelectedSection(sectionName);
   }
 
+  function getSelectedSection(sectionName) {
+    setSelectedSection(sectionName);
+  }
+
   return (
     <div className={classes.container}>
       {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
@@ -269,7 +274,7 @@ export default function App() {
       <div className={classes.rightSideBarContainer}>
         <SideBar
           itemNameArray={isEditModalOpen ? null : sectionNames}
-          selectedItemName={liftedSection}
+          selectedItemName={getSelectedSection}
           defaultItem={selectedSection}
           sideBarPosition={"right"}
           showAll={handleShowAllPageNotes}
@@ -286,6 +291,7 @@ export default function App() {
         user={user}
         database={database}
         handleSectionScroll={handleSectionScroll}
+        selectedSection={selectedSection}
       />
       <Footer />
     </div>

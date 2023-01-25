@@ -6,7 +6,7 @@ export default function SideBar({
   selectedItemName,
   sideBarPosition,
   defaultItem,
-  showAll
+  showAll,
 }) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
