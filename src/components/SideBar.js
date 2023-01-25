@@ -12,6 +12,9 @@ export default function SideBar({
   const [currentItems, setCurrentItems] = useState([]);
 
   useEffect(() => {
+    if(sideBarPosition === 'right') {
+      handleItemSelection(itemNameArray[0]);
+    }
     handleItemNameArrayChange();
   }, [itemNameArray]);
   
