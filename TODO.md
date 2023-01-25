@@ -1,5 +1,5 @@
 ### Current Focus
-* Figure out how to get the scrolling to highlight the correct section and the jumping to a section when the button is clicked to work at the same time
+* Scroll to top of page when user does a search?
 
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
@@ -175,3 +175,7 @@
         * Is less code worth the lack of readability?
         * Maybe break the giant function out into it's own helper function component?
 * Add an "all sections" button to the sections sidebar to show all the sections again if the user selected a single section
+* Figure out how to get the scrolling to highlight the correct section and the jumping to a section when the button is clicked to work at the same time
+* Figure out a way to scroll the user to the top of the page when a new page is selected
+    * Make sure the first section is highlighted in the right sidebar
+* Can we scroll to the new note when a new note is added?
