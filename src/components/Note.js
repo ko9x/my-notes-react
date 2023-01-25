@@ -117,7 +117,7 @@ export default function Note({
 
   function renderItem(note, index) {
     return (
-      <InView as='div' rootMargin="100px" threshold={1} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
+      <InView as='div' id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
         <div
         onClick={() => {
           handleSetNoteDetails(note.id);
