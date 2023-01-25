@@ -13,7 +13,9 @@ export default function SideBar({
 
   useEffect(() => {
     if(sideBarPosition === 'right') {
-      handleItemSelection(itemNameArray[0]);
+      if(itemNameArray && itemNameArray.length > 0) {
+        handleItemSelection(itemNameArray[0]);
+      }
     }
     handleItemNameArrayChange();
   }, [itemNameArray]);
