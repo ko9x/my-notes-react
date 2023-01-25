@@ -1,10 +1,19 @@
 ### Current Focus
+* Figure out how to get the scrolling to highlight the correct section and the jumping to a section when the button is clicked to work at the same time
+
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
 
 ### What to do next
-* Add an all sections button to the sections sidebar to show all the sections again if the user selected a single section
+* Rework sections sidebar
+    * Option1 Group all the notes 
+        * Add a header at the beginning of each group
+            * Have the header persist like in noteworthy
+                * keep the functionality of clicking on a section only showing those notes and requiring a show all button
+    * Option2 have the sections the user is currently viewing highlighted in the sidebar
+        * if the user scrolls down or up to another section the highlighted section changes accordingly
+            * if the user clicks on a section the screen scrolls to that section
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
 * Make sure the app looks okay on smaller screens
@@ -165,3 +174,4 @@
     * This will result in one very large function but overall less code
         * Is less code worth the lack of readability?
         * Maybe break the giant function out into it's own helper function component?
+* Add an "all sections" button to the sections sidebar to show all the sections again if the user selected a single section
