@@ -47,10 +47,6 @@ function createArrays(
       setSectionNamesFunction(sectionArr);
       setSelectedNotesFunction(allSectionsArray);
     }
-    if (myArr && selectedBook && selectedPage && selectedSection) {
-      setSelectedSectionFunction(selectedSection);
-      setSelectedNotesFunction(singleSectionArr);
-    }
   }
   export {
     createArrays,

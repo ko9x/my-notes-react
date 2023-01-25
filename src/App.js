@@ -130,11 +130,6 @@ export default function App() {
     setSelectedPage(pageBeingLifted);
   }
 
-  // Delete this if we end up using this scrolling sections feature
-  function liftedSection(section) {
-    createArrays(notes, null, selectedBook, null, selectedPage, null, setSelectedNotes, section, setSelectedSection);
-  }
-
   function handleModalOpen() {
     setIsEditModalOpen(true);
   }
@@ -163,7 +158,6 @@ export default function App() {
     createArrays(notes, null, newNote.book, null, newNote.page, setSectionNames, setSelectedNotes);
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
-    createArrays(notes, null, newNote.book, null, newNote.page, null, setSelectedNotes, newNote.section, setSelectedSection);
     setSelectedBook(newNote.book);
     setNewNote(null);
   }
@@ -231,7 +225,6 @@ export default function App() {
         changedNoteContent={changedNoteContent}
         changeBook={liftedBook}
         changePage={liftedPage}
-        changeSection={liftedSection}
         isEditModalOpen={isEditModalOpen}
         closeModal={handleCloseEditModal}
         noteToEdit={noteToEdit}
