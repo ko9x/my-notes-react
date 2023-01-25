@@ -6,7 +6,6 @@ export default function SideBar({
   selectedItemName,
   sideBarPosition,
   defaultItem,
-  showAll,
 }) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +63,6 @@ export default function SideBar({
       } ${sideBarPosition === "left" ? classes.leftSideBarContainer : null}`}
     >
       <div className={classes.itemContainer}>
-        {sideBarPosition === 'right' && <><button onClick={() => showAll()} className={classes.item}>show all</button><hr style={{width: '85%'}}></hr></>}
         {currentItems ? currentItems.map((item, index) => {
               return (
                 <button

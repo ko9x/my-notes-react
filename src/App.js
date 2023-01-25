@@ -52,6 +52,7 @@ export default function App() {
   const [newNote, setNewNote] = useState(null);
   const [user] = useAuthState(auth);
   const [newDisplayName, setNewDisplayName] = useState(null);
+  const [userClickedSection, setUserClickedSection] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -209,18 +210,13 @@ export default function App() {
     setNewDisplayName(newName)
   }
 
-  // Delete this if we end up doing the scroll thing
-  function handleShowAllPageNotes() {
-    setSelectedSection(null);
-    createArrays(notes, null, selectedBook, null, selectedPage, () => {}, setSelectedNotes);
-  }
-
   function handleSectionScroll(sectionName) {
     setSelectedSection(sectionName);
   }
 
   function getSelectedSection(sectionName) {
     setSelectedSection(sectionName);
+    setUserClickedSection(true)
   }
 
   return (
@@ -277,7 +273,6 @@ export default function App() {
           selectedItemName={getSelectedSection}
           defaultItem={selectedSection}
           sideBarPosition={"right"}
-          showAll={handleShowAllPageNotes}
         />
         <SideBarWall />
       </div>
@@ -292,6 +287,8 @@ export default function App() {
         database={database}
         handleSectionScroll={handleSectionScroll}
         selectedSection={selectedSection}
+        userClickedSection={userClickedSection}
+        setUserClickedSection={setUserClickedSection}
       />
       <Footer />
     </div>

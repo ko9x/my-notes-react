@@ -27,7 +27,9 @@ export default function Note({
   database,
   user,
   handleSectionScroll,
-  selectedSection
+  selectedSection,
+  userClickedSection,
+  setUserClickedSection
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -37,7 +39,10 @@ export default function Note({
   const noteRef = useRef(null);
 
   useEffect(() => {
-      // scrollToNote();
+    if(userClickedSection) {
+      scrollToNote();
+      setUserClickedSection(false);
+    }
   }, [selectedSection])
 
   function scrollToNote() {
@@ -45,7 +50,6 @@ export default function Note({
 
     if(element) {
       element.scrollIntoView({
-        // behavior: 'smooth'
       });
     }
   }
