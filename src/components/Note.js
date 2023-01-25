@@ -117,7 +117,7 @@ export default function Note({
 
   function renderItem(note, index) {
     return (
-      <InView as='div' key={note.id} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
+      <InView as='div' delay={500} key={note.id} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
         <div
         onClick={() => {
           handleSetNoteDetails(note.id);
