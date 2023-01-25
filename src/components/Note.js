@@ -29,13 +29,15 @@ export default function Note({
   handleSectionScroll,
   selectedSection,
   userClickedSection,
-  setUserClickedSection
+  setUserClickedSection,
+  newlyAddedNote
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
     hljs.highlightAll();
   });
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
+  const [newlyAddedNoteId, setNewlyAddedNoteId] = useState(null);
   const noteRef = useRef(null);
 
   useEffect(() => {
@@ -45,6 +47,26 @@ export default function Note({
     }
   }, [selectedSection])
 
+  useEffect(() => {
+    if(newlyAddedNote) {
+      setNewlyAddedNoteId(newlyAddedNote.id)
+    }
+  }, [newlyAddedNote])
+
+  useEffect(() => {
+    if(newlyAddedNoteId) {
+        setTimeout(() => {
+          scrollToNewlyCreatedNote()
+        }, 1000)
+    }
+  }, [newlyAddedNoteId])
+
+  function scrollToNewlyCreatedNote() {
+    noteRef.current.scrollIntoView({
+      
+    })
+  }
+ 
   function scrollToNote() {
     const element = document.getElementById(`${selectedSection}Separator`)
 
@@ -124,7 +146,7 @@ export default function Note({
         }}
         className={classes.note}
         key={`${note.id}${index}`}
-        ref={note.section === selectedSection ? noteRef : null}
+        ref={note.id === newlyAddedNoteId ? noteRef : null}
         id='outerDiv'
       >
         <div

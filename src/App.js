@@ -282,6 +282,7 @@ export default function App() {
         selectedSection={selectedSection}
         userClickedSection={userClickedSection}
         setUserClickedSection={setUserClickedSection}
+        newlyAddedNote={newNote}
       />
       <Footer />
     </div>
