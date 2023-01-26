@@ -1,19 +1,9 @@
 ### Current Focus
-* Scroll to top of page when user does a search?
-
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
 
 ### What to do next
-* Rework sections sidebar
-    * Option1 Group all the notes 
-        * Add a header at the beginning of each group
-            * Have the header persist like in noteworthy
-                * keep the functionality of clicking on a section only showing those notes and requiring a show all button
-    * Option2 have the sections the user is currently viewing highlighted in the sidebar
-        * if the user scrolls down or up to another section the highlighted section changes accordingly
-            * if the user clicks on a section the screen scrolls to that section
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
 * Make sure the app looks okay on smaller screens
@@ -21,11 +11,15 @@
     * make the sidebars less wide
         * only allow one sidebar open at a time on smaller screens
 * Add some loading spinners
-    * When you do a search there should be a spinner
-    * When you submit the form it hangs sometimes so a loading spinner would be nice
-    * When you select reactjs or react native it hangs so a spinner would be nice there
-    * When the page is autologgin in it displays the login form for a split second
-        * Maybe we could add a timeout and a loading spinner to mask that
+    * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
+        * I already installed react-spinners so lets see if that one can do what we want it to
+            * Add a loading spinner anywhere we do a setTimeout
+            * When you do a search there should be a spinner
+            * When you submit the form it hangs sometimes so a loading spinner would be nice
+            * When you select reactjs or react native it hangs so a spinner would be nice there
+            * When the page is autologgin in it displays the login form for a split second
+                * Maybe we could add a timeout and a loading spinner to mask that
+* refactoring and documentation/commenting the code
 
 ### Styling
 * See if Blake has any recommendations styling
@@ -36,7 +30,8 @@
     * a dark mode theme would be cool also
 
 ### Bugs
-* Figure out a way to scroll to the top of the page every time a new Page is selected
+* If you switch from one page to another and they have a section with the same name it can cause the selected section to highligh the wrong section for a split second
+    * The real solution is to not use arrays of strings to identify things but to use arrays of objects that contain the string we want to use to identify things
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
@@ -179,3 +174,8 @@
 * Figure out a way to scroll the user to the top of the page when a new page is selected
     * Make sure the first section is highlighted in the right sidebar
 * Can we scroll to the new note when a new note is added?
+* Rework sections sidebar
+    * have the sections the user is currently viewing highlighted in the sidebar
+        * if the user scrolls down or up to another section the highlighted section changes accordingly
+            * if the user clicks on a section the screen scrolls to that section
+* Scroll to top of page when user does a search?
