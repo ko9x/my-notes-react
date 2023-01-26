@@ -1,7 +1,4 @@
 ### Current Focus
-* when creating a new note, the radio buttons aren't showing as selected but if you hit submit the page and section get applied
-    * It has something to do with updatedNote in the submit handler or the missingRadioValue function
-
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
@@ -20,6 +17,7 @@
             * When you do a search there should be a spinner
             * When you submit the form it hangs sometimes so a loading spinner would be nice
             * When you select reactjs or react native it hangs so a spinner would be nice there
+                * I think the renderWhenEmpty from react flatlist would be a place to start for this spinner
             * When the page is autologgin in it displays the login form for a split second
                 * Maybe we could add a timeout and a loading spinner to mask that
 * refactoring and documentation/commenting the code
@@ -33,16 +31,23 @@
     * a dark mode theme would be cool also
 
 ### Bugs
-* The "please complete the form" text doesn't go away when the user starts typing in the fields
-* If you switch from one page to another and they have a section with the same name it can cause the selected section to highligh the wrong section for a split second
+* The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
+    * The correct way is to pass an object that has an id of some sort and the string
+        * That way even though 2 pages have a section with the same name the app knows they are different sections
+            * This is also mentioned in the reactoring section
     * The real solution is to not use arrays of strings to identify things but to use arrays of objects that contain the string we want to use to identify things
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
+* The "please complete the form" text doesn't go away when the user starts typing in the fields
+* If you switch from one page to another and they have a section with the same name it can cause the selected section to highligh the wrong section for a split second
 
 ### What to do later
 
-### Refactoring 
+### Refactoring
+* Instead of passing arrays of strings we really should be passing arrays of objects with an id and the string
+    * That way the app doesn't get confused when 2 pages have a section with the same name for example
+        * This is also mentioned in the bugs section
 * We could maybe useReducer in the App.js to clean up the numberous useState calls
     * There is a link in the react folder called useReducer use case that explains why it might make things cleaner
 * We could useReducer in the EditModal to clean up the numerous useState calls
@@ -72,6 +77,8 @@
     * At the moment, you need to reselect your book when editing a searched note and if you have opened the edit modal your search will not work.
 * if there is a page name or section name with a space it breaks onto 2 lines when the sidebar closes
 * If you use the search feature and try to edit, the page is not getting set even thought the radio button shows a selection
+* when creating a new note, the radio buttons aren't showing as selected but if you hit submit the page and section get applied
+    * It has something to do with updatedNote in the submit handler or the missingRadioValue function
 
 ### Done
 * Get the notes from the API
