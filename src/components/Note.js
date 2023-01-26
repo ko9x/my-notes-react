@@ -56,15 +56,13 @@ export default function Note({
   useEffect(() => {
     if(newlyAddedNoteId) {
         setTimeout(() => {
-          scrollToNewlyCreatedNote()
+          scrollToSpecificNote()
         }, 1000)
     }
   }, [newlyAddedNoteId])
 
-  function scrollToNewlyCreatedNote() {
-    noteRef.current.scrollIntoView({
-      
-    })
+  function scrollToSpecificNote() {
+    noteRef.current.scrollIntoView()
   }
  
   function scrollToNote() {
