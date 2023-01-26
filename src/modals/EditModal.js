@@ -210,7 +210,7 @@ export default function EditModal({
       setMissingBook(true);
       return true;
     }
-    if (newPage.name === null && selectedPage === null) {
+    if (newPage.name === null && (selectedPage === null || !pageList.includes(selectedPage))) {
       if (!noteToEdit) {
         setMissingPage(true);
         return true;
@@ -223,7 +223,7 @@ export default function EditModal({
         }
       }
     }
-    if (newSection.name === null && selectedSection === null) {
+    if (newSection.name === null && (selectedSection === null || !sectionList.includes(selectedSection))) {
       if (!noteToEdit) {
         setMissingSection(true);
         return true;
