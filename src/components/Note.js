@@ -57,7 +57,7 @@ export default function Note({
     if(newlyAddedNoteId) {
         setTimeout(() => {
           scrollToSpecificNote()
-        }, 1000)
+        }, 500)
     }
   }, [newlyAddedNoteId])
 
@@ -75,7 +75,7 @@ export default function Note({
   }
 
   function inViewHandler(inView, entry) {
-    if(inView) {
+    if(inView && !keyWord) {
       handleSectionScroll(entry.target.id);
     }
   }
@@ -135,7 +135,34 @@ export default function Note({
     }
   }
 
+  function determineRef(note, theRef) {
+    if(newlyAddedNoteId) {
+      if(note.id === newlyAddedNoteId) {
+        return noteRef;
+      } else {
+        return null;
+      }
+    }
+    if(keyWord) {
+      if(note.id === searchedNotesIdArray[0]) {
+        return noteRef;
+      } else {
+        return null;
+      }
+    }
+  }
+
+  const searchedNotesIdArray = []
+
   function renderItem(note, index) {
+    if(keyWord) {
+      searchedNotesIdArray.push(note.id);
+    }
+    if(searchedNotesIdArray.length > 1) {
+      setTimeout(() => {
+        scrollToSpecificNote();
+      }, 500)
+    }
     return (
       <InView as='div' delay={500} key={note.id} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
         <div
@@ -143,9 +170,7 @@ export default function Note({
           handleSetNoteDetails(note.id);
         }}
         className={classes.note}
-        key={`${note.id}${index}`}
-        ref={note.id === newlyAddedNoteId ? noteRef : null}
-        id='outerDiv'
+        ref={determineRef(note)}
       >
         <div
           className={`${
