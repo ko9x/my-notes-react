@@ -110,7 +110,7 @@ export default function SignUpLoginModal({
             className={classes.toggleButton}
             onClick={() => toggleIsNewUser()}
           >
-            {isNewUser ? "Back to Login" : <div style={{display: 'flex', flexDirection: 'row'}}><span>Click <span className={classes.actionWord}>here</span> to sign up</span></div>}
+            {isNewUser ? <div style={{display: 'flex', flexDirection: 'row'}}><span>Back to <span className={classes.actionWord}>Login</span></span></div> : <div style={{display: 'flex', flexDirection: 'row'}}><span>Click here to <span className={classes.actionWord}>Sign up</span></span></div>}
           </button>
         </div>
       </div>
