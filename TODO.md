@@ -1,4 +1,7 @@
 ### Current Focus
+* when creating a new note, the radio buttons aren't showing as selected but if you hit submit the page and section get applied
+    * It has something to do with updatedNote in the submit handler or the missingRadioValue function
+
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
@@ -30,6 +33,7 @@
     * a dark mode theme would be cool also
 
 ### Bugs
+* The "please complete the form" text doesn't go away when the user starts typing in the fields
 * If you switch from one page to another and they have a section with the same name it can cause the selected section to highligh the wrong section for a split second
     * The real solution is to not use arrays of strings to identify things but to use arrays of objects that contain the string we want to use to identify things
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
