@@ -117,6 +117,7 @@ export default function App() {
       setSelectedNotes([]);
       createArrays(notes, null, bookBeingLifted, setPageNames);
       setSelectedBook(bookBeingLifted);
+      setSelectedPage(null);
       setSectionNames([]);
     }
   }
