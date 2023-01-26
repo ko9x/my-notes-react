@@ -354,6 +354,7 @@ export default function EditModal({
     }
   }
 
+  // These determineArray functions could probably be refactored into one function
   function determineRadioBookNameArray() {
     if(newBook.name) {
       return [newBook.name, ...bookList];
@@ -386,6 +387,7 @@ export default function EditModal({
 
   function handleOnChangeInput(e, setFunc) {
     if(e.target.value !== '') {
+      setMissingRequiredInformation(false);
       setFunc(false);
     }
   }
