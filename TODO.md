@@ -31,6 +31,9 @@
     * a dark mode theme would be cool also
 
 ### Bugs
+* Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
+* If you open the edit modal and then close it, you get scrolled to the top of the page instead of staying on that note
+    * Which is kind of annoying if you don't remember where that note was
 * The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
     * The correct way is to pass an object that has an id of some sort and the string
         * That way even though 2 pages have a section with the same name the app knows they are different sections
