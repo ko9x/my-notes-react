@@ -249,7 +249,7 @@ export default function EditModal({
     }
   }
 
-  // **************** Submit Handler Section Start ****************************
+  // **************** Submit Handler Section Start ******************************************************************************
   function handleSubmit(e) {
     e.preventDefault();
     if(missingTextValue() || missingRadioValue()) {
@@ -283,23 +283,15 @@ export default function EditModal({
     update(ref(database, url), updatedNote)
     .then(() => {
       resetModal();
-          if (!noteToEdit) {
-            locationChanged(updatedNote);
-          } else {
-            if (locationMoved(updatedNote)) {
-              locationChanged(updatedNote);
-            } else {
-              changedNoteContent(updatedNote);
-            }
-          }
-          handleCloseModal();
+      locationChanged(updatedNote);
+      handleCloseModal();
     })
     .catch((error) => {
       console.log('save failed', error ); //@DEBUG
     })
   }
 
-  // **************** Submit Handler Section End ****************************
+  // **************** Submit Handler Section End ******************************************************************************
 
   useEffect(() => {
     if (isSearch && noteToEdit) {

@@ -172,11 +172,6 @@ export default function App() {
     setSelectedSection(null);
   }
 
-  function changedNoteContent(newNote) {
-    addNote(notes, setNotes, newNote, newNote.id);
-    addNote(selectedNotes, setSelectedNotes, newNote, newNote.id);
-  }
-
   function removeNoteFromArrays(note) {
     removeNote(notes, setNotes, note.id);
     removeNote(selectedNotes, setSelectedNotes, note.id);
@@ -223,7 +218,6 @@ export default function App() {
         handleNewDisplayName={handleNewDisplayName}
       />
       <EditModal
-        changedNoteContent={changedNoteContent}
         changeBook={liftedBook}
         changePage={liftedPage}
         isEditModalOpen={isEditModalOpen}
