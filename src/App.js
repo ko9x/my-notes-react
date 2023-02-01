@@ -12,25 +12,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 import { createArrays } from './helpers/HelperFunctions';
 
-function addNote(arr, func, newNote, newNoteId) {
-  let count = 0;
-  const newArray = arr.map((note) => {
-    if (note.id === newNoteId) {
-      count++;
-      return newNote;
-    } else {
-      return note;
-    }
-  });
-  if (count < 1) {
-    func((prevState) => {
-      return prevState.concat(newNote);
-    });
-  } else {
-    func(newArray);
-  }
-}
-
 function removeNote(arr, func, newNoteId) {
   const newArray = arr.filter((note) => note.id !== newNoteId);
   func(newArray);
