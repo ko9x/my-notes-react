@@ -13,7 +13,6 @@ function createArrays(
     const pageArr = [];
     const sectionArr = [];
     const allSectionsArray = [];
-    const singleSectionArr = [];
     for (const key in myArr) {
       const note = myArr[key];
       const book = note.book
@@ -21,18 +20,16 @@ function createArrays(
         bookArr.push(book);
       }
       if (myArr[key].book === selectedBook) {
+        console.log('selectedBook', selectedBook); //@DEBUG
         const page = note.page;
-        if(!pageArr.includes(page)) {
-          pageArr.push(page);
+        if(!pageArr.some(pageObj => pageObj.name === page)) {
+          pageArr.push({id: key, name: page});
         }
-        if (myArr[key].page === selectedPage) {
+        if (myArr[key].page === selectedPage?.name) {
           const section = note.section;
           allSectionsArray.push(note);
-          if(!sectionArr.includes(section)) {
-            sectionArr.push(section);
-          }
-          if (myArr[key].section === selectedSection) {
-            singleSectionArr.push(note);
+          if(!sectionArr.some(sectionObj => sectionObj.name === section)) {
+            sectionArr.push({id: key, name: section});
           }
         }
       }

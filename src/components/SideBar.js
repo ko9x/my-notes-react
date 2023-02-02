@@ -41,13 +41,9 @@ export default function SideBar({
     }
   }
 
-  // @TODO this is kind of clunky. We should have an ID or something to verify the array has changed
   function handleTransitionEnd() {
     if(itemNameArray) {
-      if(itemNameArray[0] !== currentItems[0]) {
-        handleItemNameArrayChange();
-      }
-      if (itemNameArray.length !== currentItems.length) {
+      if(itemNameArray[0].id !== currentItems[0].id) {
         handleItemNameArrayChange();
       }
     }
@@ -73,11 +69,11 @@ export default function SideBar({
                 <button
                   onMouseDown={() => handleItemSelection(item)}
                   className={`${classes.item} ${
-                    activeItem === item ? classes.active : null
+                    activeItem?.name === item?.name ?  classes.active : null
                   }`}
                   key={index}
                 >
-                  {item}
+                  {item.name}
                 </button>
               );
             })
