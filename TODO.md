@@ -31,6 +31,7 @@
     * a dark mode theme would be cool also
 
 ### Bugs
+* Resolve all the useEffects that are missing dependencies
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
 * If you open the edit modal and then close it, you get scrolled to the top of the page instead of staying on that note
     * Which is kind of annoying if you don't remember where that note was
