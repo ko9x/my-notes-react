@@ -330,7 +330,7 @@ export default function EditModal({
   return (
     <Modal
       isOpen={isEditModalOpen}
-      onRequestClose={handleCloseModal}
+      onRequestClose={handleManualCloseModal}
       style={customStyles}
       contentLabel="Example Modal"
       closeTimeoutMS={500}
