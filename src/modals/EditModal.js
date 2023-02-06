@@ -70,7 +70,6 @@ export default function EditModal({
   useEffect(() => {
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
-    setSelectedSection(defaultSection);
     return () => {
       resetModal()
     }
