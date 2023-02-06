@@ -214,6 +214,7 @@ export default function App() {
         locationChanged={locationChanged}
         user={user}
         database={database}
+        setNewNote={setNewNote}
       />
       <Header
         bookNames={bookNames}

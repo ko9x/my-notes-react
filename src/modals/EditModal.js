@@ -42,7 +42,8 @@ export default function EditModal({
   createdNoteLocation,
   locationChanged,
   user,
-  database
+  database,
+  setNewNote
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -136,6 +137,11 @@ export default function EditModal({
     setSelectedSection(e.target.id);
     changeSection(e.target.id);
     setMissingSection(false);
+  }
+
+  function handleManualCloseModal() {
+    setNewNote(noteToEdit);
+    handleCloseModal();
   }
 
   function handleCloseModal() {
@@ -454,7 +460,7 @@ export default function EditModal({
           </form>
         </div>
         <div className={classes.closeButtonContainer}>
-          <button className={classes.closeButton} onClick={handleCloseModal}>
+          <button className={classes.closeButton} onClick={handleManualCloseModal}>
             close
           </button>
         </div>
