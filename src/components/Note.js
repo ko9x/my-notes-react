@@ -30,7 +30,7 @@ export default function Note({
   selectedSection,
   userClickedSection,
   setUserClickedSection,
-  newlyAddedNote
+  newlyAddedNote,
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -49,7 +49,13 @@ export default function Note({
 
   useEffect(() => {
     if(newlyAddedNote) {
-      setNewlyAddedNoteId(newlyAddedNote.id)
+      if(newlyAddedNoteId === newlyAddedNote.id) {
+        setTimeout(() => {
+          scrollToSpecificNote()
+        }, 500)
+      } else {
+        setNewlyAddedNoteId(newlyAddedNote.id)
+      }
     }
   }, [newlyAddedNote])
 
