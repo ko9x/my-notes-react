@@ -142,15 +142,16 @@ export default function Note({
   }
 
   function determineRef(note, theRef) {
-    if(newlyAddedNoteId) {
-      if(note.id === newlyAddedNoteId) {
+    if(keyWord) {
+      setNewlyAddedNoteId(null);
+      if(note.id === searchedNotesIdArray[0]) {
         return noteRef;
       } else {
         return null;
       }
     }
-    if(keyWord) {
-      if(note.id === searchedNotesIdArray[0]) {
+    if(newlyAddedNoteId) {
+      if(note.id === newlyAddedNoteId) {
         return noteRef;
       } else {
         return null;

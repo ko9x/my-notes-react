@@ -79,6 +79,7 @@ export default function App() {
   }
 
   function executeSearch(keyWord) {
+    setNewNote(null);
     setSearchItem(keyWord);
     setPageNames([]);
     setSectionNames([]);
