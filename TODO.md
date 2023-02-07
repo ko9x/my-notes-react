@@ -33,8 +33,6 @@
 ### Bugs
 * Resolve all the useEffects that are missing dependencies
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
-* If you open the edit modal and then close it, you get scrolled to the top of the page instead of staying on that note
-    * Which is kind of annoying if you don't remember where that note was
 * The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
     * The correct way is to pass an object that has an id of some sort and the string
         * That way even though 2 pages have a section with the same name the app knows they are different sections
@@ -43,7 +41,7 @@
 * when you delete the last note in a page or section it doesn't clear it from the sidebar
     * maybe we should do an API call when deleting an item
         * like we do when creating a new note
-* The "please complete the form" text doesn't go away when the user starts typing in the fields
+* (fixed?) The "please complete the form" text doesn't go away when the user starts typing in the fields
 * If you switch from one page to another and they have a section with the same name it can cause the selected section to highligh the wrong section for a split second
 
 ### What to do later
@@ -83,6 +81,11 @@
 * If you use the search feature and try to edit, the page is not getting set even thought the radio button shows a selection
 * when creating a new note, the radio buttons aren't showing as selected but if you hit submit the page and section get applied
     * It has something to do with updatedNote in the submit handler or the missingRadioValue function
+* If you open the edit modal and then close it, you get scrolled to the top of the page instead of staying on that note
+    * Which is kind of annoying if you don't remember where that note was
+        * this also happens if you edit the same note more than once
+* It is too easy set the wrong section when editing a note because the section get set to where you scrolled to.
+    * if you scroll down far enough that the next section gets highlighted, it will set the default section to that next section
 
 ### Done
 * Get the notes from the API
