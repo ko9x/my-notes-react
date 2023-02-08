@@ -52,7 +52,7 @@ function createArrays(
   const helpers = {
     codeWrap: {id: 1, name: 'code-wrap', code: '<pre><code></code></pre>'},
     pTag: {id: 2, name: 'p-tag', code: '<p></p>'},
-    aTag: {id: 3, name: 'a-tag', code: '<a href="" target="_blank"><a/>'},
+    aTag: {id: 3, name: 'a-tag', code: '<a href="" target="_blank">here<a/>'},
     lineBreak: {id: 4, name: 'line-break', code: '<br>'},
     nonBreakingSpace: {id: 5, name: 'non-breaking-space', code: ' &nbsp '},
     listItem: {id: 6, name: 'list-item', code: '<li></li>'},
