@@ -38,6 +38,7 @@ export default function Note({
   });
   const [showingNoteDetails, setShowingNoteDetails] = useState(false);
   const [newlyAddedNoteId, setNewlyAddedNoteId] = useState(null);
+  const [oneTime, setOneTime] = useState(false);
   const noteRef = useRef(null);
 
   useEffect(() => {
@@ -141,9 +142,11 @@ export default function Note({
     }
   }
 
-  function determineRef(note, theRef) {
+  function determineRef(note) {
     if(keyWord) {
-      setNewlyAddedNoteId(null);
+      if(newlyAddedNoteId) {
+        setNewlyAddedNoteId(null);
+      }
       if(note.id === searchedNotesIdArray[0]) {
         return noteRef;
       } else {
@@ -166,9 +169,13 @@ export default function Note({
       searchedNotesIdArray.push(note.id);
     }
     if(searchedNotesIdArray.length > 1) {
-      setTimeout(() => {
-        scrollToSpecificNote();
-      }, 500)
+      if(!oneTime) {
+        setTimeout(() => {
+          scrollToSpecificNote();
+          setOneTime(true);
+        }, 500);
+      }
+      
     }
     return (
       <InView as='div' delay={500} key={note.id} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
