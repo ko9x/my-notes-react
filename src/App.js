@@ -11,6 +11,7 @@ import { auth, database, signUserOut, handleDeleteUser } from "./auth/firebase.j
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 import { createArrays } from './helpers/HelperFunctions';
+import useWindowDimensions from "./hooks/useWindowDimensions";
 
 function removeNote(arr, func, newNoteId) {
   const newArray = arr.filter((note) => note.id !== newNoteId);
@@ -34,6 +35,7 @@ export default function App() {
   const [user] = useAuthState(auth);
   const [newDisplayName, setNewDisplayName] = useState(null);
   const [userClickedSection, setUserClickedSection] = useState(false);
+  const { height, width } = useWindowDimensions();
 
   useEffect(() => {
     if (user) {
