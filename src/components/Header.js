@@ -1,6 +1,8 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export default function Header({
   bookNames,
@@ -13,6 +15,8 @@ export default function Header({
   signIn,
   signOut,
   newDisplayName,
+  width,
+  height
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -57,69 +61,226 @@ export default function Header({
     }
   }
 
-  return (
-    <div className={classes.container}>
-      <div className={classes.logoContainer}>
-        <h1 className={classes.logo}>
-          {displayName ? `${displayName}'s Notes` : 'My Notes'}
-        </h1>
-      </div>
-      <div className={classes.bookContainer}>
-        {bookNames.map((book, index) => {
-          return (
+  if(width > 750) {
+    return (
+      <div className={classes.container}>
+        <div className={classes.logoContainer}>
+          <h1 className={classes.logo}>
+            {displayName ? `${displayName}'s Notes` : 'My Notes'}
+          </h1>
+        </div>
+        <div className={classes.bookContainer}>
+          {bookNames.map((book, index) => {
+            return (
+              <button
+                disabled={disabledButtonCheck()}
+                onMouseDown={() => handleBookSelection(book)}
+                className={`${classes.item} ${
+                  activeBook === book ? classes.active : null
+                }`}
+                key={index}
+              >
+                {book}
+              </button>
+            );
+          })}
+        </div>
+        <div className={classes.rightSideContainer}>
+          <div className={classes.rightSideContainerItems}>
             <button
               disabled={disabledButtonCheck()}
-              onMouseDown={() => handleBookSelection(book)}
-              className={`${classes.item} ${
-                activeBook === book ? classes.active : null
-              }`}
-              key={index}
+              onMouseDown={() => handleBookSelection("new")}
+              className={classes.item}
             >
-              {book}
+              new +
             </button>
-          );
-        })}
+          </div>
+          <div className={classes.rightSideContainerItems}>
+            <form onSubmit={onSubmit}>
+              <input
+                disabled={disabledButtonCheck()}
+                placeholder="search"
+                type="search"
+                ref={inputRef}
+              />
+            </form>
+          </div>
+          <div className={classes.rightSideContainerItems}>
+            {user ? (
+              <button
+                className={classes.item}
+                disabled={disabledButtonCheck()}
+                onClick={isModalOpen ? null : () => signOut()}
+              >
+                Log Out
+              </button>
+            ) : (
+              <button
+                className={classes.item}
+                disabled={isModalOpen && !user}
+                onClick={isModalOpen ? null : () => signIn()}
+              >
+                Sign in
+              </button>
+            )}
+          </div>
+        </div>
       </div>
-      <div className={classes.rightSideContainer}>
-        <div className={classes.rightSideContainerItems}>
+    );
+  }
+
+  if(width < 750) {
+    return (
+      <div className={classes.smallContainer}>
+        <div className={classes.smallLogoContainer}>
+          <h1 className={classes.smallLogo}>
+            {displayName ? `${displayName}'s Notes` : 'My Notes'}
+          </h1>
+        </div>
+        <div className={classes.bookContainer}>
+            <Dropdown options={['books', '1','2','3']} placeholder={'book'} />
+            <Dropdown options={['pages', '1','2','3']} placeholder={'book'} />
+            <Dropdown options={['sections', '1','2','3']} placeholder={'book'} />
+          {/* <button>Book</button> */}
+          <button>Page</button>
+          <button>Section</button>
+          {/* {bookNames.map((book, index) => {
+            return (
+              <button
+                disabled={disabledButtonCheck()}
+                onMouseDown={() => handleBookSelection(book)}
+                className={`${classes.item} ${
+                  activeBook === book ? classes.active : null
+                }`}
+                key={index}
+              >
+                {book}
+              </button>
+            );
+          })} */}
           <button
-            disabled={disabledButtonCheck()}
-            onMouseDown={() => handleBookSelection("new")}
-            className={classes.item}
-          >
-            new +
-          </button>
-        </div>
-        <div className={classes.rightSideContainerItems}>
-          <form onSubmit={onSubmit}>
-            <input
               disabled={disabledButtonCheck()}
-              placeholder="search"
-              type="search"
-              ref={inputRef}
-            />
-          </form>
+              onMouseDown={() => handleBookSelection("new")}
+              className={classes.smallItem}
+            >
+              new
+            </button>
+            {user ? (
+              <button
+                className={classes.smallItem}
+                disabled={disabledButtonCheck()}
+                onClick={isModalOpen ? null : () => signOut()}
+              >
+                logout
+              </button>
+            ) : (
+              <button
+                className={classes.smallItem}
+                disabled={isModalOpen && !user}
+                onClick={isModalOpen ? null : () => signIn()}
+              >
+                sign in
+              </button>
+            )}
         </div>
-        <div className={classes.rightSideContainerItems}>
-          {user ? (
-            <button
-              className={classes.item}
-              disabled={disabledButtonCheck()}
-              onClick={isModalOpen ? null : () => signOut()}
-            >
-              Log Out
-            </button>
-          ) : (
-            <button
-              className={classes.item}
-              disabled={isModalOpen && !user}
-              onClick={isModalOpen ? null : () => signIn()}
-            >
-              Sign in
-            </button>
-          )}
+        <div className={classes.bottomContainer}>
+          <div className={classes.rightSideContainerItems}>
+            <form onSubmit={onSubmit}>
+              <input
+                disabled={disabledButtonCheck()}
+                placeholder="search"
+                type="search"
+                ref={inputRef}
+              />
+            </form>
+          </div>
+          <div className={classes.rightSideContainerItems}>
+            {user ? (
+              <button
+                className={classes.item}
+                disabled={disabledButtonCheck()}
+                onClick={isModalOpen ? null : () => signOut()}
+              >
+                Log Out
+              </button>
+            ) : (
+              <button
+                className={classes.item}
+                disabled={isModalOpen && !user}
+                onClick={isModalOpen ? null : () => signIn()}
+              >
+                Sign in
+              </button>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  // return (
+  //   <div className={classes.container}>
+  //     <div className={classes.logoContainer}>
+  //       {/* <h1 className={classes.logo}>
+  //         {displayName ? `${displayName}'s Notes` : 'My Notes'}
+  //       </h1> */}
+  //     </div>
+  //     <div className={classes.bookContainer}>
+  //       {bookNames.map((book, index) => {
+  //         return (
+  //           <button
+  //             disabled={disabledButtonCheck()}
+  //             onMouseDown={() => handleBookSelection(book)}
+  //             className={`${classes.item} ${
+  //               activeBook === book ? classes.active : null
+  //             }`}
+  //             key={index}
+  //           >
+  //             {book}
+  //           </button>
+  //         );
+  //       })}
+  //     </div>
+  //     <div className={classes.rightSideContainer}>
+  //       <div className={classes.rightSideContainerItems}>
+  //         {/* <button
+  //           disabled={disabledButtonCheck()}
+  //           onMouseDown={() => handleBookSelection("new")}
+  //           className={classes.item}
+  //         >
+  //           new +
+  //         </button> */}
+  //       </div>
+  //       <div className={classes.rightSideContainerItems}>
+  //         <form onSubmit={onSubmit}>
+  //           <input
+  //             disabled={disabledButtonCheck()}
+  //             placeholder="search"
+  //             type="search"
+  //             ref={inputRef}
+  //           />
+  //         </form>
+  //       </div>
+  //       <div className={classes.rightSideContainerItems}>
+  //         {/* {user ? (
+  //           <button
+  //             className={classes.item}
+  //             disabled={disabledButtonCheck()}
+  //             onClick={isModalOpen ? null : () => signOut()}
+  //           >
+  //             Log Out
+  //           </button>
+  //         ) : (
+  //           <button
+  //             className={classes.item}
+  //             disabled={isModalOpen && !user}
+  //             onClick={isModalOpen ? null : () => signIn()}
+  //           >
+  //             Sign in
+  //           </button>
+  //         )} */}
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }

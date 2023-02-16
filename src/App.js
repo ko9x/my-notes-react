@@ -259,6 +259,8 @@ export default function App() {
         signIn={handleLogInUser}
         signOut={handleLogOutUser}
         newDisplayName={newDisplayName}
+        width={width}
+        height={height}
       />
       {width > 750 && (
         <div className={classes.leftSideBarContainer}>
