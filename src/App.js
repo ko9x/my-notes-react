@@ -7,10 +7,15 @@ import SideBarWall from "./components/SideBarWall.js";
 import Note from "./components/Note.js";
 import SignUpLoginModal from "./modals/SignUpLoginModal";
 import EditModal from "./modals/EditModal";
-import { auth, database, signUserOut, handleDeleteUser } from "./auth/firebase.js";
+import {
+  auth,
+  database,
+  signUserOut,
+  handleDeleteUser,
+} from "./auth/firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
-import { createArrays } from './helpers/HelperFunctions';
+import { createArrays } from "./helpers/HelperFunctions";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 
 function removeNote(arr, func, newNoteId) {
@@ -41,8 +46,8 @@ export default function App() {
     if (user) {
       setIsSignUpLoginModalOpen(false);
       getNotes();
-      if(user.displayName) {
-        setNewDisplayName(user.displayName)
+      if (user.displayName) {
+        setNewDisplayName(user.displayName);
       }
     } else {
       setNewDisplayName(null);
@@ -75,7 +80,7 @@ export default function App() {
         };
         transformedNotes.push(noteObj);
       }
-      
+
       setNotes(transformedNotes);
     });
   }
@@ -108,10 +113,26 @@ export default function App() {
 
   function liftedPage(pageBeingLifted, theBook) {
     if (searchItem) {
-      createArrays(notes, null, theBook, null, pageBeingLifted, setSectionNames, setSelectedNotes);
+      createArrays(
+        notes,
+        null,
+        theBook,
+        null,
+        pageBeingLifted,
+        setSectionNames,
+        setSelectedNotes
+      );
       return;
     }
-    createArrays(notes, null, selectedBook, null, pageBeingLifted, setSectionNames, setSelectedNotes);
+    createArrays(
+      notes,
+      null,
+      selectedBook,
+      null,
+      pageBeingLifted,
+      setSectionNames,
+      setSelectedNotes
+    );
     setSelectedPage(pageBeingLifted);
   }
 
@@ -140,7 +161,15 @@ export default function App() {
 
   function newFetchedNotes() {
     createArrays(notes, null, newNote.book, setPageNames);
-    createArrays(notes, null, newNote.book, null, newNote.page, setSectionNames, setSelectedNotes);
+    createArrays(
+      notes,
+      null,
+      newNote.book,
+      null,
+      newNote.page,
+      setSectionNames,
+      setSelectedNotes
+    );
     setSelectedPage(newNote.page);
     setSelectedSection(newNote.section);
     setSelectedBook(newNote.book);
@@ -181,7 +210,7 @@ export default function App() {
   }
 
   function handleNewDisplayName(newName) {
-    setNewDisplayName(newName)
+    setNewDisplayName(newName);
   }
 
   function handleSectionScroll(sectionName) {
@@ -190,13 +219,13 @@ export default function App() {
 
   function getSelectedSection(sectionName) {
     setSelectedSection(sectionName);
-    setUserClickedSection(true)
+    setUserClickedSection(true);
   }
 
   return (
     <div className={classes.container}>
       {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
-      <SignUpLoginModal 
+      <SignUpLoginModal
         isSignUpLoginModalOpen={isSignUpLoginModalOpen}
         closeModal={handleCloseSignUpLoginModal}
         handleNewDisplayName={handleNewDisplayName}
@@ -231,24 +260,28 @@ export default function App() {
         signOut={handleLogOutUser}
         newDisplayName={newDisplayName}
       />
-      <div className={classes.leftSideBarContainer}>
-        <SideBarWall />
-        <SideBar
-          itemNameArray={isEditModalOpen ? null : pageNames}
-          selectedItemName={liftedPage}
-          defaultItem={selectedPage}
-          sideBarPosition={"left"}
-        />
-      </div>
-      <div className={classes.rightSideBarContainer}>
-        <SideBar
-          itemNameArray={isEditModalOpen ? null : sectionNames}
-          selectedItemName={getSelectedSection}
-          defaultItem={selectedSection}
-          sideBarPosition={"right"}
-        />
-        <SideBarWall />
-      </div>
+      {width > 750 && (
+        <div className={classes.leftSideBarContainer}>
+          <SideBarWall />
+          <SideBar
+            itemNameArray={isEditModalOpen ? null : pageNames}
+            selectedItemName={liftedPage}
+            defaultItem={selectedPage}
+            sideBarPosition={"left"}
+          />
+        </div>
+      )}
+      {width > 750 && (
+        <div className={classes.rightSideBarContainer}>
+          <SideBar
+            itemNameArray={isEditModalOpen ? null : sectionNames}
+            selectedItemName={getSelectedSection}
+            defaultItem={selectedSection}
+            sideBarPosition={"right"}
+          />
+          <SideBarWall />
+        </div>
+      )}
       <Note
         notes={notes}
         selectedNotes={selectedNotes}
