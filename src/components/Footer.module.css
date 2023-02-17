@@ -1,5 +1,4 @@
 .container {
-  height: 5vh;
   width: 100vw;
   margin-top: -6vh;
   background-color: var(--primary-color);
@@ -11,8 +10,14 @@
   position: relative;
   z-index: 100;
   justify-content: center;
+  padding-bottom: .5vh;
 }
 .footerText {
   align-self: center;
   padding-top: 1.5vh;
+  margin-bottom: 1.5;
+}
+.logout {
+  border-radius: 25px;
+  background-color: white;
 }

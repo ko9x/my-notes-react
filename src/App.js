@@ -299,7 +299,7 @@ export default function App() {
         setUserClickedSection={setUserClickedSection}
         newlyAddedNote={newNote}
       />
-      <Footer />
+      <Footer width={width} height={height} user={user} signOut={handleLogOutUser} />
     </div>
   );
 }
