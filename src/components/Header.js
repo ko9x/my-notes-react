@@ -6,6 +6,8 @@ import "../customStyles/styles.css";
 
 export default function Header({
   bookNames,
+  pageNames,
+  sectionNames,
   selectedBook,
   searchItem,
   defaultBook,
@@ -59,6 +61,50 @@ export default function Header({
     if (!user) {
       return true;
     }
+  }
+
+  function createOptionsArray(name, list) {
+    const arrWithName = [name]
+    list.forEach((item) => {
+      arrWithName.push(item);
+    })
+    return arrWithName;
+  }
+
+  if (width < 750) {
+    return (
+      <div className={classes.smallContainer}>
+        <div className={classes.smallLogoContainer}>
+          <h1 className={classes.smallLogo}>
+            {displayName ? `${displayName}'s Notes` : "My Notes"}
+          </h1>
+        </div>
+        <div className={classes.smallBookContainerTop}>
+          <Dropdown options={createOptionsArray('books', bookNames)} placeholder={"book"} />
+          <Dropdown disabled={pageNames.length < 1} options={createOptionsArray('pages', pageNames)} placeholder={"page"} />
+          <Dropdown disabled={sectionNames.length < 1} options={createOptionsArray('sections', sectionNames)} placeholder={"section"}
+          />
+        </div>
+        <div className={classes.smallBookContainerBottom}>
+          <button
+              disabled={disabledButtonCheck()}
+              onMouseDown={() => handleBookSelection("new")}
+              className={classes.smallNewButton}
+            >
+              new +
+            </button>
+          <form onSubmit={onSubmit}>
+              <input
+                className={classes.smallInput}
+                disabled={disabledButtonCheck()}
+                placeholder="search"
+                type="search"
+                ref={inputRef}
+              />
+            </form>
+        </div>
+      </div>
+    );
   }
 
   if (width > 750) {
@@ -124,42 +170,6 @@ export default function Header({
               </button>
             )}
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (width < 750) {
-    return (
-      <div className={classes.smallContainer}>
-        <div className={classes.smallLogoContainer}>
-          <h1 className={classes.smallLogo}>
-            {displayName ? `${displayName}'s Notes` : "My Notes"}
-          </h1>
-        </div>
-        <div className={classes.smallBookContainerTop}>
-          <Dropdown options={["books", "1", "2", "3"]} placeholder={"book"} />
-          <Dropdown options={["pages", "1", "2", "3"]} placeholder={"page"} />
-          <Dropdown options={["section", "1", "2", "3"]} placeholder={"section"}
-          />
-        </div>
-        <div className={classes.smallBookContainerBottom}>
-          <button
-              disabled={disabledButtonCheck()}
-              onMouseDown={() => handleBookSelection("new")}
-              className={classes.smallNewButton}
-            >
-              new +
-            </button>
-          <form onSubmit={onSubmit}>
-              <input
-                className={classes.smallInput}
-                disabled={disabledButtonCheck()}
-                placeholder="search"
-                type="search"
-                ref={inputRef}
-              />
-            </form>
         </div>
       </div>
     );

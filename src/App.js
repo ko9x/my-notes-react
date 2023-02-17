@@ -250,6 +250,8 @@ export default function App() {
       />
       <Header
         bookNames={bookNames}
+        pageNames={pageNames}
+        sectionNames={sectionNames}
         selectedBook={liftedBook}
         defaultBook={selectedBook}
         searchItem={executeSearch}
