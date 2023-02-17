@@ -1,15 +1,25 @@
 ### Current Focus
+* Make sure the app looks okay on smaller screens
+    * (done) style the header for smaller screens
+    * (done) Change the instrucitons text that mentions the sidebars
+    * (done) Don't show the sidebars if the screen width is less than 750
+    * If you select develper and then angularfire or some other long name the dropdown buttons get too wide.
+        * Make it a horizontal flat list?
+    * fix the positioning of the modal
+    * make sure the modal works and is user friendly
+        * horizontal flatlists?
+    * style the dropdown
+        * make it look like it is extending down?
+        * make the drop down close if the user presses anywhere else on the screen
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
 
 ### What to do next
+* Make the book names in the header a horizontal flatlist?
+    * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
-* Make sure the app looks okay on smaller screens
-    * move things in the header into a hamburger
-    * make the sidebars less wide
-        * only allow one sidebar open at a time on smaller screens
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
         * I already installed react-spinners so lets see if that one can do what we want it to
@@ -23,6 +33,8 @@
 * refactoring and documentation/commenting the code
 
 ### Styling
+* The container height on the notes.js needs to be more dynamic
+    * If the user is on mobile and goes to landscape mode the container height causes a white gap at the bottom of the screen
 * See if Blake has any recommendations styling
 * Style the EditModal
 * Style the SignUpLoginModal
