@@ -2,7 +2,7 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import '../customStyles/styles.css';
 
 export default function Header({
   bookNames,
@@ -137,27 +137,10 @@ export default function Header({
             {displayName ? `${displayName}'s Notes` : 'My Notes'}
           </h1>
         </div>
-        <div className={classes.bookContainer}>
-            <Dropdown options={['books', '1','2','3']} placeholder={'book'} />
-            <Dropdown options={['pages', '1','2','3']} placeholder={'book'} />
-            <Dropdown options={['sections', '1','2','3']} placeholder={'book'} />
-          {/* <button>Book</button> */}
-          <button>Page</button>
-          <button>Section</button>
-          {/* {bookNames.map((book, index) => {
-            return (
-              <button
-                disabled={disabledButtonCheck()}
-                onMouseDown={() => handleBookSelection(book)}
-                className={`${classes.item} ${
-                  activeBook === book ? classes.active : null
-                }`}
-                key={index}
-              >
-                {book}
-              </button>
-            );
-          })} */}
+        <div className={classes.smallBookContainer}>
+            <Dropdown arrowClassName={classes.dropdownArrow} options={['books', '1','2','3']} placeholder={'book'} />
+            <Dropdown options={['pages', '1','2','3']} placeholder={'page'} />
+            <Dropdown options={['sections', '1','2','3']} placeholder={'section'} />
           <button
               disabled={disabledButtonCheck()}
               onMouseDown={() => handleBookSelection("new")}
@@ -165,7 +148,7 @@ export default function Header({
             >
               new
             </button>
-            {user ? (
+            {/* {user ? (
               <button
                 className={classes.smallItem}
                 disabled={disabledButtonCheck()}
@@ -181,7 +164,7 @@ export default function Header({
               >
                 sign in
               </button>
-            )}
+            )} */}
         </div>
         <div className={classes.bottomContainer}>
           <div className={classes.rightSideContainerItems}>

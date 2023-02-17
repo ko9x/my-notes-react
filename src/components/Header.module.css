@@ -39,19 +39,16 @@
   margin-bottom: 0;
   font-family:'Courier New', Courier, monospace;
   flex: 16;
-  /* align-items: center;
-  justify-content: center; */
   animation: fadeIn 3s;
 }
 .bookContainer {
-    display: flex !important;
-    flex: 3;
-    justify-content: space-around;
+  display: flex !important;
+  flex: 3;
+  justify-content: space-around;
 }
 .smallBookContainer {
-    display: flex !important;
-    flex: 3;
-    justify-content: space-around;
+  display: flex !important;
+  justify-content: center;
 }
 .item {
     display: flex;
@@ -111,3 +108,4 @@
     opacity: 1;
   }
 }
+
