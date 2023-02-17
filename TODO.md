@@ -11,6 +11,10 @@
     * style the dropdown
         * make it look like it is extending down?
         * make the drop down close if the user presses anywhere else on the screen
+        * use the functionality of the Object Array options to style the first item in the drop down
+            * the npm site for react-dropdown is in the developer/react folder
+
+
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
