@@ -1,22 +1,19 @@
 .container {
-    display: flex !important;
-    flex-direction: row !important;
-    height: 100px;
-    width: 100vw;
-    background-color: var(--primary-color);
-    position: relative;
-    z-index: 100;
-    box-shadow: 2px -5px 20px black;
+  display: flex !important;
+  flex-direction: row !important;
+  height: 100px;
+  width: 100vw;
+  background-color: var(--primary-color);
+  position: relative;
+  z-index: 100;
+  box-shadow: 2px -5px 20px black;
 }
 .smallContainer {
-    /* display: flex !important; */
-    /* flex-direction: row !important; */
-    height: 100px;
-    width: 100vw;
-    background-color: var(--primary-color);
-    position: relative;
-    z-index: 100;
-    box-shadow: 2px -5px 20px black;
+  width: 100vw;
+  background-color: var(--primary-color);
+  position: relative;
+  z-index: 100;
+  box-shadow: 2px -5px 20px black;
 }
 .logoContainer {
   display: flex;
@@ -25,11 +22,9 @@
 .smallLogoContainer {
   display: flex;
   flex-direction: column;
-  /* flex: 1; */
 }
 .logo {
-  margin-top: 0;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   flex: 1;
   align-self: center;
   animation: fadeIn 3s;
@@ -37,7 +32,7 @@
 .smallLogo {
   margin-top: 0;
   margin-bottom: 0;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   flex: 16;
   animation: fadeIn 3s;
 }
@@ -46,38 +41,56 @@
   flex: 3;
   justify-content: space-around;
 }
-.smallBookContainer {
+.smallBookContainerTop {
   display: flex !important;
   justify-content: center;
+  padding-bottom: 1vh;
+}
+.smallBookContainerBottom {
+  display: flex !important;
+  justify-content: space-around;
+  padding-bottom: 1vh;
 }
 .item {
-    display: flex;
-    align-self: center;
-    margin-left: .5vw;
-    font-size: large;
-    font-weight: 500;
-    font-family:'Courier New', Courier, monospace;
-    text-decoration: none;
-    border: none;
-    background: none;
-    cursor: pointer;
+  display: flex;
+  align-self: center;
+  margin-left: 0.5vw;
+  font-size: large;
+  font-weight: 500;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 .smallItem {
-    display: flex;
-    align-self: center;
-    margin-left: .5vw;
-    font-size: large;
-    font-weight: 500;
-    font-family:'Courier New', Courier, monospace;
-    text-decoration: none;
-    border: none;
-    background: none;
-    cursor: pointer;
+  display: flex;
+  align-self: center;
+  margin-left: 0.5vw;
+  font-size: large;
+  font-weight: 500;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.smallNewButton {
+  background-color: white;
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: "Courier New", Courier, monospace;
+  font-size: large;
+}
+.smallInput {
+  border-radius: 25px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: medium;
 }
 .active {
-    color: var(--activeButton-color);
-    text-shadow: var(--text-shadow);
-    font-weight: 600;
+  color: var(--activeButton-color);
+  text-shadow: var(--text-shadow);
+  font-weight: 600;
 }
 .rightSideContainer {
   display: flex;
@@ -88,18 +101,15 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-top: .8vh;
+  padding-top: 0.8vh;
+}
+.bottomContainerItems {
+  display: flex;
+  flex-direction: row;
 }
 .rightSideContainerItems {
   padding-right: 1vw;
 }
-.logOut {
-    font-family:'Courier New', Courier, monospace;
-    align-self: center;
-    width: 15%;
-    cursor: pointer;
-}
-
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -108,4 +118,3 @@
     opacity: 1;
   }
 }
-
