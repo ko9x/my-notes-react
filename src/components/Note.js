@@ -31,6 +31,7 @@ export default function Note({
   userClickedSection,
   setUserClickedSection,
   newlyAddedNote,
+  width
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -265,7 +266,7 @@ export default function Note({
             />
           ) : (
             <h1 className={classes.instructions}>
-              Please select a page from the sidebar
+              {width > 750 ? 'Please select a page from the sidebar' : 'Please select a page from the "page" dropdown' }
             </h1>
           )}
         </div>

@@ -253,6 +253,8 @@ export default function App() {
         pageNames={pageNames}
         sectionNames={sectionNames}
         selectedBook={liftedBook}
+        selectedPage={liftedPage}
+        selectedSection={getSelectedSection}
         defaultBook={selectedBook}
         searchItem={executeSearch}
         newPressed={newPressed}
@@ -300,6 +302,7 @@ export default function App() {
         userClickedSection={userClickedSection}
         setUserClickedSection={setUserClickedSection}
         newlyAddedNote={newNote}
+        width={width}
       />
       <Footer width={width} height={height} user={user} signOut={handleLogOutUser} />
     </div>

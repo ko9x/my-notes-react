@@ -9,6 +9,8 @@ export default function Header({
   pageNames,
   sectionNames,
   selectedBook,
+  selectedPage,
+  selectedSection,
   searchItem,
   defaultBook,
   newPressed,
@@ -64,10 +66,10 @@ export default function Header({
   }
 
   function createOptionsArray(name, list) {
-    const arrWithName = [name]
+    const arrWithName = [name];
     list.forEach((item) => {
       arrWithName.push(item);
-    })
+    });
     return arrWithName;
   }
 
@@ -80,28 +82,41 @@ export default function Header({
           </h1>
         </div>
         <div className={classes.smallBookContainerTop}>
-          <Dropdown options={createOptionsArray('books', bookNames)} placeholder={"book"} />
-          <Dropdown disabled={pageNames.length < 1} options={createOptionsArray('pages', pageNames)} placeholder={"page"} />
-          <Dropdown disabled={sectionNames.length < 1} options={createOptionsArray('sections', sectionNames)} placeholder={"section"}
+          <Dropdown
+            options={createOptionsArray("books", bookNames)}
+            onChange={(e) => handleBookSelection(e.value)}
+            placeholder={"book"}
+          />
+          <Dropdown
+            disabled={pageNames.length < 1}
+            options={createOptionsArray("pages", pageNames)}
+            onChange={(e) => selectedPage(e.value)}
+            placeholder={"page"}
+          />
+          <Dropdown
+            disabled={sectionNames.length < 1}
+            options={createOptionsArray("sections", sectionNames)}
+            onChange={(e) => selectedSection(e.value)}
+            placeholder={"section"}
           />
         </div>
         <div className={classes.smallBookContainerBottom}>
           <button
-              disabled={disabledButtonCheck()}
-              onMouseDown={() => handleBookSelection("new")}
-              className={classes.smallNewButton}
-            >
-              new +
-            </button>
+            disabled={disabledButtonCheck()}
+            onMouseDown={() => handleBookSelection("new")}
+            className={classes.smallNewButton}
+          >
+            new +
+          </button>
           <form onSubmit={onSubmit}>
-              <input
-                className={classes.smallInput}
-                disabled={disabledButtonCheck()}
-                placeholder="search"
-                type="search"
-                ref={inputRef}
-              />
-            </form>
+            <input
+              className={classes.smallInput}
+              disabled={disabledButtonCheck()}
+              placeholder="search"
+              type="search"
+              ref={inputRef}
+            />
+          </form>
         </div>
       </div>
     );
