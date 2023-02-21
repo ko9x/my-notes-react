@@ -1,8 +1,7 @@
 import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
-import Dropdown from "react-dropdown";
-import "../customStyles/styles.css";
+import Select from "react-select";
 
 export default function Header({
   bookNames,
@@ -66,12 +65,19 @@ export default function Header({
   }
 
   function createOptionsArray(name, list) {
-    const arrWithName = [name];
+    const arrWithName = [{value: name, label: name}];
     list.forEach((item) => {
-      arrWithName.push(item);
+      arrWithName.push({value: item, label: item});
     });
     return arrWithName;
   }
+
+  const selectStyles = {
+    control: (baseStyles) => ({
+      ...baseStyles,
+      borderColor: 'black'
+    })
+  };
 
   if (width < 750) {
     return (
@@ -82,19 +88,26 @@ export default function Header({
           </h1>
         </div>
         <div className={classes.smallBookContainerTop}>
-          <Dropdown
+          <Select
+            styles={selectStyles}
+            components={{
+              IndicatorSeparator: () => null,
+              IndicatorsContainer: () => null
+            }}
             options={createOptionsArray("books", bookNames)}
             onChange={(e) => handleBookSelection(e.value)}
             placeholder={"book"}
           />
-          <Dropdown
-            disabled={pageNames.length < 1}
+          <Select
+            styles={selectStyles}
+            isDisabled={pageNames.length < 1}
             options={createOptionsArray("pages", pageNames)}
             onChange={(e) => selectedPage(e.value)}
             placeholder={"page"}
           />
-          <Dropdown
-            disabled={sectionNames.length < 1}
+          <Select
+            styles={selectStyles}
+            isDisabled={sectionNames.length < 1}
             options={createOptionsArray("sections", sectionNames)}
             onChange={(e) => selectedSection(e.value)}
             placeholder={"section"}
@@ -106,7 +119,7 @@ export default function Header({
             onMouseDown={() => handleBookSelection("new")}
             className={classes.smallNewButton}
           >
-            new +
+            new | +
           </button>
           <form onSubmit={onSubmit}>
             <input
