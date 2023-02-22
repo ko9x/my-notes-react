@@ -250,7 +250,8 @@ export default function App() {
         setNewNote={setNewNote}
         width={width}
       />
-      <Header
+      {(isEditModalOpen || isSignUpLoginModalOpen) && (width < 750) ? null : (
+        <Header
         bookNames={bookNames}
         pageNames={pageNames}
         sectionNames={sectionNames}
@@ -268,8 +269,12 @@ export default function App() {
         width={width}
         height={height}
       />
+      )}
       {width > 750 && (
-        <div className={classes.leftSideBarContainer} style={{height: height, overflow: 'auto'}}>
+        <div
+          className={classes.leftSideBarContainer}
+          style={{ height: height, overflow: "auto" }}
+        >
           <SideBarWall />
           <SideBar
             itemNameArray={isEditModalOpen ? null : pageNames}
@@ -280,7 +285,10 @@ export default function App() {
         </div>
       )}
       {width > 750 && (
-        <div className={classes.rightSideBarContainer} style={{height: height, overflow: 'auto'}}>
+        <div
+          className={classes.rightSideBarContainer}
+          style={{ height: height, overflow: "auto" }}
+        >
           <SideBar
             itemNameArray={isEditModalOpen ? null : sectionNames}
             selectedItemName={getSelectedSection}
@@ -307,7 +315,14 @@ export default function App() {
         width={width}
         height={height}
       />
-      <Footer width={width} height={height} user={user} signOut={handleLogOutUser} />
+      {(isEditModalOpen || isSignUpLoginModalOpen) && (width < 750) ? null : (
+        <Footer
+          width={width}
+          height={height}
+          user={user}
+          signOut={handleLogOutUser}
+        />
+      )}
     </div>
   );
 }

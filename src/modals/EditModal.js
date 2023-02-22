@@ -478,7 +478,7 @@ export default function EditModal({
                 sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
-            <div style={{ width: "69.1%", paddingTop: "20px" }}>
+            <div style={{ width: "69.1%", paddingTop: "20px", paddingBottom: width < 750 ? '150px' : null }}>
               <button
                 disabled={handleEnableSubmitButton()}
                 className={classes.submitButton}
@@ -491,14 +491,14 @@ export default function EditModal({
             </div>
           </form>
         </div>
-        <div className={classes.closeButtonContainer}>
+        {width > 750 ? <div className={classes.closeButtonContainer}>
           <button
             className={classes.closeButton}
             onClick={handleManualCloseModal}
           >
             close
           </button>
-        </div>
+        </div> : null }
       </div>
     </Modal>
   );
