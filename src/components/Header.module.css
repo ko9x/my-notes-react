@@ -79,11 +79,16 @@
   background-color: white;
   border-radius: 5px;
   font-weight: 400;
-  color: grey;
+  color: hsl(0, 0%, 25%);
   font-size: medium;
+  padding-right: 5px;
+}
+.smallPlus {
+  color: hsl(0, 0%, 80%);
+  padding-left: 3px;
 }
 .smallInput {
-  border-radius: 5px;
+  border-radius: 25px;
   font-size: medium;
 }
 .active {

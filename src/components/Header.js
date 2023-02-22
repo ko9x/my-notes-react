@@ -75,8 +75,17 @@ export default function Header({
   const selectStyles = {
     control: (baseStyles) => ({
       ...baseStyles,
-      borderColor: 'black'
+      borderColor: 'black',
+    }),
+    dropdownIndicator: (baseStyles) => ({
+      ...baseStyles,
+      paddingRight: '3px',
+      paddingLeft: '0'
     })
+  };
+
+  const componentOptions = {
+    IndicatorSeparator: () => null
   };
 
   if (width < 750) {
@@ -90,16 +99,14 @@ export default function Header({
         <div className={classes.smallBookContainerTop}>
           <Select
             styles={selectStyles}
-            components={{
-              IndicatorSeparator: () => null,
-              IndicatorsContainer: () => null
-            }}
+            components={componentOptions}
             options={createOptionsArray("books", bookNames)}
             onChange={(e) => handleBookSelection(e.value)}
             placeholder={"book"}
           />
           <Select
             styles={selectStyles}
+            components={componentOptions}
             isDisabled={pageNames.length < 1}
             options={createOptionsArray("pages", pageNames)}
             onChange={(e) => selectedPage(e.value)}
@@ -107,6 +114,7 @@ export default function Header({
           />
           <Select
             styles={selectStyles}
+            components={componentOptions}
             isDisabled={sectionNames.length < 1}
             options={createOptionsArray("sections", sectionNames)}
             onChange={(e) => selectedSection(e.value)}
@@ -119,7 +127,7 @@ export default function Header({
             onMouseDown={() => handleBookSelection("new")}
             className={classes.smallNewButton}
           >
-            new | +
+            new <span className={classes.smallPlus}>+</span>
           </button>
           <form onSubmit={onSubmit}>
             <input
