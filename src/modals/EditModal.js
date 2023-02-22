@@ -5,22 +5,11 @@ import { useEffect, useRef } from "react";
 import HelperButtons from "../components/HelperButtons";
 import RadioManager from "../components/RadioManager";
 import { ref, child, push, update } from "firebase/database";
-import { insertHelperText, helpers, fixCaret } from "../helpers/HelperFunctions";
-
-const customStyles = {
-  content: {
-    height: "80vh",
-    width: "70vw",
-    position: "relative",
-    zIndex: "200",
-    marginLeft: "11vw",
-    marginTop: "8vh",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    backgroundColor: "grey",
-  },
-};
+import {
+  insertHelperText,
+  helpers,
+  fixCaret,
+} from "../helpers/HelperFunctions";
 
 export default function EditModal({
   isEditModalOpen,
@@ -34,7 +23,6 @@ export default function EditModal({
   defaultSection,
   changeBook,
   changePage,
-  changeSection,
   isSearching,
   createdNote,
   changedNoteLocation,
@@ -43,7 +31,8 @@ export default function EditModal({
   locationChanged,
   user,
   database,
-  setNewNote
+  setNewNote,
+  width
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -60,7 +49,8 @@ export default function EditModal({
   const [missingBook, setMissingBook] = useState(false);
   const [missingPage, setMissingPage] = useState(false);
   const [missingSection, setMissingSection] = useState(false);
-  const [missingRequiredInformation, setMissingRequiredInformation] = useState(false);
+  const [missingRequiredInformation, setMissingRequiredInformation] =
+    useState(false);
 
   const titleRef = useRef();
   const contentRef = useRef();
@@ -71,17 +61,29 @@ export default function EditModal({
     setSelectedBook(defaultBook);
     setSelectedPage(defaultPage);
     return () => {
-      resetModal()
-    }
-  }, [
-    defaultBook,
-    defaultPage,
-    defaultSection,
-  ]);
+      resetModal();
+    };
+  }, [defaultBook, defaultPage, defaultSection]);
 
   useEffect(() => {
     setIsSearch(isSearching);
   }, [isSearching]);
+
+  const customStyles = {
+    content: {
+      height: "80vh",
+      width: "70vw",
+      position: "relative",
+      zIndex: "200",
+      marginLeft: width > 750 ? "11vw" : null,
+      marginTop: "8vh",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      backgroundColor: "grey",
+      borderRadius: '10px'
+    },
+  };
 
   function resetModal() {
     setNewBook({ changing: false, name: null });
@@ -134,7 +136,6 @@ export default function EditModal({
   function handleSectionChange(e) {
     setNewSection({ changing: false, name: null });
     setSelectedSection(e.target.id);
-    changeSection(e.target.id);
     setMissingSection(false);
   }
 
@@ -153,26 +154,32 @@ export default function EditModal({
       setMissingBook(true);
       return true;
     }
-    if (newPage.name === null && (selectedPage === null || !pageList.includes(selectedPage))) {
+    if (
+      newPage.name === null &&
+      (selectedPage === null || !pageList.includes(selectedPage))
+    ) {
       if (!noteToEdit) {
         setMissingPage(true);
         return true;
       } else {
-        if (noteToEdit.page && noteToEdit.page !== '') {
-          setNewPage({...newPage, name: noteToEdit.page});
+        if (noteToEdit.page && noteToEdit.page !== "") {
+          setNewPage({ ...newPage, name: noteToEdit.page });
         } else {
           setMissingSection(true);
           return true;
         }
       }
     }
-    if (newSection.name === null && (selectedSection === null || !sectionList.includes(selectedSection))) {
+    if (
+      newSection.name === null &&
+      (selectedSection === null || !sectionList.includes(selectedSection))
+    ) {
       if (!noteToEdit) {
         setMissingSection(true);
         return true;
       } else {
-        if (noteToEdit.section && noteToEdit.section !== '') {
-          setNewSection({...newSection, name: noteToEdit.section});
+        if (noteToEdit.section && noteToEdit.section !== "") {
+          setNewSection({ ...newSection, name: noteToEdit.section });
         } else {
           setMissingSection(true);
           return true;
@@ -182,24 +189,24 @@ export default function EditModal({
   }
 
   function missingTextValue() {
-    if(titleRef.current?.value === '') {
+    if (titleRef.current?.value === "") {
       setMissingTitle(true);
-      return true
+      return true;
     }
-    if(contentRef.current?.value === '') {
+    if (contentRef.current?.value === "") {
       setMissingContent(true);
-      return true
+      return true;
     }
   }
 
   // **************** Submit Handler Section Start ******************************************************************************
   function handleSubmit(e) {
     e.preventDefault();
-    if(missingTextValue() || missingRadioValue()) {
+    if (missingTextValue() || missingRadioValue()) {
       setMissingRequiredInformation(true);
-      return
+      return;
     }
-    const newNoteKey = push(child(ref(database), 'notes')).key;
+    const newNoteKey = push(child(ref(database), "notes")).key;
     const url = noteToEdit
       ? `notes/${user.uid}/${noteToEdit.id}`
       : `notes/${user.uid}/${newNoteKey}`;
@@ -207,8 +214,8 @@ export default function EditModal({
     const updatedNote = {
       id: noteToEdit ? noteToEdit.id : newNoteKey,
       book: newBook.name ? newBook.name : selectedBook,
-      page: newPage.name 
-        ? newPage.name 
+      page: newPage.name
+        ? newPage.name
         : selectedPage
         ? selectedPage
         : noteToEdit.page,
@@ -224,14 +231,14 @@ export default function EditModal({
     };
 
     update(ref(database, url), updatedNote)
-    .then(() => {
-      resetModal();
-      locationChanged(updatedNote);
-      handleCloseModal();
-    })
-    .catch((error) => {
-      console.log('save failed', error ); //@DEBUG
-    })
+      .then(() => {
+        resetModal();
+        locationChanged(updatedNote);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.log("save failed", error); //@DEBUG
+      });
   }
 
   // **************** Submit Handler Section End ******************************************************************************
@@ -244,7 +251,7 @@ export default function EditModal({
       setSelectedSection(noteToEdit.section);
       setIsSearch(false);
     }
-  }, [isSearch, noteToEdit])
+  }, [isSearch, noteToEdit]);
 
   useEffect(() => {
     if (selectedPage && !sectionList) {
@@ -291,7 +298,7 @@ export default function EditModal({
 
   // These determineArray functions could probably be refactored into one function
   function determineRadioBookNameArray() {
-    if(newBook.name) {
+    if (newBook.name) {
       return [newBook.name, ...bookList];
     } else {
       return bookList;
@@ -302,7 +309,7 @@ export default function EditModal({
     if (newBook.name) {
       return newPage.name ? [newPage.name] : [];
     } else {
-      return newPage.name ? [newPage.name, ...pageList] : pageList
+      return newPage.name ? [newPage.name, ...pageList] : pageList;
     }
   }
 
@@ -310,7 +317,7 @@ export default function EditModal({
     if (newBook.name || newPage.name) {
       return newSection.name ? [newSection.name] : [];
     } else {
-      return newSection.name ? [newSection.name, ...sectionList] : sectionList
+      return newSection.name ? [newSection.name, ...sectionList] : sectionList;
     }
   }
 
@@ -321,7 +328,7 @@ export default function EditModal({
   }
 
   function handleOnChangeInput(e, setFunc) {
-    if(e.target.value !== '') {
+    if (e.target.value !== "") {
       setMissingRequiredInformation(false);
       setFunc(false);
     }
@@ -336,7 +343,7 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-        <div>
+        <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '1vw'}}>
           <RadioManager
             missingItem={missingBook}
             newItem={newBook}
@@ -344,7 +351,7 @@ export default function EditModal({
             handleSetNewItem={handleSetNewItem}
             itemList={bookList}
             setNewItem={setNewBook}
-            itemPropertyName={'book'}
+            itemPropertyName={"book"}
             setMissingItem={setMissingBook}
             determineSelectedItem={determineSelectedItem}
             noteToEdit={noteToEdit}
@@ -358,7 +365,7 @@ export default function EditModal({
             handleSetNewItem={handleSetNewItem}
             itemList={pageList}
             setNewItem={setNewPage}
-            itemPropertyName={'page'}
+            itemPropertyName={"page"}
             setMissingItem={setMissingPage}
             determineSelectedItem={determineSelectedItem}
             noteToEdit={noteToEdit}
@@ -372,13 +379,15 @@ export default function EditModal({
             handleSetNewItem={handleSetNewItem}
             itemList={sectionList}
             setNewItem={setNewSection}
-            itemPropertyName={'section'}
+            itemPropertyName={"section"}
             setMissingItem={setMissingSection}
             determineSelectedItem={determineSelectedItem}
             noteToEdit={noteToEdit}
             handleItemChange={handleSectionChange}
             determinePropertyNameArray={determineRadioSectionNameArray}
           />
+        </div>
+        <div>
           <form onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
@@ -387,22 +396,30 @@ export default function EditModal({
               id="title"
               defaultValue={noteToEdit?.title}
               className={classes.modalInput}
-              placeholder='Enter a title'
-              onChange={e => handleOnChangeInput(e, setMissingTitle)}
+              placeholder="Enter a title"
+              onChange={(e) => handleOnChangeInput(e, setMissingTitle)}
             />
-            {missingTitle && <p className={classes.validationWarning}>Title is required</p>}
+            {missingTitle && (
+              <p className={classes.validationWarning}>Title is required</p>
+            )}
             <div className={classes.textAreaHeaderContainer}>
               <div onClick={() => toggleContentSize()}>
-                <h2 style={{marginBottom: '0px'}}>Content</h2>
-                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+                <h2 style={{ marginBottom: "0px" }}>Content</h2>
+                <p
+                  style={{ fontSize: "small", marginTop: "0px" }}
+                >{`(click to expand)`}</p>
               </div>
-              <HelperButtons insertHelperText={insertHelperText} selectedRef={contentRef} helpers={helpers} />
+              <HelperButtons
+                insertHelperText={insertHelperText}
+                selectedRef={contentRef}
+                helpers={helpers}
+              />
             </div>
             <textarea
               ref={contentRef}
-              onChange={e => handleOnChangeInput(e, setMissingContent)}
+              onChange={(e) => handleOnChangeInput(e, setMissingContent)}
               defaultValue={noteToEdit?.content}
-              placeholder='Enter content'
+              placeholder="Enter content"
               id="content"
               className={`${classes.modalTextArea} ${
                 contentSize === "large"
@@ -410,13 +427,21 @@ export default function EditModal({
                   : classes.modalTextAreaMediumHeight
               }`}
             ></textarea>
-            {missingContent && <p className={classes.validationWarning}>Content is required</p>}
+            {missingContent && (
+              <p className={classes.validationWarning}>Content is required</p>
+            )}
             <div className={classes.textAreaHeaderContainer}>
               <div onClick={() => toggleImportantSize()}>
-                <h2 style={{marginBottom: '0px'}}>Important Note</h2>
-                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+                <h2 style={{ marginBottom: "0px" }}>Important Note</h2>
+                <p
+                  style={{ fontSize: "small", marginTop: "0px" }}
+                >{`(click to expand)`}</p>
               </div>
-              <HelperButtons insertHelperText={insertHelperText} selectedRef={importantRef} helpers={helpers} />
+              <HelperButtons
+                insertHelperText={insertHelperText}
+                selectedRef={importantRef}
+                helpers={helpers}
+              />
             </div>
             <textarea
               ref={importantRef}
@@ -433,10 +458,16 @@ export default function EditModal({
             ></textarea>
             <div className={classes.textAreaHeaderContainer}>
               <div onClick={() => toggleSideSize()}>
-                <h2 style={{marginBottom: '0px'}}>Side Note</h2>
-                <p style={{fontSize: 'small', marginTop: '0px'}}>{`(click to expand)`}</p>
+                <h2 style={{ marginBottom: "0px" }}>Side Note</h2>
+                <p
+                  style={{ fontSize: "small", marginTop: "0px" }}
+                >{`(click to expand)`}</p>
               </div>
-              <HelperButtons insertHelperText={insertHelperText} selectedRef={sideRef} helpers={helpers} />
+              <HelperButtons
+                insertHelperText={insertHelperText}
+                selectedRef={sideRef}
+                helpers={helpers}
+              />
             </div>
             <textarea
               ref={sideRef}
@@ -453,13 +484,18 @@ export default function EditModal({
                 className={classes.submitButton}
               >
                 <p>Submit</p>
-                <p style={{color: 'red'}}>{missingRequiredInformation && 'Please complete the form'}</p>
+                <p style={{ color: "red" }}>
+                  {missingRequiredInformation && "Please complete the form"}
+                </p>
               </button>
             </div>
           </form>
         </div>
         <div className={classes.closeButtonContainer}>
-          <button className={classes.closeButton} onClick={handleManualCloseModal}>
+          <button
+            className={classes.closeButton}
+            onClick={handleManualCloseModal}
+          >
             close
           </button>
         </div>

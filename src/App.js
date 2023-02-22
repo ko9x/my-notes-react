@@ -247,6 +247,7 @@ export default function App() {
         user={user}
         database={database}
         setNewNote={setNewNote}
+        width={width}
       />
       <Header
         bookNames={bookNames}

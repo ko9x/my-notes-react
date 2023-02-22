@@ -1,0 +1,19 @@
+.noteInputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1vh;
+}
+.inputButtons {
+    padding: 1vh;
+    margin-top: .5vh;
+    border-radius: 5px;
+    border-width: 1px;
+}
+.confirmButton {
+    background-color: var(--actionButton-color);
+}

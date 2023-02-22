@@ -2,13 +2,7 @@ import './Radio.module.css';
 
 export default function Radio({ nameArray, selectionFunction, selectedItem }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-      }}
-    >
+    <div>
       {nameArray?.length > 0 &&
         nameArray.map((itemName, index) => (
           <div key={`${itemName}${index}`}>

@@ -1,5 +1,7 @@
-.radioTitle {
+.radioContainer {
     display: flex;
+    flex: 1;
+    flex-direction: column;
     font-family:'Courier New', Courier, monospace;
 }
 .validationWarning {

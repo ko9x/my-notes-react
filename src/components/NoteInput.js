@@ -1,3 +1,5 @@
+import classes from "./NoteInput.module.css";
+
 export default function NoteInput({
   selectedItem,
   newItem,
@@ -7,36 +9,63 @@ export default function NoteInput({
   itemProperty,
   itemFunction,
   itemPropertyName,
-  validationFunction
+  validationFunction,
 }) {
   function handleSetNewItemName(e) {
     if (e.target.value === "" || hasDuplicate(list, e.target.value)) {
-      handleSetNewItem({ text: "setNameNull" }, itemProperty, itemFunction, itemPropertyName);
+      handleSetNewItem(
+        { text: "setNameNull" },
+        itemProperty,
+        itemFunction,
+        itemPropertyName
+      );
     } else {
-      handleSetNewItem({ text: "hasValue", payload: e.target.value }, itemProperty, itemFunction, itemPropertyName);
+      handleSetNewItem(
+        { text: "hasValue", payload: e.target.value },
+        itemProperty,
+        itemFunction,
+        itemPropertyName
+      );
     }
   }
 
   return (
-    <>
+    <div className={classes.noteInputContainer}>
       <input
         type="text"
         placeholder={selectedItem}
         onChange={(e) => handleSetNewItemName(e)}
       />
-      <button
-        style={{ marginLeft: "1.5vw" }}
-        disabled={newItem.name === null}
-        onClick={() => handleSetNewItem({ text: "confirm" }, itemProperty, itemFunction, itemPropertyName, validationFunction)}
-      >
-        Confirm
-      </button>
-      <button
-        style={{ marginLeft: "1.5vw" }}
-        onClick={() => handleSetNewItem({ text: "cancel" }, itemProperty, itemFunction, itemPropertyName)}
-      >
-        Cancel
-      </button>
-    </>
+      <div className={classes.buttonContainer}>
+        <button
+          className={`${classes.inputButtons} ${classes.confirmButton}`}
+          disabled={newItem.name === null}
+          onClick={() =>
+            handleSetNewItem(
+              { text: "confirm" },
+              itemProperty,
+              itemFunction,
+              itemPropertyName,
+              validationFunction
+            )
+          }
+        >
+          Confirm
+        </button>
+        <button
+          className={classes.inputButtons}
+          onClick={() =>
+            handleSetNewItem(
+              { text: "cancel" },
+              itemProperty,
+              itemFunction,
+              itemPropertyName
+            )
+          }
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
   );
 }

@@ -23,7 +23,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .courierButton {
-  padding-left: 2vw;
+  padding-left: 1vw;
   padding-top: .5vh;
   font-size: large;
   font-weight: 600;
