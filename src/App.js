@@ -229,6 +229,7 @@ export default function App() {
         isSignUpLoginModalOpen={isSignUpLoginModalOpen}
         closeModal={handleCloseSignUpLoginModal}
         handleNewDisplayName={handleNewDisplayName}
+        width={width}
       />
       <EditModal
         changeBook={liftedBook}

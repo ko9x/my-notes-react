@@ -6,30 +6,31 @@ import {
   registerUserWithEmailAndPassword,
 } from "../auth/firebase";
 
-const customStyles = {
-  content: {
-    height: "80vh",
-    width: "70vw",
-    position: "relative",
-    zIndex: "200",
-    marginLeft: "11vw",
-    marginTop: "8vh",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    backgroundColor: "grey",
-  },
-};
-
 export default function SignUpLoginModal({
   isSignUpLoginModalOpen,
   closeModal,
-  handleNewDisplayName
+  handleNewDisplayName,
+  width
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
+
+  const customStyles = {
+    content: {
+      height: "80vh",
+      width: "70vw",
+      position: "relative",
+      zIndex: "200",
+      marginLeft: width > 750 ? "11vw" : null,
+      marginTop: "8vh",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      backgroundColor: "grey",
+    },
+  };
 
   function handleCloseModal() {
     resetModal();
@@ -78,7 +79,7 @@ export default function SignUpLoginModal({
         <form onSubmit={handleSubmit}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input
-              type="text"
+              type="email"
               value={email}
               placeholder="Email"
               className={classes.modalInput}
