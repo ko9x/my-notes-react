@@ -269,7 +269,7 @@ export default function App() {
         height={height}
       />
       {width > 750 && (
-        <div className={classes.leftSideBarContainer}>
+        <div className={classes.leftSideBarContainer} style={{height: height}}>
           <SideBarWall />
           <SideBar
             itemNameArray={isEditModalOpen ? null : pageNames}
@@ -280,7 +280,7 @@ export default function App() {
         </div>
       )}
       {width > 750 && (
-        <div className={classes.rightSideBarContainer}>
+        <div className={classes.rightSideBarContainer} style={{height: height}}>
           <SideBar
             itemNameArray={isEditModalOpen ? null : sectionNames}
             selectedItemName={getSelectedSection}
@@ -305,6 +305,7 @@ export default function App() {
         setUserClickedSection={setUserClickedSection}
         newlyAddedNote={newNote}
         width={width}
+        height={height}
       />
       <Footer width={width} height={height} user={user} signOut={handleLogOutUser} />
     </div>

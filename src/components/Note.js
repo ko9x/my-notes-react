@@ -31,7 +31,8 @@ export default function Note({
   userClickedSection,
   setUserClickedSection,
   newlyAddedNote,
-  width
+  width,
+  height
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -251,7 +252,7 @@ export default function Note({
   )
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={{height: height}}>
       {bookIsSelected || keyWord ? (
         <div style={{ height: 900, overflow: "auto" }}>
           {selectedNotes.length > 0 || keyWord ? (
