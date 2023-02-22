@@ -269,7 +269,7 @@ export default function App() {
         height={height}
       />
       {width > 750 && (
-        <div className={classes.leftSideBarContainer} style={{height: height}}>
+        <div className={classes.leftSideBarContainer} style={{height: height, overflow: 'auto'}}>
           <SideBarWall />
           <SideBar
             itemNameArray={isEditModalOpen ? null : pageNames}
@@ -280,7 +280,7 @@ export default function App() {
         </div>
       )}
       {width > 750 && (
-        <div className={classes.rightSideBarContainer} style={{height: height}}>
+        <div className={classes.rightSideBarContainer} style={{height: height, overflow: 'auto'}}>
           <SideBar
             itemNameArray={isEditModalOpen ? null : sectionNames}
             selectedItemName={getSelectedSection}
