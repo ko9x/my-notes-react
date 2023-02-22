@@ -18,8 +18,7 @@ export default function Header({
   signIn,
   signOut,
   newDisplayName,
-  width,
-  height,
+  isMobile,
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -88,7 +87,7 @@ export default function Header({
     IndicatorSeparator: () => null
   };
 
-  if (width < 750) {
+  if (isMobile) {
     return (
       <div className={classes.smallContainer}>
         <div className={classes.smallLogoContainer}>
@@ -143,7 +142,7 @@ export default function Header({
     );
   }
 
-  if (width > 750) {
+  if (!isMobile) {
     return (
       <div className={classes.container}>
         <div className={classes.logoContainer}>

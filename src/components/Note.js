@@ -31,7 +31,7 @@ export default function Note({
   userClickedSection,
   setUserClickedSection,
   newlyAddedNote,
-  width,
+  isMobile,
   height
 }) {
   useEffect(() => {
@@ -267,7 +267,7 @@ export default function Note({
             />
           ) : (
             <h1 className={classes.instructions}>
-              {width > 750 ? 'Please select a page from the sidebar' : 'Please select a page from the "page" dropdown' }
+              {!isMobile ? 'Please select a page from the sidebar' : 'Please select a page from the "page" dropdown' }
             </h1>
           )}
         </div>

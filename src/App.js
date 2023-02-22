@@ -41,6 +41,13 @@ export default function App() {
   const [newDisplayName, setNewDisplayName] = useState(null);
   const [userClickedSection, setUserClickedSection] = useState(false);
   const { height, width } = useWindowDimensions();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if(width < 750) {
+      setIsMobile(true);
+    }
+  }, [width])
 
   useEffect(() => {
     if (user) {
@@ -229,7 +236,7 @@ export default function App() {
         isSignUpLoginModalOpen={isSignUpLoginModalOpen}
         closeModal={handleCloseSignUpLoginModal}
         handleNewDisplayName={handleNewDisplayName}
-        width={width}
+        isMobile={isMobile}
       />
       <EditModal
         changeBook={liftedBook}
@@ -248,9 +255,9 @@ export default function App() {
         user={user}
         database={database}
         setNewNote={setNewNote}
-        width={width}
+        isMobile={isMobile}
       />
-      {(isEditModalOpen || isSignUpLoginModalOpen) && (width < 750) ? null : (
+      {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Header
         bookNames={bookNames}
         pageNames={pageNames}
@@ -266,11 +273,11 @@ export default function App() {
         signIn={handleLogInUser}
         signOut={handleLogOutUser}
         newDisplayName={newDisplayName}
-        width={width}
+        isMobile={isMobile}
         height={height}
       />
       )}
-      {width > 750 && (
+      {!isMobile && (
         <div
           className={classes.leftSideBarContainer}
           style={{ height: height, overflow: "auto" }}
@@ -284,7 +291,7 @@ export default function App() {
           />
         </div>
       )}
-      {width > 750 && (
+      {!isMobile && (
         <div
           className={classes.rightSideBarContainer}
           style={{ height: height, overflow: "auto" }}
@@ -312,12 +319,12 @@ export default function App() {
         userClickedSection={userClickedSection}
         setUserClickedSection={setUserClickedSection}
         newlyAddedNote={newNote}
-        width={width}
+        isMobile={isMobile}
         height={height}
       />
-      {(isEditModalOpen || isSignUpLoginModalOpen) && (width < 750) ? null : (
+      {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Footer
-          width={width}
+          isMobile={isMobile}
           height={height}
           user={user}
           signOut={handleLogOutUser}

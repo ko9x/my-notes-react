@@ -32,7 +32,7 @@ export default function EditModal({
   user,
   database,
   setNewNote,
-  width
+  isMobile
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -75,7 +75,7 @@ export default function EditModal({
       width: "70vw",
       position: "relative",
       zIndex: "200",
-      marginLeft: width > 750 ? "11vw" : null,
+      marginLeft: !isMobile ? "11vw" : null,
       marginTop: "8vh",
       right: "auto",
       bottom: "auto",
@@ -478,7 +478,7 @@ export default function EditModal({
                 sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
-            <div style={{ width: "69.1%", paddingTop: "20px", paddingBottom: width < 750 ? '150px' : null }}>
+            <div style={{ width: "69.1%", paddingTop: "20px", paddingBottom: isMobile ? '150px' : null }}>
               <button
                 disabled={handleEnableSubmitButton()}
                 className={classes.submitButton}
@@ -491,7 +491,7 @@ export default function EditModal({
             </div>
           </form>
         </div>
-        {width > 750 ? <div className={classes.closeButtonContainer}>
+        {!isMobile ? <div className={classes.closeButtonContainer}>
           <button
             className={classes.closeButton}
             onClick={handleManualCloseModal}

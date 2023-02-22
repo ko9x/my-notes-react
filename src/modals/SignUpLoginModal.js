@@ -10,7 +10,7 @@ export default function SignUpLoginModal({
   isSignUpLoginModalOpen,
   closeModal,
   handleNewDisplayName,
-  width
+  isMobile
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ export default function SignUpLoginModal({
       width: "70vw",
       position: "relative",
       zIndex: "200",
-      marginLeft: width > 750 ? "11vw" : null,
+      marginLeft: !isMobile ? "11vw" : null,
       marginTop: "8vh",
       right: "auto",
       bottom: "auto",
