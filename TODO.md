@@ -3,16 +3,10 @@
     * (done) style the header for smaller screens
     * (done) Change the instrucitons text that mentions the sidebars
     * (done) Don't show the sidebars if the screen width is less than 750
-    * If you select develper and then angularfire or some other long name the dropdown buttons get too wide.
-        * Make it a horizontal flat list?
-    * fix the positioning of the modal
-    * make sure the modal works and is user friendly
-        * horizontal flatlists?
-    * style the dropdown
-        * make it look like it is extending down?
-        * make the drop down close if the user presses anywhere else on the screen
-        * use the functionality of the Object Array options to style the first item in the drop down
-            * the npm site for react-dropdown is in the developer/react folder
+    * (done) fix the positioning of the modal for small screens
+    * (done) style the dropdown
+    * make sure the modal works and is user friendly on small screens
+        * horizontal scrolling?
 
 
 * Host the app on blakes server instead of github pages
