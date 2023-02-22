@@ -3,11 +3,18 @@
     * (done) style the header for smaller screens
     * (done) Change the instrucitons text that mentions the sidebars
     * (done) Don't show the sidebars if the screen width is less than 750
-    * (done) fix the positioning of the modal for small screens
+    * (done) fix the positioning of the modals for small screens
     * (done) style the dropdown
     * make sure the modal works and is user friendly on small screens
         * horizontal scrolling?
 
+* Add error message alerts if a user enters the wrong password or an email that doesn't exist
+    * Don't give too much detail. Just say login failed, please check your credentials
+* Make sure all the validation is correct and working for both login and signup
+
+* The container height on the notes.js needs to be more dynamic
+    * If the user is on mobile the black background stops short of the footer and looks weird
+    * If the user is on mobile and goes to landscape mode the container height causes a white gap at the bottom of the screen
 
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
@@ -31,8 +38,6 @@
 * refactoring and documentation/commenting the code
 
 ### Styling
-* The container height on the notes.js needs to be more dynamic
-    * If the user is on mobile and goes to landscape mode the container height causes a white gap at the bottom of the screen
 * See if Blake has any recommendations styling
 * Style the EditModal
 * Style the SignUpLoginModal
