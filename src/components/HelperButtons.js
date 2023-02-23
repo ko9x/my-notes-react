@@ -4,6 +4,7 @@ export default function HelperButtons({
   insertHelperText,
   selectedRef,
   helpers,
+  isMobile
 }) {
   const helpersArray = Object.values(helpers);
   function renderedItems() {
@@ -11,6 +12,7 @@ export default function HelperButtons({
       <h2
         key={helper.id}
         className='courierButton'
+        style={{paddingRight: isMobile ? '4vw' : null}}
         onClick={() => insertHelperText(selectedRef, helper)}
       >
         {helper.name}
@@ -18,5 +20,5 @@ export default function HelperButtons({
     ));
   }
 
-  return <div className={classes.buttonContainer}>{renderedItems()}</div>;
+  return <div className={classes.buttonContainer} style={{overflowX: isMobile ? 'scroll' : null}}>{renderedItems()}</div>;
 }

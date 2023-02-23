@@ -343,7 +343,7 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-        <div style={{display: 'flex', flexDirection: 'row', paddingLeft: '1vw'}}>
+        <div className={isMobile ? classes.smallRadioContainer : classes.largeRadioContainer}>
           <RadioManager
             missingItem={missingBook}
             newItem={newBook}
@@ -402,19 +402,19 @@ export default function EditModal({
             {missingTitle && (
               <p className={classes.validationWarning}>Title is required</p>
             )}
-            <div className={classes.textAreaHeaderContainer}>
-              <div onClick={() => toggleContentSize()}>
+            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+              <div>
                 <h2 style={{ marginBottom: "0px" }}>Content</h2>
-                <p
-                  style={{ fontSize: "small", marginTop: "0px" }}
-                >{`(click to expand)`}</p>
               </div>
               <HelperButtons
                 insertHelperText={insertHelperText}
                 selectedRef={contentRef}
                 helpers={helpers}
+                isMobile={isMobile}
               />
             </div>
+            <p onClick={() => toggleContentSize()} style={{ fontSize: "small", marginTop: "0px" }}
+                >{`(click to expand)`}</p>
             <textarea
               ref={contentRef}
               onChange={(e) => handleOnChangeInput(e, setMissingContent)}
