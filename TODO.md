@@ -7,21 +7,19 @@
     * (done) style the dropdown
     * make sure the modal works and is user friendly on small screens
         * horizontal scrolling?
+    * Fix the note details for small screens
+        * the buttons look weird and it needs some padding
 
 * Add error message alerts if a user enters the wrong password or an email that doesn't exist
     * Don't give too much detail. Just say login failed, please check your credentials
 * Make sure all the validation is correct and working for both login and signup
-
-* The container height on the notes.js needs to be more dynamic
-    * If the user is on mobile the black background stops short of the footer and looks weird
-    * If the user is on mobile and goes to landscape mode the container height causes a white gap at the bottom of the screen
 
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive. 
 
 
 ### What to do next
-* Make the book names in the header a horizontal flatlist?
+* Make the book names in the header scroll horizontally?
     * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
 * Maybe do some of the styling TODOs
@@ -46,7 +44,7 @@
     * a dark mode theme would be cool also
 
 ### Bugs
-* Resolve all the useEffects that are missing dependencies
+* If the screen is not very tall and the user scrolls in a sidebar, the background color and the sideBarWall cut off.
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
 * The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
     * The correct way is to pass an object that has an id of some sort and the string
@@ -62,6 +60,8 @@
 ### What to do later
 
 ### Refactoring
+* Resolve all the useEffects that are missing dependencies
+    * or tell the linter not to warn me about them
 * Instead of passing arrays of strings we really should be passing arrays of objects with an id and the string
     * That way the app doesn't get confused when 2 pages have a section with the same name for example
         * This is also mentioned in the bugs section
