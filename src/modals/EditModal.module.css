@@ -35,6 +35,10 @@
 .textAreaHeaderContainer {
     display: flex;
 }
+.textAreaHeader {
+    margin-bottom: 0;
+    cursor: pointer;
+}
 .submitButton {
     width: 30vw;
     border-radius: .5vh;

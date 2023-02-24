@@ -99,9 +99,29 @@ function createArrays(
     return newArr.join('');
   }
 
+  function toggleFunc(setStateFunc, toggleState) {
+    setStateFunc(prevState => !prevState);
+  }
+
+  function handleToggleAndText(setStateFunc, toggleState, isMobile) {
+    function showText() {
+      if(toggleState) {
+        return ' collapse'
+      } else {
+        return ' expand'
+      }
+    }
+    return (
+      <p onClick={() => toggleFunc(setStateFunc, toggleState)} style={{ fontSize: "small", marginTop: "0px", cursor: 'pointer' }}
+                >{isMobile ? `(tap to${showText()})` : `(click to${showText()})`}</p>
+    )
+  }
+
   export {
     createArrays,
     fixCaret,
     insertHelperText,
+    toggleFunc,
+    handleToggleAndText,
     helpers
   }

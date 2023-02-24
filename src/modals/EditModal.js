@@ -9,6 +9,8 @@ import {
   insertHelperText,
   helpers,
   fixCaret,
+  toggleFunc,
+  handleToggleAndText
 } from "../helpers/HelperFunctions";
 
 export default function EditModal({
@@ -94,29 +96,6 @@ export default function EditModal({
     setMissingPage(false);
     setMissingSection(false);
     setMissingRequiredInformation(false);
-  }
-
-  // @TODO I'm sure there is a better way to refactor this
-  function toggleContentSize() {
-    if (contentSize === "large") {
-      setContentSize("medium");
-    } else {
-      setContentSize("large");
-    }
-  }
-  function toggleSideSize() {
-    if (sideSize === null) {
-      setSideSize("medium");
-    } else {
-      setSideSize(null);
-    }
-  }
-  function toggleImportantSize() {
-    if (importantSize === null) {
-      setImportantSize("medium");
-    } else {
-      setImportantSize(null);
-    }
   }
   function handleBookChange(e) {
     setNewBook({ changing: false, name: null });
@@ -404,7 +383,7 @@ export default function EditModal({
             )}
             <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
               <div>
-                <h2 style={{ marginBottom: "0px" }}>Content</h2>
+                <h2 onClick={() => toggleFunc(setContentSize, contentSize)} className={classes.textAreaHeader}>Content</h2>
               </div>
               <HelperButtons
                 insertHelperText={insertHelperText}
@@ -413,8 +392,7 @@ export default function EditModal({
                 isMobile={isMobile}
               />
             </div>
-            <p onClick={() => toggleContentSize()} style={{ fontSize: "small", marginTop: "0px" }}
-                >{`(click to expand)`}</p>
+            {handleToggleAndText(setContentSize, contentSize, isMobile)}
             <textarea
               ref={contentRef}
               onChange={(e) => handleOnChangeInput(e, setMissingContent)}
@@ -422,7 +400,7 @@ export default function EditModal({
               placeholder="Enter content"
               id="content"
               className={`${classes.modalTextArea} ${
-                contentSize === "large"
+                contentSize
                   ? classes.modalTextAreaLargeHeight
                   : classes.modalTextAreaMediumHeight
               }`}
@@ -430,19 +408,18 @@ export default function EditModal({
             {missingContent && (
               <p className={classes.validationWarning}>Content is required</p>
             )}
-            <div className={classes.textAreaHeaderContainer}>
-              <div onClick={() => toggleImportantSize()}>
-                <h2 style={{ marginBottom: "0px" }}>Important Note</h2>
-                <p
-                  style={{ fontSize: "small", marginTop: "0px" }}
-                >{`(click to expand)`}</p>
+            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+              <div onClick={() => toggleFunc(setImportantSize, importantSize)}>
+                <h2 className={classes.textAreaHeader}>Important Note</h2>
               </div>
               <HelperButtons
                 insertHelperText={insertHelperText}
                 selectedRef={importantRef}
                 helpers={helpers}
+                isMobile={isMobile}
               />
             </div>
+            {handleToggleAndText(setImportantSize, importantSize, isMobile)}
             <textarea
               ref={importantRef}
               defaultValue={noteToEdit?.important}
@@ -451,31 +428,30 @@ export default function EditModal({
                 noteToEdit?.important ? null : "Add an important note"
               }
               className={`${classes.modalTextArea} ${
-                importantSize === "medium"
+                importantSize
                   ? classes.modalTextAreaMediumHeight
                   : null
               }`}
             ></textarea>
-            <div className={classes.textAreaHeaderContainer}>
-              <div onClick={() => toggleSideSize()}>
-                <h2 style={{ marginBottom: "0px" }}>Side Note</h2>
-                <p
-                  style={{ fontSize: "small", marginTop: "0px" }}
-                >{`(click to expand)`}</p>
+            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+              <div onClick={() => toggleFunc(setSideSize, sideSize)}>
+                <h2 className={classes.textAreaHeader}>Side Note</h2>
               </div>
               <HelperButtons
                 insertHelperText={insertHelperText}
                 selectedRef={sideRef}
                 helpers={helpers}
+                isMobile={isMobile}
               />
             </div>
+            {handleToggleAndText(setSideSize, sideSize, isMobile)}
             <textarea
               ref={sideRef}
               defaultValue={noteToEdit?.side}
               id="side"
               placeholder={noteToEdit?.side ? null : "Add a side note"}
               className={`${classes.modalTextArea} ${
-                sideSize === "medium" ? classes.modalTextAreaMediumHeight : null
+                sideSize ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
             <div style={{ width: "69.1%", paddingTop: "20px", paddingBottom: isMobile ? '150px' : null }}>
