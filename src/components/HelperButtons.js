@@ -12,7 +12,7 @@ export default function HelperButtons({
       <h2
         key={helper.id}
         className='courierButton'
-        style={{paddingRight: isMobile ? '4vw' : null}}
+        style={{paddingRight: isMobile ? '4vw' : null, display: 'flex', alignSelf: 'center', marginBottom: isMobile ? null : 0}}
         onClick={() => insertHelperText(selectedRef, helper)}
       >
         {helper.name}
