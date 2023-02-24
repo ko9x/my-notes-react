@@ -24,6 +24,7 @@ export default function RadioManager({
   noteToEdit,
   handleItemChange,
   determinePropertyNameArray,
+  isMobile
 }) {
   return (
     <div className={classes.radioContainer}>
@@ -61,6 +62,7 @@ export default function RadioManager({
                 noteToEdit?.[itemPropertyName]
               )}
               selectionFunction={handleItemChange}
+              isMobile={isMobile}
             />
           </div>
         )}

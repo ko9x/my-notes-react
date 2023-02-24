@@ -17,3 +17,20 @@ input[type='radio'] {
 input[type='radio']:checked {
     background-color: var(--actionButton-color);
 }
+.largeContainer {
+    display: flex;
+    flex-direction: column;
+}
+.smallContainer {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    white-space: nowrap;
+}
+.smallRadio {
+    display: flex;
+    flex-direction: row;
+    padding-right: 5vw;
+}

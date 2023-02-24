@@ -336,6 +336,7 @@ export default function EditModal({
             noteToEdit={noteToEdit}
             handleItemChange={handleBookChange}
             determinePropertyNameArray={determineRadioBookNameArray}
+            isMobile={isMobile}
           />
           <RadioManager
             missingItem={missingPage}
@@ -350,6 +351,7 @@ export default function EditModal({
             noteToEdit={noteToEdit}
             handleItemChange={handlePageChange}
             determinePropertyNameArray={determineRadioPageNameArray}
+            isMobile={isMobile}
           />
           <RadioManager
             missingItem={missingSection}
@@ -364,6 +366,7 @@ export default function EditModal({
             noteToEdit={noteToEdit}
             handleItemChange={handleSectionChange}
             determinePropertyNameArray={determineRadioSectionNameArray}
+            isMobile={isMobile}
           />
         </div>
         <div>
