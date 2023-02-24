@@ -102,19 +102,19 @@ export default function Note({
 
   function handleAlert(note) {
     confirmAlert({
-      title: "Delete note?",
-      message: "This action cannot be undone",
-      buttons: [
-        {
-          label: "Yes",
-          style: {background: 'red'},
-          onClick: () => deleteNote(note),
-        },
-        {
-          label: "Cancel",
-          onClick: () => {},
-        },
-      ],
+      customUI: ({ onClose }) => {
+        return (
+          <div>
+            <h1>Delete Note?</h1>
+            <h3>This action cannot be undone</h3>
+            <button onClick={onClose}>Cancel</button>
+            <button onClick={() => {
+              deleteNote(note);
+              onClose();
+            }}>Yes</button>
+          </div>
+        )
+      }
     });
   }
 
