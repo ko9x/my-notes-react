@@ -7,7 +7,7 @@
   text-align: left;
 }
 .note {
-  padding: 5px;
+  /* padding: 5px; */
   border-bottom: solid white 2px;
   padding-bottom: 30px;
   animation: fadeIn 2s;
@@ -15,7 +15,11 @@
 .groupSeparator {
   color: var(--activeButton-color);
   text-shadow: var(--text-shadow);
+  margin-bottom: 0;
   font-family:'Courier New', Courier, monospace;
+}
+hr {
+  margin-bottom: 0;
 }
 pre {
   background-color: #0d1117;
@@ -36,20 +40,22 @@ a {
 .noteDetailContainer {
   justify-content: space-between;
   display: flex;
+  animation: fadeIn 5s;
 }
 .descriptionContainer {
   display: flex;
   flex-direction: row;
   height: 45px;
-  
 }
 .detailOpen {
-  height: 30px;
+  padding-left: 1vw;
+  height: 5vh;
   opacity: 1;
   transition-duration: 500ms;
-  animation: fadeIn 1s;
+  background-color: grey;
 }
 .detailClosed {
+  padding-left: 1vw;
   height: 0.1px;
   transition-duration: 500ms;
 }

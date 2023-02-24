@@ -122,15 +122,15 @@ export default function Note({
     return (
       <div className={classes.noteDetailContainer}>
         <div className={classes.descriptionContainer}>
-          <p className={classes.description}>Book: {note.book}</p>
-          <p className={classes.description}>Page: {note.page}</p>
-          <p className={classes.description}>Section: {note.section}</p>
+          <p className={classes.description}>{note.book}</p>
+          <p className={classes.description}>{note.page}</p>
+          <p className={classes.description}>{note.section}</p>
         </div>
         <div className={classes.buttonContainer}>
           <div className={classes.editButton}>
-            <button onClick={() => handleNoteEditPress(note)}>Edit Note</button>
+            <button onClick={() => handleNoteEditPress(note)}>edit</button>
           </div>
-          <button onClick={() => handleAlert(note)}>Delete Note</button>
+          <button onClick={() => handleAlert(note)}>delete</button>
         </div>
       </div>
     );
