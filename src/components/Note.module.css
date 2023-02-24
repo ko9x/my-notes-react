@@ -65,12 +65,20 @@ a {
   height: 0.1px;
 }
 .description {
-  padding-right: 5px;
+  padding-right: 2px;
   margin-bottom: -10px;
+  overflow-x: scroll;
 }
 .buttonContainer {
   display: flex;
   padding-bottom: 1vh;
+}
+.customButton {
+  background-color: white;
+  border-radius: 5px;
+  font-weight: 400;
+  color: hsl(0, 0%, 25%);
+  font-size: small;
 }
 .editButton {
   align-self: center;
