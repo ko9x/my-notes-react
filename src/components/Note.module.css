@@ -7,7 +7,6 @@
   text-align: left;
 }
 .note {
-  /* padding: 5px; */
   border-bottom: solid white 2px;
   padding-bottom: 30px;
   animation: fadeIn 2s;
@@ -40,7 +39,10 @@ a {
 .noteDetailContainer {
   justify-content: space-between;
   display: flex;
-  animation: fadeIn 5s;
+  align-items: flex-end;
+  background-color: grey;
+  padding-left: 1vw;
+  overflow: hidden;
 }
 .descriptionContainer {
   display: flex;
@@ -48,24 +50,23 @@ a {
   height: 45px;
 }
 .detailOpen {
-  padding-left: 1vw;
-  height: 5vh;
-  opacity: 1;
+  transition: ease-out;
   transition-duration: 500ms;
-  background-color: grey;
+  height: 5vh;
+  transition-duration: 500ms;
 }
 .detailClosed {
-  padding-left: 1vw;
-  height: 0.1px;
+  transition: ease-in;
   transition-duration: 500ms;
+  height: 0.1px;
 }
 .description {
-  padding-right: 10px;
+  padding-right: 5px;
   margin-bottom: -10px;
 }
 .buttonContainer {
   display: flex;
-  align-self: center;
+  padding-bottom: 1vh;
 }
 .editButton {
   align-self: center;

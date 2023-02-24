@@ -118,24 +118,6 @@ export default function Note({
     });
   }
 
-  function showNoteDetails(note) {
-    return (
-      <div className={classes.noteDetailContainer}>
-        <div className={classes.descriptionContainer}>
-          <p className={classes.description}>{note.book}</p>
-          <p className={classes.description}>{note.page}</p>
-          <p className={classes.description}>{note.section}</p>
-        </div>
-        <div className={classes.buttonContainer}>
-          <div className={classes.editButton}>
-            <button onClick={() => handleNoteEditPress(note)}>edit</button>
-          </div>
-          <button onClick={() => handleAlert(note)}>delete</button>
-        </div>
-      </div>
-    );
-  }
-
   function handleSetNoteDetails(newNoteId) {
     if (showingNoteDetails === newNoteId) {
       setShowingNoteDetails(null);
@@ -177,8 +159,8 @@ export default function Note({
           setOneTime(true);
         }, 500);
       }
-      
     }
+
     return (
       <InView as='div' delay={500} key={note.id} id={note.section} onChange={(inView, entry) => inViewHandler(inView, entry)}>
         <div
@@ -189,13 +171,25 @@ export default function Note({
         ref={determineRef(note)}
       >
         <div
-          className={`${
+          className={`${classes.noteDetailContainer} ${
             showingNoteDetails === note.id
               ? classes.detailOpen
               : classes.detailClosed
           }`}
         >
-          {showingNoteDetails === note.id && showNoteDetails(note)}
+          <>
+            <div className={classes.descriptionContainer}>
+            <p className={classes.description}>{note.book}</p>
+            <p className={classes.description}>> {note.page}</p>
+            <p className={classes.description}>> {note.section}</p>
+          </div>
+          <div className={classes.buttonContainer}>
+            <div className={classes.editButton}>
+              <button onClick={() => handleNoteEditPress(note)}>edit</button>
+            </div>
+            <button onClick={() => handleAlert(note)}>delete</button>
+          </div>
+          </>
         </div>
         <h1>
           <Highlighter
