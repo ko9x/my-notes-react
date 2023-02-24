@@ -178,30 +178,32 @@ export default function Note({
           className={classes.note}
           ref={determineRef(note)}
         >
-          <div
-            className={`${classes.noteDetailContainer} ${
-              showingNoteDetails === note.id
-                ? classes.detailOpen
-                : classes.detailClosed
-            }`}
-          >
-            <>
-              <div className={classes.descriptionContainer}>
-                <p className={classes.description}>{note.book}</p>
-                <p className={classes.description}>> {note.page}</p>
-                <p className={classes.description}>> {note.section}</p>
-              </div>
-              <div className={classes.buttonContainer}>
-                <div className={classes.editButton}>
-                  <button onClick={() => handleNoteEditPress(note)}>
-                    edit
-                  </button>
+          <div style={{minHeight: '4.5vh'}}>
+            <div
+              className={`${classes.noteDetailContainer} ${
+                showingNoteDetails === note.id
+                  ? classes.detailOpen
+                  : classes.detailClosed
+              }`}
+            >
+              <>
+                <div className={classes.descriptionContainer}>
+                  <p className={classes.description}>{note.book}</p>
+                  <p className={classes.description}>> {note.page}</p>
+                  <p className={classes.description}>> {note.section}</p>
                 </div>
-                <button onClick={() => handleAlert(note)}>delete</button>
-              </div>
-            </>
+                <div className={classes.buttonContainer}>
+                  <div className={classes.editButton}>
+                    <button onClick={() => handleNoteEditPress(note)}>
+                      edit
+                    </button>
+                  </div>
+                  <button onClick={() => handleAlert(note)}>delete</button>
+                </div>
+              </>
+            </div>
           </div>
-          <h1>
+          <h1 style={{marginTop: '0'}}>
             <Highlighter
               highlightStyle={{ color: "#282c34" }}
               searchWords={[keyWord]}
