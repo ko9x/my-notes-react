@@ -1,28 +1,33 @@
 ### Current Focus
+* Host the app on blakes server instead of github pages
+    * Or create my own server if it's not too expensive.
+
 * Make sure the app looks okay on smaller screens
     * (done) style the header for smaller screens
     * (done) Change the instrucitons text that mentions the sidebars
     * (done) Don't show the sidebars if the screen width is less than 750
     * (done) fix the positioning of the modals for small screens
     * (done) style the dropdown
-    * make sure the modal works and is user friendly on small screens
-        * horizontal scrolling?
+    * (done) make sure the modal works and is user friendly on small screens
+    * (done) Fix the are you sure you want to delete screen for mobile
     * Fix the note details for small screens
         * the buttons look weird and it needs some padding
 
 * Add error message alerts if a user enters the wrong password or an email that doesn't exist
     * Don't give too much detail. Just say login failed, please check your credentials
+
 * Make sure all the validation is correct and working for both login and signup
 
-* Host the app on blakes server instead of github pages
-    * Or create my own server if it's not too expensive. 
+* If the user has never created a note (there are no books yet created) we need different instuctional text.
+
+* We need to style this thing to grab peoples attention when they are looking at your portfolio
 
 
 ### What to do next
+* Styling
 * Make the book names in the header scroll horizontally?
     * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
-* Maybe do some of the styling TODOs
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
         * I already installed react-spinners so lets see if that one can do what we want it to
@@ -36,9 +41,17 @@
 * refactoring and documentation/commenting the code
 
 ### Styling
+* I think we need to find a better default color scheme
+* Style the delete note ui in the Note.js
+    * starts at line 103
 * See if Blake has any recommendations styling
+* make the radio buttons look nicer, especially on mobile
+    * Maybe use a checkbox or something
 * Style the EditModal
+    * Look at some other apps and sites for "inspiration"
+    * Maybe do a background that make the distiction between sections more obvious and adds some color and shading
 * Style the SignUpLoginModal
+    * Look at some other apps and sites for "inspiration"
 * Make some themes the user can choose from
     * like an iOS theme
     * a dark mode theme would be cool also
