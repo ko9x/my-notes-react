@@ -2,17 +2,6 @@
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive.
 
-* Make sure the app looks okay on smaller screens
-    * (done) style the header for smaller screens
-    * (done) Change the instrucitons text that mentions the sidebars
-    * (done) Don't show the sidebars if the screen width is less than 750
-    * (done) fix the positioning of the modals for small screens
-    * (done) style the dropdown
-    * (done) make sure the modal works and is user friendly on small screens
-    * (done) Fix the are you sure you want to delete screen for mobile
-    * Fix the note details for small screens
-        * the buttons look weird and it needs some padding
-
 * Add error message alerts if a user enters the wrong password or an email that doesn't exist
     * Don't give too much detail. Just say login failed, please check your credentials
 
@@ -21,7 +10,6 @@
 * If the user has never created a note (there are no books yet created) we need different instuctional text.
 
 * We need to style this thing to grab peoples attention when they are looking at your portfolio
-
 
 ### What to do next
 * Styling
@@ -225,3 +213,13 @@
         * if the user scrolls down or up to another section the highlighted section changes accordingly
             * if the user clicks on a section the screen scrolls to that section
 * Scroll to top of page when user does a search?
+* Make sure the app looks okay on smaller screens
+    * style the header for smaller screens
+    * Change the instrucitons text that mentions the sidebars
+    * Don't show the sidebars if the screen width is less than 750
+    * fix the positioning of the modals for small screens
+    * style the dropdown
+    * make sure the modal works and is user friendly on small screens
+    * Fix the are you sure you want to delete screen for mobile
+    * Fix the note details for small screens
+    
