@@ -58,12 +58,19 @@ export default function SignUpLoginModal({
     resetModal();
   }
 
-  function toggleIsNewUser() {
-    setIsNewUser((prevState) => !prevState);
+  function validationCheck() {
+    const validEmail = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    const validPassword = password.length >= 6;
+    const validUsername = isNewUser ? username.length > 0 : true;
+    if(validEmail && validPassword && validUsername) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  function actionWord() {
-    return <p className={classes.actionWord}>here</p>
+  function toggleIsNewUser() {
+    setIsNewUser((prevState) => !prevState);
   }
 
   return (
@@ -91,18 +98,22 @@ export default function SignUpLoginModal({
               placeholder="Password"
               className={classes.modalInput}
               onChange={({ target }) => setPassword(target.value)}
+              formNoValidate={true}
             />
             {isNewUser ? (
               <input
                 type="username"
                 value={username}
-                placeholder="User name"
+                placeholder="Username"
                 className={classes.modalInput}
                 onChange={({ target }) => setUsername(target.value)}
               />
             ) : null}
-            <button className={classes.submitButton} type="submit">
-              Submit
+            <button 
+              className={classes.submitButton} 
+              type="submit"
+              disabled={!validationCheck()}
+              >Submit
             </button>
           </div>
         </form>
