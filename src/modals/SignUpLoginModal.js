@@ -10,7 +10,7 @@ export default function SignUpLoginModal({
   isSignUpLoginModalOpen,
   closeModal,
   handleNewDisplayName,
-  isMobile
+  isMobile,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,7 +62,7 @@ export default function SignUpLoginModal({
     const validEmail = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
     const validPassword = password.length >= 6;
     const validUsername = isNewUser ? username.length > 0 : true;
-    if(validEmail && validPassword && validUsername) {
+    if (validEmail && validPassword && validUsername) {
       return true;
     } else {
       return false;
@@ -82,7 +82,9 @@ export default function SignUpLoginModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-        <h1 className={classes.modalTitle}>{isNewUser ? "Sign up" : "Login"}</h1>
+        <h1 className={classes.modalTitle}>
+          {isNewUser ? "Sign up" : "Login"}
+        </h1>
         <form onSubmit={handleSubmit}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <input
@@ -109,20 +111,34 @@ export default function SignUpLoginModal({
                 onChange={({ target }) => setUsername(target.value)}
               />
             ) : null}
-            <button 
-              className={classes.submitButton} 
+            <button
+              className={classes.submitButton}
               type="submit"
               disabled={!validationCheck()}
-              >Submit
+            >
+              Submit
             </button>
           </div>
         </form>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div>
           <button
             className={classes.toggleButton}
             onClick={() => toggleIsNewUser()}
           >
-            {isNewUser ? <div style={{display: 'flex', flexDirection: 'row'}}><span>Back to <span className={classes.actionWord}>Login</span></span></div> : <div style={{display: 'flex', flexDirection: 'row'}}><span>Click here to <span className={classes.actionWord}>Sign up</span></span></div>}
+            {isNewUser ? (
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <span>
+                  Back to <span className={classes.actionWord}>Login</span>
+                </span>
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <span>
+                  Click here to{" "}
+                  <span className={classes.actionWord}>Sign up</span>
+                </span>
+              </div>
+            )}
           </button>
         </div>
       </div>
