@@ -2,14 +2,15 @@
 * Host the app on blakes server instead of github pages
     * Or create my own server if it's not too expensive.
 
-* Add error message alerts if a user enters the wrong password or an email that doesn't exist
-    * Don't give too much detail. Just say login failed, please check your credentials
+* The edit modal has too much padding on the right side.
+    * only present on large screens
 
-* Make sure all the validation is correct and working for both login and signup
+* If you shrink the edit modal down below 750 width and then back above 750 it doesn't switch back to non-mobile mode
 
-* If the user has never created a note (there are no books yet created) we need different instuctional text.
+* If the user has never created a note (there are no books yet created) we need different instructional text.
 
 * We need to style this thing to grab peoples attention when they are looking at your portfolio
+    * Get some ideas from the internets!
 
 ### What to do next
 * Styling
@@ -30,6 +31,8 @@
 
 ### Styling
 * I think we need to find a better default color scheme
+    * cornflower blue and purple on a white background for light mode
+    * or maybe stick with the lightseagreen
 * Style the delete note ui in the Note.js
     * starts at line 103
 * See if Blake has any recommendations styling
@@ -222,4 +225,8 @@
     * make sure the modal works and is user friendly on small screens
     * Fix the are you sure you want to delete screen for mobile
     * Fix the note details for small screens
-    
+* Add error message alerts if a user enters the wrong password or an email that doesn't exist
+    * Don't give too much detail. Just say login failed, please check your credentials
+* Make sure all the validation is correct and working for both login and signup
+* Set up password reset
+    * sendPasswordResetEmail from firebase/app
