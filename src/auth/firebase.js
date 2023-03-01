@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, signOut, deleteUser } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, updateProfile, signOut, deleteUser } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
@@ -38,6 +38,16 @@ const registerUserWithEmailAndPassword = async (email, password, username) => {
     }
   };
 
+const sendPasswordReset = async (email) => {
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset email sent!");
+  } catch (err) {
+    console.log(err);
+    alert('Password reset email sent!');
+  }
+}
+
 const signUserOut = () => {
   signOut(auth);
 }
@@ -51,6 +61,7 @@ const handleDeleteUser = (user) => {
     database,
     logInWithEmailAndPassword,
     registerUserWithEmailAndPassword,
+    sendPasswordReset,
     signUserOut,
     handleDeleteUser
   }

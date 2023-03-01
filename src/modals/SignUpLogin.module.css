@@ -8,10 +8,11 @@
    font-family:'Courier New', Courier, monospace;
 }
 
-.toggleButton {
+.bottomButton {
     text-decoration: none;
     border: none;
     background: none;
+    padding-bottom: 1vh;
 }
 
 .actionWord {

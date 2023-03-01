@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   logInWithEmailAndPassword,
   registerUserWithEmailAndPassword,
+  sendPasswordReset
 } from "../auth/firebase";
 
 export default function SignUpLoginModal({
@@ -69,6 +70,15 @@ export default function SignUpLoginModal({
     }
   }
 
+  function handlePasswordReset() {
+    const validEmail = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    if(validEmail) {
+      sendPasswordReset(email);
+    } else {
+      alert('Please enter a valid email into the Email field')
+    }
+  }
+
   function toggleIsNewUser() {
     setIsNewUser((prevState) => !prevState);
   }
@@ -120,9 +130,15 @@ export default function SignUpLoginModal({
             </button>
           </div>
         </form>
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <button
-            className={classes.toggleButton}
+            className={classes.bottomButton}
+            onClick={() => handlePasswordReset()}
+          >
+            <span className={classes.actionWord}>Forgot Password?</span>
+          </button>
+          <button
+            className={classes.bottomButton}
             onClick={() => toggleIsNewUser()}
           >
             {isNewUser ? (
