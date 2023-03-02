@@ -134,7 +134,7 @@ export default function Header({
             onMouseDown={() => handleBookSelection("new")}
             className={classes.smallNewButton}
           >
-            new <span className={classes.smallPlus}>+</span>
+            new note
           </button>
           <div style={{marginLeft: 'auto', display: 'flex'}}>
           <form onSubmit={onSubmit} >
