@@ -44,12 +44,13 @@
 }
 .smallBookContainerTop {
   display: flex !important;
-  justify-content: space-around;
+  margin-left: 2.5vw;
   padding-bottom: 1vh;
 }
 .smallBookContainerBottom {
-  display: flex !important;
-  justify-content: space-around;
+  display: flex;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
   padding-bottom: 1vh;
 }
 .item {
@@ -83,6 +84,7 @@
   color: hsl(0, 0%, 25%);
   font-size: medium;
   padding-right: 5px;
+  width: 30vw;
 }
 .smallPlus {
   color: hsl(0, 0%, 80%);

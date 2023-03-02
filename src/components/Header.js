@@ -2,6 +2,7 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Select from "react-select";
+import { FaSearch } from "react-icons/fa";
 
 export default function Header({
   bookNames,
@@ -75,6 +76,7 @@ export default function Header({
     control: (baseStyles) => ({
       ...baseStyles,
       borderColor: 'black',
+      width: '30vw'
     }),
     dropdownIndicator: (baseStyles) => ({
       ...baseStyles,
@@ -96,29 +98,35 @@ export default function Header({
           </h1>
         </div>
         <div className={classes.smallBookContainerTop}>
-          <Select
-            styles={selectStyles}
-            components={componentOptions}
-            options={createOptionsArray("books", bookNames)}
-            onChange={(e) => handleBookSelection(e.value)}
-            placeholder={"book"}
-          />
-          <Select
-            styles={selectStyles}
-            components={componentOptions}
-            isDisabled={pageNames.length < 1}
-            options={createOptionsArray("pages", pageNames)}
-            onChange={(e) => selectedPage(e.value)}
-            placeholder={"page"}
-          />
-          <Select
-            styles={selectStyles}
-            components={componentOptions}
-            isDisabled={sectionNames.length < 1}
-            options={createOptionsArray("sections", sectionNames)}
-            onChange={(e) => selectedSection(e.value)}
-            placeholder={"section"}
-          />
+          <div style={{display: 'flex', flex: '1'}}>
+            <Select
+              styles={selectStyles}
+              components={componentOptions}
+              options={createOptionsArray("books", bookNames)}
+              onChange={(e) => handleBookSelection(e.value)}
+              placeholder={"book"}
+            />
+          </div>
+          <div style={{display: 'flex', flex: '1'}}>
+            <Select
+              styles={selectStyles}
+              components={componentOptions}
+              isDisabled={pageNames.length < 1}
+              options={createOptionsArray("pages", pageNames)}
+              onChange={(e) => selectedPage(e.value)}
+              placeholder={"page"}
+            />
+          </div>
+          <div style={{display: 'flex', flex: '1'}}>
+            <Select
+              styles={selectStyles}
+              components={componentOptions}
+              isDisabled={sectionNames.length < 1}
+              options={createOptionsArray("sections", sectionNames)}
+              onChange={(e) => selectedSection(e.value)}
+              placeholder={"section"}
+            />
+          </div>
         </div>
         <div className={classes.smallBookContainerBottom}>
           <button
@@ -128,7 +136,8 @@ export default function Header({
           >
             new <span className={classes.smallPlus}>+</span>
           </button>
-          <form onSubmit={onSubmit}>
+          <div style={{marginLeft: 'auto', display: 'flex'}}>
+          <form onSubmit={onSubmit} >
             <input
               className={classes.smallInput}
               disabled={disabledButtonCheck()}
@@ -137,6 +146,8 @@ export default function Header({
               ref={inputRef}
             />
           </form>
+          <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} />
+          </div>
         </div>
       </div>
     );
