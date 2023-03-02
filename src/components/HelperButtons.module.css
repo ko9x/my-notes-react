@@ -1,4 +1,6 @@
 .buttonContainer {
     display: flex;
     flex-direction: row;
+    margin-right: 2vw;
+    overflow-x: scroll;
 }

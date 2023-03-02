@@ -370,7 +370,7 @@ export default function EditModal({
           />
         </div>
         <div>
-          <form onSubmit={handleSubmit}>
+          <form style={{paddingLeft: '1vw', width: '100%'}} onSubmit={handleSubmit}>
             <h2>Title</h2>
             <input
               ref={titleRef}
