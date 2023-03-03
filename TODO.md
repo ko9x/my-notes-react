@@ -1,19 +1,13 @@
 ### Current Focus
-* Host the app on blakes server instead of github pages
-    * Or create my own server if it's not too expensive.
-
-* The edit modal has too much padding on the right side.
-    * only present on large screens
-
-* If you shrink the edit modal down below 750 width and then back above 750 it doesn't switch back to non-mobile mode
-
-* If the user has never created a note (there are no books yet created) we need different instructional text.
-
 * We need to style this thing to grab peoples attention when they are looking at your portfolio
     * Get some ideas from the internets!
 
+* If the user has never created a note (there are no books yet created) we need different instructional text.
+
+* Create my own server so I can host this app and my portfolio on there
+
 ### What to do next
-* Styling
+* Styling!
 * Make the book names in the header scroll horizontally?
     * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
@@ -38,16 +32,15 @@
 * See if Blake has any recommendations styling
 * make the radio buttons look nicer, especially on mobile
     * Maybe use a checkbox or something
-* Style the EditModal
+* Style the EditModal and SignUpLoginModal
     * Look at some other apps and sites for "inspiration"
     * Maybe do a background that make the distiction between sections more obvious and adds some color and shading
-* Style the SignUpLoginModal
-    * Look at some other apps and sites for "inspiration"
 * Make some themes the user can choose from
     * like an iOS theme
     * a dark mode theme would be cool also
 
 ### Bugs
+* If you shrink the edit modal down below 750 width and then back above 750 it doesn't switch back to non-mobile mode
 * If the screen is not very tall and the user scrolls in a sidebar, the background color and the sideBarWall cut off.
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
 * The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
@@ -230,3 +223,5 @@
 * Make sure all the validation is correct and working for both login and signup
 * Set up password reset
     * sendPasswordResetEmail from firebase/app
+* The edit modal has too much padding on the right side.
+    * only present on large screens?
