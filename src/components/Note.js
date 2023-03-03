@@ -188,8 +188,8 @@ export default function Note({
             >
               <>
                 <div className={classes.descriptionContainer}>
-                  <p className={classes.description}>{note.book} ></p>
-                  <p className={classes.description}>{note.page} ></p>
+                  <p className={classes.description}>{`${note.book} >`}</p>
+                  <p className={classes.description}>{`${note.page} >`}</p>
                   <p className={classes.description}>{note.section}</p>
                 </div>
                 <div className={classes.buttonContainer}>
