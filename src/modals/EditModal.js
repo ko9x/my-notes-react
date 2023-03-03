@@ -457,20 +457,18 @@ export default function EditModal({
                 sideSize ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
-            <div style={{ width: "69.1%", paddingTop: "20px", paddingBottom: isMobile ? '150px' : null }}>
+            <div style={{paddingTop: "20px", paddingBottom: isMobile ? '150px' : null }}>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: '5vw'}}>
               <button
                 disabled={handleEnableSubmitButton()}
                 className={classes.submitButton}
               >
                 <p>Submit</p>
-                <p style={{ color: "red" }}>
+                <p style={{ color: '#cc3300' }}>
                   {missingRequiredInformation && "Please complete the form"}
                 </p>
               </button>
-            </div>
-          </form>
-        </div>
-        {!isMobile ? <div className={classes.closeButtonContainer}>
+              {!isMobile ? <div className={classes.closeButtonContainer}>
           <button
             className={classes.closeButton}
             onClick={handleManualCloseModal}
@@ -478,6 +476,10 @@ export default function EditModal({
             close
           </button>
         </div> : null }
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </Modal>
   );

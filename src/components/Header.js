@@ -136,7 +136,7 @@ export default function Header({
           >
             new note
           </button>
-          <div style={{marginLeft: 'auto', display: 'flex'}}>
+          <div style={{ display: 'flex', marginLeft: 'auto'}}>
           <form onSubmit={onSubmit} >
             <input
               className={classes.smallInput}
