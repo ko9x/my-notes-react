@@ -50,6 +50,7 @@
 .closeButtonContainer { 
     float: right;
     padding-top: 2vh;
+    margin-bottom: 5vh;
 }
 .closeButton {
     border-radius: .5vh;
