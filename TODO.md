@@ -2,6 +2,11 @@
 * We need to style this thing to grab peoples attention when they are looking at your portfolio
     * Get some ideas from the internets!
 
+* (done) Create My Notes circular logo
+    * On the desktop in the MyNotesLogo folder
+* Continue with the re-design of the mobile header
+    * I drew a rough sketch of what I am thinking
+
 * If the user has never created a note (there are no books yet created) we need different instructional text.
 
 * Create my own server so I can host this app and my portfolio on there
