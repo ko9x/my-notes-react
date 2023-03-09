@@ -274,6 +274,7 @@ export default function App() {
         signOut={handleLogOutUser}
         newDisplayName={newDisplayName}
         isMobile={isMobile}
+        isLandscape={width > height}
         height={height}
       />
       )}

@@ -22,6 +22,7 @@ export default function Header({
   signOut,
   newDisplayName,
   isMobile,
+  isLandscape,
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -93,15 +94,15 @@ export default function Header({
 
   if (isMobile) {
     return (
-      <div className={classes.smallContainer}>
+      <div className={classes.smallContainer} style={{height: isLandscape ? '40vh' : '10vh'}}>
         <div style={{flex: '1'}}>
-            <LogoSvg style={{marginLeft: '2vw', marginRight: '2vw', marginTop: '.5vh'}} />
+            <LogoSvg style={{marginLeft: isLandscape ? '3vw' : '2vw', marginRight: isLandscape ? '3vw' : '2vw', marginTop: isLandscape ? '1vh' : '.5vh'}} />
         </div>
-        <div style={{flex: '3', height: '10vh'}}>
+        <div style={{flex: '3', height: '100%'}}>
           <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '100%'}}>
-            <form onSubmit={onSubmit} style={{width: '100%', height: '100%'}} >
+            <form onSubmit={onSubmit} style={{display: 'flex', alignItems:'center', justifyContent: 'center', width: '100%', height: '100%'}} >
               <input
-                style={{width: '90%', height: '50%', marginTop: '2.8vh'}}
+                style={{width: '90%', height: isLandscape ? '35%' : '50%'}}
                 className={classes.smallInput}
                 disabled={disabledButtonCheck()}
                 placeholder="search"
