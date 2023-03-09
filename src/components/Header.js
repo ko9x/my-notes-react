@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Select from "react-select";
 import { FaSearch } from "react-icons/fa";
+import {Spin as Hamburger} from "hamburger-react";
+import {ReactComponent as LogoSvg} from '../images/logo-cropped.svg';
 
 export default function Header({
   bookNames,
@@ -92,13 +94,29 @@ export default function Header({
   if (isMobile) {
     return (
       <div className={classes.smallContainer}>
-        <div className={classes.smallLogoContainer}>
-          <h1 className={classes.smallLogo}>
-            {displayName ? `${displayName}'s Notes` : "My Notes"}
-          </h1>
+        <div style={{flex: '1'}}>
+            <LogoSvg style={{marginLeft: '2vw', marginRight: '2vw', marginTop: '.5vh'}} />
         </div>
-        <div className={classes.smallBookContainerTop}>
-          <div style={{display: 'flex', flex: '1'}}>
+        <div style={{flex: '3', height: '10vh'}}>
+          <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '100%'}}>
+            <form onSubmit={onSubmit} style={{width: '100%', height: '100%'}} >
+              <input
+                style={{width: '90%', height: '50%', marginTop: '2.8vh'}}
+                className={classes.smallInput}
+                disabled={disabledButtonCheck()}
+                placeholder="search"
+                type="search"
+                ref={inputRef}
+              />
+            </form>
+            {/* <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} /> */}
+          </div>
+        </div>
+        <div style={{marginRight: '1vw'}}>
+          <Hamburger rounded />
+        </div>
+        {/* <div className={classes.smallBookContainerTop}> */}
+          {/* <div style={{display: 'flex', flex: '1'}}>
             <Select
               styles={selectStyles}
               components={componentOptions}
@@ -126,29 +144,19 @@ export default function Header({
               onChange={(e) => selectedSection(e.value)}
               placeholder={"section"}
             />
-          </div>
-        </div>
-        <div className={classes.smallBookContainerBottom}>
-          <button
+          </div> */}
+        {/* </div> */}
+        {/* <div className={classes.smallBookContainerBottom}> */}
+          {/* <button
             disabled={disabledButtonCheck()}
-            onMouseDown={() => handleBookSelection("new")}
+            // onMouseDown={() => handleBookSelection("new")}
             className={classes.smallNewButton}
           >
             new note
-          </button>
-          <div style={{ display: 'flex', marginLeft: 'auto'}}>
-          <form onSubmit={onSubmit} >
-            <input
-              className={classes.smallInput}
-              disabled={disabledButtonCheck()}
-              placeholder="search"
-              type="search"
-              ref={inputRef}
-            />
-          </form>
-          <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} />
-          </div>
-        </div>
+          </button> */}
+          {/* <div style={{ display: 'flex', marginLeft: 'auto'}}> */}
+          {/* </div> */}
+        {/* </div> */}
       </div>
     );
   }
@@ -156,9 +164,11 @@ export default function Header({
   if (!isMobile) {
     return (
       <div className={classes.container}>
+         
         <div className={classes.logoContainer}>
           <h1 className={classes.logo}>
-            {displayName ? `${displayName}'s Notes` : "My Notes"}
+            <LogoSvg style={{width: '80%', paddingTop: '2vh'}} />
+            {/* {displayName ? `${displayName}'s Notes` : "My Notes"} */}
           </h1>
         </div>
         <div className={classes.bookContainer}>
