@@ -15,9 +15,9 @@
   align-items: center;
   width: 100vw;
   background-color: var(--primary-color);
-  /* position: relative; */
-  /* z-index: 100; */
-  box-shadow: 2px -5px 20px black;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 2px -2px 20px black;
   -webkit-tap-highlight-color: transparent;
 }
 .logoContainer {
@@ -28,6 +28,28 @@
 .smallLogoContainer {
   display: flex;
   flex-direction: column;
+}
+.slideContainer {
+  display: flex;
+  /* overflow-y: hidden; */
+  background-color: var(--primary-color);
+  align-items: flex-end;
+  padding-top: 1vh;
+  padding-bottom: .5vh;
+  border-bottom-left-radius: .5vh;
+  border-bottom-right-radius: .5vh;
+}
+.itemContainer {
+}
+.slideOpen {
+  height: 15vh;
+  transition: ease-out;
+  transition-duration: 500ms;
+}
+.slideClosed {
+  height: 0;
+  transition: ease-in;
+  transition-duration: 500ms;
 }
 .logo {
   font-family: "Courier New", Courier, monospace;

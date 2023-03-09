@@ -3,8 +3,8 @@ import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Select from "react-select";
 import { FaSearch } from "react-icons/fa";
-import {Spin as Hamburger} from "hamburger-react";
-import {ReactComponent as LogoSvg} from '../images/logo-cropped.svg';
+import { Spin as Hamburger } from "hamburger-react";
+import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
 
 export default function Header({
   bookNames,
@@ -26,6 +26,7 @@ export default function Header({
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [showSlide, setShowSlide] = useState(false);
   const inputRef = useRef();
 
   useEffect(() => {
@@ -68,9 +69,9 @@ export default function Header({
   }
 
   function createOptionsArray(name, list) {
-    const arrWithName = [{value: name, label: name}];
+    const arrWithName = [{ value: name, label: name }];
     list.forEach((item) => {
-      arrWithName.push({value: item, label: item});
+      arrWithName.push({ value: item, label: item });
     });
     return arrWithName;
   }
@@ -78,45 +79,74 @@ export default function Header({
   const selectStyles = {
     control: (baseStyles) => ({
       ...baseStyles,
-      borderColor: 'black',
-      width: '30vw'
+      borderColor: "black",
+      width: "100vw",
+      // boxShadow: '1px 1px 10px black'
     }),
     dropdownIndicator: (baseStyles) => ({
       ...baseStyles,
-      paddingRight: '3px',
-      paddingLeft: '0'
-    })
+      paddingRight: "3px",
+      paddingLeft: "0",
+    }),
   };
 
   const componentOptions = {
-    IndicatorSeparator: () => null
+    IndicatorSeparator: () => null,
   };
 
   if (isMobile) {
     return (
-      <div className={classes.smallContainer} style={{height: isLandscape ? '40vh' : '10vh'}}>
-        <div style={{flex: '1'}}>
-            <LogoSvg style={{marginLeft: isLandscape ? '3vw' : '2vw', marginRight: isLandscape ? '3vw' : '2vw', marginTop: isLandscape ? '1vh' : '.5vh'}} />
-        </div>
-        <div style={{flex: '3', height: '100%'}}>
-          <div style={{display: 'flex', flexDirection: 'row', width: '100%', height: '100%'}}>
-            <form onSubmit={onSubmit} style={{display: 'flex', alignItems:'center', justifyContent: 'center', width: '100%', height: '100%'}} >
-              <input
-                style={{width: '90%', height: isLandscape ? '35%' : '50%'}}
-                className={classes.smallInput}
-                disabled={disabledButtonCheck()}
-                placeholder="search"
-                type="search"
-                ref={inputRef}
-              />
-            </form>
-            {/* <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} /> */}
+      <div>
+        <div
+          className={classes.smallContainer}
+          style={{ height: isLandscape ? "40vh" : "10vh" }}
+        >
+          <div style={{ flex: "1" }}>
+            <LogoSvg
+              style={{
+                marginLeft: isLandscape ? "3vw" : "2vw",
+                marginRight: isLandscape ? "3vw" : "2vw",
+                marginTop: isLandscape ? "1vh" : ".5vh",
+              }}
+            />
           </div>
-        </div>
-        <div style={{marginRight: '1vw'}}>
-          <Hamburger rounded />
-        </div>
-        {/* <div className={classes.smallBookContainerTop}> */}
+          <div style={{ flex: "3", height: "100%" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <form
+                onSubmit={onSubmit}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <input
+                  style={{ width: "90%", height: isLandscape ? "35%" : "50%" }}
+                  className={classes.smallInput}
+                  disabled={disabledButtonCheck()}
+                  placeholder="search"
+                  type="search"
+                  ref={inputRef}
+                />
+              </form>
+              {/* <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} /> */}
+            </div>
+          </div>
+          <div style={{ marginRight: "1vw" }}>
+            <Hamburger onToggle={() => {
+              setShowSlide(prevState => !prevState);
+            }} rounded />
+          </div>
+          {/* <div className={classes.smallBookContainerTop}> */}
           {/* <div style={{display: 'flex', flex: '1'}}>
             <Select
               styles={selectStyles}
@@ -146,8 +176,8 @@ export default function Header({
               placeholder={"section"}
             />
           </div> */}
-        {/* </div> */}
-        {/* <div className={classes.smallBookContainerBottom}> */}
+          {/* </div> */}
+          {/* <div className={classes.smallBookContainerBottom}> */}
           {/* <button
             disabled={disabledButtonCheck()}
             // onMouseDown={() => handleBookSelection("new")}
@@ -157,7 +187,33 @@ export default function Header({
           </button> */}
           {/* <div style={{ display: 'flex', marginLeft: 'auto'}}> */}
           {/* </div> */}
-        {/* </div> */}
+          {/* </div> */}
+        </div>
+        <div className={`${classes.slideContainer} ${showSlide ? classes.slideOpen : classes.slideClosed}`}>
+          <div className={classes.itemContainer}>
+              <Select
+                styles={selectStyles}
+                components={componentOptions}
+                options={createOptionsArray("books", bookNames)}
+                onChange={(e) => handleBookSelection(e.value)}
+                placeholder={"book"}
+              />
+              <Select
+                styles={selectStyles}
+                components={componentOptions}
+                options={createOptionsArray("books", bookNames)}
+                onChange={(e) => handleBookSelection(e.value)}
+                placeholder={"book"}
+              />
+              <Select
+                styles={selectStyles}
+                components={componentOptions}
+                options={createOptionsArray("books", bookNames)}
+                onChange={(e) => handleBookSelection(e.value)}
+                placeholder={"book"}
+              />
+            </div>
+        </div>
       </div>
     );
   }
@@ -165,10 +221,9 @@ export default function Header({
   if (!isMobile) {
     return (
       <div className={classes.container}>
-         
         <div className={classes.logoContainer}>
           <h1 className={classes.logo}>
-            <LogoSvg style={{width: '80%', paddingTop: '2vh'}} />
+            <LogoSvg style={{ width: "80%", paddingTop: "2vh" }} />
             {/* {displayName ? `${displayName}'s Notes` : "My Notes"} */}
           </h1>
         </div>
