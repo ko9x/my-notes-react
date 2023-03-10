@@ -246,7 +246,10 @@ export default function Header({
                 disabled={disabledButtonCheck()}
                 onClick={isModalOpen ? null : () => signOut()}
               >
-                Log Out
+                <div>
+                  <p style={{marginTop: '0', marginBottom: '0'}} >logout</p>
+                  <p style={{marginTop: '0', marginBottom: '0'}} >{displayName}</p>
+                </div>
               </button>
             ) : (
               <button
