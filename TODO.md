@@ -2,17 +2,13 @@
 * We need to style this thing to grab peoples attention when they are looking at your portfolio
     * Get some ideas from the internets!
 
-* (done) Create My Notes circular logo
-    * On the desktop in the MyNotesLogo folder
-* Continue with the re-design of the mobile header
-    * I drew a rough sketch of what I am thinking
-
 * If the user has never created a note (there are no books yet created) we need different instructional text.
 
 * Create my own server so I can host this app and my portfolio on there
 
 ### What to do next
 * Styling!
+    * Style the modals
 * Make the book names in the header scroll horizontally?
     * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
@@ -126,27 +122,27 @@
 * Finish styling the SideBars
 * Add search functionality
 * Add transition when a user clicks the header to reveal the edit button and details
-* (Done) Add the new features
-    * (done) Most important is implementing the search feature
-* (done) Add validation ensuring each note has:
-    * (done) book
-    * (done) page
-    * (done) section
-    * (done) title
-    * (done) content
-* (done) Add functionality to create a new book
-* (done) Add functionality to create a new page
-* (done) Add functionality to create a new section
-* (done) Finish the form
-* (done) Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
-    * (done) Make sure if a book or page or section exists, the radio button defaults to that spot
-    * (done) Make sure only one radio button is selected at a time
-    * (done) Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
-* (Done) Add functionality to add new notes with a new book name, page name, and/or section name
+* Add the new features
+    * Most important is implementing the search feature
+* Add validation ensuring each note has:
+    * book
+    * page
+    * section
+    * title
+    * content
+* Add functionality to create a new book
+* Add functionality to create a new page
+* Add functionality to create a new section
+* Finish the form
+* Get the correct pages for the selected book and the correct sections for the selected page to show at the top of the modal.
+    * Make sure if a book or page or section exists, the radio button defaults to that spot
+    * Make sure only one radio button is selected at a time
+    * Make sure if a new book or page is selected the list gets updated and displays the correct pages and/or section
+* Add functionality to add new notes with a new book name, page name, and/or section name
     * Allow books, pages, and section names to be multiple words and use unique characters
-* (Done) Add edit and remove functionality
-    * (done) Allow user to move a note from one book, page, or section to another
-    * (Done) After editing a note make sure the view returns to the note you just edited
+* Add edit and remove functionality
+    * Allow user to move a note from one book, page, or section to another
+    * After editing a note make sure the view returns to the note you just edited
 * Break the helper buttons into a separate component and add them to the side and important notes
 * Add buttons to easily code such as:
         * pre-wrap/code-wrap 
@@ -230,3 +226,7 @@
     * sendPasswordResetEmail from firebase/app
 * The edit modal has too much padding on the right side.
     * only present on large screens?
+* Create My Notes circular logo
+    * On the desktop in the MyNotesLogo folder
+* Continue with the re-design of the mobile header
+    * I drew a rough sketch of what I am thinking
