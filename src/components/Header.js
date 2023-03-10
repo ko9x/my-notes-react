@@ -2,7 +2,6 @@ import classes from "./Header.module.css";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 import Select from "react-select";
-import { FaSearch } from "react-icons/fa";
 import { Spin as Hamburger } from "hamburger-react";
 import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
 
@@ -80,13 +79,19 @@ export default function Header({
     control: (baseStyles) => ({
       ...baseStyles,
       borderColor: "black",
-      width: "100vw",
-      // boxShadow: '1px 1px 10px black'
+      width: "98vw",
+      height: '40px',
+      boxShadow: '1px 10px 10px rgba(0,0,0,0.4)',
+      marginTop: '2px'
     }),
     dropdownIndicator: (baseStyles) => ({
       ...baseStyles,
       paddingRight: "3px",
       paddingLeft: "0",
+    }),
+    placeholder: (baseStyles) => ({
+      ...baseStyles,
+      color: 'black'
     }),
   };
 
@@ -101,7 +106,7 @@ export default function Header({
           className={classes.smallContainer}
           style={{ height: isLandscape ? "40vh" : "10vh" }}
         >
-          <div style={{ flex: "1" }}>
+          <div style={{ flex: "1" }} onClick={() => setShowSlide(prevState => !prevState)}>
             <LogoSvg
               style={{
                 marginLeft: isLandscape ? "3vw" : "2vw",
@@ -138,56 +143,13 @@ export default function Header({
                   ref={inputRef}
                 />
               </form>
-              {/* <FaSearch onClick={(e) => onSubmit(e)} style={{alignSelf: 'center', paddingLeft: '1vw'}} /> */}
             </div>
           </div>
           <div style={{ marginRight: "1vw" }}>
-            <Hamburger onToggle={() => {
+            <Hamburger toggled={showSlide} onToggle={() => {
               setShowSlide(prevState => !prevState);
-            }} rounded />
+            }} rounded duration={.7} />
           </div>
-          {/* <div className={classes.smallBookContainerTop}> */}
-          {/* <div style={{display: 'flex', flex: '1'}}>
-            <Select
-              styles={selectStyles}
-              components={componentOptions}
-              options={createOptionsArray("books", bookNames)}
-              onChange={(e) => handleBookSelection(e.value)}
-              placeholder={"book"}
-            />
-          </div>
-          <div style={{display: 'flex', flex: '1'}}>
-            <Select
-              styles={selectStyles}
-              components={componentOptions}
-              isDisabled={pageNames.length < 1}
-              options={createOptionsArray("pages", pageNames)}
-              onChange={(e) => selectedPage(e.value)}
-              placeholder={"page"}
-            />
-          </div>
-          <div style={{display: 'flex', flex: '1'}}>
-            <Select
-              styles={selectStyles}
-              components={componentOptions}
-              isDisabled={sectionNames.length < 1}
-              options={createOptionsArray("sections", sectionNames)}
-              onChange={(e) => selectedSection(e.value)}
-              placeholder={"section"}
-            />
-          </div> */}
-          {/* </div> */}
-          {/* <div className={classes.smallBookContainerBottom}> */}
-          {/* <button
-            disabled={disabledButtonCheck()}
-            // onMouseDown={() => handleBookSelection("new")}
-            className={classes.smallNewButton}
-          >
-            new note
-          </button> */}
-          {/* <div style={{ display: 'flex', marginLeft: 'auto'}}> */}
-          {/* </div> */}
-          {/* </div> */}
         </div>
         <div className={`${classes.slideContainer} ${showSlide ? classes.slideOpen : classes.slideClosed}`}>
           <div className={classes.itemContainer}>
@@ -196,22 +158,37 @@ export default function Header({
                 components={componentOptions}
                 options={createOptionsArray("books", bookNames)}
                 onChange={(e) => handleBookSelection(e.value)}
-                placeholder={"book"}
+                placeholder={"select a book"}
               />
               <Select
                 styles={selectStyles}
                 components={componentOptions}
-                options={createOptionsArray("books", bookNames)}
-                onChange={(e) => handleBookSelection(e.value)}
-                placeholder={"book"}
+                isDisabled={pageNames.length < 1}
+                options={createOptionsArray("pages", pageNames)}
+                onChange={(e) => selectedPage(e.value)}
+                placeholder={"select a page"}
               />
               <Select
                 styles={selectStyles}
                 components={componentOptions}
-                options={createOptionsArray("books", bookNames)}
-                onChange={(e) => handleBookSelection(e.value)}
-                placeholder={"book"}
+                isDisabled={sectionNames.length < 1}
+                options={createOptionsArray("sections", sectionNames)}
+                onChange={(e) => selectedSection(e.value)}
+                placeholder={"select a section"}
               />
+              <button
+                onMouseDown={() => handleBookSelection("new")}
+                className={classes.smallNewButton}
+              >
+                add a new note
+              </button>
+              <button
+                disabled={disabledButtonCheck()}
+                onMouseDown={() => signOut()}
+                className={classes.smallNewButton}
+              >
+                {`logout ${displayName}` }
+              </button>
             </div>
         </div>
       </div>
@@ -224,7 +201,6 @@ export default function Header({
         <div className={classes.logoContainer}>
           <h1 className={classes.logo}>
             <LogoSvg style={{ width: "80%", paddingTop: "2vh" }} />
-            {/* {displayName ? `${displayName}'s Notes` : "My Notes"} */}
           </h1>
         </div>
         <div className={classes.bookContainer}>

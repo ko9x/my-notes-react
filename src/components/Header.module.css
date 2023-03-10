@@ -31,20 +31,19 @@
 }
 .slideContainer {
   display: flex;
-  /* overflow-y: hidden; */
   background-color: var(--primary-color);
   align-items: flex-end;
-  padding-top: 1vh;
-  padding-bottom: .5vh;
+  padding-left: 1vw;
   border-bottom-left-radius: .5vh;
   border-bottom-right-radius: .5vh;
 }
 .itemContainer {
 }
 .slideOpen {
-  height: 15vh;
+  height: 208px;
   transition: ease-out;
   transition-duration: 500ms;
+  padding-bottom: .5vh;
 }
 .slideClosed {
   height: 0;
@@ -110,7 +109,12 @@
   font-weight: 400;
   color: hsl(0, 0%, 25%);
   font-size: medium;
-  width: 30vw;
+  margin-top: 2px;
+  padding-right: 10vw;
+  height: 38px;
+  width: 100%;
+  position: relative;
+  box-shadow: 1px 10px 10px rgba(0,0,0,0.4);
 }
 .smallPlus {
   color: hsl(0, 0%, 80%);
@@ -119,6 +123,8 @@
 .smallInput {
   border-radius: 25px;
   font-size: medium;
+  outline: none;
+  padding-left: 20px;
 }
 .active {
   color: var(--activeButton-color);
