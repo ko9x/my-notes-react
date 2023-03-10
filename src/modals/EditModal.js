@@ -10,7 +10,7 @@ import {
   helpers,
   fixCaret,
   toggleFunc,
-  handleToggleAndText
+  handleToggleAndText,
 } from "../helpers/HelperFunctions";
 
 export default function EditModal({
@@ -34,7 +34,7 @@ export default function EditModal({
   user,
   database,
   setNewNote,
-  isMobile
+  isMobile,
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -83,7 +83,7 @@ export default function EditModal({
       bottom: "auto",
       marginRight: "-50%",
       backgroundColor: "grey",
-      borderRadius: '10px'
+      borderRadius: "10px",
     },
   };
 
@@ -322,7 +322,11 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-        <div className={isMobile ? classes.smallRadioContainer : classes.largeRadioContainer}>
+        <div
+          className={
+            isMobile ? classes.smallRadioContainer : classes.largeRadioContainer
+          }
+        >
           <RadioManager
             missingItem={missingBook}
             newItem={newBook}
@@ -370,7 +374,10 @@ export default function EditModal({
           />
         </div>
         <div>
-          <form style={{paddingLeft: '1vw', width: '100%'}} onSubmit={handleSubmit}>
+          <form
+            style={{ paddingLeft: "1vw", width: "100%" }}
+            onSubmit={handleSubmit}
+          >
             <h2>Title</h2>
             <input
               ref={titleRef}
@@ -384,9 +391,17 @@ export default function EditModal({
             {missingTitle && (
               <p className={classes.validationWarning}>Title is required</p>
             )}
-            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+            <div
+              className={classes.textAreaHeaderContainer}
+              style={{ flexDirection: isMobile ? "column" : "row" }}
+            >
               <div>
-                <h2 onClick={() => toggleFunc(setContentSize, contentSize)} className={classes.textAreaHeader}>Content</h2>
+                <h2
+                  onClick={() => toggleFunc(setContentSize, contentSize)}
+                  className={classes.textAreaHeader}
+                >
+                  Content
+                </h2>
               </div>
               <HelperButtons
                 insertHelperText={insertHelperText}
@@ -411,7 +426,10 @@ export default function EditModal({
             {missingContent && (
               <p className={classes.validationWarning}>Content is required</p>
             )}
-            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+            <div
+              className={classes.textAreaHeaderContainer}
+              style={{ flexDirection: isMobile ? "column" : "row" }}
+            >
               <div onClick={() => toggleFunc(setImportantSize, importantSize)}>
                 <h2 className={classes.textAreaHeader}>Important Note</h2>
               </div>
@@ -431,12 +449,13 @@ export default function EditModal({
                 noteToEdit?.important ? null : "Add an important note"
               }
               className={`${classes.modalTextArea} ${
-                importantSize
-                  ? classes.modalTextAreaMediumHeight
-                  : null
+                importantSize ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
-            <div className={classes.textAreaHeaderContainer} style={{flexDirection: isMobile ? 'column' : 'row'}}>
+            <div
+              className={classes.textAreaHeaderContainer}
+              style={{ flexDirection: isMobile ? "column" : "row" }}
+            >
               <div onClick={() => toggleFunc(setSideSize, sideSize)}>
                 <h2 className={classes.textAreaHeader}>Side Note</h2>
               </div>
@@ -457,25 +476,37 @@ export default function EditModal({
                 sideSize ? classes.modalTextAreaMediumHeight : null
               }`}
             ></textarea>
-            <div style={{paddingTop: "20px", paddingBottom: isMobile ? '150px' : null }}>
-              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: '5vw'}}>
-              <button
-                disabled={handleEnableSubmitButton()}
-                className={classes.submitButton}
+            <div
+              style={{
+                paddingTop: "20px",
+                paddingBottom: isMobile ? "150px" : null,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginRight: "5vw",
+                }}
               >
-                <p>Submit</p>
-                <p style={{ color: '#cc3300' }}>
-                  {missingRequiredInformation && "Please complete the form"}
-                </p>
-              </button>
-              {!isMobile ? <div className={classes.closeButtonContainer}>
-          <button
-            className={classes.closeButton}
-            onClick={handleManualCloseModal}
-          >
-            close
-          </button>
-        </div> : null }
+                <button
+                  disabled={handleEnableSubmitButton()}
+                  className={classes.submitButton}
+                >
+                  <p>Submit</p>
+                  <p style={{ color: "#cc3300" }}>
+                    {missingRequiredInformation && "Please complete the form"}
+                  </p>
+                </button>
+                <div className={classes.closeButtonContainer}>
+                  <button
+                    className={classes.closeButton}
+                    onClick={handleManualCloseModal}
+                  >
+                    close
+                  </button>
+                </div>
               </div>
             </div>
           </form>
