@@ -200,7 +200,7 @@ export default function Header({
       <div className={classes.container}>
         <div className={classes.logoContainer}>
           <h1 className={classes.logo}>
-            <LogoSvg style={{ width: "80%", paddingTop: "2vh" }} />
+            <LogoSvg style={{ height: '90px', marginTop: '5px' }} />
           </h1>
         </div>
         <div className={classes.bookContainer}>
