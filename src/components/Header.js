@@ -23,10 +23,18 @@ export default function Header({
   isMobile,
   isLandscape,
 }) {
+  const [isDark, setIsDark] = useState(true);
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [showSlide, setShowSlide] = useState(false);
   const inputRef = useRef();
+
+  if(isDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  if(!isDark) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 
   useEffect(() => {
     setActiveBook(defaultBook);
@@ -199,7 +207,7 @@ export default function Header({
     return (
       <div className={classes.container}>
         <div className={classes.logoContainer}>
-          <h1 className={classes.logo}>
+          <h1 className={classes.logo} onClick={() => setIsDark(prevState => !prevState)}>
             <LogoSvg style={{ height: '90px', marginTop: '5px' }} />
           </h1>
         </div>
