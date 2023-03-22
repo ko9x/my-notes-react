@@ -71,6 +71,8 @@ export default function EditModal({
     setIsSearch(isSearching);
   }, [isSearching]);
 
+  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
+
   const customStyles = {
     content: {
       height: "80vh",
@@ -82,7 +84,7 @@ export default function EditModal({
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
-      backgroundColor: "grey",
+      backgroundColor: `${modalBackgroundColor}`,
       borderRadius: "10px",
     },
   };

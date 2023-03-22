@@ -51,7 +51,6 @@
   transition-duration: 500ms;
 }
 .logo {
-  font-family: "Courier New", Courier, monospace;
   flex: 1;
   align-self: center;
   animation: fadeIn 3s;
@@ -59,7 +58,6 @@
 .smallLogo {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: "Courier New", Courier, monospace;
   flex: 16;
   animation: fadeIn 3s;
 }
@@ -85,7 +83,6 @@
   margin-left: 0.5vw;
   font-size: large;
   font-weight: 500;
-  font-family: "Courier New", Courier, monospace;
   text-decoration: none;
   border: none;
   background: none;
@@ -97,7 +94,6 @@
   margin-left: 0.5vw;
   font-size: large;
   font-weight: 500;
-  font-family: "Courier New", Courier, monospace;
   text-decoration: none;
   border: none;
   background: none;

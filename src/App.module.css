@@ -3,6 +3,15 @@
   background-color: var(--background-color);
   width: 100vw;
 }
+h1 {
+  color: var(--font-color);
+}
+p {
+  color: var(--font-color);
+}
+button {
+  color: var(--font-color);
+}
 .leftSideBarContainer {
   display: flex;
   justify-content: flex-start;

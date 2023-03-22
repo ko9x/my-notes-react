@@ -1,4 +1,44 @@
+
+/* Original grey look */
+/* :root {
+  header and footer
+  --primary-color: #c1c1c1;
+  SideBar
+  --secondary-color: #a9a9a9;
+  SideBarWall
+  --tertiary-color: #8c8a8a;
+  background where the notes are displayed
+  --background-color: #282c34;
+  activated button
+  --activeButton-color: palegreen;
+  action button
+  --actionButton-color: lightseagreen;
+  text shadow
+  --text-shadow: 1px .5px .5px black;
+} */
+
+/* Light Mode */
 :root {
+  /* header and footer */
+  --primary-color: #ffffff;
+  /* SideBar */
+  --secondary-color: #e5e7eb;
+  /* SideBarWall */
+  --tertiary-color: #ffffff;
+  /* background where the notes are displayed */
+  /* --background-color: #282c34; */
+  /* activated button */
+  --activeButton-color: #6495ed;
+  /* action button */
+  --actionButton-color: lightseagreen;
+  /* text shadow */
+  /* --text-shadow: 1px .5px .5px black; */
+  /* font color */
+  --font-color: black;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
   /* header and footer */
   --primary-color: #c1c1c1;
   /* SideBar */
@@ -13,7 +53,10 @@
   --actionButton-color: lightseagreen;
   /* text shadow */
   --text-shadow: 1px .5px .5px black;
+  /* font color */
+  --font-color: #ffffff;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
