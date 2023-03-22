@@ -78,7 +78,7 @@ export default function Note({
     const element = document.getElementById(`${selectedSection}Separator`);
 
     if (element) {
-      element.scrollIntoView({});
+      element.scrollIntoView({behavior: 'instant', block: 'nearest', inline: 'start'});
     }
   }
 
