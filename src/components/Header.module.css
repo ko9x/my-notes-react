@@ -25,6 +25,9 @@
   flex: 1;
   padding-left: 1vw;
 }
+svg {
+  color: var(--font-color)
+}
 .smallLogoContainer {
   display: flex;
   flex-direction: column;
