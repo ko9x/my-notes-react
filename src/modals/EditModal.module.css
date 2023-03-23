@@ -54,7 +54,7 @@
 }
 .closeButton {
     border-radius: .5vh;
-    background-color: white;
+    background-color: var(--secondary-color);
     float: right;
     border-color: transparent;
     box-shadow: 1px 1px 2.5px black;
