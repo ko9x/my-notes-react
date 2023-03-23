@@ -2,8 +2,10 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    font-family:'Courier New', Courier, monospace;
 }
 .validationWarning {
     color: red;
+}
+h2 {
+    color: var(--font-color);
 }
