@@ -178,7 +178,7 @@ export default function Note({
           className={classes.note}
           ref={determineRef(note)}
         >
-          <div style={{minHeight: '4.5vh'}}>
+          <div style={{minHeight: '35px'}}>
             <div
               className={`${classes.noteDetailContainer} ${
                 showingNoteDetails === note.id
