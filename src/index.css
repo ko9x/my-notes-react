@@ -26,7 +26,7 @@
   /* SideBarWall */
   --tertiary-color: #ffffff;
   /* background where the notes are displayed */
-  /* --background-color: #282c34; */
+  --background-color: #ffffff;
   /* activated button */
   --activeButton-color: #6495ed;
   /* action button */
@@ -40,15 +40,15 @@
 /* Dark Mode */
 [data-theme="dark"] {
   /* header and footer */
-  --primary-color: #c1c1c1;
+  --primary-color: #282c34;
   /* SideBar */
-  --secondary-color: #a9a9a9;
+  --secondary-color: rgba(120,131,155,.2);
   /* SideBarWall */
-  --tertiary-color: #8c8a8a;
+  --tertiary-color: #282c34;
   /* background where the notes are displayed */
   --background-color: #282c34;
   /* activated button */
-  --activeButton-color: palegreen;
+  --activeButton-color: lightseagreen;
   /* action button */
   --actionButton-color: lightseagreen;
   /* text shadow */
