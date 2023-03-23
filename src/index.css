@@ -81,10 +81,15 @@ body {
   transition: opacity 500ms ease-in-out;
 }
 
-.ReactModal__Overlay--after-open{
+.ReactModal__Overlay--after-open {
   opacity: 1;
+  background-color: var(--background-color) !important;
 }
 
-.ReactModal__Overlay--before-close{
+.ReactModal__Content--after-open {
+  border: none !important;
+}
+
+.ReactModal__Overlay--before-close {
   opacity: 0;
 }
