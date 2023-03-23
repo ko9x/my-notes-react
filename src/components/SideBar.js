@@ -76,6 +76,7 @@ export default function SideBar({
                     activeItem === item ? classes.active : null
                   }`}
                   key={index}
+                  style={{marginRight: sideBarPosition === "left" ? '65px' : null}}
                 >
                   {item}
                 </button>
