@@ -128,7 +128,6 @@ svg {
 .active {
   color: var(--activeButton-color);
   text-shadow: var(--text-shadow);
-  font-weight: 600;
 }
 .rightSideContainer {
   display: flex;

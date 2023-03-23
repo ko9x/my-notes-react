@@ -15,7 +15,6 @@
   color: var(--activeButton-color);
   text-shadow: var(--text-shadow);
   margin-bottom: 0;
-  font-family:'Courier New', Courier, monospace;
 }
 hr {
   margin-bottom: 0;

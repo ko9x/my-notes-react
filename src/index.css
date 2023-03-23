@@ -70,7 +70,7 @@ body {
   padding-top: .5vh;
   font-size: large;
   font-weight: 600;
-  font-family:'Courier New', Courier, monospace;
+  /* font-family:'Courier New', Courier, monospace; */
   text-decoration: none;
   border: none;
   background: none;
