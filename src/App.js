@@ -40,6 +40,7 @@ export default function App() {
   const [user] = useAuthState(auth);
   const [newDisplayName, setNewDisplayName] = useState(null);
   const [userClickedSection, setUserClickedSection] = useState(false);
+  const [physicalSectionClick, setPhysicalSectionClick] = useState(false);
   const { height, width } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -302,6 +303,7 @@ export default function App() {
             selectedItemName={getSelectedSection}
             defaultItem={selectedSection}
             sideBarPosition={"right"}
+            setPhysicalSectionClick={setPhysicalSectionClick}
           />
           <SideBarWall />
         </div>
@@ -319,6 +321,8 @@ export default function App() {
         selectedSection={selectedSection}
         userClickedSection={userClickedSection}
         setUserClickedSection={setUserClickedSection}
+        physicalSectionClick={physicalSectionClick}
+        setPhysicalSectionClick={setPhysicalSectionClick}
         newlyAddedNote={newNote}
         isMobile={isMobile}
         height={height}

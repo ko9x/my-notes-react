@@ -6,6 +6,7 @@ export default function SideBar({
   selectedItemName,
   sideBarPosition,
   defaultItem,
+  setPhysicalSectionClick
 }) {
   const [activeItem, setActiveItem] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,12 @@ export default function SideBar({
     selectedItemName(item);
   }
 
+  function handlePhysicalSectionClick() {
+    if(setPhysicalSectionClick && sideBarPosition === 'right') {
+      setPhysicalSectionClick(true);
+    }
+  }
+
   return (
     <div
       onTransitionEnd={e => {
@@ -71,6 +78,7 @@ export default function SideBar({
         {currentItems ? currentItems.map((item, index) => {
               return (
                 <button
+                  onMouseDownCapture={() => sideBarPosition === "right" ? handlePhysicalSectionClick() : null}
                   onMouseDown={() => handleItemSelection(item)}
                   className={`${classes.item} ${
                     activeItem === item ? classes.active : null

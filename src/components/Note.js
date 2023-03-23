@@ -33,6 +33,8 @@ export default function Note({
   newlyAddedNote,
   isMobile,
   height,
+  physicalSectionClick,
+  setPhysicalSectionClick
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -49,6 +51,13 @@ export default function Note({
       setUserClickedSection(false);
     }
   }, [selectedSection]);
+
+  useEffect(() => {
+    if(physicalSectionClick) {
+      scrollToNote();
+      setPhysicalSectionClick(false);
+    }
+  }, [physicalSectionClick])
 
   useEffect(() => {
     if (newlyAddedNote) {
@@ -78,7 +87,7 @@ export default function Note({
     const element = document.getElementById(`${selectedSection}Separator`);
 
     if (element) {
-      element.scrollIntoView({behavior: 'instant', block: 'nearest', inline: 'start'});
+      element.scrollIntoView({behavior: 'instant', block: physicalSectionClick ? 'start' : 'nearest'});
     }
   }
 
