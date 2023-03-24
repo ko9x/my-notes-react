@@ -66,6 +66,15 @@ input[type='search']::placeholder{
   color: var(--search-placeholder) !important;
   font-size: medium;
 }
+input[type='text']::placeholder{
+  color: var(--search-placeholder) !important;
+}
+textarea::placeholder{
+  color: var(--search-placeholder) !important;
+}
+input[type='search'] {
+  color: var(--text-color);
+}
 
 body {
   margin: 0;

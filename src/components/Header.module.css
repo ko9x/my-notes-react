@@ -87,10 +87,11 @@ svg {
   border-radius: 25px;
   border-color: transparent;
   background-color: var(--secondary-color);
+  outline-width: 2px;
+  outline-color: var(--actionButton-color);
 }
-#largeSearchID::placeholder {
-  color: green;
-  opacity: 1;
+.largeSearchInput:focus {
+  outline-style: solid;
 }
 .bookContainer {
   display: flex !important;

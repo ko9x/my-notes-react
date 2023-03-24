@@ -14,7 +14,13 @@
     width: 95%;
     border-radius: .5vh;
     border-color: transparent;
-    outline-color: var(--actionButton-color)
+    outline-color: var(--actionButton-color);
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+}
+.modalInput:focus {
+    outline-style: solid;
+    outline-width: 2px;
 }
 .modalTextArea {
     transition-duration: 500ms;
@@ -22,7 +28,14 @@
     width: 95%; 
     border-radius: .5vh;
     border-color: transparent;
-    outline-color: var(--actionButton-color)
+    outline-color: var(--actionButton-color);
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+}
+.modalTextArea:focus {
+    transition-duration: 0ms;
+    outline-style: solid;
+    outline-width: 2px;
 }
 .modalTextAreaMediumHeight {
     transition-duration: 500ms;
