@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Select from "react-select";
 import { Spin as Hamburger } from "hamburger-react";
 import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
+import 'font-awesome/css/font-awesome.min.css';
 
 export default function Header({
   bookNames,
@@ -117,9 +118,9 @@ export default function Header({
           <div style={{ flex: "1" }} onClick={() => setShowSlide(prevState => !prevState)}>
             <LogoSvg
               style={{
-                marginLeft: isLandscape ? "3vw" : "2vw",
-                marginRight: isLandscape ? "3vw" : "2vw",
-                marginTop: isLandscape ? "1vh" : ".5vh",
+                marginLeft: isLandscape ? "10px" : "5px",
+                marginRight: isLandscape ? "20px" : "10px",
+                marginTop: isLandscape ? "5px" : "2px",
               }}
             />
           </div>
@@ -146,8 +147,8 @@ export default function Header({
                   style={{ width: "90%", height: isLandscape ? "35%" : "50%" }}
                   className={classes.smallInput}
                   disabled={disabledButtonCheck()}
-                  placeholder="search"
                   type="search"
+                  placeholder="search"
                   ref={inputRef}
                 />
               </form>
@@ -211,6 +212,20 @@ export default function Header({
             <LogoSvg style={{ height: '90px', marginTop: '5px' }} />
           </h1>
         </div>
+        <div className={classes.searchContainer}>
+          <form onSubmit={onSubmit} style={{width: '100%'}}>
+            <input
+              className={classes.largeSearchInput}
+              disabled={disabledButtonCheck()}
+              // placeholder="search"
+              placeholder=' &#xF002;  search'
+              style={{fontFamily: "Arial, FontAwesome"}}
+              type="search"
+              ref={inputRef}
+              id='largeSearchID'
+            />
+          </form>
+        </div>
         <div className={classes.bookContainer}>
           {bookNames.map((book, index) => {
             return (
@@ -226,9 +241,16 @@ export default function Header({
               </button>
             );
           })}
+          <button
+              disabled={disabledButtonCheck()}
+              onMouseDown={() => handleBookSelection("new")}
+              className={classes.item}
+            >
+              new +
+            </button>
         </div>
         <div className={classes.rightSideContainer}>
-          <div className={classes.rightSideContainerItems}>
+          {/* <div className={classes.rightSideContainerItems}>
             <button
               disabled={disabledButtonCheck()}
               onMouseDown={() => handleBookSelection("new")}
@@ -268,7 +290,7 @@ export default function Header({
                 Sign in
               </button>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     );

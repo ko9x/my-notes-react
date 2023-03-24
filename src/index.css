@@ -33,8 +33,10 @@
   --actionButton-color: #1982fc;
   /* text shadow */
   /* --text-shadow: 1px .5px .5px black; */
-  /* font color */
+  /* general font color */
   --font-color: black;
+  /*  search field placeholder font color*/
+  --search-placeholder: grey;
 }
 
 /* Dark Mode */
@@ -53,8 +55,16 @@
   --actionButton-color: lightseagreen;
   /* text shadow */
   --text-shadow: 1px .5px .5px black;
-  /* font color */
+  /* general font color */
   --font-color: #ffffff;
+  /*search field placeholder font color  */
+  --search-placeholder: rgb(153 161 179);
+
+}
+
+input[type='search']::placeholder{
+  color: var(--search-placeholder) !important;
+  font-size: medium;
 }
 
 body {
