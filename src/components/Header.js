@@ -30,6 +30,8 @@ export default function Header({
   const [showSlide, setShowSlide] = useState(false);
   const inputRef = useRef();
 
+  const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
+
   if(isDark) {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
@@ -217,9 +219,8 @@ export default function Header({
             <input
               className={classes.largeSearchInput}
               disabled={disabledButtonCheck()}
-              // placeholder="search"
               placeholder=' &#xF002;  search'
-              style={{fontFamily: "Arial, FontAwesome"}}
+              style={{fontFamily: "Arial, FontAwesome", color: fontColor, paddingLeft: '20px', paddingRight: '10px'}}
               type="search"
               ref={inputRef}
               id='largeSearchID'

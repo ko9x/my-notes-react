@@ -93,6 +93,13 @@ svg {
 .largeSearchInput:focus {
   outline-style: solid;
 }
+input[type='search' i]::-webkit-search-cancel-button{
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 8px;
+  width: 8px;
+  background: var(--search-clear);
+}
 .bookContainer {
   display: flex !important;
   flex: 4;
