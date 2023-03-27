@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import Select from "react-select";
 import { Spin as Hamburger } from "hamburger-react";
 import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
+import { ReactComponent as SunSvg } from "../images/icons8-sun.svg";
+import { ReactComponent as MoonSvg } from "../images/icons8-moon.svg";
+import { ReactComponent as UserSvg } from "../images/icons8-user.svg";
 import 'font-awesome/css/font-awesome.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faMoon, faIdBadge } from "@fortawesome/free-regular-svg-icons";
@@ -255,16 +258,15 @@ export default function Header({
           <button
               onMouseDown={() => setIsDark(prevState => !prevState)}
               className={classes.item}
-              style={{fontFamily: 'Ariel, FontAwesome', fontSize: '25px'}}
             >
-              {isDark ? <FontAwesomeIcon icon={faLightbulb} /> : <FontAwesomeIcon icon={faMoon} /> }
+              {isDark ? <SunSvg color={fontColor} /> : <MoonSvg color={fontColor} /> }
           </button>
           <button
               onMouseDown={() => user ? signOut() : signIn()}
               className={classes.item}
-              style={{fontFamily: 'Ariel, FontAwesome', fontSize: '25px', paddingRight: '10px'}}
+              style={{paddingRight: '20px'}}
             >
-              <FontAwesomeIcon icon={faIdBadge} />
+              <UserSvg color={fontColor} />
           </button>
         </div>
         <div className={classes.rightSideContainer}>
