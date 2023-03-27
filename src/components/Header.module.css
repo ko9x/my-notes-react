@@ -9,9 +9,6 @@
   box-shadow: 2px -5px 20px black;
   -webkit-tap-highlight-color: transparent;
 }
-svg {
-  color: var(--actionButton-color)
-}
 .smallContainer {
   display: flex !important;
   flex-direction: row !important;

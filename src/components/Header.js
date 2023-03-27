@@ -33,6 +33,7 @@ export default function Header({
   const inputRef = useRef();
 
   const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
+  const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
 
   if(isDark) {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -213,7 +214,7 @@ export default function Header({
       <div className={classes.container}>
         <div className={classes.logoContainer}>
           <h1 className={classes.logo} onClick={() => setIsDark(prevState => !prevState)}>
-            <LogoSvg style={{ height: '90px', marginTop: '5px' }} />
+            <LogoSvg style={{ height: '90px', marginTop: '5px' }} color={actionColor} />
           </h1>
         </div>
         <div className={classes.searchContainer}>
