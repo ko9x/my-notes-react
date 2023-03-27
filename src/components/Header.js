@@ -8,8 +8,6 @@ import { ReactComponent as SunSvg } from "../images/icons8-sun.svg";
 import { ReactComponent as MoonSvg } from "../images/icons8-moon.svg";
 import { ReactComponent as UserSvg } from "../images/icons8-user.svg";
 import 'font-awesome/css/font-awesome.min.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb, faMoon, faIdBadge } from "@fortawesome/free-regular-svg-icons";
 
 export default function Header({
   bookNames,
@@ -34,7 +32,7 @@ export default function Header({
   const [displayName, setDisplayName] = useState(null);
   const [showSlide, setShowSlide] = useState(false);
   const inputRef = useRef();
-
+  
   const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
   const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
 
