@@ -5,6 +5,8 @@ import Select from "react-select";
 import { Spin as Hamburger } from "hamburger-react";
 import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
 import 'font-awesome/css/font-awesome.min.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLightbulb, faMoon, faIdBadge } from "@fortawesome/free-regular-svg-icons";
 
 export default function Header({
   bookNames,
@@ -248,50 +250,23 @@ export default function Header({
               className={classes.item}
             >
               new +
-            </button>
+          </button>
+          <button
+              onMouseDown={() => setIsDark(prevState => !prevState)}
+              className={classes.item}
+              style={{fontFamily: 'Ariel, FontAwesome', fontSize: '25px'}}
+            >
+              {isDark ? <FontAwesomeIcon icon={faLightbulb} /> : <FontAwesomeIcon icon={faMoon} /> }
+          </button>
+          <button
+              onMouseDown={() => user ? signOut() : signIn()}
+              className={classes.item}
+              style={{fontFamily: 'Ariel, FontAwesome', fontSize: '25px', paddingRight: '10px'}}
+            >
+              <FontAwesomeIcon icon={faIdBadge} />
+          </button>
         </div>
         <div className={classes.rightSideContainer}>
-          {/* <div className={classes.rightSideContainerItems}>
-            <button
-              disabled={disabledButtonCheck()}
-              onMouseDown={() => handleBookSelection("new")}
-              className={classes.item}
-            >
-              new +
-            </button>
-          </div>
-          <div className={classes.rightSideContainerItems}>
-            <form onSubmit={onSubmit}>
-              <input
-                disabled={disabledButtonCheck()}
-                placeholder="search"
-                type="search"
-                ref={inputRef}
-              />
-            </form>
-          </div>
-          <div className={classes.rightSideContainerItems}>
-            {user ? (
-              <button
-                className={classes.item}
-                disabled={disabledButtonCheck()}
-                onClick={isModalOpen ? null : () => signOut()}
-              >
-                <div>
-                  <p style={{marginTop: '0', marginBottom: '0'}} >logout</p>
-                  <p style={{marginTop: '0', marginBottom: '0'}} >{displayName}</p>
-                </div>
-              </button>
-            ) : (
-              <button
-                className={classes.item}
-                disabled={isModalOpen && !user}
-                onClick={isModalOpen ? null : () => signIn()}
-              >
-                Sign in
-              </button>
-            )}
-          </div> */}
         </div>
       </div>
     );
