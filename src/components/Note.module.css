@@ -12,7 +12,7 @@
   animation: fadeIn 2s;
 }
 .groupSeparator {
-  color: var(--activeButton-color);
+  color: var(--actionButton-color);
   text-shadow: var(--text-shadow);
   margin-bottom: 0;
 }

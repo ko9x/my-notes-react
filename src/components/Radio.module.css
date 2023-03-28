@@ -10,7 +10,7 @@ input[type='radio'] {
     padding: 6px;
     border: 2px solid #bbbbbb;
     border-radius: 25px;
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     margin-left: 1vw;
     margin-right: 1vw;
 }

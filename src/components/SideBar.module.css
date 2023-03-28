@@ -39,6 +39,6 @@
   white-space: nowrap;
 }
 .active {
-    color: var(--activeButton-color);
+    color: var(--actionButton-color);
     text-shadow: var(--text-shadow);
 }

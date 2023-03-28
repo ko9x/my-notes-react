@@ -1,7 +1,7 @@
 .bar {
     display: flex;
     align-items: center;
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     margin-top: -1px;
     box-shadow: 2px 1px 20px black;
     position: relative;
