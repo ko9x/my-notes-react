@@ -7,18 +7,20 @@
 * Create my own server so I can host this app and my portfolio on there
 
 ### What to do next
-* Add a shadow to the top of the note detail
 * Get new version on the server
-* Dynamically change the search bar size one there are too many books
-    * Decide what the break-point should be
-* Add a card around the notes?
+* Style the signupLogin modal
+* Try pulling changes to the server
 * If you search for `var(` with just the opening `(` it crashes the app
     * See if we can fix that
+* Dynamically change the search bar size one there are too many books
+    * Decide what the break-point should be
 * Make an onboarding flow if the user has no books
 * Add a bar above the header that says you are in demo mode click login to create an account 
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
 * In the editModal when you select developer the modal jumps
     * We should add a transition to make that smoother
+* Add a shadow to the top of the note detail
+* Add a card around the notes?
 
 * Styling!
     * Style the modals
