@@ -112,14 +112,24 @@ input[type='search' i]::-webkit-search-cancel-button{
   background: none;
   cursor: pointer;
 }
+.item:hover {
+  background-color: var(--secondary-color);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
+}
 .rightSideContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .active {
-  color: var(--activeButton-color);
+  color: var(--actionButton-color);
   text-shadow: var(--text-shadow);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 25px;
+  background-color: var(--action-background) !important;
 }
 @keyframes fadeIn {
   0% {

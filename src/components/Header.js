@@ -257,14 +257,14 @@ export default function Header({
               onMouseDown={() => setIsDark(prevState => !prevState)}
               className={classes.item}
             >
-              {isDark ? <SunSvg color={fontColor} /> : <MoonSvg color={fontColor} /> }
+              {isDark ? <SunSvg height={'23px'} color={fontColor} /> : <MoonSvg height={'20px'} color={fontColor} /> }
           </button>
           <button
               onMouseDown={() => user ? signOut() : signIn()}
               className={classes.item}
-              style={{paddingRight: '20px'}}
+              style={{marginRight: '10px'}}
             >
-              <UserSvg color={fontColor} />
+              <UserSvg height={'25px'} color={fontColor} />
           </button>
         </div>
         <div className={classes.rightSideContainer}>
