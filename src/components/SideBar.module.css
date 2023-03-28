@@ -32,13 +32,29 @@
   font-size: large;
   font-weight: 500;
   text-decoration: none;
-  padding: 10px;
+  padding: 15px;
   border: none;
   background: none;
   cursor: pointer;
   white-space: nowrap;
 }
+.item:hover {
+  background-color: var(--secondary-color);
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
 .active {
-    color: var(--actionButton-color);
-    text-shadow: var(--text-shadow);
+  color: var(--actionButton-color);
+  text-shadow: var(--text-shadow);
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-color: var(--action-background) !important;
 }
