@@ -1,18 +1,14 @@
 /* Light Mode */
 :root {
-  /* header and footer */
+  /* header footer and sideBarWall */
   --primary-color: #ffffff;
   /* SideBar */
-  /* --secondary-color: #e5e7eb; */
   --secondary-color: rgba(120, 131, 155, 0.2);
-  /* SideBarWall */
   /* --tertiary-color: #ffffff; */
   /* background where the notes are displayed */
   --background-color: #ffffff;
   /* background for actionButtons */
   --action-background: rgba(120, 131, 225, 0.15);
-  /* activated button */
-  /* --activeButton-color: #1982fc; */
   /* action button */
   --actionButton-color: #1982fc;
   /* text shadow */
@@ -44,18 +40,15 @@
 
 /* Dark Mode */
 [data-theme="dark"] {
-  /* header and footer */
+  /* header footer and sideBarWall */
   --primary-color: #282c34;
   /* SideBar */
   --secondary-color: rgba(120, 131, 155, 0.2);
-  /* SideBarWall */
   /* --tertiary-color: #282c34; */
   /* background where the notes are displayed */
   --background-color: #282c34;
   /* background for actionButtons */
   --action-background: rgba(120, 131, 135, 0.2);
-  /* activated button */
-  /* --activeButton-color: lightseagreen; */
   /* action button */
   --actionButton-color: lightseagreen;
   /* text shadow */
