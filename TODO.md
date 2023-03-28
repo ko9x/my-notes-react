@@ -7,6 +7,19 @@
 * Create my own server so I can host this app and my portfolio on there
 
 ### What to do next
+* Add a shadow to the top of the note detail
+* Get new version on the server
+* Dynamically change the search bar size one there are too many books
+    * Decide what the break-point should be
+* Add a card around the notes?
+* If you search for `var(` with just the opening `(` it crashes the app
+    * See if we can fix that
+* Make an onboarding flow if the user has no books
+* Add a bar above the header that says you are in demo mode click login to create an account 
+    * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
+* In the editModal when you select developer the modal jumps
+    * We should add a transition to make that smoother
+
 * Styling!
     * Style the modals
 * Make the book names in the header scroll horizontally?
@@ -230,3 +243,6 @@
     * On the desktop in the MyNotesLogo folder
 * Continue with the re-design of the mobile header
     * I drew a rough sketch of what I am thinking
+* Add button background to header
+    * also add a light background when hovering
+* Find better svgs for light mode, dark mode, and signin and out
