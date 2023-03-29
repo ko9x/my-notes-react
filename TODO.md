@@ -248,3 +248,4 @@
 * Add button background to header
     * also add a light background when hovering
 * Find better svgs for light mode, dark mode, and signin and out
+* Fix cancel button on edit modal
