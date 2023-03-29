@@ -11,6 +11,8 @@
   --action-background: rgba(120, 131, 225, 0.15);
   /* action button */
   --actionButton-color: #1982fc;
+  /* lighter button only different in light mode */
+  --actionButtonLight-color: rgba(25, 130, 252, 0.6);
   /* text shadow */
   /* --text-shadow: 1px .5px .5px black; */
   /* general font color */
@@ -51,6 +53,8 @@
   --action-background: rgba(120, 131, 135, 0.2);
   /* action button */
   --actionButton-color: lightseagreen;
+  /* lighter button only different in light mode */
+  --actionButtonLight-color: lightseagreen;
   /* text shadow */
   --text-shadow: 1px 0.5px 0.5px black;
   /* general font color */
@@ -84,6 +88,18 @@ input[type="search"]::placeholder {
 }
 input[type="text"]::placeholder {
   color: var(--search-placeholder) !important;
+}
+input[type="email"]::placeholder {
+  color: var(--search-placeholder) !important;
+  font-size: medium;
+}
+input[type="password"]::placeholder {
+  color: var(--search-placeholder) !important;
+  font-size: medium;
+}
+input[type="username"]::placeholder {
+  color: var(--search-placeholder) !important;
+  font-size: medium;
 }
 textarea::placeholder {
   color: var(--search-placeholder) !important;

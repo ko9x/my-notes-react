@@ -16,27 +16,35 @@
 
 .actionWord {
     color: var(--actionButton-color);
-    text-shadow: 1px 1px 2.5px black;
     padding-right: .05vw;
     cursor: pointer;
 }
 
 .modalInput {
     height: 3.5vh;
-    width: 30vw;
-    margin-bottom: 2vh;
-    border-radius: 1vh;
+    padding-left: 20px;
+    margin-bottom: 10px;
     border-color: transparent;
-    outline-color: var(--actionButton-color)
+    width: 60%;
+    border-radius: 25px;
+    border-color: transparent;
+    outline-color: var(--actionButton-color);
+    outline-width: 2px;
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+    font-size: large;
+}
+.modalInput:focus {
+    outline-style: solid;
 }
 
 .submitButton {
-    height: 3vh;
-    width: 20vw;
+    height: 30px;
+    width: 300px;
     align-self: center;
     border-radius: .5vh;
     border-color: transparent;
     box-shadow: 1px 1px 2.5px black;
-    background-color: var(--actionButton-color);
+    background-color: var(--actionButtonLight-color);
     margin-bottom: 1vh;
 }

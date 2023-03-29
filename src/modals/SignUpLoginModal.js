@@ -18,6 +18,8 @@ export default function SignUpLoginModal({
   const [username, setUsername] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
 
+  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
+
   const customStyles = {
     content: {
       height: "80vh",
@@ -29,7 +31,7 @@ export default function SignUpLoginModal({
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
-      backgroundColor: "grey",
+      backgroundColor: `${modalBackgroundColor}`,
     },
   };
 
@@ -95,19 +97,19 @@ export default function SignUpLoginModal({
         <h1 className={classes.modalTitle}>
           {isNewUser ? "Sign up" : "Login"}
         </h1>
-        <form onSubmit={handleSubmit}>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+        <form onSubmit={handleSubmit} style={{width: '100%'}}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
             <input
               type="email"
               value={email}
-              placeholder="Email"
+              placeholder="email"
               className={classes.modalInput}
               onChange={({ target }) => setEmail(target.value)}
             />
             <input
               type="password"
               value={password}
-              placeholder="Password"
+              placeholder="password"
               className={classes.modalInput}
               onChange={({ target }) => setPassword(target.value)}
               formNoValidate={true}
@@ -116,7 +118,7 @@ export default function SignUpLoginModal({
               <input
                 type="username"
                 value={username}
-                placeholder="Username"
+                placeholder="username"
                 className={classes.modalInput}
                 onChange={({ target }) => setUsername(target.value)}
               />

@@ -57,7 +57,7 @@
     border-radius: .5vh;
     float: right;
     border-color: transparent;
-    background-color: var(--actionButton-color);
+    background-color: var(--actionButtonLight-color);
     box-shadow: 1px 1px 2.5px black;
 }
 .closeButtonContainer { 
