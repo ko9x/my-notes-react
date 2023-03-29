@@ -16,4 +16,10 @@
 }
 .confirmButton {
     background-color: var(--actionButton-color);
+    cursor: pointer;
+}
+.cancelButton {
+    background-color: var(--secondary-color);
+    border-style: none;
+    cursor: pointer;
 }

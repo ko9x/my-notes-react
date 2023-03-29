@@ -53,7 +53,7 @@ export default function NoteInput({
           Confirm
         </button>
         <button
-          className={classes.inputButtons}
+          className={`${classes.inputButtons} ${classes.cancelButton}`}
           onClick={() =>
             handleSetNewItem(
               { text: "cancel" },
