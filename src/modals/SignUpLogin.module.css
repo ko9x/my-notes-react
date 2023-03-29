@@ -3,31 +3,24 @@
     flex-direction: column;
     align-items: center;
 }
-
-.modalTitle {
-}
-
 .bottomButton {
     text-decoration: none;
     border: none;
     background: none;
     padding-bottom: 1vh;
 }
-
 .actionWord {
     color: var(--actionButton-color);
     padding-right: .05vw;
     cursor: pointer;
 }
-
 .modalInput {
     height: 3.5vh;
-    padding-left: 20px;
+    padding-left: 10px;
     margin-bottom: 10px;
     border-color: transparent;
-    width: 60%;
-    border-radius: 25px;
     border-color: transparent;
+    border-radius: 5px;
     outline-color: var(--actionButton-color);
     outline-width: 2px;
     background-color: var(--secondary-color);
@@ -37,10 +30,8 @@
 .modalInput:focus {
     outline-style: solid;
 }
-
 .submitButton {
     height: 30px;
-    width: 300px;
     align-self: center;
     border-radius: .5vh;
     border-color: transparent;

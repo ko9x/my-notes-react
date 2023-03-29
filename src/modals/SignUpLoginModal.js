@@ -104,6 +104,7 @@ export default function SignUpLoginModal({
               value={email}
               placeholder="email"
               className={classes.modalInput}
+              style={{width: isMobile ? '90%' : '60%'}}
               onChange={({ target }) => setEmail(target.value)}
             />
             <input
@@ -111,6 +112,7 @@ export default function SignUpLoginModal({
               value={password}
               placeholder="password"
               className={classes.modalInput}
+              style={{width: isMobile ? '90%' : '60%'}}
               onChange={({ target }) => setPassword(target.value)}
               formNoValidate={true}
             />
@@ -120,11 +122,13 @@ export default function SignUpLoginModal({
                 value={username}
                 placeholder="username"
                 className={classes.modalInput}
+                style={{width: isMobile ? '90%' : '60%'}}
                 onChange={({ target }) => setUsername(target.value)}
               />
             ) : null}
             <button
               className={classes.submitButton}
+              style={{width: isMobile ? '70%' : '300px'}}
               type="submit"
               disabled={!validationCheck()}
             >
