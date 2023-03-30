@@ -20,7 +20,7 @@ export default function SignUpLoginModal({
 
   const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
 
-  const customStyles = {
+  const customLargeStyles = {
     content: {
       height: "80vh",
       width: "70vw",
@@ -31,6 +31,20 @@ export default function SignUpLoginModal({
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
+      backgroundColor: `${modalBackgroundColor}`,
+    },
+  };
+
+  const customMobileStyles = {
+    content: {
+      height: "90%",
+      width: '85%',
+      inset: '0',
+      marginTop: '10%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      borderRadius: '25px',
+      zIndex: "200",
       backgroundColor: `${modalBackgroundColor}`,
     },
   };
@@ -89,7 +103,7 @@ export default function SignUpLoginModal({
     <Modal
       isOpen={isSignUpLoginModalOpen}
       onRequestClose={handleCloseModal}
-      style={customStyles}
+      style={isMobile ? customMobileStyles : customLargeStyles}
       contentLabel="Example Modal"
       closeTimeoutMS={500}
     >

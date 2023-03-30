@@ -73,7 +73,7 @@ export default function EditModal({
 
   const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
 
-  const customStyles = {
+  const customLargeStyles = {
     content: {
       height: "80vh",
       width: "70vw",
@@ -86,6 +86,20 @@ export default function EditModal({
       marginRight: "-50%",
       backgroundColor: `${modalBackgroundColor}`,
       borderRadius: "10px",
+    },
+  };
+
+  const customMobileStyles = {
+    content: {
+      height: "100%",
+      width: '85%',
+      inset: '0',
+      marginTop: '10%',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      borderRadius: '25px',
+      zIndex: "200",
+      backgroundColor: `${modalBackgroundColor}`,
     },
   };
 
@@ -319,7 +333,7 @@ export default function EditModal({
     <Modal
       isOpen={isEditModalOpen}
       onRequestClose={handleManualCloseModal}
-      style={customStyles}
+      style={isMobile ? customMobileStyles : customLargeStyles}
       contentLabel="Example Modal"
       closeTimeoutMS={500}
     >

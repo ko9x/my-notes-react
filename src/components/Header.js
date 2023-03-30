@@ -128,6 +128,7 @@ export default function Header({
                 marginRight: isLandscape ? "20px" : "10px",
                 marginTop: isLandscape ? "5px" : "2px",
               }}
+              color={actionColor}
             />
           </div>
           <div style={{ flex: "3", height: "100%" }}>
