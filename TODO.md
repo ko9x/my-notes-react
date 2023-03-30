@@ -4,19 +4,24 @@
 
 * If the user has never created a note (there are no books yet created) we need different instructional text.
 
-* Create my own server so I can host this app and my portfolio on there
-
 ### What to do next
 * Get new version on the server
-* Style the signupLogin modal
-* Try pulling changes to the server
+* Get mobile looking good
+    * Need to add a button to toggle dark and light mode
+    * The dropdown colors need to be fixed
+    * The searchbar background color needs to be fixed
+    * Add a close button that is always in the top right corner of the edit modal
+    * Get the mobile modal looking good
+    * make sure all the colors are working
 * If you search for `var(` with just the opening `(` it crashes the app
     * See if we can fix that
 * Dynamically change the search bar size one there are too many books
     * Decide what the break-point should be
 * Make an onboarding flow if the user has no books
-* Add a bar above the header that says you are in demo mode click login to create an account 
+* Make the demo mode user
+    * Add a bar above the header that says you are in demo mode click login to create an account 
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
+    * Add a demo mode button to the login and sign up modal
 * In the editModal when you select developer the modal jumps
     * We should add a transition to make that smoother
 * Add a shadow to the top of the note detail
@@ -249,3 +254,6 @@
     * also add a light background when hovering
 * Find better svgs for light mode, dark mode, and signin and out
 * Fix cancel button on edit modal
+* Create my own server so I can host this app and my portfolio on there
+* Style the signupLogin modal
+* Figure out how to get background color in status bar area 
