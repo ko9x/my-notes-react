@@ -36,11 +36,21 @@ export default function Header({
   const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
   const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
 
-  if(isDark) {
-    document.documentElement.setAttribute('data-theme', 'dark');
+  if(isMobile) {
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }
-  if(!isDark) {
-    document.documentElement.setAttribute('data-theme', 'light');
+
+  if(!isMobile) {
+    if(isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    if(!isDark) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
   }
 
   useEffect(() => {
