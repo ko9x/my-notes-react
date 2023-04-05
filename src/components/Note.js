@@ -257,9 +257,7 @@ export default function Note({
       } else {
         return "Please select a book, enter a search term, or create a new note";
       }
-    } else {
-      return "Please sign in or create an account";
-    }
+    } 
   }
 
   const groupSeparator = (group, idx, groupLabel) => (

@@ -26,8 +26,9 @@ export default function Header({
   newDisplayName,
   isMobile,
   isLandscape,
+  isDark,
+  setIsDark
 }) {
-  const [isDark, setIsDark] = useState(true);
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [showSlide, setShowSlide] = useState(false);
@@ -35,23 +36,6 @@ export default function Header({
   
   const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
   const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
-
-  if(isMobile) {
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  }
-
-  if(!isMobile) {
-    if(isDark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    }
-    if(!isDark) {
-      document.documentElement.setAttribute('data-theme', 'light');
-    }
-  }
 
   useEffect(() => {
     setActiveBook(defaultBook);

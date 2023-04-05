@@ -43,6 +43,7 @@ export default function App() {
   const [physicalSectionClick, setPhysicalSectionClick] = useState(false);
   const { height, width } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState(false);
+  const [isDark, setIsDark] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   useEffect(() => {
     if(width < 750) {
@@ -230,15 +231,37 @@ export default function App() {
     setUserClickedSection(true);
   }
 
-  return (
-    <div className={classes.container}>
-      {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
+  if(isMobile) {
+    if(window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }
+
+  if(!isMobile) {
+    if(isDark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+    if(!isDark) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }
+
+  if(!user) {
+    return (
       <SignUpLoginModal
         isSignUpLoginModalOpen={isSignUpLoginModalOpen}
         closeModal={handleCloseSignUpLoginModal}
         handleNewDisplayName={handleNewDisplayName}
         isMobile={isMobile}
       />
+    )
+  }
+
+  return (
+    <div className={classes.container}>
+      {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
       <EditModal
         changeBook={liftedBook}
         changePage={liftedPage}
@@ -277,6 +300,8 @@ export default function App() {
         isMobile={isMobile}
         isLandscape={width > height}
         height={height}
+        isDark={isDark}
+        setIsDark={setIsDark}
       />
       )}
       {!isMobile && (
