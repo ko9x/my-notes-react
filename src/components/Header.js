@@ -156,7 +156,7 @@ export default function Header({
             </div>
           </div>
           <div style={{ marginRight: "1vw" }}>
-            <Hamburger toggled={showSlide} onToggle={() => {
+            <Hamburger toggled={showSlide} color={fontColor} onToggle={() => {
               setShowSlide(prevState => !prevState);
             }} rounded duration={.7} />
           </div>
