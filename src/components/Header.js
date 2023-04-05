@@ -90,7 +90,6 @@ export default function Header({
       borderColor: "black",
       width: "98vw",
       height: '40px',
-      boxShadow: '1px 10px 10px rgba(0,0,0,0.4)',
       marginTop: '2px'
     }),
     dropdownIndicator: (baseStyles) => ({
