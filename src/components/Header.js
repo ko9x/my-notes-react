@@ -85,12 +85,13 @@ export default function Header({
   }
 
   const selectStyles = {
-    control: (baseStyles) => ({
+    control: (baseStyles, {isDisabled}) => ({
       ...baseStyles,
       borderColor: "black",
       width: "98vw",
       height: '40px',
-      marginTop: '2px'
+      marginTop: '2px',
+      backgroundColor: isDisabled ? 'rgba(206, 217, 224, 0.85)' : 'white'
     }),
     dropdownIndicator: (baseStyles) => ({
       ...baseStyles,
@@ -100,7 +101,7 @@ export default function Header({
     placeholder: (baseStyles) => ({
       ...baseStyles,
       color: 'black'
-    }),
+    })
   };
 
   const componentOptions = {
