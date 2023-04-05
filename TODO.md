@@ -1,36 +1,33 @@
 ### Current Focus
-* We need to style this thing to grab peoples attention when they are looking at your portfolio
-    * Get some ideas from the internets!
-
-* If the user has never created a note (there are no books yet created) we need different instructional text.
+* MVP!
+    * We need to decide what is necessary do get done before we deploy this thing and move onto the next project
 
 ### What to do next
 * Get new version on the server
+* Fix the search icon on the server version
+    * It just shows a box
 * Get mobile looking good
-    * Need to add a button to toggle dark and light mode
-    * The dropdown colors need to be fixed
-    * The searchbar background color needs to be fixed
     * Add a close button that is always in the top right corner of the edit modal
-    * Get the mobile modal looking good
-    * make sure all the colors are working
+        * Or fix the issue where the overlay needs to be tapped twice to dismiss the modal
+    * (done) Change colorscheme based on user preference variable
+    * (done) The header shadow needs to be fixed
+    * (done) The dropdown colors need to be fixed
+    * (done) make sure all the colors are working
 * If you search for `var(` with just the opening `(` it crashes the app
     * See if we can fix that
 * Dynamically change the search bar size one there are too many books
+    * only if viewport width is larger than 750
     * Decide what the break-point should be
+        * Make the book names in the header scroll horizontally?
 * Make an onboarding flow if the user has no books
 * Make the demo mode user
     * Add a bar above the header that says you are in demo mode click login to create an account 
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
     * Add a demo mode button to the login and sign up modal
-* In the editModal when you select developer the modal jumps
+* In the editModal (non-mobile) when you select developer the modal jumps
     * We should add a transition to make that smoother
 * Add a shadow to the top of the note detail
 * Add a card around the notes?
-
-* Styling!
-    * Style the modals
-* Make the book names in the header scroll horizontally?
-    * only if viewport width is larger than 750
 * Maybe solve some of the issues in the bugs section
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
@@ -44,23 +41,8 @@
                 * Maybe we could add a timeout and a loading spinner to mask that
 * refactoring and documentation/commenting the code
 
-### Styling
-* I think we need to find a better default color scheme
-    * cornflower blue and purple on a white background for light mode
-    * or maybe stick with the lightseagreen
-* Style the delete note ui in the Note.js
-    * starts at line 103
-* See if Blake has any recommendations styling
-* make the radio buttons look nicer, especially on mobile
-    * Maybe use a checkbox or something
-* Style the EditModal and SignUpLoginModal
-    * Look at some other apps and sites for "inspiration"
-    * Maybe do a background that make the distiction between sections more obvious and adds some color and shading
-* Make some themes the user can choose from
-    * like an iOS theme
-    * a dark mode theme would be cool also
-
 ### Bugs
+* To close the editModal you have to tap outside the modal 2 times
 * If you shrink the edit modal down below 750 width and then back above 750 it doesn't switch back to non-mobile mode
 * If the screen is not very tall and the user scrolls in a sidebar, the background color and the sideBarWall cut off.
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
