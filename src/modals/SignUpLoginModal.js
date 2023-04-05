@@ -102,7 +102,6 @@ export default function SignUpLoginModal({
   return (
     <Modal
       isOpen={isSignUpLoginModalOpen}
-      onRequestClose={handleCloseModal}
       style={isMobile ? customMobileStyles : customLargeStyles}
       contentLabel="Example Modal"
       closeTimeoutMS={500}
