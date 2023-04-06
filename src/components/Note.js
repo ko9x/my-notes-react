@@ -275,7 +275,7 @@ export default function Note({
         <div style={{ height: 900, overflow: "auto" }}>
           {selectedNotes.length > 0 || keyWord ? (
             <FlatList
-              searchTerm={keyWord ? keyWord : null}
+              searchTerm={keyWord && keyWord.slice(-1) !== '(' ? keyWord : null}
               searchBy={["content", "title", "important", "side"]}
               list={keyWord ? notes : selectedNotes}
               renderItem={renderItem}
