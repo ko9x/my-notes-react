@@ -12,13 +12,12 @@ export default function SignUpLoginModal({
   closeModal,
   handleNewDisplayName,
   isMobile,
+  modalBackgroundColor
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
-
-  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
 
   const customLargeStyles = {
     content: {

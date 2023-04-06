@@ -248,7 +248,9 @@ export default function App() {
     }
   }
 
+  // Establish computedStyles so they can be passed to the necessary components
   const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+  const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
 
   if(!user) {
@@ -258,6 +260,7 @@ export default function App() {
         closeModal={handleCloseSignUpLoginModal}
         handleNewDisplayName={handleNewDisplayName}
         isMobile={isMobile}
+        modalBackgroundColor={modalBackgroundColor}
       />
     )
   }
@@ -284,6 +287,7 @@ export default function App() {
         setNewNote={setNewNote}
         isMobile={isMobile}
         textColor={textColor}
+        modalBackgroundColor={modalBackgroundColor}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Header
@@ -306,6 +310,8 @@ export default function App() {
         height={height}
         isDark={isDark}
         setIsDark={setIsDark}
+        textColor={textColor}
+        actionColor={actionColor}
       />
       )}
       {!isMobile && (

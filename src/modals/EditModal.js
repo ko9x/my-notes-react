@@ -35,7 +35,8 @@ export default function EditModal({
   database,
   setNewNote,
   isMobile,
-  textColor
+  textColor,
+  modalBackgroundColor
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -71,8 +72,6 @@ export default function EditModal({
   useEffect(() => {
     setIsSearch(isSearching);
   }, [isSearching]);
-
-  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
 
   const customLargeStyles = {
     content: {

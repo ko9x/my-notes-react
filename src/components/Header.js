@@ -28,16 +28,15 @@ export default function Header({
   isMobile,
   isLandscape,
   isDark,
-  setIsDark
+  setIsDark,
+  textColor,
+  actionColor
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [showSlide, setShowSlide] = useState(false);
   const inputRef = useRef();
   
-  const fontColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
-  const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
-
   useEffect(() => {
     setActiveBook(defaultBook);
   }, [defaultBook]);
@@ -157,7 +156,7 @@ export default function Header({
             </div>
           </div>
           <div style={{ marginRight: "1vw" }}>
-            <Hamburger toggled={showSlide} color={fontColor} onToggle={() => {
+            <Hamburger toggled={showSlide} color={textColor} onToggle={() => {
               setShowSlide(prevState => !prevState);
             }} rounded duration={.7} />
           </div>
@@ -221,7 +220,7 @@ export default function Header({
               className={classes.largeSearchInput}
               disabled={disabledButtonCheck()}
               placeholder='search'
-              style={{fontFamily: "Arial, FontAwesome", color: fontColor, paddingLeft: '20px', paddingRight: '10px', fontSize: 'large'}}
+              style={{fontFamily: "Arial, FontAwesome", color: textColor, paddingLeft: '20px', paddingRight: '10px', fontSize: 'large'}}
               type="search"
               ref={inputRef}
               id='largeSearchID'
@@ -254,14 +253,14 @@ export default function Header({
               onMouseDown={() => setIsDark(prevState => !prevState)}
               className={classes.item}
             >
-              {isDark ? <SunSvg height={'23px'} color={fontColor} /> : <MoonSvg height={'20px'} color={fontColor} /> }
+              {isDark ? <SunSvg height={'23px'} color={textColor} /> : <MoonSvg height={'20px'} color={textColor} /> }
           </button>
           <button
               onMouseDown={() => user ? signOut() : signIn()}
               className={classes.item}
               style={{marginRight: '10px'}}
             >
-              <UserSvg height={'25px'} color={fontColor} />
+              <UserSvg height={'25px'} color={textColor} />
           </button>
         </div>
         <div className={classes.rightSideContainer}>
