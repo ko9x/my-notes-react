@@ -7,6 +7,7 @@ import { ReactComponent as LogoSvg } from "../images/logo-cropped.svg";
 import { ReactComponent as SunSvg } from "../images/icons8-sun.svg";
 import { ReactComponent as MoonSvg } from "../images/icons8-moon.svg";
 import { ReactComponent as UserSvg } from "../images/icons8-user.svg";
+import { ReactComponent as SearchSvg } from "../images/search-icon.svg";
 import 'font-awesome/css/font-awesome.min.css';
 
 export default function Header({
@@ -215,10 +216,11 @@ export default function Header({
         </div>
         <div className={classes.searchContainer}>
           <form onSubmit={onSubmit} style={{width: '100%'}}>
+            <SearchSvg style={{marginLeft: '-20px', marginRight: '-18px', marginBottom: '-2px', }} />
             <input
               className={classes.largeSearchInput}
               disabled={disabledButtonCheck()}
-              placeholder=' &#xF002;  search'
+              placeholder='search'
               style={{fontFamily: "Arial, FontAwesome", color: fontColor, paddingLeft: '20px', paddingRight: '10px', fontSize: 'large'}}
               type="search"
               ref={inputRef}
