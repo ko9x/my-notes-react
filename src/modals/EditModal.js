@@ -35,6 +35,7 @@ export default function EditModal({
   database,
   setNewNote,
   isMobile,
+  textColor
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -71,7 +72,7 @@ export default function EditModal({
     setIsSearch(isSearching);
   }, [isSearching]);
 
-  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color')
+  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
 
   const customLargeStyles = {
     content: {
@@ -343,6 +344,7 @@ export default function EditModal({
             isMobile ? classes.smallRadioContainer : classes.largeRadioContainer
           }
         >
+          {isMobile && <button style={{float: 'right', height: '50px', width: '50px', borderRadius: '25px', color: textColor, background: modalBackgroundColor}} onClick={() => handleManualCloseModal()}>close</button>}
           <RadioManager
             missingItem={missingBook}
             newItem={newBook}

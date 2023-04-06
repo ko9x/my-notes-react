@@ -248,6 +248,9 @@ export default function App() {
     }
   }
 
+  const modalBackgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
+
   if(!user) {
     return (
       <SignUpLoginModal
@@ -280,6 +283,7 @@ export default function App() {
         database={database}
         setNewNote={setNewNote}
         isMobile={isMobile}
+        textColor={textColor}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Header
