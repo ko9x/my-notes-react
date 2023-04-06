@@ -1,45 +1,37 @@
 ### Current Focus
-* MVP!
+* Focus on MVP!
     * We need to decide what is necessary do get done before we deploy this thing and move onto the next project
-
-### What to do next
 * Get new version on the server
-* Fix the search icon on the server version
-    * It just shows a box
-* Get mobile looking good
-    * Add a close button that is always in the top right corner of the edit modal
-        * Or fix the issue where the overlay needs to be tapped twice to dismiss the modal
-    * (done) Change colorscheme based on user preference variable
-    * (done) The header shadow needs to be fixed
-    * (done) The dropdown colors need to be fixed
-    * (done) make sure all the colors are working
-* If you search for `var(` with just the opening `(` it crashes the app
-    * See if we can fix that
-* Dynamically change the search bar size one there are too many books
-    * only if viewport width is larger than 750
-    * Decide what the break-point should be
-        * Make the book names in the header scroll horizontally?
-* Make an onboarding flow if the user has no books
+
+### MVP
+* Make an onboarding flow if the user has no books/just created an account
 * Make the demo mode user
-    * Add a bar above the header that says you are in demo mode click login to create an account 
+    * Add a bar above the header that says "you are in demo mode click here to create an account"
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
+        * maybe just make the submit button unclickable if they are in demo. That way they can still see the modal
     * Add a demo mode button to the login and sign up modal
-* In the editModal (non-mobile) when you select developer the modal jumps
-    * We should add a transition to make that smoother
-* Add a shadow to the top of the note detail
-* Add a card around the notes?
-* Maybe solve some of the issues in the bugs section
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
         * I already installed react-spinners so lets see if that one can do what we want it to
             * Add a loading spinner anywhere we do a setTimeout
             * When you do a search there should be a spinner
             * When you submit the form it hangs sometimes so a loading spinner would be nice
+                * it seems to hang more frequently when editing an existing note
             * When you select reactjs or react native it hangs so a spinner would be nice there
                 * I think the renderWhenEmpty from react flatlist would be a place to start for this spinner
-            * When the page is autologgin in it displays the login form for a split second
-                * Maybe we could add a timeout and a loading spinner to mask that
-* refactoring and documentation/commenting the code
+
+### What to do later
+    * See if we can fix that
+* Dynamically change the search bar size one there are too many books
+    * only if viewport width is larger than 750
+    * Decide what the break-point should be
+        * Make the book names in the header scroll horizontally?
+* In the editModal (non-mobile) when you select developer the modal jumps
+    * We should add a transition to make that smoother
+* Add a shadow to the top of the note detail
+* Add a card around the notes?
+* Maybe solve some of the issues in the bugs section
+* refactor and document/comment the code
 
 ### Bugs
 * To close the editModal you have to tap outside the modal 2 times
@@ -238,4 +230,13 @@
 * Fix cancel button on edit modal
 * Create my own server so I can host this app and my portfolio on there
 * Style the signupLogin modal
-* Figure out how to get background color in status bar area 
+* Figure out how to get background color in status bar area
+* Fix the search icon on the server version
+    * It just shows a box
+* Get mobile looking good
+    * (done) Add a close button that is always in the top right corner of the edit modal
+    * (done) Change colorscheme based on user preference variable
+    * (done) The header shadow needs to be fixed
+    * (done) The dropdown colors need to be fixed
+    * (done) make sure all the colors are working
+* If you search for `var(` with just the opening `(` it crashes the app
