@@ -71,7 +71,6 @@
 .logo {
   flex: 1;
   align-self: center;
-  animation: fadeIn 3s;
 }
 .searchContainer {
   display: flex;
