@@ -1,5 +1,5 @@
 import classes from "./App.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, CSSProperties } from "react";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import SideBar from "./components/SideBar.js";
@@ -17,6 +17,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, onValue } from "firebase/database";
 import { createArrays } from "./helpers/HelperFunctions";
 import useWindowDimensions from "./hooks/useWindowDimensions";
+import { ClipLoader } from "react-spinners";
 
 function removeNote(arr, func, newNoteId) {
   const newArray = arr.filter((note) => note.id !== newNoteId);
@@ -44,6 +45,7 @@ export default function App() {
   const { height, width } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState(false);
   const [isDark, setIsDark] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if(width < 750) {
@@ -253,6 +255,15 @@ export default function App() {
   const actionColor = getComputedStyle(document.documentElement).getPropertyValue('--actionButton-color');
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--font-color');
 
+  const spinnerOverride: CSSProperties = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 200,
+    margin: 'auto',
+    zIndex: '1000'
+  }
+
   if(!user) {
     return (
       <SignUpLoginModal
@@ -288,6 +299,7 @@ export default function App() {
         isMobile={isMobile}
         textColor={textColor}
         modalBackgroundColor={modalBackgroundColor}
+        setIsLoading={setIsLoading}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Header
@@ -343,6 +355,14 @@ export default function App() {
           <SideBarWall />
         </div>
       )}
+      <ClipLoader
+        color={textColor}
+        loading={isLoading}
+        cssOverride={spinnerOverride}
+        size={300}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
       <Note
         notes={notes}
         selectedNotes={selectedNotes}
