@@ -13,10 +13,9 @@
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
         * I already installed react-spinners so lets see if that one can do what we want it to
-            * Add a loading spinner anywhere we do a setTimeout
-            * When you do a search there should be a spinner
-            * When you submit the form it hangs sometimes so a loading spinner would be nice
-                * it seems to hang more frequently when editing an existing note
+            * (done) When you do a search there should be a spinner
+            * (done) When you submit the form it hangs sometimes so a loading spinner would be nice
+            * Add a loading spinner anywhere we do a setTimeout?
             * When you select reactjs or react native it hangs so a spinner would be nice there
                 * I think the renderWhenEmpty from react flatlist would be a place to start for this spinner
 
