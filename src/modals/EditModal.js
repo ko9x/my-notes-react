@@ -36,7 +36,8 @@ export default function EditModal({
   setNewNote,
   isMobile,
   textColor,
-  modalBackgroundColor
+  modalBackgroundColor,
+  setIsLoading
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -201,6 +202,7 @@ export default function EditModal({
       setMissingRequiredInformation(true);
       return;
     }
+    setIsLoading(true);
     const newNoteKey = push(child(ref(database), "notes")).key;
     const url = noteToEdit
       ? `notes/${user.uid}/${noteToEdit.id}`
@@ -227,11 +229,13 @@ export default function EditModal({
 
     update(ref(database, url), updatedNote)
       .then(() => {
+        setIsLoading(false);
         resetModal();
         locationChanged(updatedNote);
         handleCloseModal();
       })
       .catch((error) => {
+        setIsLoading(false);
         console.log("save failed", error); //@DEBUG
       });
   }
