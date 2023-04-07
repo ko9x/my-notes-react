@@ -324,6 +324,7 @@ export default function App() {
         setIsDark={setIsDark}
         textColor={textColor}
         actionColor={actionColor}
+        setIsLoading={setIsLoading}
       />
       )}
       {!isMobile && (
@@ -381,6 +382,7 @@ export default function App() {
         newlyAddedNote={newNote}
         isMobile={isMobile}
         height={height}
+        setIsLoading={setIsLoading}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Footer

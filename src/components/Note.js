@@ -34,7 +34,8 @@ export default function Note({
   isMobile,
   height,
   physicalSectionClick,
-  setPhysicalSectionClick
+  setPhysicalSectionClick,
+  setIsLoading
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -160,6 +161,7 @@ export default function Note({
   const searchedNotesIdArray = [];
 
   function renderItem(note, index) {
+    
     if (keyWord) {
       searchedNotesIdArray.push(note.id);
     }
@@ -168,7 +170,12 @@ export default function Note({
         setTimeout(() => {
           scrollToSpecificNote();
           setOneTime(true);
+          setIsLoading(false);
         }, 500);
+      } else {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500)
       }
     }
 
@@ -269,6 +276,11 @@ export default function Note({
     </>
   );
 
+  function noMatchFound() {
+    setIsLoading(false);
+    return <h1>No matches found for search term " {keyWord} "</h1>
+  }
+
   return (
     <div className={classes.container} style={{ height: height }}>
       {bookIsSelected || keyWord ? (
@@ -282,6 +294,7 @@ export default function Note({
               searchCaseInsensitive
               groupBy="section"
               groupSeparator={groupSeparator}
+              renderWhenEmpty={noMatchFound}
             />
           ) : (
             <h1 className={classes.instructions}>

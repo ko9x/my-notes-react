@@ -30,7 +30,8 @@ export default function Header({
   isDark,
   setIsDark,
   textColor,
-  actionColor
+  actionColor,
+  setIsLoading
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -62,7 +63,10 @@ export default function Header({
     if (value === "") {
       return;
     }
-    searchItem(value);
+    setIsLoading(true);
+    setTimeout(() => {
+      searchItem(value);
+    }, 100)
     inputRef.current.value = "";
     handleBookSelection(null);
   }
