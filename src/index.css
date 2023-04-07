@@ -140,3 +140,7 @@ body {
 .ReactModal__Overlay--before-close {
   opacity: 0;
 }
+.react-confirm-alert-overlay {
+  transition: opacity 500ms ease-in-out;
+  background: var(--background-color) !important;
+}

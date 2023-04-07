@@ -383,6 +383,8 @@ export default function App() {
         isMobile={isMobile}
         height={height}
         setIsLoading={setIsLoading}
+        modalBackgroundColor={modalBackgroundColor}
+        textColor={textColor}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Footer

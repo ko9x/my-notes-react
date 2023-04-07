@@ -35,7 +35,9 @@ export default function Note({
   height,
   physicalSectionClick,
   setPhysicalSectionClick,
-  setIsLoading
+  setIsLoading,
+  modalBackgroundColor,
+  textColor
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -112,11 +114,12 @@ export default function Note({
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
-          <div>
-            <h1>Delete Note?</h1>
-            <h3>This action cannot be undone</h3>
-            <button onClick={onClose}>Cancel</button>
+          <div style={{background: modalBackgroundColor, padding: '50px', borderRadius: '25px'}}>
+            <h1 style={{color: textColor}}>Delete Note?</h1>
+            <h3 style={{color: textColor}}>This action cannot be undone</h3>
+            <button className={classes.customButton} onClick={onClose}>Cancel</button>
             <button
+              className={classes.customButton}
               onClick={() => {
                 deleteNote(note);
                 onClose();
