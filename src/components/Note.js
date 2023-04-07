@@ -209,11 +209,7 @@ export default function Note({
                   <p className={classes.description}>{note.section}</p>
                 </div>
                 <div className={classes.buttonContainer}>
-                  <div className={classes.editButton}>
-                    <button className={classes.customButton} onClick={() => handleNoteEditPress(note)}>
-                      edit
-                    </button>
-                  </div>
+                  <button className={classes.customButton} onClick={() => handleNoteEditPress(note)}>edit</button>
                   <button className={classes.customButton} onClick={() => handleAlert(note)}>delete</button>
                 </div>
               </>

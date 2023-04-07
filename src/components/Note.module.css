@@ -79,10 +79,7 @@ a {
   font-weight: 400;
   color: hsl(0, 0%, 25%);
   font-size: small;
-}
-.editButton {
-  align-self: center;
-  padding-right: 1.5vw;
+  margin-left: 5px;
 }
 .instructions {
   display: flex;
