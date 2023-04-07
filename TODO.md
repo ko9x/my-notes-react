@@ -10,14 +10,6 @@
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
         * maybe just make the submit button unclickable if they are in demo. That way they can still see the modal
     * Add a demo mode button to the login and sign up modal
-* Add some loading spinners
-    * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
-        * I already installed react-spinners so lets see if that one can do what we want it to
-            * (done) When you do a search there should be a spinner
-            * (done) When you submit the form it hangs sometimes so a loading spinner would be nice
-            * Add a loading spinner anywhere we do a setTimeout?
-            * When you select reactjs or react native it hangs so a spinner would be nice there
-                * I think the renderWhenEmpty from react flatlist would be a place to start for this spinner
 
 ### What to do later
     * See if we can fix that
@@ -239,3 +231,9 @@
     * (done) The dropdown colors need to be fixed
     * (done) make sure all the colors are working
 * If you search for `var(` with just the opening `(` it crashes the app
+* Add some loading spinners
+    * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
+        * I already installed react-spinners so lets see if that one can do what we want it to
+            * (done) When you do a search there should be a spinner
+            * (done) When you submit the form it hangs sometimes so a loading spinner would be nice
+* Fix the delete note overlay theme
