@@ -5,12 +5,10 @@
   overflow-y: scroll;
   color: white;
   text-align: left;
-  /* box-shadow: 0px -5px 12px black; */
 }
 .note {
   border-bottom: solid white 2px;
   padding-bottom: 30px;
-  animation: fadeIn 2s;
 }
 .groupSeparator {
   color: var(--actionButton-color);
@@ -90,14 +88,4 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  animation: fadeIn 1.5s;
 }
-/* I commented this out because the fade animation gave me a headache */
-/* @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
