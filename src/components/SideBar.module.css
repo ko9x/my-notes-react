@@ -37,6 +37,8 @@
   background: none;
   cursor: pointer;
   white-space: nowrap;
+  min-width: 110px;
+  text-align: start;
 }
 .item:hover {
   background-color: var(--secondary-color);
