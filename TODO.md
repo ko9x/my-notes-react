@@ -2,6 +2,7 @@
 * Focus on MVP!
     * We need to decide what is necessary do get done before we deploy this thing and move onto the next project
 * Get new version on the server
+    * Make a note about the process!
 
 ### MVP
 * Make an onboarding flow if the user has no books/just created an account
