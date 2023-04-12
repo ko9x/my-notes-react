@@ -5,6 +5,9 @@
     * Make a note about the process!
 
 ### MVP
+* Finish arrow button functionality
+    * Only on mobile
+    * only show if header is not visible
 * Make an onboarding flow if the user has no books/just created an account
 * Make the demo mode user
     * Add a bar above the header that says "you are in demo mode click here to create an account"
@@ -13,11 +16,6 @@
     * Add a demo mode button to the login and sign up modal
 
 ### What to do later
-    * See if we can fix that
-* Dynamically change the search bar size one there are too many books
-    * only if viewport width is larger than 750
-    * Decide what the break-point should be
-        * Make the book names in the header scroll horizontally?
 * In the editModal (non-mobile) when you select developer the modal jumps
     * We should add a transition to make that smoother
 * Add a shadow to the top of the note detail
@@ -238,3 +236,5 @@
             * (done) When you do a search there should be a spinner
             * (done) When you submit the form it hangs sometimes so a loading spinner would be nice
 * Fix the delete note overlay theme
+* Dynamically change the search bar size one there are too many books
+    * only if viewport width is larger than 750
