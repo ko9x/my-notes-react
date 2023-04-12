@@ -49,11 +49,6 @@ export default function SignUpLoginModal({
     },
   };
 
-  function handleCloseModal() {
-    resetModal();
-    closeModal();
-  }
-
   function resetModal() {
     setEmail("");
     setPassword("");
