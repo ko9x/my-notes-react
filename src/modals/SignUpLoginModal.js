@@ -21,15 +21,16 @@ export default function SignUpLoginModal({
 
   const customLargeStyles = {
     content: {
-      height: "80vh",
-      width: "70vw",
+      height: "80%",
+      width: "70%",
       position: "relative",
       zIndex: "200",
-      marginLeft: !isMobile ? "11vw" : null,
-      marginTop: "8vh",
+      marginLeft: "10%",
+      marginTop: "30px",
       right: "auto",
       bottom: "auto",
       marginRight: "-50%",
+      borderRadius: "25px",
       backgroundColor: `${modalBackgroundColor}`,
     },
   };
