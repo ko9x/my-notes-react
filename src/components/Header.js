@@ -214,7 +214,7 @@ export default function Header({
       <div className={classes.container}>
         <div className={classes.logoContainer}>
           <h1 className={classes.logo} onClick={() => setIsDark(prevState => !prevState)}>
-            <LogoSvg style={{ height: '90px', marginTop: '5px', paddingRight: '20px' }} color={actionColor} />
+            <LogoSvg style={{ minWidth: '120px', height: '90px', marginTop: '5px', paddingRight: '20px' }} color={actionColor} />
           </h1>
         </div>
         <div className={classes.searchContainer}>

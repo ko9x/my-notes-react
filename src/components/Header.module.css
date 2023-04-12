@@ -108,6 +108,7 @@ input[type='search' i]::-webkit-search-cancel-button{
   font-size: large;
   font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
   border: none;
   background: none;
   cursor: pointer;
