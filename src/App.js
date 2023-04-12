@@ -18,6 +18,7 @@ import { ref, onValue } from "firebase/database";
 import { createArrays } from "./helpers/HelperFunctions";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 import { ClipLoader } from "react-spinners";
+import { ReactComponent as UpArrowSvg } from "./images/skip-to-top.svg";
 
 function removeNote(arr, func, newNoteId) {
   const newArray = arr.filter((note) => note.id !== newNoteId);
@@ -276,6 +277,14 @@ export default function App() {
     )
   }
 
+  function scrollHeaderIntoView() {
+    const element = document.getElementById('header');
+
+    if (element) {
+      element.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  }
+
   return (
     <div className={classes.container}>
       {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
@@ -302,31 +311,33 @@ export default function App() {
         setIsLoading={setIsLoading}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
-        <Header
-        bookNames={bookNames}
-        pageNames={pageNames}
-        sectionNames={sectionNames}
-        selectedBook={liftedBook}
-        selectedPage={liftedPage}
-        selectedSection={getSelectedSection}
-        defaultBook={selectedBook}
-        searchItem={executeSearch}
-        newPressed={newPressed}
-        isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
-        user={user}
-        signIn={handleLogInUser}
-        signOut={handleLogOutUser}
-        newDisplayName={newDisplayName}
-        isMobile={isMobile}
-        isLandscape={width > height}
-        height={height}
-        isDark={isDark}
-        setIsDark={setIsDark}
-        textColor={textColor}
-        actionColor={actionColor}
-        setIsLoading={setIsLoading}
-        setPhysicalSectionClick={setPhysicalSectionClick}
-      />
+        <div id="header">
+          <Header
+            bookNames={bookNames}
+            pageNames={pageNames}
+            sectionNames={sectionNames}
+            selectedBook={liftedBook}
+            selectedPage={liftedPage}
+            selectedSection={getSelectedSection}
+            defaultBook={selectedBook}
+            searchItem={executeSearch}
+            newPressed={newPressed}
+            isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
+            user={user}
+            signIn={handleLogInUser}
+            signOut={handleLogOutUser}
+            newDisplayName={newDisplayName}
+            isMobile={isMobile}
+            isLandscape={width > height}
+            height={height}
+            isDark={isDark}
+            setIsDark={setIsDark}
+            textColor={textColor}
+            actionColor={actionColor}
+            setIsLoading={setIsLoading}
+            setPhysicalSectionClick={setPhysicalSectionClick}
+          />
+        </div>
       )}
       {!isMobile && (
         <div
@@ -365,6 +376,7 @@ export default function App() {
         aria-label="Loading Spinner"
         data-testid="loader"
       />
+      <UpArrowSvg onClick={() => scrollHeaderIntoView()} color={actionColor} style={{position: 'fixed', right: '20px', bottom: '20px', zIndex: '1000', border: 'none', borderRadius: '8px'}} />
       <Note
         notes={notes}
         selectedNotes={selectedNotes}
