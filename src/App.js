@@ -325,6 +325,7 @@ export default function App() {
         textColor={textColor}
         actionColor={actionColor}
         setIsLoading={setIsLoading}
+        setPhysicalSectionClick={setPhysicalSectionClick}
       />
       )}
       {!isMobile && (

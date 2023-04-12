@@ -31,7 +31,8 @@ export default function Header({
   setIsDark,
   textColor,
   actionColor,
-  setIsLoading
+  setIsLoading,
+  setPhysicalSectionClick
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -86,6 +87,11 @@ export default function Header({
       arrWithName.push({ value: item, label: item });
     });
     return arrWithName;
+  }
+
+  function handleSelectedSection(section) {
+    setPhysicalSectionClick(true);
+    selectedSection(section)
   }
 
   const selectStyles = {
@@ -187,7 +193,7 @@ export default function Header({
                 components={componentOptions}
                 isDisabled={sectionNames.length < 1}
                 options={createOptionsArray("select a section?", sectionNames)}
-                onChange={(e) => selectedSection(e.value)}
+                onChange={(e) => handleSelectedSection(e.value)}
                 placeholder={"select a section (optional)"}
               />
               <button
