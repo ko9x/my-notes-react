@@ -170,7 +170,7 @@ export default function Header({
               <Select
                 styles={selectStyles}
                 components={componentOptions}
-                options={createOptionsArray("books", bookNames)}
+                options={createOptionsArray("select a book", bookNames)}
                 onChange={(e) => handleBookSelection(e.value)}
                 placeholder={"select a book"}
               />
@@ -178,7 +178,7 @@ export default function Header({
                 styles={selectStyles}
                 components={componentOptions}
                 isDisabled={pageNames.length < 1}
-                options={createOptionsArray("pages", pageNames)}
+                options={createOptionsArray("select a page", pageNames)}
                 onChange={(e) => selectedPage(e.value)}
                 placeholder={"select a page"}
               />
@@ -186,9 +186,9 @@ export default function Header({
                 styles={selectStyles}
                 components={componentOptions}
                 isDisabled={sectionNames.length < 1}
-                options={createOptionsArray("sections", sectionNames)}
+                options={createOptionsArray("select a section?", sectionNames)}
                 onChange={(e) => selectedSection(e.value)}
-                placeholder={"select a section"}
+                placeholder={"select a section (optional)"}
               />
               <button
                 onMouseDown={() => handleBookSelection("new")}
