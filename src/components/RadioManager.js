@@ -30,7 +30,7 @@ export default function RadioManager({
     <div className={classes.radioContainer}>
       <div>
         <h2 className={missingItem ? classes.validationWarning : null}>
-          Select a {itemPropertyName}
+          {itemList.length > 0 ? 'Select a ' : 'Create a '} {itemPropertyName}
         </h2>
         <button
           onClick={() => setNewItem({ ...newItem, changing: true })}

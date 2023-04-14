@@ -333,6 +333,43 @@ export default function EditModal({
     }
   }
 
+  function NewUserRadioFlow() {
+    if(bookList.length < 1) {
+      if(!newBook.name) {
+       return <h3>First you create a book. A book should be a broad subject such as coding or hobbies</h3>;
+      }
+      if(newBook.name && !newPage.name) {
+        return (
+          <div>
+            <h3>Next you create a page to narrow the focus of our books subject.</h3>
+            <h3>A page in a coding book could be Visual Studio Code or Javascript. </h3>
+          </div>
+        )
+        
+      }
+      if(newBook.name && newPage.name && !newSection.name) {
+        return (
+          <div>
+            <h3>Now we narrow the focus even farther by creating a section of our page</h3>
+            <h3>A section of a Javascript page might be Setup or Examples </h3>
+          </div>
+        )
+      }
+    }
+  }
+  function NewUserFormFlow() {
+    if(bookList.length < 1) {
+      if(newBook.name && newPage.name && newSection.name) {
+        return (
+          <div>
+            <h3>Now finish creating your first note by giving it a title and content</h3>
+            <h3>Try using the helper buttons like pTag and lineBreak to format your note</h3>
+          </div>
+        )
+      }
+    }
+  }
+
   return (
     <Modal
       isOpen={isEditModalOpen}
@@ -342,6 +379,9 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
+      <div style={{display: 'flex', justifyContent: 'center', transitionDuration: '200ms'}}>
+        <NewUserRadioFlow />
+      </div>
         <div
           className={
             isMobile ? classes.smallRadioContainer : classes.largeRadioContainer
@@ -394,6 +434,7 @@ export default function EditModal({
             isMobile={isMobile}
           />
         </div>
+        <NewUserFormFlow />
         <div>
           <form
             style={{ paddingLeft: "1vw", width: "100%" }}
