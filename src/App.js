@@ -47,6 +47,7 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [isDark, setIsDark] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [isLoading, setIsLoading] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
 
   useEffect(() => {
     if(width < 750) {
@@ -285,8 +286,17 @@ export default function App() {
     }
   }
 
+  window.addEventListener('scroll', (e) => {
+    if(window.scrollY > 50) {
+      setShowArrow(true);
+    }
+    if(window.scrollY < 50) {
+      setShowArrow(false);
+    }
+  });
+
   return (
-    <div className={classes.container}>
+    <div id='main' className={classes.container}>
       {/* <button onClick={()=> handleDeleteUser(user)}>Delete</button> */}
       <EditModal
         changeBook={liftedBook}
@@ -376,7 +386,7 @@ export default function App() {
         aria-label="Loading Spinner"
         data-testid="loader"
       />
-      <UpArrowSvg onClick={() => scrollHeaderIntoView()} color={actionColor} style={{position: 'fixed', right: '20px', bottom: '20px', zIndex: '1000', border: 'none', borderRadius: '8px'}} />
+      {showArrow && isMobile ? <UpArrowSvg onClick={() => scrollHeaderIntoView()} color={actionColor} style={{position: 'fixed', right: '30px', bottom: '55px', zIndex: '1000', border: 'none', borderRadius: '25px', background: 'rgb(0,0,0,0.2)', padding: '5px'}} /> : null}
       <Note
         notes={notes}
         selectedNotes={selectedNotes}
