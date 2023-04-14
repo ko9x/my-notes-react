@@ -5,10 +5,11 @@
     * Make a note about the process!
 
 ### MVP
-* Finish arrow button functionality
-    * Only on mobile
-    * only show if header is not visible
-* Make an onboarding flow if the user has no books/just created an account
+* Finish the onboarding flow
+    * Style the text 
+        * Give it some transition so it's not so jarring when new text shows up
+    * Do some testing to make sure the new flow doesn't change the flow for users who know what to do
+    * If the user has no existing notes there should be an area above the heading saying to try out demo mode
 * Make the demo mode user
     * Add a bar above the header that says "you are in demo mode click here to create an account"
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
@@ -238,3 +239,6 @@
 * Fix the delete note overlay theme
 * Dynamically change the search bar size one there are too many books
     * only if viewport width is larger than 750
+* Finish arrow button functionality
+    * Only on mobile
+    * only show if header is not visible
