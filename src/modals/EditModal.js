@@ -335,41 +335,44 @@ export default function EditModal({
   function NewUserRadioFlow() {
     if(bookList.length < 1) {
       if(newBook.changing && flowHeight !== '0px') {
-        setFlowHeight('0px');
+        setFlowHeight('0');
       }
       if(!newBook.name && !newBook.changing) {
         setTimeout(() => {
           setFlowHeight('50px');
         }, 500);
-       return <h3>First, create a book. A book should be a broad subject such as coding or hobbies</h3>;
+       return <h3>First, create a book. A book should be a broad subject such as coding or hobbies.</h3>;
       }
-      if(newBook.name && !newPage.name) {
+      if(newPage.changing && flowHeight !== '0') {
+        setFlowHeight('0');
+      }
+      if(newBook.name && !newPage.name && !newPage.changing) {
         setFlowHeight('90px');
         return (
           <div>
-            <h3 >Next, create a page to narrow the focus of our book.</h3>
-            <h3 >A page in a coding book could be Visual Studio Code or Javascript. </h3>
+            <h3>Next, create a page to narrow the focus of our book.</h3>
+            <h3>A page in a coding book could be javascript or react. </h3>
           </div>
         )
-        
+      }
+      if(newSection.changing && flowHeight !== '0') {
+        setFlowHeight('0');
       }
       if(newBook.name && newPage.name && !newSection.name) {
+        setFlowHeight('90px');
         return (
           <div>
-            <h3>Now we narrow the focus even farther by creating a section of our page</h3>
-            <h3>A section of a Javascript page might be Setup or Examples </h3>
+            <h3>Now, narrow the focus even further by creating a section of our page.</h3>
+            <h3>A section of a javascript page might be setup or examples.</h3>
           </div>
         )
       }
-    }
-  }
-  function NewUserFormFlow() {
-    if(bookList.length < 1) {
-      if(newBook.name && newPage.name && newSection.name) {
+      if(newBook.name && newPage.name && newSection.name && !newSection.changing) {
+        setFlowHeight('90px');
         return (
           <div>
-            <h3>Now finish creating your first note by giving it a title and content</h3>
-            <h3>Try using the helper buttons like pTag and lineBreak to format your note</h3>
+            <h3>Now finish creating your first note by giving it a title and content.</h3>
+            <h3>Try using the helper buttons like pTag and lineBreak to format your note.</h3>
           </div>
         )
       }
@@ -386,7 +389,7 @@ export default function EditModal({
     >
       <div className={classes.container}>
       <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
-        <div style={{display: 'flex', color: 'white', transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px'}}>
+        <div style={{display: 'flex', color: 'white', transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
           <NewUserRadioFlow />
         </div>
       </div>
@@ -442,7 +445,6 @@ export default function EditModal({
             isMobile={isMobile}
           />
         </div>
-        <NewUserFormFlow />
         <div>
           <form
             style={{ paddingLeft: "1vw", width: "100%" }}
