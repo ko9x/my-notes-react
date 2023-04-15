@@ -54,9 +54,8 @@ export default function EditModal({
   const [missingBook, setMissingBook] = useState(false);
   const [missingPage, setMissingPage] = useState(false);
   const [missingSection, setMissingSection] = useState(false);
-  const [missingRequiredInformation, setMissingRequiredInformation] =
-    useState(false);
-
+  const [missingRequiredInformation, setMissingRequiredInformation] = useState(false);
+  const [flowHeight, setFlowHeight] = useState('0px');
   const titleRef = useRef();
   const contentRef = useRef();
   const importantRef = useRef();
@@ -335,14 +334,21 @@ export default function EditModal({
 
   function NewUserRadioFlow() {
     if(bookList.length < 1) {
-      if(!newBook.name) {
-       return <h3>First you create a book. A book should be a broad subject such as coding or hobbies</h3>;
+      if(newBook.changing && flowHeight !== '0px') {
+        setFlowHeight('0px');
+      }
+      if(!newBook.name && !newBook.changing) {
+        setTimeout(() => {
+          setFlowHeight('50px');
+        }, 500);
+       return <h3>First, create a book. A book should be a broad subject such as coding or hobbies</h3>;
       }
       if(newBook.name && !newPage.name) {
+        setFlowHeight('90px');
         return (
           <div>
-            <h3>Next you create a page to narrow the focus of our books subject.</h3>
-            <h3>A page in a coding book could be Visual Studio Code or Javascript. </h3>
+            <h3 >Next, create a page to narrow the focus of our book.</h3>
+            <h3 >A page in a coding book could be Visual Studio Code or Javascript. </h3>
           </div>
         )
         
@@ -379,8 +385,10 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-      <div style={{display: 'flex', justifyContent: 'center', transitionDuration: '200ms'}}>
-        <NewUserRadioFlow />
+      <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
+        <div style={{display: 'flex', color: 'white', transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px'}}>
+          <NewUserRadioFlow />
+        </div>
       </div>
         <div
           className={
@@ -409,7 +417,7 @@ export default function EditModal({
             selectedProperty={selectedPage}
             handleSetNewItem={handleSetNewItem}
             itemList={pageList}
-            setNewItem={setNewPage}
+            setNewItem={!newBook.changing && newBook.name ? setNewPage : null }
             itemPropertyName={"page"}
             setMissingItem={setMissingPage}
             determineSelectedItem={determineSelectedItem}
@@ -424,7 +432,7 @@ export default function EditModal({
             selectedProperty={selectedSection}
             handleSetNewItem={handleSetNewItem}
             itemList={sectionList}
-            setNewItem={setNewSection}
+            setNewItem={!newPage.changing && newPage.name ? setNewSection : null}
             itemPropertyName={"section"}
             setMissingItem={setMissingSection}
             determineSelectedItem={determineSelectedItem}

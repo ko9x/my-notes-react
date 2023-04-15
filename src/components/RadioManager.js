@@ -33,6 +33,7 @@ export default function RadioManager({
           {itemList.length > 0 ? 'Select a ' : 'Create a '} {itemPropertyName}
         </h2>
         <button
+          disabled={!setNewItem}
           onClick={() => setNewItem({ ...newItem, changing: true })}
           className="courierButton"
         >
