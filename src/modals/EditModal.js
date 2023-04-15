@@ -37,7 +37,8 @@ export default function EditModal({
   isMobile,
   textColor,
   modalBackgroundColor,
-  setIsLoading
+  setIsLoading,
+  newUser
 }) {
   const [contentSize, setContentSize] = useState("medium");
   const [sideSize, setSideSize] = useState(null);
@@ -333,7 +334,7 @@ export default function EditModal({
   }
 
   function NewUserRadioFlow() {
-    if(bookList.length < 1) {
+    if(newUser) {
       if(newBook.changing && flowHeight !== '0px') {
         setFlowHeight('0');
       }
@@ -388,11 +389,11 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-      <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
+      {newUser && <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
         <div style={{display: 'flex', color: 'white', transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
           <NewUserRadioFlow />
         </div>
-      </div>
+      </div>}
         <div
           className={
             isMobile ? classes.smallRadioContainer : classes.largeRadioContainer

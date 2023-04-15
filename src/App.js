@@ -319,6 +319,7 @@ export default function App() {
         textColor={textColor}
         modalBackgroundColor={modalBackgroundColor}
         setIsLoading={setIsLoading}
+        newUser={bookNames.length < 1}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <div id="header">
