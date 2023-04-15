@@ -6,7 +6,7 @@
 
 ### MVP
 * Finish the onboarding flow
-    * Style the text 
+    * (done) Style the text 
         * Give it some transition so it's not so jarring when new text shows up
     * Do some testing to make sure the new flow doesn't change the flow for users who know what to do
     * If the user has no existing notes there should be an area above the heading saying to try out demo mode
