@@ -33,6 +33,7 @@ export default function NoteInput({
     <div className={classes.noteInputContainer}>
       <input
         type="text"
+        className={classes.noteInput}
         placeholder={selectedItem}
         onChange={(e) => handleSetNewItemName(e)}
       />

@@ -3,6 +3,18 @@
     flex-direction: column;
     width: 60%;
 }
+.noteInput { 
+    width: 95%;
+    border-radius: .5vh;
+    border-color: transparent;
+    outline-color: var(--actionButton-color);
+    background-color: var(--secondary-color);
+    color: var(--font-color);
+}
+.noteInput:focus {
+    outline-style: solid;
+    outline-width: 2px;
+}
 .buttonContainer {
     display: flex;
     flex-direction: column;
