@@ -6,15 +6,18 @@
 
 ### MVP
 * Finish the onboarding flow
-    * (done) Style the text 
-        * Give it some transition so it's not so jarring when new text shows up
-    * Do some testing to make sure the new flow doesn't change the flow for users who know what to do
     * If the user has no existing notes there should be an area above the heading saying to try out demo mode
+    * (done) Style the text 
+        * (done) Give it some transition so it's not so jarring when new text shows up
+    * (done) Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
 * Make the demo mode user
     * Add a bar above the header that says "you are in demo mode click here to create an account"
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
-        * maybe just make the submit button unclickable if they are in demo. That way they can still see the modal
+        * maybe just make the submit button unclickable if they are in demo? That way they can still see the modal but...
+            * We need to make sure a developer cannot bypass weak measure and mess with demo mode notes
     * Add a demo mode button to the login and sign up modal
+    * Make sure a user in demo mode cannot reset the demo mode user password
+        * not just in the UI. we need to ensure a developer can't mess with the demo mode user profile
 
 ### What to do later
 * In the editModal (non-mobile) when you select developer the modal jumps
@@ -25,9 +28,13 @@
 * refactor and document/comment the code
 
 ### Bugs
+* As a new user, when you click 'new +' inside the edit modal to create your first book there is an error in the console
+    * It doesn't break the app and hopefully it doesn't show up in the console on the production build
 * To close the editModal you have to tap outside the modal 2 times
+    * This is only on mobile
 * If you shrink the edit modal down below 750 width and then back above 750 it doesn't switch back to non-mobile mode
-* If the screen is not very tall and the user scrolls in a sidebar, the background color and the sideBarWall cut off.
+* If the user has lots of books or a book with lots of sections the sidebar can get too long and the background color cuts off
+    * This can be recreated by making the screen shorter
 * Sometimes when it tries to scroll you to a specific note it scrolls to the top of the next section if it's close enough.
 * The cause of a lot of little bugs comes from the way we are passing data as just arrays of strings
     * The correct way is to pass an object that has an id of some sort and the string
@@ -242,3 +249,5 @@
 * Finish arrow button functionality
     * Only on mobile
     * only show if header is not visible
+* When the last note in a book, page, or section is deleted the app needs to be refreshed to remove the empty book, page or section
+    * We need to check to see if the note being deleted is the last one and force a refresh
