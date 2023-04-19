@@ -390,7 +390,7 @@ export default function EditModal({
     >
       <div className={classes.container}>
       {newUser && <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
-        <div style={{display: 'flex', color: 'white', transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
+        <div style={{display: 'flex', color: textColor, transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
           <NewUserRadioFlow />
         </div>
       </div>}
@@ -421,7 +421,7 @@ export default function EditModal({
             selectedProperty={selectedPage}
             handleSetNewItem={handleSetNewItem}
             itemList={pageList}
-            setNewItem={!newBook.changing && newBook.name ? setNewPage : null }
+            setNewItem={newUser ? !newBook.changing && newBook.name ? setNewPage : null : setNewPage}
             itemPropertyName={"page"}
             setMissingItem={setMissingPage}
             determineSelectedItem={determineSelectedItem}
@@ -436,7 +436,7 @@ export default function EditModal({
             selectedProperty={selectedSection}
             handleSetNewItem={handleSetNewItem}
             itemList={sectionList}
-            setNewItem={!newPage.changing && newPage.name ? setNewSection : null}
+            setNewItem={newUser ? !newPage.changing && newPage.name ? setNewSection : null : setNewSection}
             itemPropertyName={"section"}
             setMissingItem={setMissingSection}
             determineSelectedItem={determineSelectedItem}
