@@ -20,11 +20,6 @@ import useWindowDimensions from "./hooks/useWindowDimensions";
 import { ClipLoader } from "react-spinners";
 import { ReactComponent as UpArrowSvg } from "./images/skip-to-top.svg";
 
-function removeNote(arr, func, newNoteId) {
-  const newArray = arr.filter((note) => note.id !== newNoteId);
-  func(newArray);
-}
-
 export default function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNotes, setSelectedNotes] = useState([]);
@@ -72,6 +67,9 @@ export default function App() {
     if (notes.length > 0) {
       createArrays(notes, setBookNames);
     }
+    if (notes.length === 0) {
+      setBookNames([]);
+    }
   }, [notes]);
 
   useEffect(() => {
@@ -93,7 +91,6 @@ export default function App() {
         };
         transformedNotes.push(noteObj);
       }
-
       setNotes(transformedNotes);
     });
   }
@@ -196,6 +193,18 @@ export default function App() {
     setSectionNames([]);
     setSelectedPage(null);
     setSelectedSection(null);
+  }
+
+  function removeNote(arr, func, newNoteId) {
+    if(arr.length === 1) {
+      getNotes();
+      setPageNames([]);
+      setSectionNames([]);
+      setSelectedBook(null)
+      createArrays(notes, setBookNames);
+    }
+    const newArray = arr.filter((note) => note.id !== newNoteId);
+    func(newArray);
   }
 
   function removeNoteFromArrays(note) {
