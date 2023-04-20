@@ -251,3 +251,4 @@
     * only show if header is not visible
 * When the last note in a book, page, or section is deleted the app needs to be refreshed to remove the empty book, page or section
     * We need to check to see if the note being deleted is the last one and force a refresh
+* Make it easier to highlight and copy specific text in the notes
