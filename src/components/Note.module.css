@@ -24,9 +24,33 @@ pre {
   border-radius: 10px;
   border: 3px solid grey;
 }
+.copyButton {
+  float: right;
+  margin-top: -21px;
+  color: var(--actionButton-color);
+  border-radius: 10px;
+  background-color: rgb(100, 100, 100, 0.05);
+  display: none;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+code:hover + .copyButton {
+  display: block;
+}
+.copyButton:hover {
+  display: block;
+}
+.copyButton {
+  float: right;
+  margin-top: -21px;
+  color: var(--actionButton-color);
+  border-radius: 10px;
+  background-color: rgb(100, 100, 100, 0.05);
+}
+.copyButton:hover {
+  display: block;
 }
 mark {
   background-color: green;

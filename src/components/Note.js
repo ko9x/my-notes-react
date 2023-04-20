@@ -175,19 +175,22 @@ export default function Note({
   function renderItem(note, index) {
 
   // Add copy to clipboard functionality to the pre-code wrapped text
-  let blocks = document.querySelectorAll('pre');
-
-  blocks.forEach((block, index) => {
-    let button = document.createElement('button');
-    button.setAttribute("id", index);
-    button.innerText = 'here!';
-    if(!document.getElementById(index)) {
-      block?.appendChild(button);
-    }
-    button.addEventListener('click', async () => {
-      await copyCode(block);
+  if(!isMobile) {
+    let blocks = document.querySelectorAll('pre');
+    blocks.forEach((block, index) => {
+      let button = document.createElement('button');
+      button.setAttribute("id", index);
+      button.classList.add(classes.copyButton)
+      button.innerText = 'copy';
+      if(!document.getElementById(index)) {
+        block?.appendChild(button);
+      }
+      button.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        await copyCode(block);
+      });
     });
-  });
+  }
     
     if (keyWord) {
       searchedNotesIdArray.push(note.id);
