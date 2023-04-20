@@ -161,9 +161,33 @@ export default function Note({
     }
   }
 
+  // Add copy to clipboard functionality to the pre-code wrapped text
+  async function copyCode(block) {
+    let code = block.querySelector("code");
+    let text = code.innerText;
+
+    await navigator.clipboard.writeText(text);
+  }
+
   const searchedNotesIdArray = [];
 
+  // ****************** Start of renderItem function ***************************************************************
   function renderItem(note, index) {
+
+  // Add copy to clipboard functionality to the pre-code wrapped text
+  let blocks = document.querySelectorAll('pre');
+
+  blocks.forEach((block, index) => {
+    let button = document.createElement('button');
+    button.setAttribute("id", index);
+    button.innerText = 'here!';
+    if(!document.getElementById(index)) {
+      block?.appendChild(button);
+    }
+    button.addEventListener('click', async () => {
+      await copyCode(block);
+    });
+  });
     
     if (keyWord) {
       searchedNotesIdArray.push(note.id);
@@ -255,6 +279,7 @@ export default function Note({
       </InView>
     );
   }
+  // ****************** End of renderItem function ***************************************************************
 
   function DetermineHelperText() {
     if (user) {
