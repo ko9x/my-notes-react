@@ -356,6 +356,7 @@ export default function App() {
             actionColor={actionColor}
             setIsLoading={setIsLoading}
             setPhysicalSectionClick={setPhysicalSectionClick}
+            newUser={bookNames.length < 1}
           />
         </div>
       )}

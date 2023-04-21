@@ -286,10 +286,18 @@ export default function Note({
 
   function DetermineHelperText() {
     if (user) {
-      if (notes.length < 1) {
-        return "Please click 'new +' to create your first note ";
+      if (!isMobile) {
+        if (notes.length < 1) {
+          return "Please click 'new +' to create your first note ";
+        } else {
+          return "Please select a book, enter a search term, or create a new note";
+        }
       } else {
-        return "Please select a book, enter a search term, or create a new note";
+        if (notes.length < 1) {
+          return "Please tap 'add a new note' to create your first note or check out demo mode";
+        } else {
+          return "Please select a book, enter a search term, or create a new note";
+        }
       }
     } 
   }

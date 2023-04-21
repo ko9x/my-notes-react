@@ -9,3 +9,23 @@
 h2 {
     color: var(--font-color);
 }
+.pulseButton {
+    color: var(--actionButton-color);
+    animation: pulse 1.5s infinite;
+    -webkit-animation: pulse 1.5s infinite;
+    border-radius: 25px;
+  }
+  @keyframes pulse {
+    0% {
+        opacity: 0.5;
+    }
+    30% {
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+  }

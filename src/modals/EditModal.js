@@ -57,6 +57,7 @@ export default function EditModal({
   const [missingSection, setMissingSection] = useState(false);
   const [missingRequiredInformation, setMissingRequiredInformation] = useState(false);
   const [flowHeight, setFlowHeight] = useState('0px');
+  const [isPulsing, setIsPulsing] = useState('false');
   const titleRef = useRef();
   const contentRef = useRef();
   const importantRef = useRef();
@@ -337,8 +338,10 @@ export default function EditModal({
     if(newUser) {
       if(newBook.changing && flowHeight !== '0px') {
         setFlowHeight('0');
+        setIsPulsing('');
       }
       if(!newBook.name && !newBook.changing) {
+        setIsPulsing('book');
         setTimeout(() => {
           setFlowHeight('50px');
         }, 500);
@@ -346,9 +349,11 @@ export default function EditModal({
       }
       if(newPage.changing && flowHeight !== '0') {
         setFlowHeight('0');
+        setIsPulsing('');
       }
       if(newBook.name && !newPage.name && !newPage.changing) {
         setFlowHeight('90px');
+        setIsPulsing('page');
         return (
           <div>
             <h3>Next, create a page to narrow the focus of our book.</h3>
@@ -358,9 +363,11 @@ export default function EditModal({
       }
       if(newSection.changing && flowHeight !== '0') {
         setFlowHeight('0');
+        setIsPulsing('')
       }
       if(newBook.name && newPage.name && !newSection.name) {
         setFlowHeight('90px');
+        setIsPulsing('section');
         return (
           <div>
             <h3>Now, narrow the focus even further by creating a section of our page.</h3>
@@ -389,8 +396,8 @@ export default function EditModal({
       closeTimeoutMS={500}
     >
       <div className={classes.container}>
-      {newUser && <div style={{display: 'flex', justifyContent: 'center', height: '80px', alignItems: 'end'}}>
-        <div style={{display: 'flex', color: textColor, transitionDuration: '2000ms', height: flowHeight, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
+      {newUser && <div style={{display: 'flex', justifyContent: 'center', height: !isMobile ? '80px' : 0, alignItems: 'end'}}>
+        <div style={{display: 'flex', color: textColor, transitionDuration: '2000ms', height: !isMobile ? flowHeight : 0, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
           <NewUserRadioFlow />
         </div>
       </div>}
@@ -414,6 +421,7 @@ export default function EditModal({
             handleItemChange={handleBookChange}
             determinePropertyNameArray={determineRadioBookNameArray}
             isMobile={isMobile}
+            pulse={isPulsing === 'book' && isMobile}
           />
           <RadioManager
             missingItem={missingPage}
@@ -429,6 +437,7 @@ export default function EditModal({
             handleItemChange={handlePageChange}
             determinePropertyNameArray={determineRadioPageNameArray}
             isMobile={isMobile}
+            pulse={isPulsing === 'page' && isMobile}
           />
           <RadioManager
             missingItem={missingSection}
@@ -444,6 +453,7 @@ export default function EditModal({
             handleItemChange={handleSectionChange}
             determinePropertyNameArray={determineRadioSectionNameArray}
             isMobile={isMobile}
+            pulse={isPulsing === 'section' && isMobile}
           />
         </div>
         <div>

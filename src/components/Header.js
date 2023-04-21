@@ -32,7 +32,8 @@ export default function Header({
   textColor,
   actionColor,
   setIsLoading,
-  setPhysicalSectionClick
+  setPhysicalSectionClick,
+  newUser
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -46,6 +47,14 @@ export default function Header({
   useEffect(() => {
     setDisplayName(newDisplayName);
   }, [newDisplayName]);
+
+  useEffect(() => {
+    if(newUser && isMobile) {
+      setTimeout(() => {
+        setShowSlide(true);
+      }, 500)
+    }
+  }, [newUser, isMobile]);
 
   function handleBookSelection(book) {
     if (book !== "new") {

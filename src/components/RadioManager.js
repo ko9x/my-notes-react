@@ -24,7 +24,8 @@ export default function RadioManager({
   noteToEdit,
   handleItemChange,
   determinePropertyNameArray,
-  isMobile
+  isMobile,
+  pulse
 }) {
   return (
     <div className={classes.radioContainer}>
@@ -35,7 +36,7 @@ export default function RadioManager({
         <button
           disabled={!setNewItem}
           onClick={() => setNewItem({ ...newItem, changing: true })}
-          className="courierButton"
+          className={`courierButton ${pulse ? classes.pulseButton : null}`}
         >
           new +
         </button>
