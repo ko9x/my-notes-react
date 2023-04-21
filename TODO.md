@@ -6,12 +6,16 @@
 
 ### MVP
 * Finish the onboarding flow
-    * If the user has no existing notes there should be an area above the heading saying to try out demo mode
+    * If the user has no existing notes there should be an area above the header saying to try out demo mode
+        * on mobile there needs to be a demo mode button in the menu
+    * (done) Add mobile onboarding flow
+        * (done) make the "new +" button bump so they know which one to press
     * (done) Style the text 
         * (done) Give it some transition so it's not so jarring when new text shows up
     * (done) Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
 * Make the demo mode user
-    * Add a bar above the header that says "you are in demo mode click here to create an account"
+    * Add a bar above the header that says "you are in demo mode click here to create an account or login"
+        * figure out what to do for mobile to alert the user they are in demo mode and they should create an account or login
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
         * maybe just make the submit button unclickable if they are in demo? That way they can still see the modal but...
             * We need to make sure a developer cannot bypass weak measure and mess with demo mode notes
