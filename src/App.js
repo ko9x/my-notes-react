@@ -289,6 +289,7 @@ export default function App() {
         handleNewDisplayName={handleNewDisplayName}
         isMobile={isMobile}
         modalBackgroundColor={modalBackgroundColor}
+        textColor={textColor}
       />
     )
   }

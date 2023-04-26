@@ -6,18 +6,30 @@ import {
   registerUserWithEmailAndPassword,
   sendPasswordReset
 } from "../auth/firebase";
+import { ClipLoader } from "react-spinners";
 
 export default function SignUpLoginModal({
   isSignUpLoginModalOpen,
   closeModal,
   handleNewDisplayName,
   isMobile,
-  modalBackgroundColor
+  modalBackgroundColor,
+  textColor
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [hasNoAccount, setHasNoAccount] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(false);
+
+  const spinnerOverride: CSSProperties = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 200,
+    margin: 'auto',
+    zIndex: '1000'
+  }
 
   const customLargeStyles = {
     content: {
@@ -57,13 +69,16 @@ export default function SignUpLoginModal({
 
   async function handleRegisterUser() {
     await registerUserWithEmailAndPassword(email, password, username);
+    setIsLoadingUser(false);
     handleNewDisplayName(username);
   }
 
   async function handleSubmit(e) {
+    setIsLoadingUser(true);
     e.preventDefault();
     if (!hasNoAccount) {
-      logInWithEmailAndPassword(email, password);
+      await logInWithEmailAndPassword(email, password);
+      setIsLoadingUser(false);
     } else {
       handleRegisterUser();
     }
@@ -95,83 +110,93 @@ export default function SignUpLoginModal({
   }
 
   return (
-    <Modal
-      isOpen={isSignUpLoginModalOpen}
-      style={isMobile ? customMobileStyles : customLargeStyles}
-      contentLabel="Example Modal"
-      closeTimeoutMS={500}
-    >
-      <div className={classes.container}>
-        <h1 className={classes.modalTitle}>
-          {hasNoAccount ? "Sign up" : "Login"}
-        </h1>
-        <form onSubmit={handleSubmit} style={{width: '100%'}}>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
-            <input
-              type="email"
-              value={email}
-              placeholder="email"
-              className={classes.modalInput}
-              style={{width: isMobile ? '90%' : '60%'}}
-              onChange={({ target }) => setEmail(target.value)}
-            />
-            <input
-              type="password"
-              value={password}
-              placeholder="password"
-              className={classes.modalInput}
-              style={{width: isMobile ? '90%' : '60%'}}
-              onChange={({ target }) => setPassword(target.value)}
-              formNoValidate={true}
-            />
-            {hasNoAccount ? (
+    <>
+      <ClipLoader
+        color={textColor}
+        loading={isLoadingUser}
+        cssOverride={spinnerOverride}
+        size={300}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      <Modal
+        isOpen={isSignUpLoginModalOpen}
+        style={isMobile ? customMobileStyles : customLargeStyles}
+        contentLabel="Example Modal"
+        closeTimeoutMS={500}
+      >
+        <div className={classes.container}>
+          <h1 className={classes.modalTitle}>
+            {hasNoAccount ? "Sign up" : "Login"}
+          </h1>
+          <form onSubmit={handleSubmit} style={{width: '100%'}}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
               <input
-                type="username"
-                value={username}
-                placeholder="username"
+                type="email"
+                value={email}
+                placeholder="email"
                 className={classes.modalInput}
                 style={{width: isMobile ? '90%' : '60%'}}
-                onChange={({ target }) => setUsername(target.value)}
+                onChange={({ target }) => setEmail(target.value)}
               />
-            ) : null}
+              <input
+                type="password"
+                value={password}
+                placeholder="password"
+                className={classes.modalInput}
+                style={{width: isMobile ? '90%' : '60%'}}
+                onChange={({ target }) => setPassword(target.value)}
+                formNoValidate={true}
+              />
+              {hasNoAccount ? (
+                <input
+                  type="username"
+                  value={username}
+                  placeholder="username"
+                  className={classes.modalInput}
+                  style={{width: isMobile ? '90%' : '60%'}}
+                  onChange={({ target }) => setUsername(target.value)}
+                />
+              ) : null}
+              <button
+                className={classes.submitButton}
+                style={{width: isMobile ? '70%' : '300px'}}
+                type="submit"
+                disabled={!validationCheck()}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <button
-              className={classes.submitButton}
-              style={{width: isMobile ? '70%' : '300px'}}
-              type="submit"
-              disabled={!validationCheck()}
+              className={classes.bottomButton}
+              onClick={() => handlePasswordReset()}
             >
-              Submit
+              <span className={classes.actionWord}>Forgot Password?</span>
+            </button>
+            <button
+              className={classes.bottomButton}
+              onClick={() => toggleUserStatus()}
+            >
+              {hasNoAccount ? (
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <span>
+                    Back to <span className={classes.actionWord}>Login</span>
+                  </span>
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <span>
+                    Click here to{" "}
+                    <span className={classes.actionWord}>Sign up</span>
+                  </span>
+                </div>
+              )}
             </button>
           </div>
-        </form>
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <button
-            className={classes.bottomButton}
-            onClick={() => handlePasswordReset()}
-          >
-            <span className={classes.actionWord}>Forgot Password?</span>
-          </button>
-          <button
-            className={classes.bottomButton}
-            onClick={() => toggleUserStatus()}
-          >
-            {hasNoAccount ? (
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <span>
-                  Back to <span className={classes.actionWord}>Login</span>
-                </span>
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <span>
-                  Click here to{" "}
-                  <span className={classes.actionWord}>Sign up</span>
-                </span>
-              </div>
-            )}
-          </button>
         </div>
-      </div>
-    </Modal>
+      </Modal>
+    </>
   );
 }
