@@ -7,7 +7,8 @@
 ### MVP
 * Finish the onboarding flow
     * If the user has no existing notes there should be an area above the header saying to try out demo mode
-        * on mobile there needs to be a demo mode button in the menu
+        * (button is added but doesn't enter demo mode yet) on mobile there needs to be a demo mode button in the menu
+    * (button is added but doesn't enter demo mode yet) Add a demo mode button to the login and sign up modal
     * (done) Add mobile onboarding flow
         * (done) make the "new +" button bump so they know which one to press
     * (done) Style the text 
@@ -19,7 +20,6 @@
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
         * maybe just make the submit button unclickable if they are in demo? That way they can still see the modal but...
             * We need to make sure a developer cannot bypass weak measure and mess with demo mode notes
-    * Add a demo mode button to the login and sign up modal
     * Make sure a user in demo mode cannot reset the demo mode user password
         * not just in the UI. we need to ensure a developer can't mess with the demo mode user profile
 
@@ -256,3 +256,4 @@
 * When the last note in a book, page, or section is deleted the app needs to be refreshed to remove the empty book, page or section
     * We need to check to see if the note being deleted is the last one and force a refresh
 * Make it easier to highlight and copy specific text in the notes
+* Show spinner when the user is being logged in
