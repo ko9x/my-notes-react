@@ -43,6 +43,7 @@ export default function App() {
   const [isDark, setIsDark] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [isLoading, setIsLoading] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
 
   useEffect(() => {
     if(width < 750) {
@@ -90,6 +91,11 @@ export default function App() {
           ...data[key],
         };
         transformedNotes.push(noteObj);
+      }
+      if(transformedNotes.length < 1) {
+        setIsNewUser(true);
+      } else {
+        setIsNewUser(false);
       }
       setNotes(transformedNotes);
     });
@@ -328,7 +334,7 @@ export default function App() {
         textColor={textColor}
         modalBackgroundColor={modalBackgroundColor}
         setIsLoading={setIsLoading}
-        newUser={bookNames.length < 1}
+        newUser={isNewUser}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <div id="header">
@@ -356,7 +362,7 @@ export default function App() {
             actionColor={actionColor}
             setIsLoading={setIsLoading}
             setPhysicalSectionClick={setPhysicalSectionClick}
-            newUser={bookNames.length < 1}
+            newUser={isNewUser}
           />
         </div>
       )}
