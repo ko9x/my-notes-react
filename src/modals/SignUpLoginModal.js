@@ -17,7 +17,7 @@ export default function SignUpLoginModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [isNewUser, setIsNewUser] = useState(false);
+  const [hasNoAccount, setHasNoAccount] = useState(false);
 
   const customLargeStyles = {
     content: {
@@ -62,7 +62,7 @@ export default function SignUpLoginModal({
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!isNewUser) {
+    if (!hasNoAccount) {
       logInWithEmailAndPassword(email, password);
     } else {
       handleRegisterUser();
@@ -73,7 +73,7 @@ export default function SignUpLoginModal({
   function validationCheck() {
     const validEmail = email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
     const validPassword = password.length >= 6;
-    const validUsername = isNewUser ? username.length > 0 : true;
+    const validUsername = hasNoAccount ? username.length > 0 : true;
     if (validEmail && validPassword && validUsername) {
       return true;
     } else {
@@ -90,8 +90,8 @@ export default function SignUpLoginModal({
     }
   }
 
-  function toggleIsNewUser() {
-    setIsNewUser((prevState) => !prevState);
+  function toggleUserStatus() {
+    setHasNoAccount((prevState) => !prevState);
   }
 
   return (
@@ -103,7 +103,7 @@ export default function SignUpLoginModal({
     >
       <div className={classes.container}>
         <h1 className={classes.modalTitle}>
-          {isNewUser ? "Sign up" : "Login"}
+          {hasNoAccount ? "Sign up" : "Login"}
         </h1>
         <form onSubmit={handleSubmit} style={{width: '100%'}}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
@@ -124,7 +124,7 @@ export default function SignUpLoginModal({
               onChange={({ target }) => setPassword(target.value)}
               formNoValidate={true}
             />
-            {isNewUser ? (
+            {hasNoAccount ? (
               <input
                 type="username"
                 value={username}
@@ -153,9 +153,9 @@ export default function SignUpLoginModal({
           </button>
           <button
             className={classes.bottomButton}
-            onClick={() => toggleIsNewUser()}
+            onClick={() => toggleUserStatus()}
           >
-            {isNewUser ? (
+            {hasNoAccount ? (
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <span>
                   Back to <span className={classes.actionWord}>Login</span>
