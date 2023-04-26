@@ -171,6 +171,7 @@ export default function SignUpLoginModal({
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <button
               className={classes.bottomButton}
+              style={{paddingBottom: '20px'}}
               onClick={() => handlePasswordReset()}
             >
               <span className={classes.actionWord}>Forgot Password?</span>
@@ -180,19 +181,30 @@ export default function SignUpLoginModal({
               onClick={() => toggleUserStatus()}
             >
               {hasNoAccount ? (
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>
                     Back to <span className={classes.actionWord}>Login</span>
                   </span>
+                  <span style={{paddingTop: '4px'}}>or</span>
                 </div>
               ) : (
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>
                     Click here to{" "}
                     <span className={classes.actionWord}>Sign up</span>
                   </span>
+                  <span style={{paddingTop: '4px'}}>or</span>
                 </div>
               )}
+            </button>
+            <button
+              className={classes.bottomButton}
+              onClick={() => console.log('go to demo mode')}
+            >
+              <span>
+                    Check out{" "}
+                    <span className={classes.actionWord}>Demo mode</span>
+                  </span>
             </button>
           </div>
         </div>
