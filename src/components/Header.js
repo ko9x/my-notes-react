@@ -180,7 +180,7 @@ export default function Header({
             }} rounded duration={.7} />
           </div>
         </div>
-        <div className={`${classes.slideContainer} ${showSlide ? classes.slideOpen : classes.slideClosed}`}>
+        <div className={`${classes.slideContainer} ${showSlide ? newUser ? classes.slideOpenNewUser : classes.slideOpen : classes.slideClosed}`}>
           <div className={classes.itemContainer}>
               <Select
                 styles={selectStyles}
@@ -210,6 +210,12 @@ export default function Header({
                 className={classes.smallNewButton}
               >
                 add a new note
+              </button>
+              <button
+                onMouseDown={() => handleBookSelection("new")}
+                className={classes.smallNewButton}
+              >
+                try demo mode
               </button>
               <button
                 disabled={disabledButtonCheck()}

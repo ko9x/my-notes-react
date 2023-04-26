@@ -58,6 +58,12 @@
   transition-duration: 500ms;
   padding-bottom: .5vh;
 }
+.slideOpenNewUser {
+  height: 120px;
+  transition: ease-out;
+  transition-duration: 500ms;
+  padding-bottom: .5vh;
+}
 .slideClosed {
   height: 0;
   transition: ease-in;
