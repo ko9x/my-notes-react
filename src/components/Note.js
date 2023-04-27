@@ -26,6 +26,7 @@ export default function Note({
   removeNoteFromArrays,
   database,
   user,
+  isDemoMode,
   handleSectionScroll,
   selectedSection,
   userClickedSection,
@@ -239,8 +240,8 @@ export default function Note({
                   <p className={classes.description}>{note.section}</p>
                 </div>
                 <div className={classes.buttonContainer}>
-                  <button className={classes.customButton} onClick={() => handleNoteEditPress(note)}>edit</button>
-                  <button className={classes.customButton} onClick={() => handleAlert(note)}>delete</button>
+                  <button disabled={isDemoMode} className={classes.customButton} onClick={() => handleNoteEditPress(note)}>edit</button>
+                  <button disabled={isDemoMode} className={classes.customButton} onClick={() => handleAlert(note)}>delete</button>
                 </div>
               </>
             </div>

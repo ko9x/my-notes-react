@@ -235,10 +235,6 @@ export default function App() {
     removeNote(selectedNotes, setSelectedNotes, note.id);
   }
 
-  function handleLogInUser() {
-    setIsSignUpLoginModalOpen(true);
-  }
-
   function handleLogOutUser() {
     setNewDisplayName(null);
     signUserOut();
@@ -432,6 +428,7 @@ export default function App() {
         editPressed={editPressed}
         removeNoteFromArrays={removeNoteFromArrays}
         user={user}
+        isDemoMode={isDemoMode}
         database={database}
         handleSectionScroll={handleSectionScroll}
         selectedSection={selectedSection}

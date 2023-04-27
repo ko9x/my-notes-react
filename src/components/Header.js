@@ -124,6 +124,22 @@ export default function Header({
     IndicatorSeparator: () => null,
   };
 
+  function handleShowSlide() {
+    if(showSlide) {
+      if(newUser) {
+        return classes.slideOpenNewUser;
+      }
+      if(isDemoMode) {
+        return classes.slideOpenDemoMode;
+      }
+      if(!newUser && !isDemoMode) {
+        return classes.slideOpen;
+      }
+    } else {
+      return classes.slideClosed;
+    }
+  }
+
   if (isMobile) {
     return (
       <div>
@@ -177,7 +193,7 @@ export default function Header({
             }} rounded duration={.7} />
           </div>
         </div>
-        <div className={`${classes.slideContainer} ${showSlide ? newUser ? classes.slideOpenNewUser : classes.slideOpen : classes.slideClosed}`}>
+        <div className={`${classes.slideContainer} ${handleShowSlide()}`}>
           <div className={classes.itemContainer}>
               <Select
                 styles={selectStyles}
@@ -202,7 +218,7 @@ export default function Header({
                 onChange={(e) => handleSelectedSection(e.value)}
                 placeholder={"select a section (optional)"}
               />
-              <button
+              {!isDemoMode && <><button
                 onMouseDown={() => handleBookSelection("new")}
                 className={classes.smallNewButton}
               >
@@ -220,7 +236,7 @@ export default function Header({
                 className={classes.smallNewButton}
               >
                 {`logout ${displayName}` }
-              </button>
+              </button></>}
             </div>
         </div>
       </div>

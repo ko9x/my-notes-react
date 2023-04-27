@@ -64,6 +64,12 @@
   transition-duration: 500ms;
   padding-bottom: .5vh;
 }
+.slideOpenDemoMode {
+  height: 130px;
+  transition: ease-out;
+  transition-duration: 500ms;
+  padding-bottom: .5vh;
+}
 .slideClosed {
   height: 0;
   transition: ease-in;
