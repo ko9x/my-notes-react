@@ -1,10 +1,12 @@
 ### Current Focus
 * Focus on MVP!
-    * We need to decide what is necessary do get done before we deploy this thing and move onto the next project
+    * Continue working on Demo Mode
 * Get new version on the server
     * Make a note about the process!
 
 ### MVP
+* Need some sort of message when the user tries to use an existing email
+    * Probably just a "something went wrong" alert
 * Finish the onboarding flow
     * If the user has no existing notes there should be an area above the header saying to try out demo mode
         * (button is added but doesn't enter demo mode yet) on mobile there needs to be a demo mode button in the menu
@@ -15,13 +17,15 @@
         * (done) Give it some transition so it's not so jarring when new text shows up
     * (done) Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
 * Make the demo mode user
+    * Add logic for user to enter and exit demo mode
+        * exiting takes the user directly to the loginAndSignUpModal
+    * Add all the demo mode notes
     * Add a bar above the header that says "you are in demo mode click here to create an account or login"
         * figure out what to do for mobile to alert the user they are in demo mode and they should create an account or login
     * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
-        * maybe just make the submit button unclickable if they are in demo? That way they can still see the modal but...
-            * We need to make sure a developer cannot bypass weak measure and mess with demo mode notes
-    * Make sure a user in demo mode cannot reset the demo mode user password
-        * not just in the UI. we need to ensure a developer can't mess with the demo mode user profile
+    * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
+    * (done) Make sure a user in demo mode cannot reset the demo mode user password
+        * This is done because there is no password. Demo mode just shows hard coded data that cannot be changed.
 
 ### What to do later
 * In the editModal (non-mobile) when you select developer the modal jumps
