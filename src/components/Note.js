@@ -285,21 +285,19 @@ export default function Note({
   // ****************** End of renderItem function ***************************************************************
 
   function DetermineHelperText() {
-    if (user) {
-      if (!isMobile) {
-        if (notes.length < 1) {
-          return "Please click 'new +' to create your first note ";
-        } else {
-          return "Please select a book, enter a search term, or create a new note";
-        }
+    if (!isMobile) {
+      if (notes.length < 1) {
+        return "Please click 'new +' to create your first note ";
       } else {
-        if (notes.length < 1) {
-          return "Please tap 'add a new note' to create your first note or check out demo mode";
-        } else {
-          return "Please select a book, enter a search term, or create a new note";
-        }
+        return "Please select a book, enter a search term, or create a new note";
       }
-    } 
+    } else {
+      if (notes.length < 1) {
+        return "Please tap 'add a new note' to create your first note or check out demo mode";
+      } else {
+        return "Please select a book, enter a search term, or create a new note";
+      }
+    }
   }
 
   const groupSeparator = (group, idx, groupLabel) => (

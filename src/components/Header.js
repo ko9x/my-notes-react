@@ -22,7 +22,6 @@ export default function Header({
   newPressed,
   isModalOpen,
   user,
-  signIn,
   signOut,
   newDisplayName,
   isMobile,
@@ -83,9 +82,6 @@ export default function Header({
 
   function disabledButtonCheck() {
     if (isModalOpen) {
-      return true;
-    }
-    if (!user) {
       return true;
     }
   }
@@ -281,7 +277,7 @@ export default function Header({
               {isDark ? <SunSvg height={'23px'} color={textColor} /> : <MoonSvg height={'20px'} color={textColor} /> }
           </button>
           <button
-              onMouseDown={() => user ? signOut() : signIn()}
+              onMouseDown={() => signOut()}
               className={classes.item}
               style={{marginRight: '10px'}}
             >

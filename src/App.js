@@ -351,7 +351,6 @@ export default function App() {
             newPressed={newPressed}
             isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
             user={user}
-            signIn={handleLogInUser}
             signOut={handleLogOutUser}
             newDisplayName={newDisplayName}
             isMobile={isMobile}
@@ -428,12 +427,7 @@ export default function App() {
         textColor={textColor}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
-        <Footer
-          isMobile={isMobile}
-          height={height}
-          user={user}
-          signOut={handleLogOutUser}
-        />
+        <Footer/>
       )}
     </div>
   );
