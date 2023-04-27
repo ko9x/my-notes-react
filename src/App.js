@@ -44,6 +44,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
+  const [isDemoMode, setIsDemoMode] = useState(true);
 
   useEffect(() => {
     if(width < 750) {
@@ -65,6 +66,14 @@ export default function App() {
   }, [user]);
 
   useEffect(() => {
+    if(isDemoMode) {
+      setIsSignUpLoginModalOpen(false);
+      getNotes();
+      setNewDisplayName('Demo Mode')
+    }
+  }, [isDemoMode])
+
+  useEffect(() => {
     if (notes.length > 0) {
       createArrays(notes, setBookNames);
     }
@@ -80,7 +89,14 @@ export default function App() {
   }, [bookNames]);
 
   async function getNotes() {
-    const fetchedNotes = await ref(database, `/notes/${user.uid}`);
+    if(isDemoMode) {
+      const demoData = [
+        {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' }
+      ]
+      setNotes(demoData);
+    }
+    if(!isDemoMode) {
+      const fetchedNotes = await ref(database, `/notes/${user.uid}`);
     onValue(fetchedNotes, (snapshot) => {
       const data = snapshot.val();
       const transformedNotes = [];
@@ -99,6 +115,7 @@ export default function App() {
       }
       setNotes(transformedNotes);
     });
+    }
   }
 
   function executeSearch(keyWord) {
@@ -282,16 +299,18 @@ export default function App() {
   }
 
   if(!user) {
-    return (
-      <SignUpLoginModal
-        isSignUpLoginModalOpen={isSignUpLoginModalOpen}
-        closeModal={handleCloseSignUpLoginModal}
-        handleNewDisplayName={handleNewDisplayName}
-        isMobile={isMobile}
-        modalBackgroundColor={modalBackgroundColor}
-        textColor={textColor}
-      />
-    )
+    if(!isDemoMode) {
+      return (
+        <SignUpLoginModal
+          isSignUpLoginModalOpen={isSignUpLoginModalOpen}
+          closeModal={handleCloseSignUpLoginModal}
+          handleNewDisplayName={handleNewDisplayName}
+          isMobile={isMobile}
+          modalBackgroundColor={modalBackgroundColor}
+          textColor={textColor}
+        />
+      )
+    }
   }
 
   function scrollHeaderIntoView() {
@@ -351,6 +370,7 @@ export default function App() {
             newPressed={newPressed}
             isModalOpen={isEditModalOpen || isSignUpLoginModalOpen}
             user={user}
+            isDemoMode={isDemoMode}
             signOut={handleLogOutUser}
             newDisplayName={newDisplayName}
             isMobile={isMobile}

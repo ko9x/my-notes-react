@@ -22,6 +22,7 @@ export default function Header({
   newPressed,
   isModalOpen,
   user,
+  isDemoMode,
   signOut,
   newDisplayName,
   isMobile,
@@ -263,26 +264,26 @@ export default function Header({
               </button>
             );
           })}
-          <button
+          {!isDemoMode && <button
               disabled={disabledButtonCheck()}
               onMouseDown={() => handleBookSelection("new")}
               className={classes.item}
             >
               new +
-          </button>
+          </button>}
           <button
               onMouseDown={() => setIsDark(prevState => !prevState)}
               className={classes.item}
             >
               {isDark ? <SunSvg height={'23px'} color={textColor} /> : <MoonSvg height={'20px'} color={textColor} /> }
           </button>
-          <button
+          {!isDemoMode && <button
               onMouseDown={() => signOut()}
               className={classes.item}
               style={{marginRight: '10px'}}
             >
               <UserSvg height={'25px'} color={textColor} />
-          </button>
+          </button>}
         </div>
         <div className={classes.rightSideContainer}>
         </div>
