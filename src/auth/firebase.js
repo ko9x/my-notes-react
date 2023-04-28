@@ -17,7 +17,6 @@ const logInWithEmailAndPassword = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
-      console.error(err);
       alert('Please enter a valid Email and Password');
     }
   };
@@ -32,9 +31,12 @@ const registerUserWithEmailAndPassword = async (email, password, username) => {
           return username;
         })
       })
+      .catch((err) => {
+        // Usually means email is already in use
+        alert('Something went wrong, please enter a valid Email, Password and Username');
+      })
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      alert('Something went wrong');
     }
   };
 
@@ -43,7 +45,7 @@ const sendPasswordReset = async (email) => {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset email sent!");
   } catch (err) {
-    console.log(err);
+    // Don't want to give away too much information
     alert('Password reset email sent!');
   }
 }
