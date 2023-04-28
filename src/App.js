@@ -44,7 +44,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
-  const [isDemoMode, setIsDemoMode] = useState(true);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   useEffect(() => {
     if(width < 750) {
@@ -87,6 +87,18 @@ export default function App() {
       newFetchedNotes();
     }
   }, [bookNames]);
+
+  function enableDemoMode() {
+    if(user) {
+      signUserOut()
+    }
+    setIsDemoMode(true);
+  }
+
+  function disableDemoMode() {
+    setIsDemoMode(false);
+    setIsSignUpLoginModalOpen(true);
+  }
 
   async function getNotes() {
     if(isDemoMode) {
@@ -304,6 +316,7 @@ export default function App() {
           isMobile={isMobile}
           modalBackgroundColor={modalBackgroundColor}
           textColor={textColor}
+          enableDemoMode={enableDemoMode}
         />
       )
     }
@@ -379,6 +392,8 @@ export default function App() {
             setIsLoading={setIsLoading}
             setPhysicalSectionClick={setPhysicalSectionClick}
             newUser={isNewUser}
+            enableDemoMode={enableDemoMode}
+            disableDemoMode={disableDemoMode}
           />
         </div>
       )}

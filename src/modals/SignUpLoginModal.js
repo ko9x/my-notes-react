@@ -14,7 +14,8 @@ export default function SignUpLoginModal({
   handleNewDisplayName,
   isMobile,
   modalBackgroundColor,
-  textColor
+  textColor,
+  enableDemoMode
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -199,7 +200,7 @@ export default function SignUpLoginModal({
             </button>
             <button
               className={classes.bottomButton}
-              onClick={() => console.log('go to demo mode')}
+              onClick={() => enableDemoMode()}
             >
               <span>
                     Check out{" "}

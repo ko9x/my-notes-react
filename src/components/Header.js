@@ -33,7 +33,9 @@ export default function Header({
   actionColor,
   setIsLoading,
   setPhysicalSectionClick,
-  newUser
+  newUser,
+  enableDemoMode,
+  disableDemoMode
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -225,7 +227,7 @@ export default function Header({
                 add a new note
               </button>
               <button
-                onMouseDown={() => handleBookSelection("new")}
+                onMouseDown={() => enableDemoMode()}
                 className={classes.smallNewButton}
               >
                 try demo mode
@@ -237,6 +239,12 @@ export default function Header({
               >
                 {`logout ${displayName}` }
               </button></>}
+              {isDemoMode && <button
+                onMouseDown={() => disableDemoMode()}
+                className={classes.smallNewButton}
+              >
+                exit demo mode
+              </button>}
             </div>
         </div>
       </div>
