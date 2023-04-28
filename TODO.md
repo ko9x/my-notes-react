@@ -5,24 +5,18 @@
     * Make a note about the process!
 
 ### MVP
-* Need some sort of message when the user tries to use an existing email
-    * Probably just a "something went wrong" alert
-* Finish the onboarding flow
-    * If the user has no existing notes there should be an area above the header saying to try out demo mode
-        * (button is added but doesn't enter demo mode yet) on mobile there needs to be a demo mode button in the menu
-    * (button is added but doesn't enter demo mode yet) Add a demo mode button to the login and sign up modal
-    * (done) Add mobile onboarding flow
-        * (done) make the "new +" button bump so they know which one to press
-    * (done) Style the text 
-        * (done) Give it some transition so it's not so jarring when new text shows up
-    * (done) Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
 * Make the demo mode user
-    * Add logic for user to enter and exit demo mode
-        * exiting takes the user directly to the loginAndSignUpModal
+    * Mobile only (I think) bug where the notes persist going between a user and demo mode
+        * Especially if you selected a book and page before switching
+    * (started) If the user has no existing notes there should be an area above the header saying to try out demo mode
+        * add text and button to enter/exit demo mode
     * Add all the demo mode notes
+    * Should the try demo mode buttons (mobile and large) only be there when newUser is true?
+        * It would be annoying for full time users to have to see that banner all the time
+            * maybe add a button to stop showing demo mode option and save the user preference in local storage
     * Add a bar above the header that says "you are in demo mode click here to create an account or login"
         * figure out what to do for mobile to alert the user they are in demo mode and they should create an account or login
-    * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
+    * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account?
     * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
     * (done) Make sure a user in demo mode cannot reset the demo mode user password
         * This is done because there is no password. Demo mode just shows hard coded data that cannot be changed.
@@ -240,17 +234,17 @@
 * Fix the search icon on the server version
     * It just shows a box
 * Get mobile looking good
-    * (done) Add a close button that is always in the top right corner of the edit modal
-    * (done) Change colorscheme based on user preference variable
-    * (done) The header shadow needs to be fixed
-    * (done) The dropdown colors need to be fixed
-    * (done) make sure all the colors are working
+    * Add a close button that is always in the top right corner of the edit modal
+    * Change colorscheme based on user preference variable
+    * The header shadow needs to be fixed
+    * The dropdown colors need to be fixed
+    * make sure all the colors are working
 * If you search for `var(` with just the opening `(` it crashes the app
 * Add some loading spinners
     * Usually everything loads really fast and a spinner would not be noticed but sometimes it hangs and spinners would be nice
         * I already installed react-spinners so lets see if that one can do what we want it to
-            * (done) When you do a search there should be a spinner
-            * (done) When you submit the form it hangs sometimes so a loading spinner would be nice
+            * When you do a search there should be a spinner
+            * When you submit the form it hangs sometimes so a loading spinner would be nice
 * Fix the delete note overlay theme
 * Dynamically change the search bar size one there are too many books
     * only if viewport width is larger than 750
@@ -261,3 +255,10 @@
     * We need to check to see if the note being deleted is the last one and force a refresh
 * Make it easier to highlight and copy specific text in the notes
 * Show spinner when the user is being logged in
+* Need some sort of message when the user tries to use an existing email
+* Finish the onboarding flow
+    * Add mobile onboarding flow
+        * make the "new +" button bump so they know which one to press
+    * Style the text 
+        * Give it some transition so it's not so jarring when new text shows up
+    * Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
