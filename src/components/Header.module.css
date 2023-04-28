@@ -1,3 +1,8 @@
+.demoBanner {
+  height: 40px;
+  width: 100%;
+  background-color: var(--action-background);
+}
 .container {
   display: flex !important;
   flex-direction: row !important;
@@ -6,7 +11,7 @@
   background-color: var(--primary-color);
   position: relative;
   z-index: 100;
-  box-shadow: 2px -5px 20px black;
+  box-shadow: 2px 15px 20px -15px #111;
   -webkit-tap-highlight-color: transparent;
 }
 .smallContainer {
@@ -65,7 +70,7 @@
   padding-bottom: .5vh;
 }
 .slideOpenDemoMode {
-  height: 130px;
+  height: 170px;
   transition: ease-out;
   transition-duration: 500ms;
   padding-bottom: .5vh;

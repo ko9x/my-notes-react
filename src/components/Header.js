@@ -253,6 +253,8 @@ export default function Header({
 
   if (!isMobile) {
     return (
+      <>
+      {isDemoMode && <div className={classes.demoBanner}>hello</div>}
       <div className={classes.container}>
         <div className={classes.logoContainer}>
           <h1 className={classes.logo} onClick={() => setIsDark(prevState => !prevState)}>
@@ -312,6 +314,7 @@ export default function Header({
         <div className={classes.rightSideContainer}>
         </div>
       </div>
+      </>
     );
   }
 }

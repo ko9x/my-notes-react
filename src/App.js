@@ -459,7 +459,7 @@ export default function App() {
         textColor={textColor}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
-        <Footer/>
+        <Footer isMobile={isMobile}/>
       )}
     </div>
   );
