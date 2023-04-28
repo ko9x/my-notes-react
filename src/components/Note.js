@@ -286,6 +286,9 @@ export default function Note({
   // ****************** End of renderItem function ***************************************************************
 
   function DetermineHelperText() {
+    if(isDemoMode) {
+      return "Please select a book or enter a search term";
+    }
     if (!isMobile) {
       if (notes.length < 1) {
         return "Please click 'new +' to create your first note ";

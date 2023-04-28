@@ -49,7 +49,7 @@ export default function Header({
   }, [newDisplayName]);
 
   useEffect(() => {
-    if(newUser && isMobile) {
+    if((newUser && isMobile) || (isDemoMode && isMobile)) {
       setTimeout(() => {
         setShowSlide(true);
       }, 500)
