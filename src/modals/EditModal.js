@@ -371,7 +371,7 @@ export default function EditModal({
         return (
           <div>
             <h3>Now, narrow the focus even further by creating a section of our page.</h3>
-            <h3>A section of a javascript page might be setup or examples.</h3>
+            <h3>A section of a javascript page might be arrays or examples.</h3>
           </div>
         )
       }
@@ -380,7 +380,7 @@ export default function EditModal({
         return (
           <div>
             <h3>Now finish creating your first note by giving it a title and content.</h3>
-            <h3>Try using the helper buttons like pTag and lineBreak to format your note.</h3>
+            <h3>Try using the helper buttons like pTag or codeWrap to format your note.</h3>
           </div>
         )
       }
@@ -395,7 +395,7 @@ export default function EditModal({
       contentLabel="Example Modal"
       closeTimeoutMS={500}
     >
-      <div className={classes.container}>
+      <div className={classes.container} style={{marginTop: newUser ? '40px' : null}}>
       {newUser && <div style={{display: 'flex', justifyContent: 'center', height: !isMobile ? '80px' : 0, alignItems: 'end'}}>
         <div style={{display: 'flex', color: textColor, transitionDuration: '2000ms', height: !isMobile ? flowHeight : 0, overflowY: 'hidden', backgroundColor: modalBackgroundColor, width: '100%', justifyContent: 'center',  borderTopLeftRadius: '25px', borderTopRightRadius: '25px', marginTop: '5px', marginRight: '2.5%'}}>
           <NewUserRadioFlow />
