@@ -6,22 +6,15 @@
 
 ### MVP
 * Make the demo mode user
-    * Mobile only (I think) bug where the notes persist going between a user and demo mode
-        * Especially if you selected a book and page before switching
-    * (started) If the user has no existing notes there should be an area above the header saying to try out demo mode
-        * add text and button to enter/exit demo mode
     * Add all the demo mode notes
-    * Should the try demo mode buttons (mobile and large) only be there when newUser is true?
-        * It would be annoying for full time users to have to see that banner all the time
-            * maybe add a button to stop showing demo mode option and save the user preference in local storage
-    * Add a bar above the header that says "you are in demo mode click here to create an account or login"
-        * figure out what to do for mobile to alert the user they are in demo mode and they should create an account or login
-    * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account?
     * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
-    * (done) Make sure a user in demo mode cannot reset the demo mode user password
-        * This is done because there is no password. Demo mode just shows hard coded data that cannot be changed.
 
 ### What to do later
+* Switch to demo mode directly when hitting the try demo mode button in the desktop header or the mobile dropdown
+    * Currently it just logs you out so you can hit the demo mode button in the signUpLoginModal
+        * If you make those buttons just run enableDemoMode it doesn't work properly
+            * It fails in different ways on desktop and mobile
+                * I didn't want to keep spending time trying to figure it out.
 * In the editModal (non-mobile) when you select developer the modal jumps
     * We should add a transition to make that smoother
 * Add a shadow to the top of the note detail
@@ -93,6 +86,8 @@
         * this also happens if you edit the same note more than once
 * It is too easy set the wrong section when editing a note because the section get set to where you scrolled to.
     * if you scroll down far enough that the next section gets highlighted, it will set the default section to that next section
+* Mobile only (I think) bug where the notes persist going between a user and demo mode
+        * Especially if you selected a book and page before switching
 
 ### Done
 * Get the notes from the API
@@ -262,3 +257,10 @@
     * Style the text 
         * Give it some transition so it's not so jarring when new text shows up
     * Do some testing to make sure the new user flow doesn't change the flow for users who know what to do
+* If the user has no existing notes there should be an area above the header saying to try out demo mode
+    * add text and button to enter/exit demo mode
+* Add a bar above the header that says "you are in demo mode click here to create an account or login"
+    * figure out what to do for mobile to alert the user they are in demo mode and they should create an account or login
+* If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
+* Make sure a user in demo mode cannot reset the demo mode user password
+    * This is done because there is no password. Demo mode just shows hard coded data that cannot be changed.
