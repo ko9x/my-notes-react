@@ -53,7 +53,6 @@ export default function App() {
   }, [width])
 
   useEffect(() => {
-    resetNotes();
     if (user) {
       setIsSignUpLoginModalOpen(false);
       getNotes();
@@ -107,7 +106,7 @@ export default function App() {
     if(isDemoMode) {
       const demoData = [
         {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' },
-        {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' }
+        {book: 'TestBook', content: 'testContent', id: 'demoNote2', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' }
       ]
       setNotes(demoData);
     }

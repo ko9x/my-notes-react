@@ -227,7 +227,7 @@ export default function Header({
                 add a new note
               </button>
               <button
-                onMouseDown={() => enableDemoMode()}
+                onMouseDown={() => signOut()}
                 className={classes.smallNewButton}
               >
                 try demo mode
@@ -266,7 +266,7 @@ export default function Header({
         </div>}
       {newUser && 
         <div className={classes.demoBanner}>
-        <button onClick={() => enableDemoMode()} className={classes.demoBannerButton}>
+        <button onClick={() => signOut()} className={classes.demoBannerButton}>
           <span>
             Would you like to see some example notes? Click here and
             <span></span>
