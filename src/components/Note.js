@@ -38,7 +38,8 @@ export default function Note({
   setPhysicalSectionClick,
   setIsLoading,
   modalBackgroundColor,
-  textColor
+  textColor,
+  disableDemoMode
 }) {
   useEffect(() => {
     hljs.configure({ ignoreUnescapedHTML: true });
@@ -111,7 +112,7 @@ export default function Note({
     });
   }
 
-  function handleAlert(note) {
+  function handleDeleteAlert(note) {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
@@ -123,6 +124,29 @@ export default function Note({
               className={classes.customButton}
               onClick={() => {
                 deleteNote(note);
+                onClose();
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        );
+      },
+    });
+  }
+
+  function handleDemoModeAlert() {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <div style={{background: modalBackgroundColor, padding: '50px', borderRadius: '25px'}}>
+            <h1 style={{color: textColor}}>This action is disabled in demo mode</h1>
+            <h3 style={{color: textColor}}>Exit demo mode?</h3>
+            <button className={classes.customButton} onClick={onClose}>Cancel</button>
+            <button
+              className={classes.customButton}
+              onClick={() => {
+                disableDemoMode();
                 onClose();
               }}
             >
@@ -239,8 +263,8 @@ export default function Note({
                   <p className={classes.description}>{note.section}</p>
                 </div>
                 <div className={classes.buttonContainer}>
-                  <button disabled={isDemoMode} className={classes.customButton} onClick={() => handleNoteEditPress(note)}>edit</button>
-                  <button disabled={isDemoMode} className={classes.customButton} onClick={() => handleAlert(note)}>delete</button>
+                  <button className={classes.customButton} onClick={() => isDemoMode ? handleDemoModeAlert() : handleNoteEditPress(note)}>edit</button>
+                  <button className={classes.customButton} onClick={() => isDemoMode ? handleDemoModeAlert() : handleDeleteAlert(note)}>delete</button>
                 </div>
               </>
             </div>

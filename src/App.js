@@ -465,6 +465,7 @@ export default function App() {
         setIsLoading={setIsLoading}
         modalBackgroundColor={modalBackgroundColor}
         textColor={textColor}
+        disableDemoMode={disableDemoMode}
       />
       {(isEditModalOpen || isSignUpLoginModalOpen) && isMobile ? null : (
         <Footer isMobile={isMobile}/>
