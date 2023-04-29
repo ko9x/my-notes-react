@@ -1,13 +1,22 @@
 .demoBanner {
+  display: flex;
   height: 40px;
   width: 100%;
   background-color: var(--action-background);
   color: var(--font-color);
+  align-items: center;
+  justify-content: center;
 }
 .actionWord {
   color: var(--actionButton-color);
-  padding-right: 5px;
   cursor: pointer;
+}
+.demoBannerButton {
+  text-decoration: none;
+  border: none;
+  background: none;
+  padding-bottom: 5px;
+  font-size: large;
 }
 .container {
   display: flex !important;

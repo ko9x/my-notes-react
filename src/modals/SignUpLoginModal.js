@@ -191,7 +191,7 @@ export default function SignUpLoginModal({
               ) : (
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <span>
-                    Click here to{" "}
+                    Don't have an account? Click here to{" "}
                     <span className={classes.actionWord}>Sign up</span>
                   </span>
                   <span style={{paddingTop: '4px'}}>or</span>

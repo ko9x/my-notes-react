@@ -94,6 +94,7 @@ export default function App() {
     if(user) {
       handleLogOutUser();
     }
+    setIsNewUser(false);
     setIsDemoMode(true);
   }
 
@@ -124,6 +125,7 @@ export default function App() {
         transformedNotes.push(noteObj);
       }
       if(transformedNotes.length < 1) {
+        setIsDemoMode(false)
         setIsNewUser(true);
       } else {
         setIsNewUser(false);
@@ -254,6 +256,8 @@ export default function App() {
     resetNotes();
     setNewDisplayName(null);
     signUserOut();
+    setIsDemoMode(false);
+    setIsNewUser(false);
   }
 
   function resetNotes() {

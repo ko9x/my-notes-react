@@ -35,7 +35,7 @@ export default function Header({
   setPhysicalSectionClick,
   newUser,
   enableDemoMode,
-  disableDemoMode
+  disableDemoMode,
 }) {
   const [activeBook, setActiveBook] = useState(null);
   const [displayName, setDisplayName] = useState(null);
@@ -256,16 +256,23 @@ export default function Header({
       <>
       {isDemoMode && 
         <div className={classes.demoBanner}>
-          <span>
-            Click here to sign up and{" "}
-            <span className={classes.actionWord}>start creating your own notes</span>
-          </span>
+          <button onClick={() => disableDemoMode()} className={classes.demoBannerButton}>
+            <span>
+              Ready to exit demo mode? Click here to log in and
+              <span></span>
+              <span className={classes.actionWord}> start creating your own notes</span>
+            </span>
+          </button>
         </div>}
-      {newUser && <div className={classes.demoBanner}>
-        <span>
-          To see some example notes, click here and{" "}
-          <span className={classes.actionWord}>try out demo mode</span>
-        </span>
+      {newUser && 
+        <div className={classes.demoBanner}>
+        <button onClick={() => enableDemoMode()} className={classes.demoBannerButton}>
+          <span>
+            Would you like to see some example notes? Click here and
+            <span></span>
+            <span className={classes.actionWord}> try out demo mode</span>
+          </span>
+        </button>
       </div>}
       <div className={classes.container}>
         <div className={classes.logoContainer}>
