@@ -73,7 +73,7 @@
   border-bottom-right-radius: .5vh;
 }
 .slideOpen {
-  height: 250px;
+  height: 210px;
   transition: ease-out;
   transition-duration: 500ms;
   padding-bottom: .5vh;

@@ -226,12 +226,12 @@ export default function Header({
               >
                 add a new note
               </button>
-              <button
+              {newUser && <button
                 onMouseDown={() => signOut()}
                 className={classes.smallNewButton}
               >
                 try demo mode
-              </button>
+              </button>}
               <button
                 disabled={disabledButtonCheck()}
                 onMouseDown={() => signOut()}
