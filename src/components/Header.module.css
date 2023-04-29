@@ -2,6 +2,12 @@
   height: 40px;
   width: 100%;
   background-color: var(--action-background);
+  color: var(--font-color);
+}
+.actionWord {
+  color: var(--actionButton-color);
+  padding-right: 5px;
+  cursor: pointer;
 }
 .container {
   display: flex !important;

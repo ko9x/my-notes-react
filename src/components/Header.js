@@ -254,7 +254,19 @@ export default function Header({
   if (!isMobile) {
     return (
       <>
-      {isDemoMode && <div className={classes.demoBanner}>hello</div>}
+      {isDemoMode && 
+        <div className={classes.demoBanner}>
+          <span>
+            Click here to sign up and{" "}
+            <span className={classes.actionWord}>start creating your own notes</span>
+          </span>
+        </div>}
+      {newUser && <div className={classes.demoBanner}>
+        <span>
+          To see some example notes, click here and{" "}
+          <span className={classes.actionWord}>try out demo mode</span>
+        </span>
+      </div>}
       <div className={classes.container}>
         <div className={classes.logoContainer}>
           <h1 className={classes.logo} onClick={() => setIsDark(prevState => !prevState)}>

@@ -105,6 +105,7 @@ export default function App() {
   async function getNotes() {
     if(isDemoMode) {
       const demoData = [
+        {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' },
         {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' }
       ]
       setNotes(demoData);
