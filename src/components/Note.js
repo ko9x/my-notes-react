@@ -174,7 +174,6 @@ export default function Note({
 
   // ****************** Start of renderItem function ***************************************************************
   function renderItem(note, index) {
-
   // Add copy to clipboard functionality to the pre-code wrapped text
   if(!isMobile) {
     let blocks = document.querySelectorAll('pre');

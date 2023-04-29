@@ -53,6 +53,7 @@ export default function App() {
   }, [width])
 
   useEffect(() => {
+    resetNotes();
     if (user) {
       setIsSignUpLoginModalOpen(false);
       getNotes();
@@ -66,6 +67,7 @@ export default function App() {
   }, [user]);
 
   useEffect(() => {
+    resetNotes();
     if(isDemoMode) {
       setIsSignUpLoginModalOpen(false);
       getNotes();
@@ -90,7 +92,7 @@ export default function App() {
 
   function enableDemoMode() {
     if(user) {
-      signUserOut()
+      handleLogOutUser();
     }
     setIsDemoMode(true);
   }
@@ -248,12 +250,13 @@ export default function App() {
   }
 
   function handleLogOutUser() {
+    resetNotes();
     setNewDisplayName(null);
     signUserOut();
-    resetNotes();
   }
 
   function resetNotes() {
+    setNotes([]);
     setBookNames([]);
     setSelectedBook(null);
     setPageNames([]);
@@ -261,6 +264,7 @@ export default function App() {
     setSectionNames([]);
     setSelectedSection(null);
   }
+
 
   function handleNewDisplayName(newName) {
     setNewDisplayName(newName);
