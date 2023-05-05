@@ -6,7 +6,10 @@
 
 ### MVP
 * Make the demo mode user
-    * Add all the demo mode notes
+    * Add more demo mode notes
+        * I think it should have at least 3 books
+            * Each book should have at least 2 pages 
+                * Each page should have 2 or more sections but multiple pages and books is probably more important
     * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
 
 ### What to do later
