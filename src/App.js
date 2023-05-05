@@ -19,6 +19,7 @@ import { createArrays } from "./helpers/HelperFunctions";
 import useWindowDimensions from "./hooks/useWindowDimensions";
 import { ClipLoader } from "react-spinners";
 import { ReactComponent as UpArrowSvg } from "./images/skip-to-top.svg";
+import { demoNotes } from "./helpers/DemoNotes";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
@@ -104,11 +105,7 @@ export default function App() {
 
   async function getNotes() {
     if(isDemoMode) {
-      const demoData = [
-        {book: 'TestBook', content: 'testContent', id: 'demoNote1', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' },
-        {book: 'TestBook', content: 'testContent', id: 'demoNote2', important: '', page: 'testPage', section: 'testSection', side: '', title: 'testTitle' }
-      ]
-      setNotes(demoData);
+      setNotes(demoNotes);
     }
     if(!isDemoMode) {
       const fetchedNotes = await ref(database, `/notes/${user.uid}`);
