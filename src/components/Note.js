@@ -84,20 +84,6 @@ export default function Note({
     }
   }, [newlyAddedNoteId]);
 
-  const demoNotes = [];
-
-  selectedNotes.map((note, index) => {
-    if(note.section === 'styling') {
-      demoNotes.push({
-        ...note,
-        book: 'coding',
-        page: 'react'
-      });
-    }
-  })
-
-  console.log('demoNotes', demoNotes); //@DEBUG
-
   function scrollToSpecificNote() {
     noteRef.current.scrollIntoView();
   }
