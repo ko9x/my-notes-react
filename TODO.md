@@ -1,16 +1,4 @@
 ### Current Focus
-* Focus on MVP!
-    * Continue working on Demo Mode
-* Get new version on the server
-    * Make a note about the process!
-
-### MVP
-* Make the demo mode user
-    * Add more demo mode notes
-        * I think it should have at least 3 books
-            * Each book should have at least 2 pages 
-                * Each page should have 2 or more sections but multiple pages and books is probably more important
-    * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
 
 ### What to do later
 * Switch to demo mode directly when hitting the try demo mode button in the desktop header or the mobile dropdown
@@ -267,3 +255,11 @@
 * If a user is in demo mode and tries to edit or delete a note show an alert telling them to create an account
 * Make sure a user in demo mode cannot reset the demo mode user password
     * This is done because there is no password. Demo mode just shows hard coded data that cannot be changed.
+* Get new version on the server
+    * Make a note about the process!
+* Make the demo mode user
+    * Add more demo mode notes
+        * I think it should have at least 3 books
+            * Each book should have at least 2 pages 
+                * Each page should have 2 or more sections but multiple pages and books is probably more important
+    * Test to make sure the demo mode stuff didn't change anything for regular mode and newUser mode
