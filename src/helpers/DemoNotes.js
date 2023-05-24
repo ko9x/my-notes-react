@@ -13,7 +13,7 @@ export const demoNotes = [
         
         <p>We can also create a javascript project using Finder and Visual Studio Code</p>
         <p>In Finder, navigate to:</p>
-        <pre><code>sean/development/javascript-projects</code></pre>
+        <pre><code>development/javascript-projects</code></pre>
         <p>Then right click (two finger click) and select new folder from the options and name it demoProject</p>
         <p>Now open Visual Studio Code and select File/open from the top menu bar</p>
         <p>Navigate to the folder we just created and hit the "open" button</p>
@@ -21,7 +21,7 @@ export const demoNotes = [
         <p>Make these three files:</p>
         <li>index.html</li><li>styles.css</li><li>app.js</li>
         <p>(Technically we can name these files anything we want but this is the convention)</p>
-        <p>Now double click on the index.html and type this type a single ! followed by the return key</p>
+        <p>Now double click on the index.html and type a single ! followed by the return key</p>
         <p>This will add a basic html template to our index.html</p>
         
         <p>At this point we can actually run this javascript project in the browser by right clicking the index.html and selecting "Open with Live Server" from the dropdown</p>
@@ -289,7 +289,7 @@ export const demoNotes = [
     id: "demoNote10",
     important: "",
     page: "javascript",
-    section: "examples",
+    section: "misc",
     side: "",
     title: "Change the first letter of a string to a capital letter",
   },
@@ -321,7 +321,7 @@ export const demoNotes = [
     id: "demoNote11",
     important: "",
     page: "javascript",
-    section: "examples",
+    section: "misc",
     side: '<p>For more information about splice click <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice" target="_blank">here<a/></p>',
     title: "array.splice",
   },
@@ -337,7 +337,7 @@ export const demoNotes = [
     important:
       "<p>This example requires the objects to have an id property</p>",
     page: "javascript",
-    section: "examples",
+    section: "misc",
     side: "",
     title:
       "Make an array of unique objects from an array that has duplicate objects",
@@ -362,7 +362,7 @@ export const demoNotes = [
     id: "demoNote13",
     important: "",
     page: "javascript",
-    section: "examples",
+    section: "misc",
     side: '<a href="https://bobbyhadz.com/blog/javascript-convert-object-to-array-of-objects" target="_blank">Here is a link with more information about Object.value( )<a/>',
     title:
       "Turn an object of objects into an array of objects with Object.values( )",
@@ -980,7 +980,7 @@ export const demoNotes = [
        important: "",
        page: "printer",
        section: "hardware",
-       side: "<p>It was easy to assemble and set up. Even the all important bed leveling</p>",
+       side: "",
        title: "Atmega v2.2"
    },
    {
@@ -990,7 +990,7 @@ export const demoNotes = [
        important: "",
        page: "printer",
        section: "hardware",
-       side: "<p>It was easy to assemble and set up. Even the all important bed leveling</p>",
+       side: "",
        title: "12v 350w Power Supply"
    },
    {
